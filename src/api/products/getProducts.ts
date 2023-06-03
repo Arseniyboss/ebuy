@@ -14,8 +14,6 @@ export const getProducts = async ({
 }: QueryParams) => {
   const url = `${BASE_URL}/api/products?page=${page}&searchTerm=${searchTerm}&sort=${sort}`
   const response = await fetch(url, { next: { tags: ['products'] } })
-  // for testing
-  // const response = await fetch(url, { cache: 'no-cache' })
   const { products, pages }: Data = await response.json()
   return { products, pages }
 }

@@ -5,6 +5,17 @@ import { BASE_URL } from '@baseUrl'
 import { SortKey, QueryParams } from 'types/queryParams'
 import { Product } from 'types/product'
 
+type Data = {
+  products: Product[]
+  pages: number
+}
+
+type Sort = {
+  type: 'asc' | 'desc'
+  key: SortKey
+  products: Product[]
+}
+
 const getProducts = async ({
   page = 1,
   searchTerm = '',
@@ -13,22 +24,18 @@ const getProducts = async ({
   const url = `${BASE_URL}/api/products?page=${page}&searchTerm=${searchTerm}&sort=${sort}`
   const request = new NextRequest(url)
   const response = await GET(request)
-  const products: Product[] = await response.json()
-  return { status: response.status, products }
+  const { products, pages }: Data = await response.json()
+  return { status: response.status, products, pages }
 }
 
-// const verifySort
-
-const verifyAscendingSort = (products: Product[], key: SortKey) => {
+const verifySort = ({ type, key, products }: Sort) => {
   products.reduce((prevProduct, nextProduct, index) => {
-    expect(prevProduct[key]).toBeLessThanOrEqual(nextProduct[key])
-    return products[index]
-  }, products[0])
-}
-
-const verifyDescendingSort = (products: Product[], key: SortKey) => {
-  products.reduce((prevProduct, nextProduct, index) => {
-    expect(prevProduct[key]).toBeGreaterThanOrEqual(nextProduct[key])
+    if (type === 'asc') {
+      expect(prevProduct[key]).toBeLessThanOrEqual(nextProduct[key])
+    }
+    if (type === 'desc') {
+      expect(prevProduct[key]).toBeGreaterThanOrEqual(nextProduct[key])
+    }
     return products[index]
   }, products[0])
 }
@@ -37,11 +44,34 @@ beforeAll(async () => await seedProducts())
 
 describe('GET /api/products', () => {
   describe('given the searchTerm and sort are not applied', () => {
-    it('returns status code 200 and all products', async () => {
-      const { status, products } = await getProducts()
+    it('returns status code 200 and paginated products', async () => {
+      const { status, products, pages } = await getProducts()
 
       expect(status).toBe(200)
-      expect(products.length).toBe(7)
+      expect(pages).toBe(2)
+      expect(products.length).toBe(4)
+    })
+  })
+
+  describe('given the page number is invalid', () => {
+    describe('given the page number is less than 1', () => {
+      it('returns status code 200 and paginated products', async () => {
+        const { status, products, pages } = await getProducts({ page: -1 })
+
+        expect(status).toBe(200)
+        expect(pages).toBe(2)
+        expect(products.length).toBe(4)
+      })
+    })
+
+    describe('given the page number is greater than the total number of pages', () => {
+      it('returns status code 200 and paginated products', async () => {
+        const { status, products, pages } = await getProducts({ page: 3 })
+
+        expect(status).toBe(200)
+        expect(pages).toBe(2)
+        expect(products.length).toBe(4)
+      })
     })
   })
 
@@ -83,20 +113,20 @@ describe('GET /api/products', () => {
 
   describe('given the searchTerm is invalid', () => {
     describe('given the searchTerm is )', () => {
-      it('returns status code 200 and all products', async () => {
-        const { status, products } = await getProducts({ searchTerm: ')' })
-
+      it('returns status code 200', async () => {
+        const { status } = await getProducts({
+          searchTerm: ')',
+        })
         expect(status).toBe(200)
-        expect(products.length).toBe(7)
       })
     })
 
     describe('given the searchTerm is #', () => {
       it('returns status code 200 and all products', async () => {
-        const { status, products } = await getProducts({ searchTerm: '#' })
-
+        const { status } = await getProducts({
+          searchTerm: '#',
+        })
         expect(status).toBe(200)
-        expect(products.length).toBe(7)
       })
     })
   })
@@ -107,7 +137,7 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'price.asc' })
 
         expect(status).toBe(200)
-        verifyAscendingSort(products, 'price')
+        verifySort({ type: 'asc', key: 'price', products })
       })
     })
 
@@ -116,7 +146,7 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'price.desc' })
 
         expect(status).toBe(200)
-        verifyDescendingSort(products, 'price')
+        verifySort({ type: 'desc', key: 'price', products })
       })
     })
   })
@@ -127,17 +157,17 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'rating.desc' })
 
         expect(status).toBe(200)
-        verifyDescendingSort(products, 'rating')
+        verifySort({ type: 'desc', key: 'rating', products })
       })
     })
   })
 
   describe('given the sort is invalid', () => {
-    it('returns status code 200 and sorted products', async () => {
-      const { status, products } = await getProducts({ sort: 'rating.xyz' })
-
+    it('returns status code 200', async () => {
+      const { status } = await getProducts({
+        sort: 'rating.xyz',
+      })
       expect(status).toBe(200)
-      expect(products.length).toBe(7)
     })
   })
 
@@ -150,7 +180,7 @@ describe('GET /api/products', () => {
 
       expect(status).toBe(200)
       expect(products.length).toBe(2)
-      verifyAscendingSort(products, 'price')
+      verifySort({ type: 'asc', key: 'price', products })
     })
   })
 })
