@@ -2,33 +2,31 @@ import { NextRequest } from 'next/server'
 import { GET } from '@app/api/products/route'
 import { seedProducts } from '@config/seeder'
 import { BASE_URL } from '@baseUrl'
+import { SortKey, QueryParams } from 'types/queryParams'
 import { Product } from 'types/product'
 
-type QueryParams = {
-  searchTerm?: string
-  sort?: string
-}
-
 const getProducts = async ({
+  page = 1,
   searchTerm = '',
   sort = 'createdAt.desc',
 }: QueryParams = {}) => {
-  const request = new NextRequest(
-    `${BASE_URL}/api/products?searchTerm=${searchTerm}&sort=${sort}`
-  )
+  const url = `${BASE_URL}/api/products?page=${page}&searchTerm=${searchTerm}&sort=${sort}`
+  const request = new NextRequest(url)
   const response = await GET(request)
   const products: Product[] = await response.json()
   return { status: response.status, products }
 }
 
-const verifyAscendingSort = (products: Product[], key: 'price') => {
+// const verifySort
+
+const verifyAscendingSort = (products: Product[], key: SortKey) => {
   products.reduce((prevProduct, nextProduct, index) => {
     expect(prevProduct[key]).toBeLessThanOrEqual(nextProduct[key])
     return products[index]
   }, products[0])
 }
 
-const verifyDescendingSort = (products: Product[], key: 'price' | 'rating') => {
+const verifyDescendingSort = (products: Product[], key: SortKey) => {
   products.reduce((prevProduct, nextProduct, index) => {
     expect(prevProduct[key]).toBeGreaterThanOrEqual(nextProduct[key])
     return products[index]
@@ -104,7 +102,7 @@ describe('GET /api/products', () => {
   })
 
   describe('given the price sort is applied', () => {
-    describe('in ascending direction', () => {
+    describe('in ascending order', () => {
       it('returns status code 200 sorted products', async () => {
         const { status, products } = await getProducts({ sort: 'price.asc' })
 
@@ -113,7 +111,7 @@ describe('GET /api/products', () => {
       })
     })
 
-    describe('in descending direction', () => {
+    describe('in descending order', () => {
       it('returns status code 200 sorted products', async () => {
         const { status, products } = await getProducts({ sort: 'price.desc' })
 
@@ -124,7 +122,7 @@ describe('GET /api/products', () => {
   })
 
   describe('given the rating sort is applied', () => {
-    describe('in descending direction', () => {
+    describe('in descending order', () => {
       it('returns status code 200 sorted products', async () => {
         const { status, products } = await getProducts({ sort: 'rating.desc' })
 

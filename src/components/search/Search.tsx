@@ -4,16 +4,15 @@ import { useState } from 'react'
 import { useDebounce } from '@hooks/useDebounce'
 import { useQueryParams } from '@hooks/useQueryParams'
 import { useUpdateEffect } from '@hooks/useUpdateEffect'
-import { QueryParams } from 'types/queryParams'
 import { SearchInput } from './styles'
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [debouncedSearchTerm] = useDebounce(searchTerm)
-  const setQueryParams = useQueryParams<QueryParams>()
+  const { queryParams, setQueryParams } = useQueryParams()
+  const [searchTerm, setSearchTerm] = useState(queryParams.searchTerm)
+  const debouncedSearchTerm = useDebounce(searchTerm)
 
   useUpdateEffect(() => {
-    setQueryParams({ searchTerm: debouncedSearchTerm })
+    setQueryParams({ searchTerm: debouncedSearchTerm, page: 1 })
   }, [debouncedSearchTerm])
   return (
     <SearchInput

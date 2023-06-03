@@ -1,7 +1,8 @@
 export type SortOrder = 'asc' | 'desc'
-export type SortKey = 'price' | 'rating' | 'createdAt'
+export type SortKey = 'price' | 'rating'
 
 export type QueryParams = {
+  page?: number
   searchTerm?: string
-  sort?: `${SortKey}.${SortOrder}`
+  sort?: string
 }

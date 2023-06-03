@@ -1,0 +1,38 @@
+'use client'
+
+import { useQueryParams } from '@hooks/useQueryParams'
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
+import { PaginationContainer, PaginationButton } from './styles'
+import { getValidPage } from '@utils/validateQueryParams'
+
+type Props = {
+  pages: number
+}
+
+const Pagination = ({ pages }: Props) => {
+  const { queryParams, setQueryParams } = useQueryParams()
+  const page = getValidPage(Number(queryParams.page), pages)
+  return (
+    <PaginationContainer>
+      <PaginationButton
+        disabled={page === 1}
+        onClick={() => setQueryParams({ page: page - 1 })}
+        aria-label='go to the previous page'
+      >
+        <FiArrowLeft />
+      </PaginationButton>
+      <p>
+        {page} of {pages}
+      </p>
+      <PaginationButton
+        disabled={page === pages}
+        onClick={() => setQueryParams({ page: page + 1 })}
+        aria-label='go to the next page'
+      >
+        <FiArrowRight />
+      </PaginationButton>
+    </PaginationContainer>
+  )
+}
+
+export default Pagination

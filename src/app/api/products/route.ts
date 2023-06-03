@@ -1,35 +1,45 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { connectToDB } from '@config/mongodb'
 import { SortOrder } from 'types/queryParams'
+import { connectToDB } from '@config/mongodb'
+import { getSearchParams } from '@utils/getSearchParams'
+import {
+  validateSearchTerm,
+  validateSortOrder,
+  getValidPage,
+} from '@utils/validateQueryParams'
 import Product from '@models/product'
 
-const validateSearchTerm = (searchTerm: string) => {
-  return /^[A-Za-z0-9 ]+$/.test(searchTerm)
-}
-
-const validateSortDirection = (sortDirection: string) => {
-  return sortDirection === 'asc' || sortDirection === 'desc'
-}
-
 export const GET = async (request: NextRequest) => {
-  const searchTerm = request.nextUrl.searchParams.get('searchTerm')!
-  const sort = request.nextUrl.searchParams.get('sort')!
-
-  const sortKey = sort?.split('.')[0]
-  const sortDirection = sort?.split('.')[1] as SortOrder
-
-  const isSearchTermValid = validateSearchTerm(searchTerm)
-  const isSortDirectionValid = validateSortDirection(sortDirection)
-
-  const filters = {
-    name: { $regex: `^${searchTerm}`, $options: 'i' },
-  }
-  const filterQuery = isSearchTermValid ? filters : {}
-  const sortQuery = isSortDirectionValid ? { [sortKey]: sortDirection } : {}
-
   await connectToDB()
 
-  const products = await Product.find(filterQuery).sort(sortQuery)
+  const searchTerm = getSearchParams(request, 'searchTerm')
+  const sort = getSearchParams(request, 'sort')
 
-  return NextResponse.json(products)
+  const sortKey = sort?.split('.')[0]
+  const sortOrder = sort?.split('.')[1] as SortOrder
+
+  const isSearchTermValid = validateSearchTerm(searchTerm)
+  const isSortOrderValid = validateSortOrder(sortOrder)
+
+  const filterQuery = {
+    name: {
+      $regex: isSearchTermValid ? `^${searchTerm}` : '(.*?)',
+      $options: 'i',
+    },
+  }
+  const sortQuery = isSortOrderValid ? { [sortKey]: sortOrder } : null
+
+  const productsPerPage = 4
+  const numberOfProducts = await Product.countDocuments(filterQuery)
+  const pages = Math.ceil(numberOfProducts / productsPerPage)
+  const page = getValidPage(Number(getSearchParams(request, 'page')), pages)
+
+  const prevPageProducts = productsPerPage * (page - 1)
+
+  const products = await Product.find(filterQuery)
+    .sort(sortQuery)
+    .limit(productsPerPage)
+    .skip(prevPageProducts)
+
+  return NextResponse.json({ products, pages })
 }
