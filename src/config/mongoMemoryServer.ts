@@ -9,12 +9,12 @@ const collections = mongoose.connection.collections
 
 let mongoMemoryServer: MongoMemoryServer
 
-export const connectDB = async () => {
+export const connectToDB = async () => {
   mongoMemoryServer = await MongoMemoryServer.create()
   await mongoose.connect(mongoMemoryServer.getUri())
 }
 
-export const disconnectDB = async () => {
+export const disconnectFromDB = async () => {
   await mongoose.connection.dropDatabase()
   await mongoose.disconnect()
   await mongoose.connection.close()
