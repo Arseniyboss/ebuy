@@ -1,5 +1,5 @@
-export const validateSearchTerm = (searchTerm: string) => {
-  return /^[A-Za-z0-9 ]+$/.test(searchTerm)
+export const validateSearch = (search: string) => {
+  return /^[A-Za-z0-9 ]+$/.test(search)
 }
 
 export const validateSortOrder = (sortOrder: string) => {

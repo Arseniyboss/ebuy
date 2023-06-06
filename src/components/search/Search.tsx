@@ -8,19 +8,19 @@ import { SearchInput } from './styles'
 
 const Search = () => {
   const { queryParams, setQueryParams } = useQueryParams()
-  const [searchTerm, setSearchTerm] = useState(queryParams.searchTerm)
-  const debouncedSearchTerm = useDebounce(searchTerm)
+  const [search, setSearch] = useState(queryParams.search)
+  const debouncedSearch = useDebounce(search)
 
   useUpdateEffect(() => {
-    setQueryParams({ searchTerm: debouncedSearchTerm, page: 1 })
-  }, [debouncedSearchTerm])
+    setQueryParams({ search: debouncedSearch, page: 1 })
+  }, [debouncedSearch])
   return (
     <SearchInput
       type='text'
-      name='searchTerm'
+      name='search'
       placeholder='Search products...'
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
     />
   )
 }

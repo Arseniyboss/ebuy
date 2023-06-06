@@ -3,7 +3,7 @@ import { SortOrder } from 'types/queryParams'
 import { connectToDB } from '@config/mongodb'
 import { getSearchParams } from '@utils/getSearchParams'
 import {
-  validateSearchTerm,
+  validateSearch,
   validateSortOrder,
   getValidPage,
 } from '@utils/validateQueryParams'
@@ -12,18 +12,18 @@ import Product from '@models/product'
 export const GET = async (request: NextRequest) => {
   await connectToDB()
 
-  const searchTerm = getSearchParams(request, 'searchTerm')
+  const search = getSearchParams(request, 'search')
   const sort = getSearchParams(request, 'sort')
 
   const sortKey = sort?.split('.')[0]
   const sortOrder = sort?.split('.')[1] as SortOrder
 
-  const isSearchTermValid = validateSearchTerm(searchTerm)
+  const isSearchValid = validateSearch(search)
   const isSortOrderValid = validateSortOrder(sortOrder)
 
   const filterQuery = {
     name: {
-      $regex: isSearchTermValid ? `^${searchTerm}` : '(.*?)',
+      $regex: isSearchValid ? `^${search}` : '(.*?)',
       $options: 'i',
     },
   }

@@ -18,10 +18,10 @@ type Sort = {
 
 const getProducts = async ({
   page = 1,
-  searchTerm = '',
+  search = '',
   sort = 'createdAt.desc',
 }: QueryParams = {}) => {
-  const url = `${BASE_URL}/api/products?page=${page}&searchTerm=${searchTerm}&sort=${sort}`
+  const url = `${BASE_URL}/api/products?page=${page}&search=${search}&sort=${sort}`
   const request = new NextRequest(url)
   const response = await GET(request)
   const { products, pages }: Data = await response.json()
@@ -43,7 +43,7 @@ const verifySort = ({ type, key, products }: Sort) => {
 beforeAll(async () => await seedProducts())
 
 describe('GET /api/products', () => {
-  describe('given the searchTerm and sort are not applied', () => {
+  describe('given the search and sort are not applied', () => {
     it('returns status code 200 and paginated products', async () => {
       const { status, products, pages } = await getProducts()
 
@@ -75,9 +75,9 @@ describe('GET /api/products', () => {
     })
   })
 
-  describe('given the products matched the searchTerm', () => {
+  describe('given the products matched the search', () => {
     it('returns status code 200 and matching products', async () => {
-      const { status, products } = await getProducts({ searchTerm: 'A' })
+      const { status, products } = await getProducts({ search: 'A' })
 
       expect(status).toBe(200)
       expect(products.length).toBe(2)
@@ -88,9 +88,9 @@ describe('GET /api/products', () => {
     })
   })
 
-  describe('given the products matched the searchTerm in lowercase', () => {
+  describe('given the products matched the search in lowercase', () => {
     it('returns status code 200 and matching products', async () => {
-      const { status, products } = await getProducts({ searchTerm: 'a' })
+      const { status, products } = await getProducts({ search: 'a' })
 
       expect(status).toBe(200)
       expect(products.length).toBe(2)
@@ -101,9 +101,9 @@ describe('GET /api/products', () => {
     })
   })
 
-  describe('given no products matched the searchTerm', () => {
+  describe('given no products matched the search', () => {
     it('returns status code 200 and empty array', async () => {
-      const { status, products } = await getProducts({ searchTerm: 'xyz' })
+      const { status, products } = await getProducts({ search: 'xyz' })
 
       expect(status).toBe(200)
       expect(products.length).toBe(0)
@@ -111,20 +111,20 @@ describe('GET /api/products', () => {
     })
   })
 
-  describe('given the searchTerm is invalid', () => {
-    describe('given the searchTerm is )', () => {
+  describe('given the search is invalid', () => {
+    describe('given the search is )', () => {
       it('returns status code 200', async () => {
         const { status } = await getProducts({
-          searchTerm: ')',
+          search: ')',
         })
         expect(status).toBe(200)
       })
     })
 
-    describe('given the searchTerm is #', () => {
+    describe('given the search is #', () => {
       it('returns status code 200 and all products', async () => {
         const { status } = await getProducts({
-          searchTerm: '#',
+          search: '#',
         })
         expect(status).toBe(200)
       })
@@ -171,10 +171,10 @@ describe('GET /api/products', () => {
     })
   })
 
-  describe('given the searchTerm and sort are applied', () => {
+  describe('given the search and sort are applied', () => {
     it('return status code 200 and filtered sorted products', async () => {
       const { status, products } = await getProducts({
-        searchTerm: 'A',
+        search: 'A',
         sort: 'price.asc',
       })
 

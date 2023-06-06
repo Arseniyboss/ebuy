@@ -13,7 +13,7 @@ const Products = async ({ searchParams }: Props) => {
   const { products, pages } = await getProducts(searchParams)
   return (
     <>
-      {searchParams.searchTerm && products.length === 0 && (
+      {searchParams.search && products.length === 0 && (
         <SearchFailText>No products matched your search term</SearchFailText>
       )}
       {products.length > 0 && (

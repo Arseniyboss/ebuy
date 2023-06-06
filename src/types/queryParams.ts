@@ -3,6 +3,6 @@ export type SortKey = 'price' | 'rating'
 
 export type QueryParams = {
   page?: number
-  searchTerm?: string
+  search?: string
   sort?: string
 }
