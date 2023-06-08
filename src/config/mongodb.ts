@@ -17,9 +17,11 @@ export const connectToDB = async () => {
 }
 
 export const seedProducts = async () => {
+  if (process.env.CYPRESS_TEST !== 'true') return
   await Product.insertMany(products)
 }
 
 export const deleteProducts = async () => {
+  if (process.env.CYPRESS_TEST !== 'true') return
   await Product.deleteMany()
 }
