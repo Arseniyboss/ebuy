@@ -13,7 +13,7 @@ const Product = ({ name, image, price, rating, numReviews }: Props) => {
     <ProductContainer>
       <ProductImage src={image} height={250} width={250} alt='' priority />
       <ProductDetails>
-        <h1>{name}</h1>
+        <h1 data-testid='product-name'>{name}</h1>
         <ProductPrice>${price}</ProductPrice>
         <FlexGroup>
           <Rating value={rating} />
