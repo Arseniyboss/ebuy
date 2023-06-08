@@ -9,7 +9,7 @@ const isConnected = mongoose.connection.readyState === 1
 
 export const connectToDB = async () => {
   if (isConnected || process.env.NODE_ENV === 'test') return
-  if (process.env.TEST_MONGO_URI) {
+  if (process.env.CYPRESS_TEST === 'true') {
     await mongoose.connect(process.env.TEST_MONGO_URI)
   } else {
     await mongoose.connect(process.env.MONGO_URI)

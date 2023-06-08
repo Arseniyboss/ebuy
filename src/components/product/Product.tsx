@@ -10,11 +10,11 @@ import Rating from '@components/rating/Rating'
 
 const Product = ({ name, image, price, rating, numReviews }: Props) => {
   return (
-    <ProductContainer>
+    <ProductContainer data-testid='product'>
       <ProductImage src={image} height={250} width={250} alt='' priority />
       <ProductDetails>
         <h1 data-testid='product-name'>{name}</h1>
-        <ProductPrice>${price}</ProductPrice>
+        <ProductPrice data-testid='product-price'>${price}</ProductPrice>
         <FlexGroup>
           <Rating value={rating} />
           <p>

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import products from '@mocks/products'
 import { IdMapper } from 'types/mongo'
 import { Product } from 'types/product'
 import { MongoMemoryServer } from 'mongodb-memory-server'
@@ -24,4 +25,8 @@ export const disconnectFromDB = async () => {
 export const seedCollection = async (name: string, data: Data[]) => {
   const collection = collections[name]
   await collection.insertMany(data)
+}
+
+export const seedProducts = async () => {
+  await seedCollection('products', products)
 }

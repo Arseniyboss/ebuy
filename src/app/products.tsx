@@ -14,7 +14,9 @@ const Products = async ({ searchParams }: Props) => {
   return (
     <>
       {searchParams.search && products.length === 0 && (
-        <SearchFailText>No products matched your search term</SearchFailText>
+        <SearchFailText data-testid='search-fail-text'>
+          No products matched your search term
+        </SearchFailText>
       )}
       {products.length > 0 && (
         <>

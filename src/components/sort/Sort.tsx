@@ -14,7 +14,7 @@ const Sort = () => {
     setQueryParams({ sort, page: 1 })
   }
   return (
-    <Select value={sort} onChange={handleSort}>
+    <Select value={sort} onChange={handleSort} data-testid='sort-select'>
       <option value=''>Default Order</option>
       <option value='price.asc'>Price: Low - High</option>
       <option value='price.desc'>Price: High - Low</option>

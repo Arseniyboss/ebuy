@@ -18,6 +18,7 @@ const Pagination = ({ pages }: Props) => {
         disabled={page === 1}
         onClick={() => setQueryParams({ page: page - 1 })}
         aria-label='go to the previous page'
+        data-testid='left-arrow'
       >
         <FiArrowLeft />
       </PaginationButton>
@@ -28,6 +29,7 @@ const Pagination = ({ pages }: Props) => {
         disabled={page === pages}
         onClick={() => setQueryParams({ page: page + 1 })}
         aria-label='go to the next page'
+        data-testid='right-arrow'
       >
         <FiArrowRight />
       </PaginationButton>
