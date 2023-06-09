@@ -21,7 +21,7 @@ Cypress.Commands.add('waitDebounce', () => {
 })
 
 Cypress.Commands.add('waitSelect', () => {
-  cy.wait(300)
+  cy.wait(500)
 })
 
 Cypress.Commands.add('verifyNavLink', (testId, url) => {
