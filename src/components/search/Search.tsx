@@ -19,7 +19,7 @@ const Search = () => {
       type='text'
       name='search'
       placeholder='Search products...'
-      value={search}
+      value={search || ''}
       onChange={(e) => setSearch(e.target.value)}
       data-testid='search-input'
     />
