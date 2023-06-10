@@ -14,6 +14,7 @@ declare global {
       waitDebounce(): Chainable<Element>
       waitSelect(): Chainable<Element>
       verifyNavLink(dataId: string, url: string): Chainable<Element>
+      verifyFirstDynamicLink(testId: string, url: string): Chainable<Element>
       verifySort(prices: number[]): Chainable<Element>
     }
   }

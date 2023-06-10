@@ -1,3 +1,5 @@
+import { Product } from '../../src/types/product'
+
 before(() => {
   cy.task('seedProducts')
   cy.request('/api/revalidate?tag=products')
@@ -17,7 +19,7 @@ describe('Home Page', () => {
 
     cy.request(url).then((response) => {
       const { status, body } = response
-      const products = body.products
+      const products: Product[] = body.products
 
       expect(status).to.equal(200)
       expect(products.length).to.equal(4)
@@ -26,8 +28,10 @@ describe('Home Page', () => {
         expect(element).to.have.text(products[index].name)
       })
       cy.getByTestId('product-price').each((element, index) => {
-        expect(element).to.contain.text(products[index].price)
+        expect(element).to.contain.text(products[index].price.toString())
       })
+
+      cy.verifyFirstDynamicLink('product-link', `/product/${products[0]._id}`)
     })
   })
 

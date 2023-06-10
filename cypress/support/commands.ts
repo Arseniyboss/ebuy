@@ -29,6 +29,12 @@ Cypress.Commands.add('verifyNavLink', (testId, url) => {
   cy.location('pathname').should('eq', url)
 })
 
+Cypress.Commands.add('verifyFirstDynamicLink', (testId, url) => {
+  cy.getByTestId(testId).eq(0).click()
+  cy.location('pathname').should('eq', url)
+  cy.go('back')
+})
+
 Cypress.Commands.add('verifySort', (prices) => {
   cy.getByTestId('product-price').each((element, index) => {
     const price = Number(element.text().slice(1))

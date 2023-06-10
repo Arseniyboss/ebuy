@@ -1,7 +1,12 @@
 'use client'
 
 import styled from 'styled-components'
+import Link from 'next/link'
 import Image from 'next/image'
+
+export const ProductLink = styled(Link)`
+  display: inherit;
+`
 
 export const ProductContainer = styled.article`
   box-shadow: var(--box-shadow);
