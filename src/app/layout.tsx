@@ -2,7 +2,7 @@ import './globals.css'
 import StyledComponentsRegistry from '@lib/registry'
 import Header from '@components/header/Header'
 import Footer from '@components/footer/Footer'
-import { Container } from '@styles/globals'
+import { Container, SkipLink } from '@styles/globals'
 
 export const metadata = {
   title: 'Ebuy',
@@ -14,8 +14,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='en'>
       <body>
         <StyledComponentsRegistry>
+          <SkipLink href='#main-content'>Skip to main content</SkipLink>
           <Header />
-          <Container>{children}</Container>
+          <Container id='main-content'>{children}</Container>
           <Footer />
         </StyledComponentsRegistry>
       </body>

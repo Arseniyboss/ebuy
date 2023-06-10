@@ -13,7 +13,7 @@ export const HeaderContainer = styled.header`
   padding: 1.5rem 2rem;
   box-shadow: var(--box-shadow);
   color: var(--primary-color);
-  z-index: 1;
+  z-index: var(--header-z-index);
 `
 
 export const NavLinks = styled.ul`

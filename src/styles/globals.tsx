@@ -12,6 +12,24 @@ export const Container = styled.main`
   flex: 1 0 auto;
 `
 
+export const SkipLink = styled.a`
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  translate: 0 -100%;
+  transition: translate 150ms ease-in-out;
+  z-index: var(--skip-link-z-index);
+
+  &:focus {
+    translate: 0;
+  }
+`
+
 // export const FormContainer = styled.div`
 //   min-height: 75vh;
 //   display: flex;
