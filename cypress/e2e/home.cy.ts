@@ -31,9 +31,16 @@ describe('Home Page', () => {
     })
   })
 
-  it('renders products on the second page', () => {
+  it('paginates products', () => {
+    cy.getByTestId('left-arrow').should('be.disabled')
+
     cy.getByTestId('right-arrow').click()
+    cy.getByTestId('right-arrow').should('be.disabled')
+    cy.getByTestId('left-arrow').should('not.be.disabled')
     cy.getByTestId('product').should('have.length', 3)
+
+    cy.getByTestId('left-arrow').click()
+    cy.getByTestId('product').should('have.length', 4)
   })
 
   it('filters products', () => {
@@ -81,6 +88,26 @@ describe('Home Page', () => {
       value: 'rating.desc',
     })
     cy.waitSelect()
+  })
+
+  describe('navigates to the first page', () => {
+    beforeEach(() => {
+      cy.getByTestId('right-arrow').click()
+    })
+
+    it('when searching products', () => {
+      cy.typeInto('search-input', 'Airpods')
+      cy.location('search').should('include', '?page=1')
+    })
+
+    it('when sorting products', () => {
+      cy.selectOption({
+        testId: 'sort-select',
+        text: 'Price: Low - High',
+        value: 'price.asc',
+      })
+      cy.location('search').should('include', '?page=1')
+    })
   })
 
   // it('verifies nav links', () => {
