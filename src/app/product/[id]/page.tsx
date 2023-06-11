@@ -6,10 +6,9 @@ import {
   ProductImage,
   ProductDetails,
   ProductName,
-  ProductQuantity,
-  ProductButton,
 } from './styles'
 import Rating from '@components/rating/Rating'
+import AddToCart from './AddToCart'
 
 export type Params = {
   params: {
@@ -23,8 +22,6 @@ export const generateMetadata = async ({ params }: Params) => {
 }
 
 const Product = async ({ params }: Params) => {
-  // const [quantity, setQuantity] = useState(1);
-
   const product = await getProductById(params.id)
 
   if (!product) {
@@ -49,22 +46,7 @@ const Product = async ({ params }: Params) => {
           <p>{product.numReviews === 1 ? 'review' : 'reviews'}</p>
         </FlexGroup>
         <p>{product.description}</p>
-        <FlexGroup>
-          <p>Quantity:</p>
-          <ProductQuantity
-          // value={quantity}
-          // onChange={(e) => setQuantity(e.target.value)}
-          >
-            {[...Array(product.countInStock).keys()].map((x) => (
-              <option key={x + 1} value={x + 1}>
-                {x + 1}
-              </option>
-            ))}
-          </ProductQuantity>
-        </FlexGroup>
-        <ProductButton disabled={product.countInStock === 0}>
-          Add To Cart
-        </ProductButton>
+        <AddToCart product={product} />
       </ProductDetails>
     </ProductContainer>
   )

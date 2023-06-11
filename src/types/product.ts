@@ -20,3 +20,7 @@ export type Product = {
   isPublished: boolean
   reviews?: Review[]
 }
+
+export interface CartItem extends Product {
+  quantity: number
+}
