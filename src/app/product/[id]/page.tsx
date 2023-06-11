@@ -3,11 +3,9 @@ import { getProductById } from '@api/products/getProductById'
 import { FlexGroup } from '@components/product/styles'
 import {
   ProductContainer,
-  ProductGroup,
   ProductImage,
   ProductDetails,
-  ProductDescription,
-  ProductSummary,
+  ProductName,
   ProductQuantity,
   ProductButton,
 } from './styles'
@@ -25,6 +23,8 @@ export const generateMetadata = async ({ params }: Params) => {
 }
 
 const Product = async ({ params }: Params) => {
+  // const [quantity, setQuantity] = useState(1);
+
   const product = await getProductById(params.id)
 
   if (!product) {
@@ -33,53 +33,39 @@ const Product = async ({ params }: Params) => {
 
   return (
     <ProductContainer>
-      <ProductGroup>
-        <ProductImage
-          src={product.image}
-          alt=''
-          width={250}
-          height={250}
-          priority
-        />
-        <ProductDetails>
-          <h1>{product.name}</h1>
-          <FlexGroup>
-            <Rating value={product.rating} />
-            <p>
-              {product.numReviews}{' '}
-              {product.numReviews === 1 ? 'review' : 'reviews'}
-            </p>
-          </FlexGroup>
-          <ProductDescription>{product.description}</ProductDescription>
-        </ProductDetails>
-      </ProductGroup>
-      <ProductSummary>
-        <table>
-          <tbody>
-            <tr>
-              <th>Price</th>
-              <td>${product.price}</td>
-            </tr>
-            <tr>
-              <th>Status</th>
-              <td>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</td>
-            </tr>
-            <tr>
-              <th>Quantity</th>
-              <td>
-                <ProductQuantity>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </ProductQuantity>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <ProductImage
+        src={product.image}
+        alt=''
+        width={440}
+        height={350}
+        priority
+      />
+      <ProductDetails>
+        <ProductName>{product.name}</ProductName>
+        <h2>${product.price}</h2>
+        <FlexGroup>
+          <Rating value={product.rating} />
+          <p>{product.numReviews}</p>
+          <p>{product.numReviews === 1 ? 'review' : 'reviews'}</p>
+        </FlexGroup>
+        <p>{product.description}</p>
+        <FlexGroup>
+          <p>Quantity:</p>
+          <ProductQuantity
+          // value={quantity}
+          // onChange={(e) => setQuantity(e.target.value)}
+          >
+            {[...Array(product.countInStock).keys()].map((x) => (
+              <option key={x + 1} value={x + 1}>
+                {x + 1}
+              </option>
+            ))}
+          </ProductQuantity>
+        </FlexGroup>
         <ProductButton disabled={product.countInStock === 0}>
           Add To Cart
         </ProductButton>
-      </ProductSummary>
+      </ProductDetails>
     </ProductContainer>
   )
 }

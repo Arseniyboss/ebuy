@@ -3,78 +3,58 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Button } from '@styles/globals'
+import { breakpoints } from '@constants/breakpoints/product'
 
 export const ProductContainer = styled.article`
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 4rem 2rem;
-
-  /* @media screen and (max-width: 1098px) {
-    justify-content: flex-start;
-  } */
-`
-
-export const ProductGroup = styled.div`
-  display: flex;
+  justify-content: center;
   gap: 2rem;
+  padding: 3rem 2rem;
+
+  @media screen and (max-width: ${breakpoints.medium}) {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 2rem;
+  }
 `
 
 export const ProductImage = styled(Image)`
-  height: auto;
-  width: 450px;
+  max-width: 90vw;
+
+  @media screen and (max-width: ${breakpoints.medium}) {
+    height: auto;
+  }
 `
 
 export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 500px; */
-  width: 33vw;
   gap: 1rem;
+  max-width: 600px;
   color: var(--primary-color);
+
+  @media screen and (max-width: ${breakpoints.medium}) {
+    align-items: center;
+    text-align: center;
+  }
 `
 
-export const ProductDescription = styled.p`
-  width: 90%;
-`
-
-export const ProductSummary = styled.div`
-  table {
-    border-collapse: collapse;
-    color: var(--primary-color);
-  }
-
-  th {
-    text-align: left;
-  }
-
-  td,
-  th {
-    padding: 1rem;
-  }
-
-  table,
-  td,
-  th {
-    border: 1px solid lightgrey;
-  }
-
-  /* @media screen and (max-width: 1098px) {
-    align-self: flex-start;
-  } */
+export const ProductName = styled.h1`
+  font-size: 1.8rem;
 `
 
 export const ProductQuantity = styled.select`
-  width: 70%;
+  width: 40px;
   color: inherit;
   border-radius: var(--border-radius);
 `
 
 export const ProductButton = styled(Button)`
+  border-radius: var(--border-radius);
   background: var(--primary-color);
   color: white;
-  width: 100%;
-  padding: 1rem;
+  width: fit-content;
+  padding: 0.8rem 1.2rem;
   text-transform: uppercase;
 
   &:hover {

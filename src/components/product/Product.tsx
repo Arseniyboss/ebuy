@@ -19,9 +19,8 @@ const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
           <ProductPrice data-testid='product-price'>${price}</ProductPrice>
           <FlexGroup>
             <Rating value={rating} />
-            <p>
-              {numReviews} {numReviews === 1 ? 'review' : 'reviews'}
-            </p>
+            <p>{numReviews}</p>
+            <p>{numReviews === 1 ? 'review' : 'reviews'}</p>
           </FlexGroup>
         </ProductDetails>
       </ProductContainer>
