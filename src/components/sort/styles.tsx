@@ -7,9 +7,7 @@ export const Select = styled.select`
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   text-align: center;
-  outline: none;
   appearance: none;
-  cursor: pointer;
 
   @media screen and (max-width: ${breakpoints.small}) {
     text-align: start;
