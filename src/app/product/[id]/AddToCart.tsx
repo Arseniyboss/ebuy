@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { getQuantities } from '@utils/getQuantities'
 import { addToCart } from '@utils/addToCart'
 import { Product } from 'types/product'
@@ -13,7 +14,14 @@ type Props = {
 
 const AddToCart = ({ product }: Props) => {
   const [quantity, setQuantity] = useState(1)
+  const router = useRouter()
   const quantities = getQuantities(product.countInStock)
+
+  const handleClick = () => {
+    addToCart({ ...product, quantity })
+    router.push('/cart')
+    router.refresh()
+  }
 
   return product.countInStock === 0 ? (
     <ProductStatus>Out Of Stock</ProductStatus>
@@ -35,7 +43,7 @@ const AddToCart = ({ product }: Props) => {
       </FlexGroup>
       <ProductButton
         disabled={product.countInStock === 0}
-        onClick={() => addToCart({ ...product, quantity })}
+        onClick={handleClick}
         data-testid='product-button'
       >
         Add To Cart
