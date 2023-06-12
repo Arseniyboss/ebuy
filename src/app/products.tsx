@@ -11,23 +11,19 @@ type Props = {
 
 const Products = async ({ searchParams }: Props) => {
   const { products, pages } = await getProducts(searchParams)
-  return (
+
+  return searchParams.search && products.length === 0 ? (
+    <SearchFailText data-testid='search-fail-text'>
+      No products matched your search term
+    </SearchFailText>
+  ) : (
     <>
-      {searchParams.search && products.length === 0 && (
-        <SearchFailText data-testid='search-fail-text'>
-          No products matched your search term
-        </SearchFailText>
-      )}
-      {products.length > 0 && (
-        <>
-          <ProductContainer>
-            {products.map((product: ProductType) => (
-              <Product key={product._id} {...product} />
-            ))}
-          </ProductContainer>
-          <Pagination pages={pages} />
-        </>
-      )}
+      <ProductContainer>
+        {products.map((product: ProductType) => (
+          <Product key={product._id} {...product} />
+        ))}
+      </ProductContainer>
+      <Pagination pages={pages} />
     </>
   )
 }

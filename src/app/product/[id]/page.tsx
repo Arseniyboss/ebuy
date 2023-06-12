@@ -36,16 +36,17 @@ const Product = async ({ params }: Params) => {
         width={440}
         height={350}
         priority
+        data-testid='product-image'
       />
       <ProductDetails>
-        <ProductName>{product.name}</ProductName>
-        <h2>${product.price}</h2>
+        <ProductName data-testid='product-name'>{product.name}</ProductName>
+        <h2 data-testid='product-price'>${product.price}</h2>
         <FlexGroup>
           <Rating value={product.rating} />
           <p>{product.numReviews}</p>
           <p>{product.numReviews === 1 ? 'review' : 'reviews'}</p>
         </FlexGroup>
-        <p>{product.description}</p>
+        <p data-testid='product-description'>{product.description}</p>
         <AddToCart product={product} />
       </ProductDetails>
     </ProductContainer>

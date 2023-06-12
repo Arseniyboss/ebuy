@@ -4,6 +4,14 @@ Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
 })
 
+Cypress.Commands.add('getImage', (testId) => {
+  cy.getByTestId(testId)
+    .should('be.visible')
+    .and((img) => {
+      expect(img[0].naturalWidth).to.be.greaterThan(0)
+    })
+})
+
 Cypress.Commands.add('typeInto', (dataId, text) => {
   cy.getByTestId(dataId).type(text).should('have.value', text)
 })
@@ -14,6 +22,10 @@ Cypress.Commands.add('selectOption', ({ testId, text, value }) => {
 
 Cypress.Commands.add('clearInput', (dataId) => {
   cy.getByTestId(dataId).clear()
+})
+
+Cypress.Commands.add('clickButton', (dataId) => {
+  cy.getByTestId(dataId).click()
 })
 
 Cypress.Commands.add('waitDebounce', () => {

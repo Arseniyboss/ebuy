@@ -66,3 +66,8 @@ export const ProductButton = styled(Button)`
     background: lightgrey;
   }
 `
+
+export const ProductStatus = styled.p`
+  color: red;
+  font-size: 1.2rem;
+`
