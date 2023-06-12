@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: 'Cart',
 }
 
-// Fix the error: the combined size of the name and value must be less than or equal to 4096 characters
+// Don't store cartItems in cookies (maximum size of a cookie is 4096 bytes)
+// Persist user session in cookies and get cartItems from the Vercel KV database
 
 const Cart = () => {
   const cartItems = getCookie<CartItem[]>('cartItems') || []

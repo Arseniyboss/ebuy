@@ -21,6 +21,11 @@ export type Product = {
   reviews?: Review[]
 }
 
-export interface CartItem extends Product {
+export interface CartItem {
+  _id: string
+  name: string
+  image: string
+  price: number
+  countInStock: number
   quantity: number
 }

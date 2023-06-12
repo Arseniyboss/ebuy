@@ -13,12 +13,14 @@ type Props = {
 }
 
 const AddToCart = ({ product }: Props) => {
+  const { _id, name, price, image, countInStock } = product
+
   const [quantity, setQuantity] = useState(1)
   const router = useRouter()
   const quantities = getQuantities(product.countInStock)
 
   const handleClick = () => {
-    addToCart({ ...product, quantity })
+    addToCart({ _id, name, price, image, countInStock, quantity })
     router.push('/cart')
     router.refresh()
   }
