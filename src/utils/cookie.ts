@@ -8,13 +8,13 @@ export const setCookie = (key: string, value: any) => {
 }
 
 export const getCookie = <T = string>(name: string): T | undefined => {
-  const cookie = cookies().get(name)?.value
+  const cookie = cookies().get(name)?.value as T
 
   if (!cookie) return
 
   try {
     return JSON.parse(cookie.toString())
   } catch {
-    return cookie as T
+    return cookie
   }
 }

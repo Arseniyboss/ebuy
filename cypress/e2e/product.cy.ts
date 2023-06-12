@@ -1,8 +1,31 @@
-import { Product } from '../../src/types/product'
+import { Product, CartItem } from '../../src/types/product'
+
+const id = '62dbfa7f31c12b460f19f2b5'
+const products = [
+  {
+    _id: '62dbfa7f31c12b460f19f2b6',
+    name: 'iPhone 11 Pro 256GB Memory',
+    price: 599.99,
+  },
+  {
+    _id: '62dbfa7f31c12b460f19f2b5',
+    name: 'Airpods Wireless Bluetooth Headphones',
+    price: 129.99,
+  },
+]
+
+const getCartItems = (value: string) => {
+  const cartItems: CartItem[] = JSON.parse(decodeURIComponent(value))
+  return cartItems
+}
 
 before(() => {
   cy.task('seedProducts')
   cy.request('/api/revalidate?tag=products')
+})
+
+beforeEach(() => {
+  cy.visit(`/product/${id}`)
 })
 
 after(() => {
@@ -10,14 +33,7 @@ after(() => {
 })
 
 describe('Product Page', () => {
-  // it('shows error message if the product was not found', () => {
-  //   const id = '62dbfa7f31c12b460f19f2b4'
-  //   cy.visit(`/product/${id}`)
-  //   cy.getByTestId('error-message').should('have.text', 'Product not found')
-  // })
   it('renders product', () => {
-    const id = '62dbfa7f31c12b460f19f2b5'
-    cy.visit(`/product/${id}`)
     cy.request(`/api/products/${id}`).then((response) => {
       const { status, body } = response
       const { name, price, description }: Product = body
@@ -31,42 +47,50 @@ describe('Product Page', () => {
       cy.getByTestId('product-description').should('have.text', description)
     })
   })
-  it('selects product quantity', () => {
-    const id = '62dbfa7f31c12b460f19f2b5'
-    cy.visit(`/product/${id}`)
-    cy.selectOption({ testId: 'product-quantity', text: '3', value: '3' })
-  })
-  it('adds product to the cart', () => {
-    const id = '62dbfa7f31c12b460f19f2b5'
-    cy.visit(`/product/${id}`)
+
+  it('adds product to an empty cart', () => {
     cy.clickButton('product-button')
 
-    const product = {
-      _id: '62dbfa7f31c12b460f19f2b5',
-      name: 'Airpods Wireless Bluetooth Headphones',
-      image: '/images/airpods.jpg',
-      description:
-        'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
-      brand: 'Apple',
-      category: 'Electronics',
-      price: 129.99,
-      discountPrice: 89.99,
-      countInStock: 3,
-      rating: 4.5,
-      numReviews: 7,
-      isPublished: true,
-      reviews: [
-        {
-          user: '62dbfa7f31c12b460f19f2b3',
-          name: 'Jane Doe',
-          rating: 4,
-          comment: 'Very Good Airpods!',
-        },
-      ],
-    }
+    cy.getCookie('cartItems').then(({ value }) => {
+      const cartItems = getCartItems(value)
+      expect(cartItems[0].quantity).to.equal(1)
+    })
+  })
 
-    cy.getCookie('cartItems').then((cartItems) => {
-      expect(product).to.be.oneOf(JSON.parse(JSON.stringify(cartItems)))
+  it('adds the product in the selected quantity to the cart', () => {
+    cy.selectOption({ testId: 'product-quantity', text: '2', value: '2' })
+    cy.clickButton('product-button')
+
+    cy.getCookie('cartItems').then(({ value }) => {
+      const cartItems = getCartItems(value)
+      cy.verifyCartItem(cartItems[0], products[1])
+      expect(cartItems[0].quantity).to.equal(2)
+    })
+  })
+
+  it('adds product to a non-empty cart', () => {
+    cy.setCookie('cartItems', JSON.stringify([products[0]]))
+    cy.clickButton('product-button')
+
+    cy.getCookie('cartItems').then(({ value }) => {
+      const cartItems = getCartItems(value)
+      cy.verifyCartItem(cartItems[1], products[1])
+      expect(cartItems[0]._id).to.equal(products[0]._id)
+      expect(cartItems.length).to.equal(2)
+    })
+  })
+
+  it('updates quantity of the cart item', () => {
+    cy.setCookie('cartItems', JSON.stringify(products))
+    cy.selectOption({ testId: 'product-quantity', text: '3', value: '3' })
+    cy.clickButton('product-button')
+
+    cy.getCookie('cartItems').then(({ value }) => {
+      const cartItems = getCartItems(value)
+      cy.verifyCartItem(cartItems[1], products[1])
+      expect(cartItems[0]._id).to.equal(products[0]._id)
+      expect(cartItems.length).to.equal(2)
+      expect(cartItems[1].quantity).to.equal(3)
     })
   })
 })
