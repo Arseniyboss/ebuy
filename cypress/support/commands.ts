@@ -53,9 +53,3 @@ Cypress.Commands.add('verifySort', (prices) => {
     expect(price).to.eq(prices[index])
   })
 })
-
-Cypress.Commands.add('verifyCartItem', (receivedItem, expectedItem) => {
-  expect(receivedItem._id).to.equal(expectedItem._id)
-  expect(receivedItem.name).to.equal(expectedItem.name)
-  expect(receivedItem.price).to.equal(expectedItem.price)
-})

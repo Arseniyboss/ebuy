@@ -4,12 +4,6 @@ type SelectOption = {
   value: string
 }
 
-type CartItem = {
-  _id: string
-  name: string
-  price: number
-}
-
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -24,10 +18,6 @@ declare global {
       verifyNavLink(dataId: string, url: string): Chainable<Element>
       verifyFirstDynamicLink(testId: string, url: string): Chainable<Element>
       verifySort(prices: number[]): Chainable<Element>
-      verifyCartItem(
-        receivedItem: CartItem,
-        expectedItem: CartItem
-      ): Chainable<Element>
     }
   }
 }

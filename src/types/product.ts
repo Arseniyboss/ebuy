@@ -15,17 +15,11 @@ export type Product = {
   rating: number
   numReviews: number
   price: number
-  discountPrice: number
   countInStock: number
   isPublished: boolean
   reviews?: Review[]
 }
 
-export interface CartItem {
-  _id: string
-  name: string
-  image: string
-  price: number
-  countInStock: number
+export interface CartItem extends Product {
   quantity: number
 }
