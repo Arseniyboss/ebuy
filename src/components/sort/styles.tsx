@@ -9,6 +9,10 @@ export const Select = styled.select`
   text-align: center;
   appearance: none;
 
+  &:focus {
+    border: 1px solid #444;
+  }
+
   @media screen and (max-width: ${breakpoints.small}) {
     text-align: start;
     width: 100%;

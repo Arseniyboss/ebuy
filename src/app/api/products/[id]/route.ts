@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { connectToDB } from '@config/mongodb'
+import { throwError } from '@utils/throwError'
 import Product from '@models/product'
 
 export type Params = {
@@ -14,10 +15,7 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   const product = await Product.findById(params.id)
 
   if (!product) {
-    return NextResponse.json(null, {
-      status: 404,
-      statusText: 'Product not found',
-    })
+    return throwError({ error: 'Product not found', status: 404 })
   }
 
   return NextResponse.json(product)
