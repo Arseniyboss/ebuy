@@ -2,11 +2,12 @@
 
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
-// import { login } from '@api/users/login'
-
+import { login } from '@api/users/login'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormFooter, FormLink } from '@styles/form'
 import Message from '@components/message/Message'
+
+// add form validation
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -17,16 +18,18 @@ const Login = () => {
   const router = useRouter()
 
   const handleSubmit = async (e: FormEvent) => {
-    // e.preventDefault()
-    // setLoading(true)
-    // const response = await login({ email, password })
-    // if (!response.ok) {
-    //   setLoading(false)
-    //   setError(response.statusText)
-    //   return
-    // }
-    // router.push('/')
-    // router.refresh()
+    e.preventDefault()
+    setLoading(true)
+
+    const response = await login({ email, password })
+    if (!response.ok) {
+      setLoading(false)
+      setError(response.statusText)
+      return
+    }
+
+    router.push('/')
+    router.refresh()
   }
   return (
     <Form onSubmit={handleSubmit}>

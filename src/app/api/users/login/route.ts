@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
-// import { generateTokenCookie } from '@utils/token/generateTokenCookie'
+import { generateTokenCookie } from '@utils/token/generateTokenCookie'
 import User from '@models/user'
 
 type Body = {
@@ -22,13 +22,13 @@ export const POST = async (request: NextRequest) => {
     return throwError({ error: 'Invalid credentials', status: 401 })
   }
 
-  // const tokenCookie = await generateTokenCookie({
-  //   id: user.id,
-  //   name: user.name,
-  // })
+  const tokenCookie = await generateTokenCookie({
+    id: user.id,
+    name: user.name,
+  })
 
   return NextResponse.json(null, {
     status: 200,
-    // headers: { 'Set-Cookie': tokenCookie },
+    headers: { 'Set-Cookie': tokenCookie },
   })
 }
