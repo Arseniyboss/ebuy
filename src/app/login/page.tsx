@@ -1,27 +1,38 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useForm } from '@hooks/useForm'
+import { loginSchema } from '@validation/schemas/loginSchema'
 import { login } from '@api/users/login'
 import { Input } from '@styles/globals'
-import { Form, FormGroup, FormButton, FormFooter, FormLink } from '@styles/form'
+import {
+  Form,
+  FormGroup,
+  FormButton,
+  FormFooter,
+  FormLink,
+  FormError,
+} from '@styles/form'
 import Message from '@components/message/Message'
 
-// add form validation
-
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const initialValues = {
+    email: '',
+    password: '',
+  }
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const router = useRouter()
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+  const onSubmit = async () => {
     setLoading(true)
 
+    const { email, password } = values
     const response = await login({ email, password })
+
     if (!response.ok) {
       setLoading(false)
       setError(response.statusText)
@@ -31,8 +42,14 @@ const Login = () => {
     router.push('/')
     router.refresh()
   }
+
+  const { values, errors, handleChange, handleSubmit } = useForm({
+    initialValues,
+    onSubmit,
+    validationSchema: loginSchema,
+  })
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} data-testid='login-form'>
       <h1>Sign In</h1>
       {error && <Message variant='error'>{error}</Message>}
       <FormGroup>
@@ -41,11 +58,14 @@ const Login = () => {
           type='email'
           name='email'
           id='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          value={values.email}
+          onChange={handleChange}
           autoComplete='on'
+          data-testid='email-input'
         />
+        {errors.email && (
+          <FormError data-testid='email-error'>{errors.email}</FormError>
+        )}
       </FormGroup>
       <FormGroup>
         <label htmlFor='password'>Password</label>
@@ -53,16 +73,21 @@ const Login = () => {
           type='password'
           name='password'
           id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+          value={values.password}
+          onChange={handleChange}
           autoComplete='on'
+          data-testid='password-input'
         />
+        {errors.password && (
+          <FormError data-testid='password-error'>{errors.password}</FormError>
+        )}
       </FormGroup>
       <FormButton disabled={loading}>Sign In</FormButton>
       <FormFooter>
         <p>Don't have an account?</p>
-        <FormLink href='/register'>Sign Up</FormLink>
+        <FormLink href='/register' data-testid='register-link'>
+          Sign Up
+        </FormLink>
       </FormFooter>
     </Form>
   )

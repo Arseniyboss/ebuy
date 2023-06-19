@@ -36,3 +36,8 @@ export const FormFooter = styled.div`
 export const FormLink = styled(Link)`
   color: var(--blue);
 `
+
+export const FormError = styled.p`
+  color: red;
+  font-weight: bold;
+`

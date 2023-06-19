@@ -13,7 +13,7 @@ export const generateTokenCookie = async (payload: Payload) => {
     name: 'token',
     value: token,
     maxAge: hour,
-    secure: true,
+    secure: process.env.NODE_ENV !== 'development',
     httpOnly: true,
     sameSite: 'strict',
   })

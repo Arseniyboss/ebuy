@@ -4,12 +4,20 @@ Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
 })
 
+Cypress.Commands.add('getMessage', (dataId, value) => {
+  cy.getByTestId(dataId).should('have.text', value)
+})
+
 Cypress.Commands.add('getImage', (testId) => {
   cy.getByTestId(testId)
     .should('be.visible')
     .and((img) => {
       expect(img[0].naturalWidth).to.be.greaterThan(0)
     })
+})
+
+Cypress.Commands.add('assertDisabled', (testId) => {
+  cy.getByTestId(testId).should('be.disabled')
 })
 
 Cypress.Commands.add('typeInto', (dataId, text) => {
@@ -24,6 +32,10 @@ Cypress.Commands.add('clearInput', (dataId) => {
   cy.getByTestId(dataId).clear()
 })
 
+Cypress.Commands.add('submitForm', (dataId) => {
+  cy.getByTestId(dataId).submit()
+})
+
 Cypress.Commands.add('clickButton', (dataId) => {
   cy.getByTestId(dataId).click()
 })
@@ -34,6 +46,12 @@ Cypress.Commands.add('waitDebounce', () => {
 
 Cypress.Commands.add('waitSelect', () => {
   cy.wait(500)
+})
+
+Cypress.Commands.add('verifyLink', (testId, url) => {
+  cy.getByTestId(testId).click()
+  cy.location('pathname').should('eq', url)
+  cy.go('back')
 })
 
 Cypress.Commands.add('verifyNavLink', (testId, url) => {

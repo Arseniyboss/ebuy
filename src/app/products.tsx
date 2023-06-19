@@ -28,4 +28,4 @@ const Products = async ({ searchParams }: Props) => {
   )
 }
 
-export default Products as unknown as ({ searchParams }: Props) => JSX.Element
+export default Products
