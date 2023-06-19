@@ -1,7 +1,5 @@
-import { Product } from 'types/product'
-import { Schema, models, model, Model } from 'mongoose'
-
-type ProductModel = Model<Product>
+import { Product, ProductModel } from 'types/product'
+import { Schema, models, model } from 'mongoose'
 
 const productSchema = new Schema({
   name: {

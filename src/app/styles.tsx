@@ -15,7 +15,6 @@ export const FlexContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
 
   @media screen and (max-width: ${breakpoints.small}) {
     flex-direction: column;

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const Cart = () => {
   const cartItems: CartItem[] = []
   return (
-    <div>
+    <>
       <Heading>Shopping Cart</Heading>
       {cartItems.length === 0 ? (
         <Message variant='info'>Your cart is empty</Message>
@@ -21,7 +21,7 @@ const Cart = () => {
           ))} */}
         </div>
       )}
-    </div>
+    </>
   )
 }
 

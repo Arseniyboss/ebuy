@@ -4,24 +4,47 @@ import styled from 'styled-components'
 
 export const Container = styled.main`
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
 `
 
 export const Heading = styled.h1`
-  color: var(--primary-color);
+  color: var(--gray);
   text-align: center;
-  margin: 1.5rem 0;
 `
 
 export const Button = styled.button`
+  font-size: 1rem;
+  color: white;
   border: none;
   cursor: pointer;
 
+  &:hover {
+    background-image: linear-gradient(rgb(0 0 0 / 25%) 0 0);
+  }
+
   &:disabled {
+    pointer-events: none;
     cursor: initial;
+    opacity: 0.5;
+  }
+`
+
+export const Input = styled.input`
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+
+  &:focus {
+    border: 1px solid #444;
   }
 `
 
 export const SkipLink = styled.a`
+  outline: none;
   background: #333;
   color: white;
   text-align: center;
@@ -38,10 +61,3 @@ export const SkipLink = styled.a`
     translate: 0;
   }
 `
-
-// export const FormContainer = styled.div`
-//   min-height: 75vh;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `

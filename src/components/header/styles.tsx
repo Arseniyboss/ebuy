@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
   top: 0;
   padding: 1.5rem 2rem;
   box-shadow: var(--box-shadow);
-  color: var(--primary-color);
+  color: var(--gray);
   z-index: var(--header-z-index);
 `
 

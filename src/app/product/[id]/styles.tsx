@@ -31,7 +31,7 @@ export const ProductDetails = styled.div`
   flex-direction: column;
   gap: 1rem;
   max-width: 600px;
-  color: var(--primary-color);
+  color: var(--gray);
 
   @media screen and (max-width: ${breakpoints.medium}) {
     align-items: center;
@@ -50,21 +50,11 @@ export const ProductQuantity = styled.select`
 `
 
 export const ProductButton = styled(Button)`
-  border-radius: var(--border-radius);
-  background: var(--primary-color);
-  color: white;
+  background-color: var(--gray);
   width: fit-content;
-  padding: 0.8rem 1.2rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--border-radius);
   text-transform: uppercase;
-
-  &:hover {
-    background: #333;
-    transition: all 0.3s ease;
-  }
-
-  &:disabled {
-    background: lightgrey;
-  }
 `
 
 export const ProductStatus = styled.p`

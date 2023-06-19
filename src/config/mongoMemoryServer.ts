@@ -1,10 +1,12 @@
 import mongoose from 'mongoose'
 import products from '@mocks/products'
+import users from '@mocks/users'
 import { IdMapper } from 'types/mongo'
 import { Product } from 'types/product'
+import { User } from 'types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
-type Data = IdMapper<Product>
+type Data = IdMapper<Product | User>
 
 const collections = mongoose.connection.collections
 
@@ -29,4 +31,8 @@ export const seedCollection = async (name: string, data: Data[]) => {
 
 export const seedProducts = async () => {
   await seedCollection('products', products)
+}
+
+export const seedUsers = async () => {
+  await seedCollection('users', users)
 }

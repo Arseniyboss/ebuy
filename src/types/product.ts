@@ -1,3 +1,5 @@
+import { Model } from 'mongoose'
+
 type Review = {
   user: string
   name: string
@@ -19,6 +21,8 @@ export type Product = {
   isPublished: boolean
   reviews?: Review[]
 }
+
+export type ProductModel = Model<Product>
 
 export interface CartItem extends Product {
   quantity: number

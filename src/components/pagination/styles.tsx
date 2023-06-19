@@ -1,24 +1,16 @@
 import styled from 'styled-components'
+import { Button } from '@styles/globals'
 
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 2rem;
 `
 
-export const PaginationButton = styled.button`
+export const PaginationButton = styled(Button)`
   display: flex;
-  border: none;
   background: #8ccaf8;
-  color: white;
   padding: 0.4rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: initial;
-    opacity: 0.6;
-  }
+  border-radius: var(--border-radius);
 `

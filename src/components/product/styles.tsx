@@ -25,7 +25,7 @@ export const ProductDetails = styled.div`
   gap: 0.5rem;
   padding: 1rem;
   padding-top: 0.7rem;
-  color: var(--primary-color);
+  color: var(--gray);
 `
 
 export const ProductPrice = styled.h2`
