@@ -1,5 +1,9 @@
 import { BASE_URL } from '@baseUrl'
-import { UserCredentials } from 'types/user'
+
+type UserCredentials = {
+  email: string
+  password: string
+}
 
 export const login = async ({ email, password }: UserCredentials) => {
   const response = await fetch(`${BASE_URL}/api/users/login`, {
