@@ -11,7 +11,7 @@ after(() => {
 })
 
 describe('Login Page', () => {
-  it('verifies form link', () => {
+  it('verifies register link', () => {
     cy.verifyLink('register-link', '/register')
   })
 
@@ -50,17 +50,11 @@ describe('Login Page', () => {
 
     cy.getByTestId('error-message').should('not.exist')
     cy.assertDisabled('login-button')
-
-    cy.location('pathname').should('eq', '/')
+    cy.verifyUrl('/')
 
     cy.wait('@login').then(({ response }) => {
       expect(response.statusCode).to.equal(200)
-
-      cy.getCookie('token').then((cookie) => {
-        expect(cookie.secure).to.be.true
-        expect(cookie.httpOnly).to.be.true
-        expect(cookie.sameSite).to.equal('strict')
-      })
+      cy.verifyCookie('token')
     })
   })
 })

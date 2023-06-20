@@ -18,10 +18,12 @@ declare global {
       clickButton(dataId: string): Chainable<Element>
       waitDebounce(): Chainable<Element>
       waitSelect(): Chainable<Element>
+      verifyUrl(url: string): Chainable<Element>
       verifyLink(dataId: string, url: string): Chainable<Element>
       verifyNavLink(dataId: string, url: string): Chainable<Element>
       verifyFirstDynamicLink(testId: string, url: string): Chainable<Element>
       verifySort(prices: number[]): Chainable<Element>
+      verifyCookie(name: string): Chainable<Element>
     }
   }
 }
