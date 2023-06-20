@@ -17,7 +17,7 @@ describe('Home Page', () => {
   it('verifies nav links', () => {
     cy.verifyNavLink('cart-nav-link', '/cart')
     cy.verifyNavLink('login-nav-link', '/login')
-    // cy.verifyNavLink('contact-nav-link', '/contact')
+    cy.verifyNavLink('contact-nav-link', '/contact')
     cy.verifyNavLink('home-nav-link', '/')
   })
 
