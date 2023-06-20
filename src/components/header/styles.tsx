@@ -25,4 +25,8 @@ export const NavLinks = styled.ul`
 export const NavLink = styled(Link)`
   display: flex;
   font-size: var(--header-icon-size);
+
+  &:hover {
+    color: var(--darkgray);
+  }
 `

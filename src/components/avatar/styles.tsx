@@ -5,7 +5,7 @@ export const AvatarContainer = styled.div`
   justify-content: center;
 `
 
-export const UserInitials = styled.div`
+export const UserInitials = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,10 @@ export const UserInitials = styled.div`
   border-radius: 50%;
   text-transform: capitalize;
   cursor: pointer;
+
+  &:hover {
+    background: var(--darkgray);
+  }
 `
 
 export const Dropdown = styled.ul`

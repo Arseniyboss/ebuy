@@ -8,7 +8,7 @@
 
 ## Todos
 
+- Darkgray active nav links
 - Logout e2e test
-- Hover and active state of the nav links
 - Profile Page
 - Contact Page
