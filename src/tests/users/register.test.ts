@@ -1,14 +1,9 @@
 import { NextRequest } from 'next/server'
+import { User } from 'types/api'
 import { POST } from '@app/api/users/register/route'
 import { seedUsers } from '@config/mongoMemoryServer'
-import { verifyToken } from '@utils/token/verifyToken'
+import { verifyToken } from '@auth/verifyToken'
 import { BASE_URL } from '@baseUrl'
-
-type User = {
-  name: string
-  email: string
-  password: string
-}
 
 const register = async (user: User) => {
   const url = `${BASE_URL}/api/users/login`

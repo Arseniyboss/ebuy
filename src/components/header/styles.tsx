@@ -24,5 +24,5 @@ export const NavLinks = styled.ul`
 
 export const NavLink = styled(Link)`
   display: flex;
-  font-size: 1.8rem;
+  font-size: var(--header-icon-size);
 `

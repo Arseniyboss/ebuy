@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server'
+import { JwtPayload } from 'types/jwtPayload'
 import { hour, generateToken } from './generateToken'
 
-type Payload = {
-  id: string
-  name: string
-}
-
-export const generateTokenCookie = async (payload: Payload) => {
+export const generateTokenCookie = async (payload: JwtPayload) => {
   const token = await generateToken(payload)
   const response = NextResponse.next()
   const tokenCookie = response.cookies.set({

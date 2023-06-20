@@ -12,6 +12,8 @@ type Props = {
 }
 
 const AddToCart = ({ product }: Props) => {
+  // const {name, image, price, countInStock} = product
+
   const [quantity, setQuantity] = useState(1)
   const router = useRouter()
   const quantities = getQuantities(product.countInStock)
@@ -20,7 +22,7 @@ const AddToCart = ({ product }: Props) => {
 
   const handleClick = () => {
     if (user) {
-      // addToCart({...product, quantity})
+      // addToCart({name, image, price, countInStock, quantity})
       router.push('/cart')
     } else {
       router.push('/login')

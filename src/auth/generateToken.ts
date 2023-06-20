@@ -1,14 +1,10 @@
 import { SignJWT } from 'jose'
+import { JwtPayload } from 'types/jwtPayload'
 import { getJwtSecret } from './getJwtSecret'
-
-type Payload = {
-  id: string
-  name: string
-}
 
 export const hour = 60 * 60
 
-export const generateToken = async (payload: Payload) => {
+export const generateToken = async (payload: JwtPayload) => {
   const currentTime = Math.floor(Date.now() / 1000)
   const JWT_SECRET = getJwtSecret()
 

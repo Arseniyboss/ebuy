@@ -7,7 +7,7 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react'
-import { validate } from '@utils/validation'
+import { validate } from '@validation/validate'
 
 export type ValidationSchema<T> = {
   required?: {

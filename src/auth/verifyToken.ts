@@ -1,10 +1,6 @@
 import { jwtVerify } from 'jose'
+import { JwtPayload } from 'types/jwtPayload'
 import { getJwtSecret } from './getJwtSecret'
-
-interface Payload {
-  id: string
-  name: string
-}
 
 export const verifyToken = async (token?: string) => {
   if (!token) return
@@ -13,7 +9,7 @@ export const verifyToken = async (token?: string) => {
 
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET)
-    const user = { id: payload.id, name: payload.name } as Payload
+    const user = { id: payload.id, name: payload.name } as JwtPayload
     return user
   } catch (error) {
     console.log('Token is invalid or has expired')

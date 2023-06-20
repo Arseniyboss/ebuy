@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { User as Body } from 'types/api'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
-import { generateTokenCookie } from '@utils/token/generateTokenCookie'
+import { generateTokenCookie } from '@auth/generateTokenCookie'
 import User from '@models/user'
-
-type Body = {
-  name: string
-  email: string
-  password: string
-}
 
 export const POST = async (request: NextRequest) => {
   await connectToDB()

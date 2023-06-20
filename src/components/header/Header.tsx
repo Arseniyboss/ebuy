@@ -1,8 +1,12 @@
 import Link from 'next/link'
+import { decodeToken } from '@auth/decodeToken/cookies'
+import { getUserInitials } from '@utils/getUserInitials'
 import { FaShoppingCart, FaEnvelope, FaUserCircle } from 'react-icons/fa'
 import { HeaderContainer, NavLinks, NavLink } from './styles'
+import Avatar from '@components/avatar/Avatar'
 
-const Header = () => {
+const Header = async () => {
+  const user = await decodeToken()
   return (
     <HeaderContainer>
       <h1>
@@ -17,11 +21,17 @@ const Header = () => {
               <FaShoppingCart aria-label='shopping cart' />
             </NavLink>
           </li>
-          <li>
-            <NavLink href='/login' data-testid='login-nav-link'>
-              <FaUserCircle aria-label='user' />
-            </NavLink>
-          </li>
+          {user ? (
+            <li>
+              <Avatar initials={getUserInitials(user.name)} />
+            </li>
+          ) : (
+            <li>
+              <NavLink href='/login' data-testid='login-nav-link'>
+                <FaUserCircle aria-label='user' />
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink href='/contact' data-testid='contact-nav-link'>
               <FaEnvelope aria-label='envelope' />

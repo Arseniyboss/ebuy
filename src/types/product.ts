@@ -7,23 +7,23 @@ type Review = {
   comment: string
 }
 
-export type Product = {
+export type CartItem = {
   _id: string
   name: string
   image: string
+  price: number
+  countInStock: number
+  quantity: number
+}
+
+export interface Product extends CartItem {
   brand: string
   category: string
   description: string
   rating: number
   numReviews: number
-  price: number
-  countInStock: number
   isPublished: boolean
   reviews?: Review[]
 }
 
 export type ProductModel = Model<Product>
-
-export interface CartItem extends Product {
-  quantity: number
-}
