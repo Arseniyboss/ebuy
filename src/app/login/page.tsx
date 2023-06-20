@@ -82,7 +82,9 @@ const Login = () => {
           <FormError data-testid='password-error'>{errors.password}</FormError>
         )}
       </FormGroup>
-      <FormButton disabled={loading}>Sign In</FormButton>
+      <FormButton disabled={loading} data-testid='login-button'>
+        Sign In
+      </FormButton>
       <FormFooter>
         <p>Don't have an account?</p>
         <FormLink href='/register' data-testid='register-link'>

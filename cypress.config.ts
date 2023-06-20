@@ -33,9 +33,6 @@ export default defineConfig({
         },
       })
     },
-    env: {
-      JWT_SECRET: process.env.JWT_SECRET,
-    },
     baseUrl: 'http://localhost:3000',
   },
 })

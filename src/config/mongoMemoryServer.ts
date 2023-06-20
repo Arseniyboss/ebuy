@@ -6,7 +6,7 @@ import { Product } from 'types/product'
 import { User } from 'types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
-export type Data = IdMapper<Product | User>
+type Data = IdMapper<Product | User>
 
 const collections = mongoose.connection.collections
 

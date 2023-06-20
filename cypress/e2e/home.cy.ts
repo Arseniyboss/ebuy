@@ -14,6 +14,13 @@ after(() => {
 })
 
 describe('Home Page', () => {
+  it('verifies nav links', () => {
+    cy.verifyNavLink('cart-nav-link', '/cart')
+    cy.verifyNavLink('login-nav-link', '/login')
+    // cy.verifyNavLink('contact-nav-link', '/contact')
+    cy.verifyNavLink('home-nav-link', '/')
+  })
+
   it('renders products on the first page', () => {
     const url = "/api/products?page=1&search=''&sort=createdAt.desc"
 
@@ -113,11 +120,4 @@ describe('Home Page', () => {
       cy.location('search').should('include', '?page=1')
     })
   })
-
-  // it('verifies nav links', () => {
-  //   cy.verifyNavLink('cart-nav-link', '/cart')
-  //   cy.verifyNavLink('login-nav-link', '/login')
-  //   cy.verifyNavLink('contact-nav-link', '/contact')
-  //   cy.verifyNavLink('home-nav-link', '/')
-  // })
 })
