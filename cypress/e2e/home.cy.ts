@@ -2,6 +2,7 @@ import { Product } from '../../src/types/product'
 
 before(() => {
   cy.task('seedProducts')
+  cy.task('seedUsers')
   cy.request('/api/revalidate?tag=products')
 })
 
@@ -11,16 +12,10 @@ beforeEach(() => {
 
 after(() => {
   cy.task('deleteProducts')
+  cy.task('deleteUsers')
 })
 
 describe('Home Page', () => {
-  it('verifies nav links', () => {
-    cy.verifyNavLink('cart-nav-link', '/cart')
-    cy.verifyNavLink('login-nav-link', '/login')
-    cy.verifyNavLink('contact-nav-link', '/contact')
-    cy.verifyNavLink('home-nav-link', '/')
-  })
-
   it('renders products on the first page', () => {
     const url = "/api/products?page=1&search=''&sort=createdAt.desc"
 
@@ -118,6 +113,29 @@ describe('Home Page', () => {
         value: 'price.asc',
       })
       cy.location('search').should('include', '?page=1')
+    })
+  })
+
+  describe('tests header', () => {
+    it('nav links', () => {
+      cy.verifyNavLink('cart-nav-link', '/cart')
+      cy.verifyNavLink('login-nav-link', '/login')
+      cy.verifyNavLink('contact-nav-link', '/contact')
+      cy.verifyNavLink('home-nav-link', '/')
+    })
+
+    it('user dropdown', () => {
+      cy.login({ email: 'john@example.com', password: '123456' })
+
+      cy.getByTestId('user-initials').click()
+      cy.verifyLink('profile-link', '/profile')
+
+      cy.getByTestId('user-initials').click()
+      cy.getByTestId('logout-text').click()
+
+      cy.getCookie('token').then((cookie) => {
+        expect(cookie).to.be.null
+      })
     })
   })
 })

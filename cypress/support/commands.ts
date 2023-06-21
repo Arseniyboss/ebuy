@@ -36,10 +36,6 @@ Cypress.Commands.add('submitForm', (dataId) => {
   cy.getByTestId(dataId).submit()
 })
 
-Cypress.Commands.add('clickButton', (dataId) => {
-  cy.getByTestId(dataId).click()
-})
-
 Cypress.Commands.add('waitDebounce', () => {
   cy.wait(500)
 })
@@ -81,5 +77,16 @@ Cypress.Commands.add('verifyCookie', (name) => {
     expect(cookie.secure).to.be.true
     expect(cookie.httpOnly).to.be.true
     expect(cookie.sameSite).to.equal('strict')
+  })
+})
+
+Cypress.Commands.add('login', (userCredentials) => {
+  cy.request({
+    method: 'POST',
+    url: '/api/users/login',
+    body: userCredentials,
+  }).then(() => {
+    cy.verifyCookie('token')
+    cy.reload()
   })
 })

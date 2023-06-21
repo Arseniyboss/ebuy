@@ -29,18 +29,24 @@ const Avatar = ({ initials }: Props) => {
   }
   return (
     <AvatarContainer>
-      <UserInitials onClick={toggleDropdown} $isActive={isActive}>
+      <UserInitials
+        onClick={toggleDropdown}
+        $isActive={isActive}
+        data-testid='user-initials'
+      >
         {initials}
       </UserInitials>
       {dropdown && (
         <Dropdown onClick={toggleDropdown}>
           <li>
-            <Link href='/profile'>
+            <Link href='/profile' data-testid='profile-link'>
               <DropdownText>Profile</DropdownText>
             </Link>
           </li>
           <li>
-            <DropdownText onClick={handleLogout}>Logout</DropdownText>
+            <DropdownText onClick={handleLogout} data-testid='logout-text'>
+              Logout
+            </DropdownText>
           </li>
         </Dropdown>
       )}

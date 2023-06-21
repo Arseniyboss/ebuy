@@ -1,3 +1,5 @@
+import { UserCredentials } from '../../src/types/api'
+
 type SelectOption = {
   testId: string
   text: string
@@ -15,7 +17,6 @@ declare global {
       selectOption({ testId, text, value }: SelectOption): Chainable<Element>
       clearInput(dataId: string): Chainable<Element>
       submitForm(dataId: string): Chainable<Element>
-      clickButton(dataId: string): Chainable<Element>
       waitDebounce(): Chainable<Element>
       waitSelect(): Chainable<Element>
       verifyUrl(url: string): Chainable<Element>
@@ -24,6 +25,7 @@ declare global {
       verifyFirstDynamicLink(testId: string, url: string): Chainable<Element>
       verifySort(prices: number[]): Chainable<Element>
       verifyCookie(name: string): Chainable<Element>
+      login(userCredentials: UserCredentials): Chainable<Element>
     }
   }
 }
