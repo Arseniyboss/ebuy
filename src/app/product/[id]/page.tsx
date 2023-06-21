@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { Params } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
 import { FlexGroup } from '@components/product/styles'
 import {
@@ -9,12 +10,6 @@ import {
 } from './styles'
 import Rating from '@components/rating/Rating'
 import AddToCart from './AddToCart'
-
-export type Params = {
-  params: {
-    id: string
-  }
-}
 
 export const generateMetadata = async ({ params }: Params) => {
   const product = await getProductById(params.id)

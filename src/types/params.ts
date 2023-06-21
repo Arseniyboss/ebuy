@@ -1,5 +1,8 @@
-export type SortOrder = 'asc' | 'desc'
-export type SortKey = 'price' | 'rating'
+export type Params = {
+  params: {
+    id: string
+  }
+}
 
 export type QueryParams = {
   page?: number

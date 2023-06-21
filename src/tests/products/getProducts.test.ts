@@ -2,7 +2,8 @@ import { NextRequest } from 'next/server'
 import { GET } from '@app/api/products/route'
 import { seedProducts } from '@config/mongoMemoryServer'
 import { BASE_URL } from '@baseUrl'
-import { SortKey, QueryParams } from 'types/queryParams'
+import { SortOrder, SortKey } from 'types/sort'
+import { QueryParams } from 'types/params'
 import { Product } from 'types/product'
 
 type Data = {
@@ -11,7 +12,7 @@ type Data = {
 }
 
 type Sort = {
-  type: 'asc' | 'desc'
+  order: SortOrder
   key: SortKey
   products: Product[]
 }
@@ -28,12 +29,12 @@ const getProducts = async ({
   return { status: response.status, products, pages }
 }
 
-const verifySort = ({ type, key, products }: Sort) => {
+const verifySort = ({ order, key, products }: Sort) => {
   products.reduce((prevProduct, nextProduct, index) => {
-    if (type === 'asc') {
+    if (order === 'asc') {
       expect(prevProduct[key]).toBeLessThanOrEqual(nextProduct[key])
     }
-    if (type === 'desc') {
+    if (order === 'desc') {
       expect(prevProduct[key]).toBeGreaterThanOrEqual(nextProduct[key])
     }
     return products[index]
@@ -123,7 +124,7 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'price.asc' })
 
         expect(status).toBe(200)
-        verifySort({ type: 'asc', key: 'price', products })
+        verifySort({ order: 'asc', key: 'price', products })
       })
     })
 
@@ -132,7 +133,7 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'price.desc' })
 
         expect(status).toBe(200)
-        verifySort({ type: 'desc', key: 'price', products })
+        verifySort({ order: 'desc', key: 'price', products })
       })
     })
   })
@@ -143,7 +144,7 @@ describe('GET /api/products', () => {
         const { status, products } = await getProducts({ sort: 'rating.desc' })
 
         expect(status).toBe(200)
-        verifySort({ type: 'desc', key: 'rating', products })
+        verifySort({ order: 'desc', key: 'rating', products })
       })
     })
   })
@@ -166,7 +167,7 @@ describe('GET /api/products', () => {
 
       expect(status).toBe(200)
       expect(products.length).toBe(2)
-      verifySort({ type: 'asc', key: 'price', products })
+      verifySort({ order: 'asc', key: 'price', products })
     })
   })
 

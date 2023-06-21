@@ -1,4 +1,4 @@
-import { QueryParams } from 'types/queryParams'
+import { QueryParams } from 'types/params'
 import { Product as ProductType } from 'types/product'
 import { getProducts } from '@api/products/getProducts'
 import { SearchFailText, ProductContainer } from './styles'

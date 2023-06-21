@@ -1,13 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server'
+import { Params } from 'types/params'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
 import Product from '@models/product'
-
-export type Params = {
-  params: {
-    id: string
-  }
-}
 
 export const GET = async (request: NextRequest, { params }: Params) => {
   await connectToDB()

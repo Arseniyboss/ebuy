@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { QueryParams } from 'types/queryParams'
+import { QueryParams } from 'types/params'
 
 export const useQueryParams = () => {
   const router = useRouter()

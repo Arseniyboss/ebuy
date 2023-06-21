@@ -1,4 +1,4 @@
-import { QueryParams } from 'types/queryParams'
+import { QueryParams } from 'types/params'
 import { Product } from 'types/product'
 import { BASE_URL } from '@baseUrl'
 

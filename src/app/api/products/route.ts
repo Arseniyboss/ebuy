@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { SortOrder } from 'types/queryParams'
+import { SortOrder } from 'types/sort'
 import { connectToDB } from '@config/mongodb'
 import { getSearchParams } from '@utils/getSearchParams'
 import {
