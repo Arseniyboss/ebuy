@@ -1,17 +1,22 @@
 import styled from 'styled-components'
 
+type Props = {
+  $isActive: boolean
+}
+
 export const AvatarContainer = styled.div`
   display: flex;
   justify-content: center;
 `
 
-export const UserInitials = styled.p`
+export const UserInitials = styled.p<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: var(--header-icon-size);
   width: var(--header-icon-size);
-  background: var(--gray);
+  background: ${({ $isActive }) =>
+    $isActive ? 'var(--darkgray)' : 'var(--gray)'};
   color: white;
   border-radius: 50%;
   text-transform: capitalize;

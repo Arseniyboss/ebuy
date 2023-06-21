@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { logout } from '@api/users/logout'
 import { AvatarContainer, UserInitials, Dropdown, DropdownText } from './styles'
 import Link from 'next/link'
@@ -12,7 +12,11 @@ type Props = {
 
 const Avatar = ({ initials }: Props) => {
   const [dropdown, setDropdown] = useState(false)
+
   const router = useRouter()
+  const pathname = usePathname()
+
+  const isActive = pathname === '/profile'
 
   const toggleDropdown = () => {
     setDropdown(!dropdown)
@@ -25,7 +29,9 @@ const Avatar = ({ initials }: Props) => {
   }
   return (
     <AvatarContainer>
-      <UserInitials onClick={toggleDropdown}>{initials}</UserInitials>
+      <UserInitials onClick={toggleDropdown} $isActive={isActive}>
+        {initials}
+      </UserInitials>
       {dropdown && (
         <Dropdown onClick={toggleDropdown}>
           <li>

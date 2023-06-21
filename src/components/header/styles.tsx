@@ -1,7 +1,6 @@
 'use client'
 
 import styled from 'styled-components'
-import Link from 'next/link'
 
 export const HeaderContainer = styled.header`
   background: white;
@@ -14,19 +13,4 @@ export const HeaderContainer = styled.header`
   box-shadow: var(--box-shadow);
   color: var(--gray);
   z-index: var(--header-z-index);
-`
-
-export const NavLinks = styled.ul`
-  display: flex;
-  align-items: center;
-  gap: 1.3rem;
-`
-
-export const NavLink = styled(Link)`
-  display: flex;
-  font-size: var(--header-icon-size);
-
-  &:hover {
-    color: var(--darkgray);
-  }
 `
