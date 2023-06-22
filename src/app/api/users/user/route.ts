@@ -8,7 +8,7 @@ export const GET = async (request: NextRequest) => {
   await connectToDB()
 
   const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const user = await User.findById(decoded?.id).select('-password')
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
