@@ -38,34 +38,37 @@ describe('Home Page', () => {
   })
 
   it('paginates products', () => {
-    cy.getByTestId('left-arrow').should('be.disabled')
+    cy.assertDisabled('left-arrow')
 
     cy.getByTestId('right-arrow').click()
-    cy.getByTestId('right-arrow').should('be.disabled')
+    cy.assertDisabled('right-arrow')
     cy.getByTestId('left-arrow').should('not.be.disabled')
-    cy.getByTestId('product').should('have.length', 3)
+
+    cy.assertLength('product', 3)
 
     cy.getByTestId('left-arrow').click()
-    cy.getByTestId('product').should('have.length', 4)
+
+    cy.assertLength('product', 4)
   })
 
   it('filters products', () => {
     cy.typeInto('search-input', 'Airpods')
     cy.waitDebounce()
     cy.getByTestId('product-name').should('contain.text', 'Airpods')
-    cy.getByTestId('product').should('have.length', 1)
+    cy.assertLength('product', 1)
     cy.clearInput('search-input')
 
     cy.typeInto('search-input', 'xyz')
     cy.waitDebounce()
-    cy.getByTestId('product').should('have.length', 0)
+    cy.assertLength('product', 0)
     cy.getByTestId('search-fail-text').should(
       'include.text',
       'No products matched your search term'
     )
 
     cy.clearInput('search-input')
-    cy.getByTestId('product').should('have.length', 4)
+
+    cy.assertLength('product', 4)
   })
 
   it('sorts products', () => {
@@ -126,6 +129,8 @@ describe('Home Page', () => {
 
     it('user dropdown', () => {
       cy.login({ email: 'john@example.com', password: '123456' })
+
+      cy.assertText('user-initials', 'JD')
 
       cy.getByTestId('user-initials').click()
       cy.verifyLink('profile-link', '/profile')

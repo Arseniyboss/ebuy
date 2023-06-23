@@ -23,9 +23,9 @@ describe('Product Page', () => {
 
       cy.getImage('product-image')
 
-      cy.getByTestId('product-name').should('have.text', name)
+      cy.assertText('product-name', name)
+      cy.assertText('product-description', description)
       cy.getByTestId('product-price').should('contain.text', price)
-      cy.getByTestId('product-description').should('have.text', description)
     })
   })
 })

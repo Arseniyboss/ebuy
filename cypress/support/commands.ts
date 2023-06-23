@@ -8,12 +8,30 @@ Cypress.Commands.add('getMessage', (dataId, value) => {
   cy.getByTestId(dataId).should('have.text', value)
 })
 
+Cypress.Commands.add('getTemporaryMessage', (dataId, value) => {
+  cy.getMessage(dataId, value)
+  cy.wait(3000)
+  cy.getByTestId(dataId).should('not.exist')
+})
+
 Cypress.Commands.add('getImage', (testId) => {
   cy.getByTestId(testId)
     .should('be.visible')
     .and((img) => {
       expect(img[0].naturalWidth).to.be.greaterThan(0)
     })
+})
+
+Cypress.Commands.add('assertText', (testId, text) => {
+  cy.getByTestId(testId).should('have.text', text)
+})
+
+Cypress.Commands.add('assertValue', (testId, value) => {
+  cy.getByTestId(testId).should('have.value', value)
+})
+
+Cypress.Commands.add('assertLength', (testId, value) => {
+  cy.getByTestId(testId).should('have.length', value)
 })
 
 Cypress.Commands.add('assertDisabled', (testId) => {
@@ -42,6 +60,10 @@ Cypress.Commands.add('waitDebounce', () => {
 
 Cypress.Commands.add('waitSelect', () => {
   cy.wait(500)
+})
+
+Cypress.Commands.add('waitBeforeSubmit', () => {
+  cy.wait(100)
 })
 
 Cypress.Commands.add('verifyUrl', (url) => {
@@ -80,6 +102,15 @@ Cypress.Commands.add('verifyCookie', (name) => {
   })
 })
 
+Cypress.Commands.add('verifyUserUpdate', (input, value) => {
+  cy.wait('@updateUser').then(({ response }) => {
+    expect(response.statusCode).to.equal(200)
+    cy.verifyCookie('token')
+    cy.reload()
+    cy.assertValue(input, value)
+  })
+})
+
 Cypress.Commands.add('login', (userCredentials) => {
   cy.request({
     method: 'POST',
@@ -87,6 +118,18 @@ Cypress.Commands.add('login', (userCredentials) => {
     body: userCredentials,
   }).then(() => {
     cy.verifyCookie('token')
+    cy.reload()
+  })
+})
+
+Cypress.Commands.add('logout', () => {
+  cy.request({
+    method: 'POST',
+    url: '/api/users/logout',
+  }).then(() => {
+    cy.getCookie('token').then((cookie) => {
+      expect(cookie).to.be.null
+    })
     cy.reload()
   })
 })

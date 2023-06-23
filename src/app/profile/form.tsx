@@ -55,9 +55,12 @@ const ProfileForm = ({ user }: Props) => {
       if (success) {
         setSuccess(false)
       }
+      if (error) {
+        setError('')
+      }
     },
     3000,
-    [success]
+    [success, error]
   )
 
   useEffect(() => {
