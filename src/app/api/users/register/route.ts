@@ -18,8 +18,6 @@ export const POST = async (request: NextRequest) => {
 
   const user = await User.create({ name, email, password })
 
-  await user.save()
-
   const tokenCookie = await generateTokenCookie({
     id: user.id,
     name: user.name,

@@ -50,7 +50,7 @@ describe('GET /api/users/login', () => {
 
   describe('given the user credentials are valid', () => {
     it('returns status code 200 and sends token', async () => {
-      const { _id, name, email } = users[2]
+      const { _id, name, email } = users[1]
 
       const userCredentials = {
         email,

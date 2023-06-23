@@ -1,18 +1,17 @@
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
-import { User } from 'types/user'
+import { User } from 'types/api'
 
-export const getUser = async () => {
+export const updateUser = async (user: User) => {
   const token = await getToken()
 
   const response = await fetch(`${BASE_URL}/api/users/user`, {
+    method: 'PUT',
+    body: JSON.stringify(user),
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
 
-  if (!response.ok) return
-
-  const user: User = await response.json()
-  return user
+  return response
 }

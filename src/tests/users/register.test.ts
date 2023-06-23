@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { POST } from '@app/api/users/register/route'
-import { seedUsers } from '@config/mongoMemoryServer'
+import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { verifyToken } from '@auth/verifyToken'
 import { BASE_URL } from '@baseUrl'
 import { User } from 'types/api'
@@ -44,8 +44,10 @@ describe('GET /api/users/register', () => {
 
       const { status, token } = await register(user)
       const payload = await verifyToken(token)
+      const users = await getUsers()
 
       expect(status).toBe(201)
+      expect(users.length).toBe(4)
       expect(user.name).toBe(payload?.name)
     })
   })

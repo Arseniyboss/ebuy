@@ -1,11 +1,12 @@
 'use client'
 
 import { User } from 'types/user'
-import { useState } from 'react'
-// import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
 import { profileSchema } from '@validation/schemas/profileSchema'
+import { updateUser } from '@api/users/updateUser'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
 import Message from '@components/message/Message'
@@ -23,9 +24,31 @@ const ProfileForm = ({ user }: Props) => {
 
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  // const [error, setError] = useState('')
+  const [error, setError] = useState('')
+  const router = useRouter()
 
-  // const router = useRouter()
+  const onSubmit = async () => {
+    setLoading(true)
+    setSuccess(false)
+
+    const response = await updateUser(values)
+
+    if (!response.ok) {
+      setLoading(false)
+      setError(response.statusText)
+      return
+    }
+
+    setLoading(false)
+    setSuccess(true)
+    router.refresh()
+  }
+
+  const { values, errors, handleChange, handleSubmit } = useForm({
+    initialValues,
+    onSubmit,
+    validationSchema: profileSchema,
+  })
 
   useTimeout(
     () => {
@@ -37,30 +60,14 @@ const ProfileForm = ({ user }: Props) => {
     [success]
   )
 
-  const onSubmit = async () => {
-    setLoading(true)
-    setSuccess(true)
-
-    // const response = await updateUser(values)
-
-    // if (!response.ok) {
-    //   setLoading(false)
-    //   setError(response.statusText)
-    //   return
-    // }
-
-    // router.refresh()
-  }
-
-  const { values, errors, handleChange, handleSubmit } = useForm({
-    initialValues,
-    onSubmit,
-    validationSchema: profileSchema,
-  })
+  useEffect(() => {
+    setError('')
+    setSuccess(false)
+  }, [errors])
   return (
     <Form onSubmit={handleSubmit} data-testid='profile-form'>
       <h1>User Profile</h1>
-      {/* {error && <Message variant='error'>{error}</Message>} */}
+      {error && <Message variant='error'>{error}</Message>}
       {success && <Message variant='success'>Profile Updated</Message>}
       <FormGroup>
         <label htmlFor='name'>Name</label>
