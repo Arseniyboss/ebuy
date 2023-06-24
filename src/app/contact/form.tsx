@@ -22,11 +22,11 @@ const ContactForm = ({ user }: Props) => {
   const [success, setSuccess] = useState(false)
 
   const onSubmit = () => {
-    fetch('https://formspree.io/f/xwkylwdy', {
-      method: 'POST',
-      body: JSON.stringify(values),
-      mode: 'no-cors',
-    })
+    // fetch('https://formspree.io/f/xwkylwdy', {
+    //   method: 'POST',
+    //   body: JSON.stringify(values),
+    //   mode: 'no-cors',
+    // })
     setValues({ ...values, message: '' })
     setSuccess(true)
   }

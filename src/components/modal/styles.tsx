@@ -3,10 +3,11 @@ import { FaTimes } from 'react-icons/fa'
 
 const modal = keyframes`
   0% {
-    transform: scale(0)
+    scale: 0;
   } 
   100% {
-    transform: scale(1) rotate(360deg)
+    scale: 1;
+    rotate: 360deg;
   }
 `
 
