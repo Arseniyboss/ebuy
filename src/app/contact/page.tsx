@@ -1,7 +1,10 @@
-import { Heading } from '@styles/globals'
+import { getUser } from '@api/users/getUser'
+import ContactForm from './form'
 
-const Contact = () => {
-  return <Heading>Contact</Heading>
+const Contact = async () => {
+  const user = await getUser()
+
+  return <ContactForm user={user} />
 }
 
 export default Contact

@@ -1,10 +1,10 @@
 'use client'
 
-import { User } from 'types/user'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
+import { User } from 'types/user'
 import { profileSchema } from '@validation/schemas/profileSchema'
 import { updateUser } from '@api/users/updateUser'
 import { Input } from '@styles/globals'

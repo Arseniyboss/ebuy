@@ -15,7 +15,8 @@
   --header-icon-size: 2rem;
   --gap: 1.5rem;
   --header-z-index: 1;
-  --skip-link-z-index: 2;
+  --modal-z-index: 2;
+  --skip-link-z-index: 3;
 }
 
 body {
@@ -37,4 +38,8 @@ li {
 select {
   outline: none;
   cursor: pointer;
+}
+
+textarea {
+  resize: none;
 }

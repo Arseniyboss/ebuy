@@ -31,10 +31,10 @@ export const Dropdown = styled.ul`
   position: absolute;
   background: white;
   color: var(--blue);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.3);
   font-weight: bold;
   margin-top: 3rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   overflow: hidden;
 `
 

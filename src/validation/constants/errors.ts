@@ -6,3 +6,4 @@ export const PASSWORD_REQUIRED = 'Password is required'
 export const PASSWORD_INVALID =
   'Password must contain at least 8 characters including at least one letter and number'
 export const PASSWORDS_DIFFERENT = 'Passwords do not match'
+export const MESSAGE_REQUIRED = 'Message is required'
