@@ -12,7 +12,6 @@ export const verifyToken = async (token?: string) => {
     const user = { id: payload.id, name: payload.name } as JwtPayload
     return user
   } catch (error) {
-    console.log('Token is invalid or has expired')
     return
   }
 }

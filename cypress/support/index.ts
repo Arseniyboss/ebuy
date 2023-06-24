@@ -15,6 +15,7 @@ declare global {
       getImage(testId: string): Chainable<Element>
       assertText(testId: string, text: string): Chainable<Element>
       assertValue(testId: string, value: string): Chainable<Element>
+      assertEmpty(testId: string): Chainable<Element>
       assertLength(testId: string, value: number): Chainable<Element>
       assertDisabled(testId: string): Chainable<Element>
       typeInto(dataId: string, text: string): Chainable<Element>

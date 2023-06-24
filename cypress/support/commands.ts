@@ -30,6 +30,10 @@ Cypress.Commands.add('assertValue', (testId, value) => {
   cy.getByTestId(testId).should('have.value', value)
 })
 
+Cypress.Commands.add('assertEmpty', (testId) => {
+  cy.getByTestId(testId).should('have.value', '')
+})
+
 Cypress.Commands.add('assertLength', (testId, value) => {
   cy.getByTestId(testId).should('have.length', value)
 })
