@@ -75,7 +75,7 @@ describe('Profile Page', () => {
       cy.submitForm('profile-form')
       cy.getMessage(
         'password-error',
-        'Password must contain at least 8 characters including at least one letter and number'
+        'Password must be at least 6 characters long'
       )
     })
 
@@ -83,7 +83,7 @@ describe('Profile Page', () => {
       cy.intercept('PUT', '/api/users/user').as('updateUser')
 
       cy.clearInput('password-input')
-      cy.typeInto('password-input', 'john12345')
+      cy.typeInto('password-input', '1234567')
       cy.submitForm('profile-form')
 
       cy.getByTestId('password-error').should('not.exist')
@@ -92,7 +92,7 @@ describe('Profile Page', () => {
       cy.getMessage('success-message', 'Profile Updated')
 
       cy.logout()
-      cy.login({ email: 'john@example.com', password: 'john12345' })
+      cy.login({ email: 'john@example.com', password: '1234567' })
     })
   })
 
@@ -112,12 +112,12 @@ describe('Profile Page', () => {
   })
 
   describe('when form error occurs', () => {
-    it('removes server success message', () => {
+    it('removes success message', () => {
       cy.waitBeforeSubmit()
       cy.submitForm('profile-form')
       cy.getMessage('success-message', 'Profile Updated')
 
-      cy.typeInto('password-input', '123')
+      cy.typeInto('password-input', '12345')
       cy.submitForm('profile-form')
       cy.getByTestId('success-message').should('not.exist')
     })
@@ -128,7 +128,7 @@ describe('Profile Page', () => {
       cy.submitForm('profile-form')
       cy.getMessage('error-message', 'Email is already in use')
 
-      cy.typeInto('password-input', '123')
+      cy.typeInto('password-input', '12345')
       cy.submitForm('profile-form')
       cy.getByTestId('error-message').should('not.exist')
     })

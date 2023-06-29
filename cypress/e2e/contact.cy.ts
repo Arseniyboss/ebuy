@@ -55,15 +55,27 @@ describe('Contact Page', () => {
     cy.getByTestId('message-error').should('not.exist')
   })
 
-  it('submits the form with valid input fields and shows a success message', () => {
-    cy.typeInto('name-input', 'John')
-    cy.typeInto('email-input', 'john@gmail.com')
-    cy.typeInto('message-input', 'Test message')
-    cy.submitForm('contact-form')
-    cy.assertEmpty('message-input')
+  describe('submits the form with valid input fields and', () => {
+    beforeEach(() => {
+      cy.typeInto('name-input', 'John')
+      cy.typeInto('email-input', 'john@gmail.com')
+      cy.typeInto('message-input', 'Test message')
+      cy.submitForm('contact-form')
+      cy.assertDisabled('submit-button')
+      cy.assertEmpty('message-input')
+    })
 
-    cy.getByTestId('modal').should('be.visible')
-    cy.getByTestId('modal-close-button').click()
-    cy.getByTestId('modal').should('not.exist')
+    it('shows a success message', () => {
+      cy.getMessage('success-message', 'Message Sent')
+    })
+
+    it('removes success message after 3 seconds ', () => {
+      cy.getTemporaryMessage('success-message', 'Message Sent')
+    })
+
+    it('when form error occurs removes success message', () => {
+      cy.submitForm('contact-form')
+      cy.getByTestId('success-message').should('not.exist')
+    })
   })
 })

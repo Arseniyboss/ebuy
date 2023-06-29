@@ -30,6 +30,7 @@ const ProfileForm = ({ user }: Props) => {
   const onSubmit = async () => {
     setLoading(true)
     setSuccess(false)
+    setError('')
 
     const response = await updateUser(values)
 

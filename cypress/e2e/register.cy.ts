@@ -49,30 +49,30 @@ describe('Register Page', () => {
   })
 
   it('submits the form with an invalid password and shows an error message', () => {
-    cy.typeInto('password-input', '12345678')
+    cy.typeInto('password-input', '12345')
     cy.submitForm('register-form')
     cy.getMessage(
       'password-error',
-      'Password must contain at least 8 characters including at least one letter and number'
+      'Password must be at least 6 characters long'
     )
   })
 
   it('submits the form with a valid password', () => {
-    cy.typeInto('password-input', '1234567a')
+    cy.typeInto('password-input', '123456')
     cy.submitForm('register-form')
     cy.getByTestId('password-error').should('not.exist')
   })
 
   it('submits the form with an invalid confirm password and shows an error message', () => {
-    cy.typeInto('password-input', '1234567a')
-    cy.typeInto('confirm-password-input', '1234567')
+    cy.typeInto('password-input', '123456')
+    cy.typeInto('confirm-password-input', '12345')
     cy.submitForm('register-form')
     cy.getMessage('confirm-password-error', 'Passwords do not match')
   })
 
   it('submits the form with a valid confirm password', () => {
-    cy.typeInto('password-input', '1234567a')
-    cy.typeInto('confirm-password-input', '1234567a')
+    cy.typeInto('password-input', '123456')
+    cy.typeInto('confirm-password-input', '123456')
     cy.submitForm('register-form')
     cy.getByTestId('confirm-password-error').should('not.exist')
   })
@@ -80,8 +80,8 @@ describe('Register Page', () => {
   it('submits the form with valid input fields and an email already in use', () => {
     cy.typeInto('name-input', 'John')
     cy.typeInto('email-input', 'john@example.com')
-    cy.typeInto('password-input', '1234567a')
-    cy.typeInto('confirm-password-input', '1234567a')
+    cy.typeInto('password-input', '123456')
+    cy.typeInto('confirm-password-input', '123456')
     cy.submitForm('register-form')
     cy.getMessage('error-message', 'Email is already in use')
   })
@@ -91,8 +91,8 @@ describe('Register Page', () => {
 
     cy.typeInto('name-input', 'Bob')
     cy.typeInto('email-input', 'bob@gmail.com')
-    cy.typeInto('password-input', '1234567a')
-    cy.typeInto('confirm-password-input', '1234567a')
+    cy.typeInto('password-input', '123456')
+    cy.typeInto('confirm-password-input', '123456')
     cy.submitForm('register-form')
 
     cy.getByTestId('error-message').should('not.exist')

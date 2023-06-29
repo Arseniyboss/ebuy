@@ -1,7 +1,7 @@
 import { Product, ProductModel } from 'types/product'
 import { Schema, models, model } from 'mongoose'
 
-const productSchema = new Schema({
+const productSchema = new Schema<Product>({
   name: {
     type: String,
     required: true,
@@ -40,7 +40,6 @@ const productSchema = new Schema({
   },
 })
 
-const Product =
-  (models.Product as ProductModel) || model<Product>('Product', productSchema)
+const Product: ProductModel = models.Product || model('Product', productSchema)
 
 export default Product

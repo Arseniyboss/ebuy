@@ -1,23 +1,34 @@
 import bcrypt from 'bcryptjs'
-import { Schema, models, model, Model } from 'mongoose'
-import { UserSchema } from 'types/user'
+import { Schema, models, model } from 'mongoose'
+import { UserSchema, UserModel } from 'types/user'
+import {
+  USERNAME_REQUIRED,
+  USERNAME_INVALID,
+  EMAIL_REQUIRED,
+  EMAIL_INVALID,
+  PASSWORD_REQUIRED,
+  PASSWORD_INVALID,
+} from '@validation/constants/errors'
+import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
 
-type UserModel = Model<UserSchema>
-
-const userSchema = new Schema({
+const userSchema = new Schema<UserSchema>({
   name: {
     type: String,
-    required: true,
+    required: [true, USERNAME_REQUIRED],
+    validate: [USERNAME_PATTERN, USERNAME_INVALID],
     trim: true,
   },
   email: {
     type: String,
-    required: true,
+    required: [true, EMAIL_REQUIRED],
+    validate: [EMAIL_PATTERN, EMAIL_INVALID],
     unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
-    required: true,
+    required: [true, PASSWORD_REQUIRED],
+    minlength: [6, PASSWORD_INVALID],
   },
 })
 
@@ -32,6 +43,6 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-const User = (models.User as UserModel) || model<UserSchema>('User', userSchema)
+const User: UserModel = models.User || model('User', userSchema)
 
 export default User

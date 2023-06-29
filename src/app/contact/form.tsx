@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from '@hooks/useForm'
+import { useTimeout } from '@hooks/useTimeout'
 import { User } from 'types/user'
 import { contactSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
-import Modal from '@components/modal/Modal'
+import Message from '@components/message/Message'
 
 type Props = {
   user?: User
@@ -19,16 +20,22 @@ const ContactForm = ({ user }: Props) => {
     message: '',
   }
 
+  const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  const onSubmit = () => {
-    fetch('https://formspree.io/f/xwkylwdy', {
+  const onSubmit = async () => {
+    setLoading(true)
+    setSuccess(false)
+
+    await fetch('https://formspree.io/f/xwkylwdy', {
       method: 'POST',
       body: JSON.stringify(values),
       mode: 'no-cors',
     })
-    setValues({ ...values, message: '' })
+
+    setLoading(false)
     setSuccess(true)
+    setValues({ ...values, message: '' })
   }
 
   const { values, setValues, errors, handleChange, handleSubmit } = useForm({
@@ -37,11 +44,25 @@ const ContactForm = ({ user }: Props) => {
     validationSchema: contactSchema,
   })
 
+  useTimeout(
+    () => {
+      if (success) {
+        setSuccess(false)
+      }
+    },
+    3000,
+    [success]
+  )
+
+  useEffect(() => {
+    setSuccess(false)
+  }, [errors])
+
   return (
     <>
-      {success && <Modal setSuccess={setSuccess} />}
       <Form onSubmit={handleSubmit} data-testid='contact-form'>
         <h1>Contact Us</h1>
+        {success && <Message variant='success'>Message Sent</Message>}
         <FormGroup>
           <label htmlFor='name'>Name</label>
           <Input
@@ -87,7 +108,9 @@ const ContactForm = ({ user }: Props) => {
             <FormError data-testid='message-error'>{errors.message}</FormError>
           )}
         </FormGroup>
-        <FormButton>Submit</FormButton>
+        <FormButton disabled={loading} data-testid='submit-button'>
+          Submit
+        </FormButton>
       </Form>
     </>
   )

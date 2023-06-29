@@ -1,4 +1,4 @@
-import { EMAIL_REGEX, FieldValidation } from '../../hooks/useForm'
+import { FieldValidation } from '../../hooks/useForm'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
@@ -8,10 +8,7 @@ import {
   PASSWORD_INVALID,
   PASSWORDS_DIFFERENT,
 } from '@validation/constants/errors'
-import {
-  USERNAME_PATTERN,
-  PASSWORD_PATTERN,
-} from '@validation/constants/patterns'
+import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
 
 type InitialValues = {
   name: string
@@ -27,11 +24,11 @@ export const registerSchema: FieldValidation<InitialValues> = {
   },
   email: {
     required: { value: true, message: EMAIL_REQUIRED },
-    pattern: { value: EMAIL_REGEX, message: EMAIL_INVALID },
+    pattern: { value: EMAIL_PATTERN, message: EMAIL_INVALID },
   },
   password: {
     required: { value: true, message: PASSWORD_REQUIRED },
-    pattern: { value: PASSWORD_PATTERN, message: PASSWORD_INVALID },
+    minLength: { value: 6, message: PASSWORD_INVALID },
   },
   confirmPassword: {
     required: { value: true, message: PASSWORD_REQUIRED },

@@ -66,8 +66,6 @@ type ReturnValues<T> = {
   handleSubmit: (e: FormEventType) => void
 }
 
-export const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
-
 export const useForm = <T>(options: {
   initialValues: T
   onSubmit: () => void
