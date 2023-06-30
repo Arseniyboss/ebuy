@@ -7,9 +7,9 @@ import { User } from 'types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
 type Data = IdMapper<Product | User>
-type Users = Promise<
-  mongoose.mongo.WithId<mongoose.mongo.BSON.Document | User>[]
->
+type Document<T> = Promise<mongoose.mongo.WithId<T>[]>
+type Users = Document<User>
+type Products = Document<Product>
 
 const collections = mongoose.connection.collections
 
@@ -40,11 +40,14 @@ export const seedUsers = async () => {
   await seedCollection('users', users)
 }
 
-const getDocuments = (name: string) => {
-  const documents = collections[name].find().toArray()
-  return documents
+const getDocuments = <T>(name: string) => {
+  return collections[name].find().toArray() as Document<T>
 }
 
 export const getUsers = async (): Users => {
   return getDocuments('users')
+}
+
+export const getProducts = async (): Products => {
+  return getDocuments('products')
 }

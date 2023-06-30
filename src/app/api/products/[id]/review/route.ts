@@ -27,8 +27,8 @@ export const POST = async (request: NextRequest, { params }: Params) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const { reviews } = product
   const { id, name } = user
+  const { reviews } = product
 
   const isAlreadyReviewed = reviews.find((review) => review.user === id)
 
@@ -36,7 +36,9 @@ export const POST = async (request: NextRequest, { params }: Params) => {
     return throwError({ error: 'Product already reviewed', status: 400 })
   }
 
-  reviews.push({ user: id, name, rating, comment })
+  const review = { user: id, name, rating, comment }
+
+  reviews.push(review)
 
   product.numReviews = reviews.length
   product.rating = getRating(reviews)

@@ -39,9 +39,11 @@ describe('GET /api/users/user', () => {
 
   describe('given the user exists', () => {
     it('returns status code 200 and the user', async () => {
+      const { _id, name } = users[0]
+
       const payload = {
-        id: users[0]._id.toString(),
-        name: 'John',
+        id: _id.toString(),
+        name,
       }
 
       const { status, user } = await getUser(payload)

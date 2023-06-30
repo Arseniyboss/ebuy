@@ -1,7 +1,27 @@
-import { Product, ProductModel } from 'types/product'
 import { Schema, models, model } from 'mongoose'
+import { ProductModel } from 'types/mongo'
+import { Review, Product as ProductSchema } from 'types/product'
 
-const productSchema = new Schema<Product>({
+const reviewSchema = new Schema<Review>({
+  user: {
+    type: String,
+    required: true,
+    ref: 'User',
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  comment: {
+    type: String,
+  },
+})
+
+const productSchema = new Schema<ProductSchema>({
   name: {
     type: String,
     required: true,
@@ -38,6 +58,7 @@ const productSchema = new Schema<Product>({
     type: Number,
     required: true,
   },
+  reviews: [reviewSchema],
 })
 
 const Product: ProductModel = models.Product || model('Product', productSchema)

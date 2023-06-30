@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
-import { UserSchema, UserModel } from 'types/user'
+import { User as UserSchema, UserModel } from 'types/mongo'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
