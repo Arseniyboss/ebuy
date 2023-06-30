@@ -1,5 +1,5 @@
 import { QueryParams } from 'types/params'
-import { Product } from 'types/product'
+import { Product } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 
 type Data = {

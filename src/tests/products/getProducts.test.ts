@@ -4,7 +4,7 @@ import { seedProducts } from '@config/mongoMemoryServer'
 import { BASE_URL } from '@baseUrl'
 import { SortOrder, SortKey } from 'types/sort'
 import { QueryParams } from 'types/params'
-import { Product } from 'types/product'
+import { Product } from 'types/api'
 
 type Data = {
   products: Product[]

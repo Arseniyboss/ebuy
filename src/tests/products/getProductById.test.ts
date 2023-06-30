@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { GET } from '@app/api/products/[id]/route'
 import { seedProducts } from '@config/mongoMemoryServer'
 import { BASE_URL } from '@baseUrl'
-import { Product } from 'types/product'
+import { Product } from 'types/api'
 import products from '@mocks/products'
 
 const getProductById = async (id: string) => {

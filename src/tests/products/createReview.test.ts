@@ -38,8 +38,8 @@ const createReview = async ({ id, payload }: Props) => {
       Authorization: `Bearer ${token}`,
     },
   })
-  const response = await POST(request, { params: { id } })
-  return { status: response.status, statusText: response.statusText }
+  const { status, statusText } = await POST(request, { params: { id } })
+  return { status, statusText }
 }
 
 beforeAll(async () => {
@@ -58,34 +58,50 @@ describe('GET /api/products/:id/review', () => {
     })
   })
 
-  // describe('given the user does not exist', () => {})
-
   describe('given the product exists', () => {
-    describe('given the product has already been reviewed', () => {
-      it('returns status code 400', async () => {
+    describe('given the user does not exist', () => {
+      it('returns status code 404', async () => {
         const id = products[0]._id.toString()
+
+        const payload = {
+          id: '62dbfa7f31c12b460f19f2b0',
+          name: 'John',
+        }
+
         const { status, statusText } = await createReview({ id, payload })
 
-        expect(status).toBe(400)
-        expect(statusText).toBe('Product already reviewed')
+        expect(status).toBe(404)
+        expect(statusText).toBe('User not found')
       })
     })
 
-    describe('given the product has not yet been reviewed', () => {
-      it('returns status code 201', async () => {
-        const id = products[1]._id.toString()
+    describe('given the user exists', () => {
+      describe('given the product has already been reviewed', () => {
+        it('returns status code 400', async () => {
+          const id = products[0]._id.toString()
+          const { status, statusText } = await createReview({ id, payload })
 
-        const { status } = await createReview({ id, payload })
-        const newProducts = await getProducts()
+          expect(status).toBe(400)
+          expect(statusText).toBe('Product already reviewed')
+        })
+      })
 
-        const review = newProducts[1].reviews[0]
-        const { user, name, rating, comment } = review
+      describe('given the product has not yet been reviewed', () => {
+        it('returns status code 201', async () => {
+          const id = products[1]._id.toString()
 
-        expect(status).toBe(201)
-        expect(user.toString()).toBe(users[2]._id.toString())
-        expect(name).toBe(users[2].name)
-        expect(rating).toBe(review.rating)
-        expect(comment).toBe(review.comment)
+          const { status } = await createReview({ id, payload })
+          const newProducts = await getProducts()
+
+          const review = newProducts[1].reviews[0]
+          const { user, name, rating, comment } = review
+
+          expect(status).toBe(201)
+          expect(user.toString()).toBe(users[2]._id.toString())
+          expect(name).toBe(users[2].name)
+          expect(rating).toBe(review.rating)
+          expect(comment).toBe(review.comment)
+        })
       })
     })
   })

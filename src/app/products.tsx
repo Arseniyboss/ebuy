@@ -1,5 +1,4 @@
 import { QueryParams } from 'types/params'
-import { Product as ProductType } from 'types/product'
 import { getProducts } from '@api/products/getProducts'
 import { SearchFailText, ProductContainer } from './styles'
 import Product from '@components/product/Product'
@@ -19,7 +18,7 @@ const Products = async ({ searchParams }: Props) => {
   ) : (
     <>
       <ProductContainer>
-        {products.map((product: ProductType) => (
+        {products.map((product) => (
           <Product key={product._id} {...product} />
         ))}
       </ProductContainer>

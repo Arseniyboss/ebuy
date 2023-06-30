@@ -1,4 +1,4 @@
-import { OmitId } from './mongo'
+import { Model } from 'mongoose'
 import {
   Review as ReviewType,
   CartItem as CartItemType,
@@ -6,8 +6,14 @@ import {
 } from './product'
 import { User as UserType } from './user'
 
-export type Review = OmitId<ReviewType>
-export type CartItem = OmitId<CartItemType>
-export type Product = OmitId<ProductType>
+type AssignId<T> = T & {
+  _id: string
+}
+
+export type Review = AssignId<ReviewType>
+export type CartItem = AssignId<CartItemType>
+export type Product = AssignId<ProductType>
 export type User = Omit<UserType, '_id' | 'cartItems'>
 export type UserCredentials = Pick<UserType, 'email' | 'password'>
+
+export type ProductModel = Model<Product>

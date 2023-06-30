@@ -1,4 +1,4 @@
-import { Product as Props } from 'types/product'
+import { Product as Props } from 'types/api'
 import {
   ProductLink,
   ProductContainer,
