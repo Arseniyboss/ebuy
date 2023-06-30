@@ -10,7 +10,7 @@ export const POST = async (request: NextRequest) => {
 
   const { name, email, password }: Body = await request.json()
 
-  const userExists = await User.findOne({ email })
+  const userExists = await User.exists({ email })
 
   if (userExists) {
     return throwError({ error: 'Email is already in use', status: 400 })

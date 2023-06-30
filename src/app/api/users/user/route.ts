@@ -25,7 +25,7 @@ export const PUT = async (request: NextRequest) => {
   const { name, email, password }: Body = await request.json()
   const decoded = await decodeToken(request)
   const user = await User.findById(decoded?.id)
-  const userExists = await User.findOne({ email })
+  const userExists = await User.exists({ email })
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
