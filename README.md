@@ -1,12 +1,27 @@
 # Ebuy
 
+## Technologies
+
+- Language: **TypeScript**
+- Framework: **NextJS**
+- Styling: **Styled Components**
+- Database: **MongoDB**
+- API Tests: **Jest**
+- E2E Tests: **Cypress**
+
+## Pages
+
+- Home
+- Product
+- Cart
+- Login
+- Register
+- Profile
+- Contact
+
 ## Features
 
 - Product Search
 - Product Sorting
 - Product Pagination
-
-## Todos
-
-- Trim all input fields
-- Add backend input validation
+- Secure authentication with httpOnly and sameSite cookie
