@@ -30,8 +30,8 @@ export const POST = async (request: NextRequest, { params }: Params) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const { id, name } = user
   const { reviews } = product
+  const { id, name } = user
 
   const isAlreadyReviewed = reviews.find((review) => review.user === id)
 

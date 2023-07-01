@@ -47,7 +47,7 @@ beforeAll(async () => {
   await seedUsers()
 })
 
-describe('GET /api/products/:id/review', () => {
+describe('POST /api/products/:id/review', () => {
   describe('given the product does not exist', () => {
     it('returns status code 404', async () => {
       const id = '62dbfa7f31c12b460f19f2b4'
