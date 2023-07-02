@@ -6,15 +6,21 @@ import { Button } from '@styles/globals'
 import { breakpoints } from '@constants/breakpoints/product'
 
 export const ProductContainer = styled.article`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* grid-template-columns: auto auto; */
   gap: 2rem;
   padding: 3rem 2rem;
+  margin: 0 auto;
+  color: var(--gray);
 
   @media screen and (max-width: ${breakpoints.medium}) {
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 2rem;
+    margin: initial;
   }
 `
 
@@ -31,7 +37,6 @@ export const ProductDetails = styled.div`
   flex-direction: column;
   gap: 1rem;
   max-width: 600px;
-  color: var(--gray);
 
   @media screen and (max-width: ${breakpoints.medium}) {
     align-items: center;
@@ -60,4 +65,13 @@ export const ProductButton = styled(Button)`
 export const ProductStatus = styled.p`
   color: red;
   font-size: 1.2rem;
+`
+
+export const ReviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* same as ProductImage */
+  /* max-width: 90vw; */
+  width: 448px;
 `

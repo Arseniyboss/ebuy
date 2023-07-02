@@ -1,4 +1,3 @@
-import { Model } from 'mongoose'
 import {
   Review as ReviewType,
   CartItem as CartItemType,
@@ -12,8 +11,8 @@ type AssignId<T> = T & {
 
 export type Review = AssignId<ReviewType>
 export type CartItem = AssignId<CartItemType>
-export type Product = AssignId<ProductType>
+export interface Product extends AssignId<ProductType> {
+  reviews: Review[]
+}
 export type User = Omit<UserType, '_id' | 'cartItems'>
 export type UserCredentials = Pick<UserType, 'email' | 'password'>
-
-export type ProductModel = Model<Product>

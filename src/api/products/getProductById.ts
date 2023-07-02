@@ -1,4 +1,4 @@
-import { Product } from 'types/product'
+import { Product } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 
 export const getProductById = async (id: string) => {

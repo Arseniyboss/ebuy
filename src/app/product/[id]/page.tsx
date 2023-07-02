@@ -7,9 +7,12 @@ import {
   ProductImage,
   ProductDetails,
   ProductName,
+  ReviewContainer,
 } from './styles'
 import Rating from '@components/rating/Rating'
 import AddToCart from './AddToCart'
+import Message from '@components/message/Message'
+import Review from '@components/review/Review'
 
 export const generateMetadata = async ({ params }: Params) => {
   const product = await getProductById(params.id)
@@ -28,8 +31,8 @@ const Product = async ({ params }: Params) => {
       <ProductImage
         src={product.image}
         alt=''
-        width={440}
-        height={350}
+        width={448}
+        height={357}
         priority
         data-testid='product-image'
       />
@@ -44,6 +47,16 @@ const Product = async ({ params }: Params) => {
         <p data-testid='product-description'>{product.description}</p>
         <AddToCart product={product} />
       </ProductDetails>
+      <ReviewContainer>
+        <h2>Reviews</h2>
+        {product.reviews.length === 0 ? (
+          <Message variant='info'>No Reviews</Message>
+        ) : (
+          product.reviews.map((review) => (
+            <Review key={review._id} {...review} />
+          ))
+        )}
+      </ReviewContainer>
     </ProductContainer>
   )
 }
