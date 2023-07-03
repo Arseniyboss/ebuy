@@ -8,7 +8,6 @@ import { breakpoints } from '@constants/breakpoints/product'
 export const ProductContainer = styled.article`
   display: grid;
   grid-template-columns: auto 1fr;
-  /* grid-template-columns: auto auto; */
   gap: 2rem;
   padding: 3rem 2rem;
   margin: 0 auto;
@@ -19,7 +18,6 @@ export const ProductContainer = styled.article`
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    padding: 2rem;
     margin: initial;
   }
 `
@@ -70,8 +68,7 @@ export const ProductStatus = styled.p`
 export const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  /* same as ProductImage */
-  /* max-width: 90vw; */
+  gap: 1.5rem;
+  margin-top: 1rem;
   width: 448px;
 `

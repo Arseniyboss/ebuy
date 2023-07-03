@@ -20,7 +20,6 @@ const Avatar = ({ initials }: Props) => {
 
   const handleLogout = async () => {
     await logout()
-    router.push('/')
     router.refresh()
   }
   return (

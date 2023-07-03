@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Params } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
+import { decodeToken } from '@auth/decodeToken/cookies'
 import { FlexGroup } from '@components/product/styles'
 import {
   ProductContainer,
@@ -21,6 +22,7 @@ export const generateMetadata = async ({ params }: Params) => {
 
 const Product = async ({ params }: Params) => {
   const product = await getProductById(params.id)
+  const user = await decodeToken()
 
   if (!product) {
     return notFound()
@@ -55,6 +57,11 @@ const Product = async ({ params }: Params) => {
           product.reviews.map((review) => (
             <Review key={review._id} {...review} />
           ))
+        )}
+        {!user ? (
+          <Message variant='info'>Please sign in to write a review</Message>
+        ) : (
+          <p>Review Form</p>
         )}
       </ReviewContainer>
     </ProductContainer>
