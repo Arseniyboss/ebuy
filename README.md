@@ -11,13 +11,26 @@
 
 ## Pages
 
-- Home
-- Product
-- Cart
-- Login
-- Register
-- Profile
-- Contact
+- Home ✅
+- Login ✅
+- Register ✅
+- Profile ✅
+- Contact ✅
+- Product 🛠️
+- Cart 🛠️
+- Shipping ❌
+- Payment ❌
+- PlaceOrder ❌
+- Order ❌
+- UserOrders ❌
+
+### Admin
+
+- ProductList ❌
+- UserList ❌
+- OrderList ❌
+- ProductEdit ❌
+- UserEdit ❌
 
 ## Features
 
