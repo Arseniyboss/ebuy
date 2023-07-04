@@ -16,24 +16,24 @@ Fullstack e-commerce website built with NextJS
 ## Pages
 
 | Page        | Type     | API | API Test | Fetcher | UI  | E2E Test |
-| ----------- | -------- | --- | -------- | ------- | --- | -------- |
-| Home        | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
-| Product     | Standard | ✅  | ✅       | 🛠️      | 🛠️  | 🛠️       |
-| Contact     | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
-| Login       | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
-| Register    | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
-| Profile     | User     | ✅  | ✅       | ✅      | ✅  | ✅       |
-| Cart        | User     | ❌  | ❌       | ❌      | 🛠️  | ❌       |
-| Shipping    | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
-| Payment     | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
-| PlaceOrder  | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
-| Order       | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
-| UserOrders  | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
-| ProductList | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
-| UserList    | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
-| OrderList   | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
-| ProductEdit | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
-| UserEdit    | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
+| ----------- | -------- | :-: | :------: | :-----: | :-: | :------: |
+| Home        | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
+| Product     | Standard | ✅  |    ✅    |   🛠️    | 🛠️  |    🛠️    |
+| Contact     | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
+| Login       | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
+| Register    | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
+| Profile     | User     | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
+| Cart        | User     | ❌  |    ❌    |   ❌    | 🛠️  |    ❌    |
+| Shipping    | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| Payment     | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| PlaceOrder  | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| Order       | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| UserOrders  | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| ProductList | Admin    | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| UserList    | Admin    | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| OrderList   | Admin    | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| ProductEdit | Admin    | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
+| UserEdit    | Admin    | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
 
 ## Features
 
