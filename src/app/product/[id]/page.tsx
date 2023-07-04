@@ -8,7 +8,7 @@ import {
   ProductImage,
   ProductDetails,
   ProductName,
-  ReviewContainer,
+  ProductReviews,
 } from './styles'
 import Rating from '@components/rating/Rating'
 import AddToCart from './AddToCart'
@@ -49,7 +49,7 @@ const Product = async ({ params }: Params) => {
         <p data-testid='product-description'>{product.description}</p>
         <AddToCart product={product} />
       </ProductDetails>
-      <ReviewContainer>
+      <ProductReviews>
         <h2>Reviews</h2>
         {product.reviews.length === 0 ? (
           <Message variant='info'>No Reviews</Message>
@@ -63,7 +63,7 @@ const Product = async ({ params }: Params) => {
         ) : (
           <p>Review Form</p>
         )}
-      </ReviewContainer>
+      </ProductReviews>
     </ProductContainer>
   )
 }

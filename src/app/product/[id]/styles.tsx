@@ -7,18 +7,18 @@ import { breakpoints } from '@constants/breakpoints/product'
 
 export const ProductContainer = styled.article`
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 448px 1fr;
   gap: 2rem;
-  padding: 3rem 2rem;
+  padding: 2rem;
   margin: 0 auto;
   color: var(--gray);
 
   @media screen and (max-width: ${breakpoints.medium}) {
-    display: flex;
+    grid-template-columns: auto;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
     margin: initial;
+    gap: 1rem;
+    padding-top: 0;
   }
 `
 
@@ -27,6 +27,7 @@ export const ProductImage = styled(Image)`
 
   @media screen and (max-width: ${breakpoints.medium}) {
     height: auto;
+    margin: 0 auto;
   }
 `
 
@@ -65,10 +66,9 @@ export const ProductStatus = styled.p`
   font-size: 1.2rem;
 `
 
-export const ReviewContainer = styled.div`
+export const ProductReviews = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 1rem;
-  width: 448px;
 `
