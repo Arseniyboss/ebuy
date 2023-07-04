@@ -11,26 +11,25 @@
 
 ## Pages
 
-- Home ✅
-- Login ✅
-- Register ✅
-- Profile ✅
-- Contact ✅
-- Product 🛠️
-- Cart 🛠️
-- Shipping ❌
-- Payment ❌
-- PlaceOrder ❌
-- Order ❌
-- UserOrders ❌
-
-### Admin
-
-- ProductList ❌
-- UserList ❌
-- OrderList ❌
-- ProductEdit ❌
-- UserEdit ❌
+| Page        | Type     | API | API Test | Fetcher | UI  | E2E Test |
+| ----------- | -------- | --- | -------- | ------- | --- | -------- |
+| Home        | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
+| Product     | Standard | ✅  | ✅       | 🛠️      | 🛠️  | 🛠️       |
+| Contact     | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
+| Login       | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
+| Register    | Standard | ✅  | ✅       | ✅      | ✅  | ✅       |
+| Profile     | User     | ✅  | ✅       | ✅      | ✅  | ✅       |
+| Cart        | User     | ❌  | ❌       | ❌      | 🛠️  | ❌       |
+| Shipping    | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
+| Payment     | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
+| PlaceOrder  | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
+| Order       | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
+| UserOrders  | User     | ❌  | ❌       | ❌      | ❌  | ❌       |
+| ProductList | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
+| UserList    | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
+| OrderList   | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
+| ProductEdit | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
+| UserEdit    | Admin    | ❌  | ❌       | ❌      | ❌  | ❌       |
 
 ## Features
 
