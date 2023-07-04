@@ -1,5 +1,9 @@
 # Ebuy
 
+## Description
+
+Fullstack e-commerce website built with NextJS
+
 ## Technologies
 
 - Language: **TypeScript**
