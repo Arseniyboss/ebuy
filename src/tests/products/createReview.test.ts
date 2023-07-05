@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+import { JwtPayload } from 'types/jwtPayload'
 import { POST } from '@app/api/products/[id]/review/route'
 import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
@@ -18,14 +19,9 @@ const review = {
   comment: 'Excellent Product!',
 }
 
-type Payload = {
-  id: string
-  name: string
-}
-
 type Props = {
   id: string
-  payload: Payload
+  payload: JwtPayload
 }
 
 const createReview = async ({ id, payload }: Props) => {

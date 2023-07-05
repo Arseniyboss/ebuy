@@ -50,6 +50,7 @@ export const ProductName = styled.h1`
 export const ProductQuantity = styled.select`
   width: 40px;
   color: inherit;
+  appearance: auto;
   border-radius: var(--border-radius);
 `
 

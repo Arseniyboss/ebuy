@@ -18,7 +18,7 @@ Fullstack e-commerce website built with NextJS
 | Page        | Type     | API | API Test | Fetcher | UI  | E2E Test |
 | ----------- | -------- | :-: | :------: | :-----: | :-: | :------: |
 | Home        | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
-| Product     | Standard | ✅  |    ✅    |   ✅    | 🛠️  |    🛠️    |
+| Product     | Standard | ✅  |    ✅    |   ✅    | ✅  |    🛠️    |
 | Contact     | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
 | Login       | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
 | Register    | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |

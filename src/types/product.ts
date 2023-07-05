@@ -1,7 +1,7 @@
-import { Model } from 'mongoose'
+import { Schema, Model } from 'mongoose'
 
 export type Review = {
-  user: string
+  user: Schema.Types.ObjectId | string
   name: string
   rating: number
   comment: string

@@ -9,12 +9,12 @@ export const ReviewContainer = styled.div`
   max-width: 90vw;
   word-wrap: break-word;
 
-  > *:last-child {
-    margin-top: 1rem;
-  }
-
   &:not(:last-of-type) {
     padding-bottom: 1rem;
     border-bottom: 1px solid lightgrey;
   }
+`
+
+export const Comment = styled.p`
+  margin-top: 1rem;
 `

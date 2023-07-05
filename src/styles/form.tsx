@@ -2,13 +2,17 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { Button } from '@styles/globals'
 
-export const Form = styled.form`
+type Props = {
+  $center?: boolean
+}
+
+export const Form = styled.form<Props>`
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
   width: 340px;
   padding: 2rem;
-  margin: auto;
+  margin: ${({ $center = true }) => ($center ? 'auto' : 0)};
   color: var(--gray);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);

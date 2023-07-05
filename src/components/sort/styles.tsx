@@ -7,7 +7,6 @@ export const Select = styled.select`
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   text-align: center;
-  appearance: none;
 
   &:focus {
     border: 1px solid #444;

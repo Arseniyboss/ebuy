@@ -30,8 +30,7 @@ const Login = () => {
   const onSubmit = async () => {
     setLoading(true)
 
-    const { email, password } = values
-    const response = await login({ email, password })
+    const response = await login(values)
 
     if (!response.ok) {
       setLoading(false)

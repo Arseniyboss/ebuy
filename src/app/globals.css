@@ -38,6 +38,7 @@ li {
 select {
   outline: none;
   cursor: pointer;
+  appearance: none;
 }
 
 textarea {

@@ -31,15 +31,16 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   }
 
   const { reviews } = product
-  const { id, name } = user
 
-  const isAlreadyReviewed = reviews.find((review) => review.user === id)
+  const isAlreadyReviewed = reviews.find(
+    (review) => review.user.toString() === user.id
+  )
 
   if (isAlreadyReviewed) {
     return throwError({ error: 'Product already reviewed', status: 400 })
   }
 
-  const review = { user: id, name, rating, comment }
+  const review = { user: user.id, name: user.name, rating, comment }
 
   reviews.push(review)
 

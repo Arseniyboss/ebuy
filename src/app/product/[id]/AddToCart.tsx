@@ -6,19 +6,19 @@ import { getQuantities } from '@utils/getQuantities'
 import { Product } from 'types/product'
 import { FlexGroup } from '@components/product/styles'
 import { ProductQuantity, ProductButton, ProductStatus } from './styles'
+import { JwtPayload } from 'types/jwtPayload'
 
 type Props = {
   product: Product
+  user?: JwtPayload
 }
 
-const AddToCart = ({ product }: Props) => {
+const AddToCart = ({ product, user }: Props) => {
   // const {name, image, price, countInStock} = product
 
   const [quantity, setQuantity] = useState(1)
   const router = useRouter()
   const quantities = getQuantities(product.countInStock)
-
-  const user = null
 
   const handleClick = () => {
     if (user) {

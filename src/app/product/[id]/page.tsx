@@ -14,6 +14,7 @@ import Rating from '@components/rating/Rating'
 import AddToCart from './AddToCart'
 import Message from '@components/message/Message'
 import Review from '@components/review/Review'
+import ReviewForm from './ReviewForm'
 
 export const generateMetadata = async ({ params }: Params) => {
   const product = await getProductById(params.id)
@@ -47,7 +48,7 @@ const Product = async ({ params }: Params) => {
           <p>{product.numReviews === 1 ? 'review' : 'reviews'}</p>
         </FlexGroup>
         <p data-testid='product-description'>{product.description}</p>
-        <AddToCart product={product} />
+        <AddToCart product={product} user={user} />
       </ProductDetails>
       <ProductReviews>
         <h2>Reviews</h2>
@@ -61,7 +62,7 @@ const Product = async ({ params }: Params) => {
         {!user ? (
           <Message variant='info'>Please sign in to write a review</Message>
         ) : (
-          <p>Review Form</p>
+          <ReviewForm params={params} />
         )}
       </ProductReviews>
     </ProductContainer>

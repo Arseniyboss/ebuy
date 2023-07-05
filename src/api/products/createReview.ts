@@ -1,11 +1,15 @@
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
-import { Review } from 'types/product'
 
-export const createReview = async (id: string, review: Review) => {
+type Review = {
+  rating: number
+  comment: string
+}
+
+export const createReview = async (productId: string, review: Review) => {
   const token = await getToken()
 
-  const response = await fetch(`${BASE_URL}/api/products/${id}/review`, {
+  const response = await fetch(`${BASE_URL}/api/products/${productId}/review`, {
     method: 'POST',
     body: JSON.stringify(review),
     headers: {
