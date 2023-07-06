@@ -5,7 +5,7 @@ import Rating from '@components/rating/Rating'
 
 const Review = ({ username, comment, rating, createdAt }: Props) => {
   return (
-    <ReviewContainer data-testid='review'>
+    <ReviewContainer>
       <p data-testid='review-username'>{username}</p>
       <Rating value={rating} />
       <p data-testid='review-date'>{formatReviewDate(createdAt)}</p>

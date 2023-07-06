@@ -1,24 +1,27 @@
 import { Schema, models, model } from 'mongoose'
 import { Review, Product as ProductSchema, ProductModel } from 'types/product'
 
-const reviewSchema = new Schema<Review>({
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'User',
+const reviewSchema = new Schema<Review>(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    comment: {
+      type: String,
+    },
   },
-  username: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  comment: {
-    type: String,
-  },
-})
+  { timestamps: true }
+)
 
 const productSchema = new Schema<ProductSchema>({
   name: {

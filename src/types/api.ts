@@ -11,6 +11,7 @@ type WithId<T> = T & {
 
 export interface Review extends WithId<ReviewType> {
   createdAt: string
+  updatedAt: string
 }
 export interface Product extends WithId<ProductType> {
   reviews: Review[]

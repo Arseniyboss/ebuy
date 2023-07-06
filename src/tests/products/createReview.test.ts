@@ -97,7 +97,8 @@ describe('POST /api/products/:id/review', () => {
           const { status } = await createReview({ productId, payload })
           const newProducts = await getProducts()
 
-          const review = newProducts[1].reviews[0]
+          const product = newProducts[1]
+          const review = product.reviews[1]
           const { userId, username, rating, comment } = review
 
           expect(status).toBe(201)
@@ -105,6 +106,7 @@ describe('POST /api/products/:id/review', () => {
           expect(username).toBe(users[2].name)
           expect(rating).toBe(review.rating)
           expect(comment).toBe(review.comment)
+          expect(product.rating).toBe(4.5)
         })
       })
     })

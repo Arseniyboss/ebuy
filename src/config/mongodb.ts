@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import Product from '../models/product'
+import Product from '@models/product'
 import User from '@models/user'
-import products from '../mocks/products'
+import products from '@mocks/products'
 import users from '@mocks/users'
 
 dotenv.config()

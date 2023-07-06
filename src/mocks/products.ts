@@ -22,6 +22,11 @@ const products = [
         rating: 4,
         comment: 'Very Good Airpods!',
       },
+      {
+        userId: '62dbfa7f31c12b460f19f2b2',
+        username: 'John Doe',
+        rating: 5,
+      },
     ],
   },
   {
@@ -34,9 +39,16 @@ const products = [
     category: 'Electronics',
     price: 599.99,
     countInStock: 10,
-    rating: 3,
+    rating: 4,
     numReviews: 5,
     isPublished: true,
+    reviews: [
+      {
+        userId: '62dbfa7f31c12b460f19f2b2',
+        username: 'John Doe',
+        rating: 4,
+      },
+    ],
   },
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2b7'),
