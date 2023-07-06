@@ -1,4 +1,4 @@
-import { UserCredentials } from '../../src/types/api'
+import { UserLoginParams } from '../../src/types/params'
 
 type SelectOption = {
   testId: string
@@ -32,7 +32,7 @@ declare global {
       verifySort(prices: number[]): Chainable<Element>
       verifyCookie(name: string): Chainable<Element>
       verifyUserUpdate(input: string, value: string): Chainable<Element>
-      login(userCredentials: UserCredentials): Chainable<Element>
+      login(userCredentials: UserLoginParams): Chainable<Element>
       logout(): Chainable<Element>
     }
   }

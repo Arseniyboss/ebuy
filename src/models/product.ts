@@ -1,30 +1,24 @@
 import { Schema, models, model } from 'mongoose'
-import { Review, Product as ProductSchema } from 'types/api'
-import { ProductModel } from 'types/product'
+import { Review, Product as ProductSchema, ProductModel } from 'types/product'
 
-const reviewSchema = new Schema<Review>(
-  {
-    user: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-    },
-    comment: {
-      type: String,
-    },
+const reviewSchema = new Schema<Review>({
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
   },
-  {
-    timestamps: true,
-  }
-)
+  name: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  comment: {
+    type: String,
+  },
+})
 
 const productSchema = new Schema<ProductSchema>({
   name: {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
-import { User } from 'types/user'
+import { User } from 'types/api'
 import { contactSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'

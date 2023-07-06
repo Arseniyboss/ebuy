@@ -1,20 +1,24 @@
 import {
   Review as ReviewType,
-  CartItem as CartItemType,
   Product as ProductType,
+  CartItem as CartItemType,
 } from './product'
 import { User as UserType } from './user'
 
-type AssignId<T> = T & {
+type WithId<T> = T & {
   _id: string
 }
 
-export interface Review extends AssignId<ReviewType> {
+export interface Review extends WithId<ReviewType> {
   createdAt: string
 }
-export interface Product extends AssignId<ProductType> {
+export interface Product extends WithId<ProductType> {
   reviews: Review[]
 }
-export type CartItem = AssignId<CartItemType>
-export type User = Omit<UserType, '_id' | 'cartItems'>
-export type UserCredentials = Pick<UserType, 'email' | 'password'>
+export type CartItem = WithId<CartItemType>
+export type User = WithId<Omit<UserType, 'password'>>
+
+export type GetProductsData = {
+  products: Product[]
+  pages: number
+}

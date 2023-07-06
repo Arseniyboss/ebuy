@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { CartItem } from 'types/product'
+import { CartItem } from 'types/api'
 import { Heading } from '@styles/globals'
 import Message from '@components/message/Message'
 

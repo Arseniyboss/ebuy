@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { Params } from 'types/params'
+import { PageParams, CreateReviewParams as Body } from 'types/params'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
@@ -7,12 +7,7 @@ import { getRating } from '@utils/getRating'
 import Product from '@models/product'
 import User from '@models/user'
 
-type Body = {
-  rating: number
-  comment: string
-}
-
-export const POST = async (request: NextRequest, { params }: Params) => {
+export const POST = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
   const { rating, comment }: Body = await request.json()

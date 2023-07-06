@@ -5,10 +5,10 @@ import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
 import { verifyToken } from '@auth/verifyToken'
 import { BASE_URL } from '@baseUrl'
-import { User } from 'types/api'
+import { UpdateUserParams } from 'types/params'
 import users from '@mocks/users'
 
-const updateUser = async (user: User) => {
+const updateUser = async (user: UpdateUserParams) => {
   const { _id, name } = users[1]
   const token = await generateToken({ id: _id.toString(), name })
   const url = `${BASE_URL}/api/users/user`

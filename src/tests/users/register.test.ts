@@ -3,9 +3,9 @@ import { POST } from '@app/api/users/register/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { verifyToken } from '@auth/verifyToken'
 import { BASE_URL } from '@baseUrl'
-import { User } from 'types/api'
+import { UserRegisterParams } from 'types/params'
 
-const register = async (user: User) => {
+const register = async (user: UserRegisterParams) => {
   const url = `${BASE_URL}/api/users/login`
   const request = new NextRequest(url, {
     method: 'POST',

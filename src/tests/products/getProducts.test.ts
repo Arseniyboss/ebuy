@@ -5,13 +5,9 @@ import { BASE_URL } from '@baseUrl'
 import { SortOrder, SortKey } from 'types/sort'
 import { QueryParams } from 'types/params'
 import { Product } from 'types/api'
+import { GetProductsData } from 'types/api'
 
-type Data = {
-  products: Product[]
-  pages: number
-}
-
-type Sort = {
+type VerifySortParams = {
   order: SortOrder
   key: SortKey
   products: Product[]
@@ -25,11 +21,11 @@ const getProducts = async ({
   const url = `${BASE_URL}/api/products?page=${page}&search=${search}&sort=${sort}`
   const request = new NextRequest(url)
   const response = await GET(request)
-  const { products, pages }: Data = await response.json()
+  const { products, pages }: GetProductsData = await response.json()
   return { status: response.status, products, pages }
 }
 
-const verifySort = ({ order, key, products }: Sort) => {
+const verifySort = ({ order, key, products }: VerifySortParams) => {
   products.reduce((prevProduct, nextProduct, index) => {
     if (order === 'asc') {
       expect(prevProduct[key]).toBeLessThanOrEqual(nextProduct[key])
@@ -101,18 +97,14 @@ describe('GET /api/products', () => {
   describe('given the search is invalid', () => {
     describe('given the search is )', () => {
       it('returns status code 200', async () => {
-        const { status } = await getProducts({
-          search: ')',
-        })
+        const { status } = await getProducts({ search: ')' })
         expect(status).toBe(200)
       })
     })
 
     describe('given the search is #', () => {
       it('returns status code 200 and all products', async () => {
-        const { status } = await getProducts({
-          search: '#',
-        })
+        const { status } = await getProducts({ search: '#' })
         expect(status).toBe(200)
       })
     })
@@ -151,9 +143,7 @@ describe('GET /api/products', () => {
 
   describe('given the sort is invalid', () => {
     it('returns status code 200', async () => {
-      const { status } = await getProducts({
-        sort: 'rating.xyz',
-      })
+      const { status } = await getProducts({ sort: 'rating.xyz' })
       expect(status).toBe(200)
     })
   })

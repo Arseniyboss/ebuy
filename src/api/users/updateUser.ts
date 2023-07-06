@@ -1,6 +1,6 @@
+import { UpdateUserParams as User } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
-import { User } from 'types/api'
 
 export const updateUser = async (user: User) => {
   const token = await getToken()

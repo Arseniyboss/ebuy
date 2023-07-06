@@ -1,11 +1,6 @@
 import { QueryParams } from 'types/params'
-import { Product } from 'types/api'
+import { GetProductsData as Data } from 'types/api'
 import { BASE_URL } from '@baseUrl'
-
-type Data = {
-  products: Product[]
-  pages: number
-}
 
 export const getProducts = async ({
   page = 1,

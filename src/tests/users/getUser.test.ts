@@ -3,7 +3,7 @@ import { GET } from '@app/api/users/user/route'
 import { seedUsers } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
 import { BASE_URL } from '@baseUrl'
-import { User } from 'types/user'
+import { User } from 'types/api'
 import { JwtPayload } from 'types/jwtPayload'
 import users from '@mocks/users'
 

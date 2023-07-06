@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { UserCredentials as Body } from 'types/api'
+import { UserLoginParams as Body } from 'types/params'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
 import { generateTokenCookie } from '@auth/generateTokenCookie'

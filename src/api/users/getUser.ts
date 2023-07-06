@@ -1,6 +1,6 @@
+import { User } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
-import { User } from 'types/user'
 
 export const getUser = async () => {
   const token = await getToken()

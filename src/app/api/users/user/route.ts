@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { User as Body } from 'types/api'
+import { UpdateUserParams as Body } from 'types/params'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'

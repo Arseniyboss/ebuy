@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { Params } from 'types/params'
+import { PageParams } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
 import { decodeToken } from '@auth/decodeToken/cookies'
 import { FlexGroup } from '@components/product/styles'
@@ -16,12 +16,12 @@ import Message from '@components/message/Message'
 import Review from '@components/review/Review'
 import ReviewForm from './ReviewForm'
 
-export const generateMetadata = async ({ params }: Params) => {
+export const generateMetadata = async ({ params }: PageParams) => {
   const product = await getProductById(params.id)
   return { title: product ? product.name : 'Not Found' }
 }
 
-const Product = async ({ params }: Params) => {
+const Product = async ({ params }: PageParams) => {
   const product = await getProductById(params.id)
   const user = await decodeToken()
 

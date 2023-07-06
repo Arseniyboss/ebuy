@@ -1,7 +1,7 @@
-import { UserCredentials } from 'types/api'
+import { UserLoginParams } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 
-export const login = async (UserCredentials: UserCredentials) => {
+export const login = async (UserCredentials: UserLoginParams) => {
   const response = await fetch(`${BASE_URL}/api/users/login`, {
     method: 'POST',
     body: JSON.stringify(UserCredentials),

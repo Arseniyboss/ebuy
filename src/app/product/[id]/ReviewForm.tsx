@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
-import { Params } from 'types/params'
+import { PageParams } from 'types/params'
 import { reviewSchema } from '@validation/schemas/reviewSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormError, FormButton } from '@styles/form'
@@ -12,7 +12,7 @@ import { createReview } from '@api/products/createReview'
 import { revalidateTag } from '@api/revalidateTag'
 import Message from '@components/message/Message'
 
-const ReviewForm = ({ params }: Params) => {
+const ReviewForm = ({ params }: PageParams) => {
   const initialValues = {
     rating: 0,
     comment: '',

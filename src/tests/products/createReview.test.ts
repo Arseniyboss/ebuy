@@ -19,12 +19,12 @@ const review = {
   comment: 'Excellent Product!',
 }
 
-type Props = {
+type Params = {
   id: string
   payload: JwtPayload
 }
 
-const createReview = async ({ id, payload }: Props) => {
+const createReview = async ({ id, payload }: Params) => {
   const url = `${BASE_URL}/api/products/${id}/review`
   const token = await generateToken(payload)
   const request = new NextRequest(url, {
