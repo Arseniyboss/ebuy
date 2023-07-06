@@ -17,8 +17,8 @@ const products = [
     isPublished: true,
     reviews: [
       {
-        user: '62dbfa7f31c12b460f19f2b3',
-        name: 'Jane Doe',
+        userId: '62dbfa7f31c12b460f19f2b3',
+        username: 'Jane Doe',
         rating: 4,
         comment: 'Very Good Airpods!',
       },

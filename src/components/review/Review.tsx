@@ -3,10 +3,10 @@ import { formatReviewDate } from '@utils/formatReviewDate'
 import { ReviewContainer, Comment } from './styles'
 import Rating from '@components/rating/Rating'
 
-const Review = ({ name, comment, rating, createdAt }: Props) => {
+const Review = ({ username, comment, rating, createdAt }: Props) => {
   return (
     <ReviewContainer data-testid='review'>
-      <p data-testid='review-name'>{name}</p>
+      <p data-testid='review-username'>{username}</p>
       <Rating value={rating} />
       <p data-testid='review-date'>{formatReviewDate(createdAt)}</p>
       {comment && <Comment data-testid='review-comment'>{comment}</Comment>}

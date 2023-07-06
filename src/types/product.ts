@@ -1,11 +1,8 @@
 import { Schema, Model } from 'mongoose'
 
-// user -> userId
-// name -> username
-
 export type Review = {
-  user: Schema.Types.ObjectId | string
-  name: string
+  userId: Schema.Types.ObjectId | string
+  username: string
   rating: number
   comment: string
 }
