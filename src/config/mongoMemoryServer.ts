@@ -1,12 +1,15 @@
-import mongoose from 'mongoose'
-import products from '@mocks/products'
-import users from '@mocks/users'
-import { IdMapper } from 'types/mongo'
+import mongoose, { Types } from 'mongoose'
 import { Product } from 'types/product'
 import { User } from 'types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
+import products from '@mocks/products'
+import users from '@mocks/users'
 
-type Data = IdMapper<Product | User>
+type WithId<T> = T & {
+  _id: Types.ObjectId
+}
+
+type Data = WithId<Product | User>
 type Document<T> = Promise<mongoose.mongo.WithId<T>[]>
 type Users = Document<User>
 type Products = Document<Product>

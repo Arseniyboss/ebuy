@@ -26,6 +26,7 @@ const products = [
         userId: '62dbfa7f31c12b460f19f2b2',
         username: 'John Doe',
         rating: 5,
+        comment: '',
       },
     ],
   },
@@ -47,6 +48,7 @@ const products = [
         userId: '62dbfa7f31c12b460f19f2b2',
         username: 'John Doe',
         rating: 4,
+        comment: '',
       },
     ],
   },
@@ -63,6 +65,7 @@ const products = [
     rating: 5,
     numReviews: 3,
     isPublished: true,
+    reviews: [],
   },
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2b8'),
@@ -77,6 +80,7 @@ const products = [
     rating: 3.5,
     numReviews: 3,
     isPublished: true,
+    reviews: [],
   },
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2b9'),
@@ -91,6 +95,7 @@ const products = [
     rating: 3.5,
     numReviews: 7,
     isPublished: true,
+    reviews: [],
   },
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2ba'),
@@ -105,6 +110,7 @@ const products = [
     rating: 4,
     numReviews: 4,
     isPublished: true,
+    reviews: [],
   },
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2bb'),
@@ -118,6 +124,7 @@ const products = [
     isPublished: false,
     rating: 0,
     numReviews: 0,
+    reviews: [],
   },
 ]
 
