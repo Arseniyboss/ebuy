@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
+import { CartItem as CartSchema } from 'types/api'
 import { User as UserSchema, UserModel } from 'types/user'
 import {
   USERNAME_REQUIRED,
@@ -10,6 +11,29 @@ import {
   PASSWORD_INVALID,
 } from '@validation/constants/errors'
 import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
+
+const cartSchema = new Schema<CartSchema>({
+  name: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  countInStock: {
+    type: Number,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+})
 
 const userSchema = new Schema<UserSchema>({
   name: {
@@ -30,6 +54,7 @@ const userSchema = new Schema<UserSchema>({
     required: [true, PASSWORD_REQUIRED],
     minlength: [6, PASSWORD_INVALID],
   },
+  cartItems: [cartSchema],
 })
 
 userSchema.methods.matchPassword = async function (password: string) {

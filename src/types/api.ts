@@ -17,7 +17,9 @@ export interface Product extends WithId<ProductType> {
   reviews: Review[]
 }
 export type CartItem = WithId<CartItemType>
-export type User = WithId<Omit<UserType, 'password'>>
+export interface User extends WithId<Omit<UserType, 'password'>> {
+  cartItems: CartItem[]
+}
 
 export type GetProductsData = {
   products: Product[]

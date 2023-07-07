@@ -23,7 +23,7 @@ Fullstack e-commerce website built with NextJS
 | Login       | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
 | Register    | Standard | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
 | Profile     | User     | ✅  |    ✅    |   ✅    | ✅  |    ✅    |
-| Cart        | User     | ❌  |    ❌    |   ❌    | 🛠️  |    ❌    |
+| Cart        | User     | ✅  |    ❌    |   ❌    | 🛠️  |    ❌    |
 | Shipping    | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
 | Payment     | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
 | PlaceOrder  | User     | ❌  |    ❌    |   ❌    | ❌  |    ❌    |
