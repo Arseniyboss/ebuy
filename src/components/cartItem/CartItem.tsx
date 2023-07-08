@@ -8,7 +8,7 @@ const CartItem = ({ name, image, price, countInStock, quantity }: Props) => {
       <p>{name}</p>
       <p>{price}</p>
       <p>Quantity: {quantity}</p>
-      <p>Count in stock:{countInStock}</p>
+      <p>Count in stock: {countInStock}</p>
     </div>
   )
 }
