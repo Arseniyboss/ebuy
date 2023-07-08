@@ -19,6 +19,7 @@ export const ProductContainer = styled.article`
     margin: initial;
     gap: 1rem;
     padding-top: 0;
+    padding-bottom: 0;
   }
 `
 

@@ -3,10 +3,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getQuantities } from '@utils/getQuantities'
-import { Product } from 'types/product'
+import { addCartItem } from '@api/cart/addCartItem'
+import { Product } from 'types/api'
+import { JwtPayload } from 'types/jwtPayload'
 import { FlexGroup } from '@components/product/styles'
 import { ProductQuantity, ProductButton, ProductStatus } from './styles'
-import { JwtPayload } from 'types/jwtPayload'
 
 type Props = {
   product: Product
@@ -14,22 +15,35 @@ type Props = {
 }
 
 const AddToCart = ({ product, user }: Props) => {
-  // const {name, image, price, countInStock} = product
+  const { _id, name, image, price, countInStock } = product
 
+  const [loading, setLoading] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const router = useRouter()
-  const quantities = getQuantities(product.countInStock)
+  const quantities = getQuantities(countInStock)
 
-  const handleClick = () => {
+  const cartItem = { _id, name, image, price, countInStock, quantity }
+
+  const handleClick = async () => {
     if (user) {
-      // addToCart({name, image, price, countInStock, quantity})
+      setLoading(true)
+
+      const response = await addCartItem(cartItem)
+
+      if (!response.ok) {
+        setLoading(false)
+        alert(response.statusText)
+        return
+      }
+
       router.push('/cart')
+      router.refresh()
     } else {
       router.push('/login')
     }
   }
 
-  return product.countInStock === 0 ? (
+  return countInStock === 0 ? (
     <ProductStatus>Out Of Stock</ProductStatus>
   ) : (
     <>
@@ -48,7 +62,7 @@ const AddToCart = ({ product, user }: Props) => {
         </ProductQuantity>
       </FlexGroup>
       <ProductButton
-        disabled={product.countInStock === 0}
+        disabled={loading || countInStock === 0}
         onClick={handleClick}
         data-testid='product-button'
       >
