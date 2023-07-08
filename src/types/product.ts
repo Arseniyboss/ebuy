@@ -1,4 +1,4 @@
-import { Schema, Model } from 'mongoose'
+import { Schema, Types, Model } from 'mongoose'
 
 export type Review = {
   userId: Schema.Types.ObjectId | string
@@ -21,6 +21,7 @@ export interface Product {
 }
 
 export type CartItem = {
+  _id: Types.ObjectId | string
   name: string
   image: string
   price: number

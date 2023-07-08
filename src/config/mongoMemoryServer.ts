@@ -1,13 +1,10 @@
-import mongoose, { Types } from 'mongoose'
+import mongoose from 'mongoose'
+import { WithId } from 'types/mongo'
 import { Product } from 'types/product'
 import { User } from 'types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import products from '@mocks/products'
 import users from '@mocks/users'
-
-type WithId<T> = T & {
-  _id: Types.ObjectId
-}
 
 type Data = WithId<Product | User>
 type Document<T> = Promise<mongoose.mongo.WithId<T>[]>
@@ -47,10 +44,10 @@ const getDocuments = <T>(name: string) => {
   return collections[name].find().toArray() as Document<T>
 }
 
-export const getUsers = async (): Users => {
+export const getUsers = async (): Promise<Users> => {
   return getDocuments('users')
 }
 
-export const getProducts = async (): Products => {
+export const getProducts = async (): Promise<Products> => {
   return getDocuments('products')
 }

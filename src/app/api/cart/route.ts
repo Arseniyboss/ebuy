@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { CartItem } from 'types/mongo'
 import { CartItem as Body } from 'types/product'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
@@ -17,12 +18,12 @@ export const POST = async (request: NextRequest) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const { cartItems } = user
+  const cartItems = user.cartItems as CartItem[]
 
-  const isAlreadyAdded = cartItems.find(({ name }) => cartItem.name === name)
+  const itemInTheCart = cartItems.find(({ id }) => cartItem._id === id)
 
-  if (isAlreadyAdded) {
-    return throwError({ error: 'Item already added', status: 400 })
+  if (itemInTheCart) {
+    return throwError({ error: 'Item is already in the cart', status: 400 })
   }
 
   user.cartItems.push(cartItem)
