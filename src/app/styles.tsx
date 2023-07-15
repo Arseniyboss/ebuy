@@ -3,14 +3,14 @@
 import styled from 'styled-components'
 import { breakpoints } from '@constants/breakpoints/home'
 
-export const ProductContainer = styled.main`
+export const ProductContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   padding: 0 2rem;
 `
 
-export const FlexContainer = styled.div`
+export const FlexGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { QueryParams } from 'types/params'
 import { Heading } from '@styles/globals'
-import { FlexContainer } from './styles'
+import { FlexGroup } from './styles'
 import Search from '@components/search/Search'
 import Sort from '@components/sort/Sort'
 import SkeletonLoaders from './skeletons'
@@ -15,10 +15,10 @@ const Home = ({ searchParams }: Props) => {
   return (
     <>
       <Heading>Products</Heading>
-      <FlexContainer>
+      <FlexGroup>
         <Search />
         <Sort />
-      </FlexContainer>
+      </FlexGroup>
       <Suspense fallback={<SkeletonLoaders />}>
         <Products searchParams={searchParams} />
       </Suspense>

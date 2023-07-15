@@ -53,6 +53,10 @@ export const ProductQuantity = styled.select`
   color: inherit;
   appearance: auto;
   border-radius: var(--border-radius);
+
+  &:focus {
+    outline: auto;
+  }
 `
 
 export const ProductButton = styled(Button)`

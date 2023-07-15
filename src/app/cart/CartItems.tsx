@@ -1,19 +1,33 @@
 import { getUser } from '@api/users/getUser'
+import { getTotalPrice } from '@utils/getTotalPrice'
+import {
+  Container,
+  CartItemContainer,
+  CartTotal,
+  CheckoutButton,
+} from './styles'
 import Message from '@components/message/Message'
 import CartItem from '@components/cartItem/CartItem'
 
 const CartItems = async () => {
   const user = await getUser()
   const cartItems = user?.cartItems || []
+  const totalPrice = getTotalPrice(cartItems)
 
   return cartItems.length === 0 ? (
     <Message variant='info'>Your cart is empty</Message>
   ) : (
-    <div>
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem._id} {...cartItem} />
-      ))}
-    </div>
+    <Container>
+      <CartItemContainer>
+        {cartItems.map((cartItem) => (
+          <CartItem key={cartItem._id} {...cartItem} />
+        ))}
+      </CartItemContainer>
+      <CartTotal>
+        <h2>Total: ${totalPrice}</h2>
+        <CheckoutButton>Proceed To Checkout</CheckoutButton>
+      </CartTotal>
+    </Container>
   )
 }
 
