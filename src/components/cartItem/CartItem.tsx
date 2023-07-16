@@ -20,7 +20,7 @@ const CartItem = ({
   return (
     <Container>
       <Link href={`/product/${_id}`}>
-        <ItemImage src={image} height={153} width={170} alt='' priority />
+        <ItemImage src={image} height={153} width={170} alt={name} priority />
       </Link>
       <ItemDetails>
         <h2>{name}</h2>
@@ -31,7 +31,7 @@ const CartItem = ({
             quantity={quantity}
             setQuantity={setQuantity}
           />
-          <InvisibleButton>
+          <InvisibleButton aria-label='delete cart item'>
             <FaTrashAlt />
           </InvisibleButton>
         </FlexGroup>
