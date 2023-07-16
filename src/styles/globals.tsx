@@ -17,8 +17,6 @@ export const Heading = styled.h1`
 export const Button = styled.button`
   font-size: 1rem;
   color: white;
-  border: none;
-  cursor: pointer;
 
   &:hover {
     background-image: linear-gradient(rgb(0 0 0 / 25%) 0 0);
@@ -29,6 +27,13 @@ export const Button = styled.button`
     cursor: initial;
     opacity: 0.5;
   }
+`
+
+export const InvisibleButton = styled.button`
+  background: none;
+  color: inherit;
+  font-size: inherit;
+  display: inherit;
 `
 
 export const Input = styled.input`

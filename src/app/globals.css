@@ -35,6 +35,11 @@ li {
   list-style-type: none;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
 select {
   outline: none;
   cursor: pointer;

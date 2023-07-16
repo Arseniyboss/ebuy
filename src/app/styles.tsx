@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { breakpoints } from '@constants/breakpoints/home'
+import { breakpoints } from '@breakpoints'
 
 export const ProductContainer = styled.div`
   display: grid;
@@ -16,7 +16,7 @@ export const FlexGroup = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media screen and (max-width: ${breakpoints.small}) {
+  @media screen and (max-width: ${breakpoints.home.small}) {
     flex-direction: column;
     padding: 0 2rem;
   }

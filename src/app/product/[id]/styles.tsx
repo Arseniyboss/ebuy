@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Button } from '@styles/globals'
-import { breakpoints } from '@constants/breakpoints/product'
+import { breakpoints } from '@breakpoints'
 
 export const ProductContainer = styled.article`
   display: grid;
@@ -13,7 +13,7 @@ export const ProductContainer = styled.article`
   margin: 0 auto;
   color: var(--gray);
 
-  @media screen and (max-width: ${breakpoints.medium}) {
+  @media screen and (max-width: ${breakpoints.product.medium}) {
     grid-template-columns: auto;
     justify-content: center;
     margin: initial;
@@ -26,7 +26,7 @@ export const ProductContainer = styled.article`
 export const ProductImage = styled(Image)`
   max-width: 90vw;
 
-  @media screen and (max-width: ${breakpoints.medium}) {
+  @media screen and (max-width: ${breakpoints.product.medium}) {
     height: auto;
     margin: 0 auto;
   }
@@ -38,7 +38,7 @@ export const ProductDetails = styled.div`
   gap: 1rem;
   max-width: 600px;
 
-  @media screen and (max-width: ${breakpoints.medium}) {
+  @media screen and (max-width: ${breakpoints.product.medium}) {
     align-items: center;
     text-align: center;
   }
@@ -46,17 +46,6 @@ export const ProductDetails = styled.div`
 
 export const ProductName = styled.h1`
   font-size: 1.8rem;
-`
-
-export const ProductQuantity = styled.select`
-  width: 40px;
-  color: inherit;
-  appearance: auto;
-  border-radius: var(--border-radius);
-
-  &:focus {
-    outline: auto;
-  }
 `
 
 export const ProductButton = styled(Button)`

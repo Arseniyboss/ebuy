@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints } from '@constants/breakpoints/home'
+import { breakpoints } from '@breakpoints'
 
 export const Select = styled.select`
   border: 1px solid darkgrey;
@@ -12,7 +12,7 @@ export const Select = styled.select`
     border: 1px solid #444;
   }
 
-  @media screen and (max-width: ${breakpoints.small}) {
+  @media screen and (max-width: ${breakpoints.home.small}) {
     text-align: start;
     width: 100%;
     border-radius: 0.3rem;

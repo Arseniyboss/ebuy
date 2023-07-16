@@ -1,36 +1,41 @@
 'use client'
 
-import { CartItem as Props } from 'types/product'
-import { Container, ItemImage, ItemName, ItemPrice } from './styles'
-import { ProductQuantity } from '@app/product/[id]/styles'
-import { getQuantities } from '@utils/getQuantities'
+import Link from 'next/link'
 import { useState } from 'react'
-
 import { FaTrashAlt } from 'react-icons/fa'
+import { CartItem as Props } from 'types/product'
+import { InvisibleButton } from '@styles/globals'
+import { Container, ItemImage, ItemDetails, FlexGroup } from './styles'
+import ProductQuantity from '@components/productQuantity/ProductQuantity'
 
-const CartItem = ({ name, image, price, countInStock, quantity }: Props) => {
-  const quantities = getQuantities(countInStock)
-  const [quantity2, setQuantity] = useState(quantity)
+const CartItem = ({
+  _id,
+  name,
+  image,
+  price,
+  countInStock,
+  quantity: initialQuantity,
+}: Props) => {
+  const [quantity, setQuantity] = useState(initialQuantity)
   return (
     <Container>
-      <ItemImage src={image} alt='' height={102} width={128} />
-      <ItemName>{name}</ItemName>
-      <ItemPrice>${price}</ItemPrice>
-      {/* create a separate component */}
-      <ProductQuantity
-        value={quantity2}
-        onChange={(e) => setQuantity(parseInt(e.target.value))}
-        data-testid='product-quantity'
-      >
-        {quantities.map((quantity) => (
-          <option key={quantity} value={quantity}>
-            {quantity}
-          </option>
-        ))}
-      </ProductQuantity>
-      <button>
-        <FaTrashAlt />
-      </button>
+      <Link href={`/product/${_id}`}>
+        <ItemImage src={image} height={153} width={170} alt='' priority />
+      </Link>
+      <ItemDetails>
+        <h2>{name}</h2>
+        <h3>${price}</h3>
+        <FlexGroup>
+          <ProductQuantity
+            countInStock={countInStock}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
+          <InvisibleButton>
+            <FaTrashAlt />
+          </InvisibleButton>
+        </FlexGroup>
+      </ItemDetails>
     </Container>
   )
 }

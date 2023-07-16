@@ -2,34 +2,44 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
+import { breakpoints } from '@breakpoints'
 
 export const Container = styled.div`
   display: flex;
-  align-items: flex-start;
-  gap: 2rem;
+  column-gap: 2rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid lightgrey;
 
-  &:not(:last-of-type) {
-    padding-bottom: 1.3rem;
-    border-bottom: 1px solid lightgrey;
+  @media screen and (max-width: ${breakpoints.cart.small}) {
+    flex-direction: column;
+    align-items: center;
   }
 `
 
 export const ItemImage = styled(Image)`
   border-radius: var(--border-radius);
-`
 
-export const ItemName = styled.h2`
-  width: 300px;
-  max-width: 80vw;
-  font-size: 1.2rem;
-`
-
-export const ItemPrice = styled.p`
-  width: 70px;
+  @media screen and (max-width: ${breakpoints.cart.small}) {
+    width: 270px;
+    height: auto;
+    margin-bottom: 1rem;
+  }
 `
 
 export const ItemDetails = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 0.7rem;
+
+  @media screen and (max-width: ${breakpoints.cart.small}) {
+    text-align: center;
+    align-items: center;
+  }
+`
+
+export const FlexGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `

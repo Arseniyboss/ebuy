@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getQuantities } from '@utils/getQuantities'
 import { addCartItem } from '@api/cart/addCartItem'
 import { Product } from 'types/api'
 import { JwtPayload } from 'types/jwtPayload'
 import { FlexGroup } from '@components/product/styles'
-import { ProductQuantity, ProductButton, ProductStatus } from './styles'
+import { ProductButton, ProductStatus } from './styles'
+import ProductQuantity from '@components/productQuantity/ProductQuantity'
 
 type Props = {
   product: Product
@@ -20,7 +20,6 @@ const AddToCart = ({ product, user }: Props) => {
   const [loading, setLoading] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const router = useRouter()
-  const quantities = getQuantities(countInStock)
 
   const cartItem = { _id, name, image, price, countInStock, quantity }
 
@@ -50,16 +49,10 @@ const AddToCart = ({ product, user }: Props) => {
       <FlexGroup>
         <p>Quantity:</p>
         <ProductQuantity
-          value={quantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
-          data-testid='product-quantity'
-        >
-          {quantities.map((quantity) => (
-            <option key={quantity} value={quantity}>
-              {quantity}
-            </option>
-          ))}
-        </ProductQuantity>
+          countInStock={countInStock}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
       </FlexGroup>
       <ProductButton
         disabled={loading || countInStock === 0}
