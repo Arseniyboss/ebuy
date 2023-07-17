@@ -2,10 +2,12 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { FaTrashAlt } from 'react-icons/fa'
-import { CartItem as Props } from 'types/product'
+import { CartItem as Props } from 'types/api'
 import { InvisibleButton } from '@styles/globals'
 import { Container, ItemImage, ItemDetails, FlexGroup } from './styles'
+import { deleteCartItem } from '@api/cart/deleteCartItem'
 import ProductQuantity from '@components/productQuantity/ProductQuantity'
 
 const CartItem = ({
@@ -17,6 +19,25 @@ const CartItem = ({
   quantity: initialQuantity,
 }: Props) => {
   const [quantity, setQuantity] = useState(initialQuantity)
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure?')) return
+
+    setLoading(true)
+
+    const response = await deleteCartItem(_id)
+
+    if (!response.ok) {
+      setLoading(false)
+      alert(response.statusText)
+      return
+    }
+
+    setLoading(false)
+    router.refresh()
+  }
   return (
     <Container>
       <Link href={`/product/${_id}`}>
@@ -31,7 +52,11 @@ const CartItem = ({
             quantity={quantity}
             setQuantity={setQuantity}
           />
-          <InvisibleButton aria-label='delete cart item'>
+          <InvisibleButton
+            disabled={loading}
+            onClick={handleDelete}
+            aria-label='delete cart item'
+          >
             <FaTrashAlt />
           </InvisibleButton>
         </FlexGroup>
