@@ -7,4 +7,5 @@ export type WithId<T> = T & {
 
 export interface CartItem extends CartItemType {
   id: string
+  deleteOne: () => Promise<void>
 }

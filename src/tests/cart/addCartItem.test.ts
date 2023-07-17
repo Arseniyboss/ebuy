@@ -63,7 +63,7 @@ describe('POST /api/cart', () => {
   })
 
   describe('given the user exists', () => {
-    describe('given the item is already in the cart', () => {
+    describe('given the cart item is already in the cart', () => {
       it('returns status code 400', async () => {
         const cartItem = {
           _id: new ObjectId('62dbfa7f31c12b460f19f2b5'),
@@ -85,7 +85,7 @@ describe('POST /api/cart', () => {
       })
     })
 
-    describe('given the item is not in the cart', () => {
+    describe('given the cart item is not in the cart', () => {
       it('returns status code 201', async () => {
         const cartItem = {
           _id: new ObjectId('62dbfa7f31c12b460f19f2b6'),
