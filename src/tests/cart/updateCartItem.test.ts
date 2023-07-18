@@ -1,10 +1,12 @@
 import { NextRequest } from 'next/server'
 import { JwtPayload } from 'types/jwtPayload'
-import { DELETE } from '@app/api/cart/[id]/route'
+import { PATCH } from '@app/api/cart/[id]/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
 import { BASE_URL } from '@baseUrl'
 import users from '@mocks/users'
+
+const quantity = 1
 
 const { _id, name } = users[1]
 
@@ -18,22 +20,23 @@ type Params = {
   payload: JwtPayload
 }
 
-const deleteCartItem = async ({ id, payload }: Params) => {
+const updateCartItem = async ({ id, payload }: Params) => {
   const url = `${BASE_URL}/api/cart/${id}`
   const token = await generateToken(payload)
   const request = new NextRequest(url, {
-    method: 'DELETE',
+    method: 'PATCH',
+    body: JSON.stringify(quantity),
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
-  const { status, statusText } = await DELETE(request, { params: { id } })
+  const { status, statusText } = await PATCH(request, { params: { id } })
   return { status, statusText }
 }
 
 beforeAll(async () => await seedUsers())
 
-describe('DELETE /api/cart/:id', () => {
+describe('PATCH /api/cart/:id', () => {
   describe('given the user does not exist', () => {
     it('returns status code 404', async () => {
       const id = '62dbfa7f31c12b460f19f2b5'
@@ -43,7 +46,7 @@ describe('DELETE /api/cart/:id', () => {
         name: 'John',
       }
 
-      const { status, statusText } = await deleteCartItem({ id, payload })
+      const { status, statusText } = await updateCartItem({ id, payload })
 
       expect(status).toBe(404)
       expect(statusText).toBe('User not found')
@@ -55,7 +58,7 @@ describe('DELETE /api/cart/:id', () => {
       it('returns status code 404', async () => {
         const id = '62dbfa7f31c12b460f19f2b6'
 
-        const { status, statusText } = await deleteCartItem({ id, payload })
+        const { status, statusText } = await updateCartItem({ id, payload })
 
         expect(status).toBe(404)
         expect(statusText).toBe('Cart item not found')
@@ -66,13 +69,13 @@ describe('DELETE /api/cart/:id', () => {
       it('returns status code 200', async () => {
         const id = '62dbfa7f31c12b460f19f2b5'
 
-        const { status } = await deleteCartItem({ id, payload })
+        const { status } = await updateCartItem({ id, payload })
         const users = await getUsers()
 
-        const cartItems = users[1].cartItems
+        const cartItem = users[1].cartItems[0]
 
         expect(status).toBe(200)
-        expect(cartItems.length).toBe(0)
+        expect(cartItem.quantity).toBe(1)
       })
     })
   })

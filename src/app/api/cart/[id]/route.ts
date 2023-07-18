@@ -30,3 +30,30 @@ export const DELETE = async (request: NextRequest, { params }: PageParams) => {
 
   return NextResponse.json(null, { status: 200 })
 }
+
+export const PATCH = async (request: NextRequest, { params }: PageParams) => {
+  await connectToDB()
+
+  const quantity: number = await request.json()
+
+  const decoded = await decodeToken(request)
+  const user = await User.findById(decoded?.id)
+
+  if (!user) {
+    return throwError({ error: 'User not found', status: 404 })
+  }
+
+  const cartItems = user.cartItems as CartItem[]
+
+  const cartItem = cartItems.find(({ id }) => params.id === id)
+
+  if (!cartItem) {
+    return throwError({ error: 'Cart item not found', status: 404 })
+  }
+
+  cartItem.quantity = quantity
+
+  await user.save()
+
+  return NextResponse.json(null, { status: 200 })
+}
