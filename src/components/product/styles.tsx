@@ -32,9 +32,3 @@ export const ProductPrice = styled.h2`
   font-size: 1.4rem;
   letter-spacing: 1px;
 `
-
-export const FlexGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`

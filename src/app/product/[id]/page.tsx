@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { PageParams } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
 import { decodeToken } from '@auth/decodeToken/cookies'
-import { FlexGroup } from '@components/product/styles'
+import { FlexGroup } from '@styles/globals'
 import {
   ProductContainer,
   ProductImage,

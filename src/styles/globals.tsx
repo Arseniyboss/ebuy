@@ -9,6 +9,12 @@ export const Container = styled.main`
   gap: var(--gap);
 `
 
+export const FlexGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
 export const Heading = styled.h1`
   color: var(--gray);
   text-align: center;
@@ -45,6 +51,17 @@ export const Input = styled.input`
 
   &:focus {
     border: 1px solid #444;
+  }
+`
+
+export const ProductQuantity = styled.select`
+  width: 40px;
+  color: inherit;
+  appearance: auto;
+  border-radius: var(--border-radius);
+
+  &:focus {
+    outline: auto;
   }
 `
 

@@ -42,6 +42,10 @@ describe('Product Page', () => {
     })
   })
 
+  // it('verifies product quantity select options', () => {})
+
+  // it('adds product to the cart', () => {})
+
   describe('shows info message', () => {
     it('for no product reviews', () => {
       const id = '62dbfa7f31c12b460f19f2b7'
