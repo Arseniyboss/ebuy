@@ -26,11 +26,13 @@ describe('Home Page', () => {
       expect(status).to.equal(200)
       expect(products.length).to.equal(4)
 
+      cy.getImage('product-image')
+
       cy.getByTestId('product-name').each((element, index) => {
         expect(element).to.have.text(products[index].name)
       })
       cy.getByTestId('product-price').each((element, index) => {
-        expect(element).to.contain.text(products[index].price.toString())
+        expect(element).to.have.text(`$${products[index].price}`)
       })
 
       cy.verifyFirstDynamicLink('product-link', `/product/${products[0]._id}`)

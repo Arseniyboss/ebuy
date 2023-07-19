@@ -1,4 +1,4 @@
-import { Product } from '../../src/types/api'
+import { Product, User } from '../../src/types/api'
 import { formatReviewDate } from '../../src/utils/formatReviewDate'
 
 const id = '62dbfa7f31c12b460f19f2b5'
@@ -28,7 +28,7 @@ describe('Product Page', () => {
 
       cy.assertText('product-name', name)
       cy.assertText('product-description', description)
-      cy.getByTestId('product-price').should('contain.text', price)
+      cy.assertText('product-price', `$${price}`)
 
       cy.getByTestId('review-username').each((element, index) => {
         expect(element).to.have.text(reviews[index].username)
@@ -41,10 +41,6 @@ describe('Product Page', () => {
       })
     })
   })
-
-  // it('verifies product quantity select options', () => {})
-
-  // it('adds product to the cart', () => {})
 
   describe('shows info message', () => {
     it('for no product reviews', () => {
@@ -141,6 +137,49 @@ describe('Product Page', () => {
       cy.assertText('review-username', 'John Doe')
       cy.assertText('review-date', new Date().toLocaleDateString('ru-RU'))
       cy.assertText('review-comment', 'This product is excellent!')
+    })
+  })
+
+  it('verifies product quantity select options', () => {
+    cy.visit(`/product/${id}`)
+    cy.selectOption({ testId: 'product-quantity', text: '2', value: '2' })
+    cy.selectOption({ testId: 'product-quantity', text: '3', value: '3' })
+  })
+
+  it('adds product to the cart', () => {
+    cy.intercept('POST', '/api/cart').as('addCartItem')
+    cy.login({ email: 'jane@example.com', password: '123456' })
+    cy.visit(`/product/${id}`)
+    cy.getByTestId('product-button').click()
+
+    cy.wait('@addCartItem').then(({ response }) => {
+      expect(response.statusCode).to.equal(201)
+
+      cy.verifyUrl('/cart')
+
+      cy.getCookie('token').then((cookie) => {
+        const token = cookie.value
+
+        cy.request({
+          method: 'GET',
+          url: '/api/users/user',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }).then((response) => {
+          const { status, body } = response
+          const { cartItems }: User = body
+          const { name, price, quantity } = cartItems[0]
+
+          expect(status).to.equal(200)
+
+          cy.getImage('product-image')
+
+          cy.assertText('product-name', name)
+          cy.assertText('product-price', `$${price}`)
+          cy.assertValue('product-quantity', quantity.toString())
+        })
+      })
     })
   })
 })

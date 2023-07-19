@@ -59,13 +59,24 @@ const CartItem = ({
   return (
     <Container>
       <Link href={`/product/${_id}`}>
-        <ItemImage src={image} height={153} width={170} alt={name} priority />
+        <ItemImage
+          src={image}
+          height={153}
+          width={170}
+          alt={name}
+          priority
+          data-testid='product-image'
+        />
       </Link>
       <ItemDetails>
-        <h2>{name}</h2>
-        <h3>${price}</h3>
+        <h2 data-testid='product-name'>{name}</h2>
+        <h3 data-testid='product-price'>${price}</h3>
         <FlexGroup>
-          <ProductQuantity value={quantity} onChange={handleUpdate}>
+          <ProductQuantity
+            value={quantity}
+            onChange={handleUpdate}
+            data-testid='product-quantity'
+          >
             {quantities.map((quantity) => (
               <option key={quantity} value={quantity}>
                 {quantity}

@@ -13,7 +13,14 @@ const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
   return (
     <ProductLink href={`/product/${_id}`} data-testid='product-link'>
       <ProductContainer data-testid='product'>
-        <ProductImage src={image} height={250} width={250} alt='' priority />
+        <ProductImage
+          src={image}
+          height={250}
+          width={250}
+          alt=''
+          priority
+          data-testid='product-image'
+        />
         <ProductDetails>
           <h1 data-testid='product-name'>{name}</h1>
           <ProductPrice data-testid='product-price'>${price}</ProductPrice>
