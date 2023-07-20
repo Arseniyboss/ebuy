@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { getUser } from '@api/users/getUser'
 import { getTotalPrice } from '@utils/getTotalPrice'
 import {
@@ -25,7 +26,11 @@ const CartItems = async () => {
       </CartItemContainer>
       <CartTotal>
         <h2>Total: ${totalPrice}</h2>
-        <CheckoutButton>Checkout</CheckoutButton>
+        <Link href='/shippingAddress'>
+          <CheckoutButton data-testid='checkout-button'>
+            Checkout
+          </CheckoutButton>
+        </Link>
       </CartTotal>
     </Container>
   )

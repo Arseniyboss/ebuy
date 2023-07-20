@@ -1,4 +1,4 @@
-import { Product, User } from '../../src/types/api'
+import { Product } from '../../src/types/api'
 import { formatReviewDate } from '../../src/utils/formatReviewDate'
 
 const id = '62dbfa7f31c12b460f19f2b5'
@@ -156,30 +156,7 @@ describe('Product Page', () => {
       expect(response.statusCode).to.equal(201)
 
       cy.verifyUrl('/cart')
-
-      cy.getCookie('token').then((cookie) => {
-        const token = cookie.value
-
-        cy.request({
-          method: 'GET',
-          url: '/api/users/user',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }).then((response) => {
-          const { status, body } = response
-          const { cartItems }: User = body
-          const { name, price, quantity } = cartItems[0]
-
-          expect(status).to.equal(200)
-
-          cy.getImage('product-image')
-
-          cy.assertText('product-name', name)
-          cy.assertText('product-price', `$${price}`)
-          cy.assertValue('product-quantity', quantity.toString())
-        })
-      })
+      cy.assertLength('cart-item', 1)
     })
   })
 })

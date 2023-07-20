@@ -26,22 +26,22 @@ const AddToCart = ({ product, user }: Props) => {
   const cartItem = { _id, name, image, price, countInStock, quantity }
 
   const handleClick = async () => {
-    if (user) {
-      setLoading(true)
-
-      const response = await addCartItem(cartItem)
-
-      if (!response.ok) {
-        setLoading(false)
-        alert(response.statusText)
-        return
-      }
-
-      router.push('/cart')
-      router.refresh()
-    } else {
-      router.push('/login')
+    if (!user) {
+      return router.push('/login')
     }
+
+    setLoading(true)
+
+    const response = await addCartItem(cartItem)
+
+    if (!response.ok) {
+      setLoading(false)
+      alert(response.statusText)
+      return
+    }
+
+    router.push('/cart')
+    router.refresh()
   }
 
   return countInStock === 0 ? (

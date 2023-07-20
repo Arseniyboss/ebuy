@@ -42,22 +42,17 @@ const CartItem = ({
   }
 
   const handleUpdate = async (e: ChangeEvent<HTMLSelectElement>) => {
-    setLoading(true)
-
     const quantity = parseInt(e.target.value)
     const response = await updateCartItem(_id, quantity)
 
     if (!response.ok) {
-      setLoading(false)
-      alert(response.statusText)
-      return
+      return alert(response.statusText)
     }
 
-    setLoading(false)
     router.refresh()
   }
   return (
-    <Container>
+    <Container data-testid='cart-item'>
       <Link href={`/product/${_id}`}>
         <ItemImage
           src={image}
@@ -87,6 +82,7 @@ const CartItem = ({
             disabled={loading}
             onClick={handleDelete}
             aria-label='delete cart item'
+            data-testid='delete-button'
           >
             <FaTrashAlt />
           </InvisibleButton>
