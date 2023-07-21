@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CartItem } from 'types/mongo'
+import { CartItem } from 'types/mongo/documents'
 import { CartItem as Body } from 'types/api'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'

@@ -6,7 +6,6 @@ const id = '62dbfa7f31c12b460f19f2b3'
 before(() => {
   cy.task('seedProducts')
   cy.task('seedUsers')
-  cy.request('/api/revalidate?tag=product')
 })
 
 after(() => {

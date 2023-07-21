@@ -1,7 +1,7 @@
 import { Types, Model } from 'mongoose'
-import { OmitId, CartItem } from './api'
-import { Review, Product } from './product'
-import { CartItem as CartSchemaType, User } from './user'
+import { OmitId, CartItem } from 'types/api'
+import { Review, Product } from 'types/product'
+import { CartItem as CartSchemaType, User } from 'types/user'
 
 type OmitUserId<T> = Omit<T, 'userId'>
 type OmitCartItems<T> = Omit<T, 'cartItems'>

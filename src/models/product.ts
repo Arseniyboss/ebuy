@@ -1,5 +1,5 @@
 import { Schema, models, model } from 'mongoose'
-import { ReviewSchema, ProductModel } from 'types/models'
+import { ReviewSchema, ProductModel } from 'types/mongo/models'
 import { Product as ProductSchema } from 'types/product'
 
 const reviewSchema = new Schema<ReviewSchema>(

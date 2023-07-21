@@ -1,5 +1,5 @@
 import { Types } from 'mongoose'
-import { Product } from '@config/mongoMemoryServer'
+import { Product } from 'types/mongo/documents'
 
 const { ObjectId } = Types
 

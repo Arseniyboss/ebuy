@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
-import { CartSchema, UserModel } from 'types/models'
+import { CartSchema, UserModel } from 'types/mongo/models'
 import { ShippingAddress, Checkout, User as UserSchema } from 'types/user'
 import {
   USERNAME_REQUIRED,
