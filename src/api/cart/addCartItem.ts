@@ -1,4 +1,4 @@
-import { CartItem } from 'types/product'
+import { CartItem } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
 

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
+import { UserRegisterParams } from 'types/params'
+import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/users/register/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { verifyToken } from '@auth/verifyToken'
-import { BASE_URL } from '@baseUrl'
-import { UserRegisterParams } from 'types/params'
 
 const register = async (user: UserRegisterParams) => {
   const url = `${BASE_URL}/api/users/login`
@@ -23,7 +23,7 @@ describe('GET /api/users/register', () => {
     it('returns status code 400', async () => {
       const user = {
         name: 'John',
-        email: 'john@example.com',
+        email: 'john@gmail.com',
         password: '123456',
       }
 
@@ -38,7 +38,7 @@ describe('GET /api/users/register', () => {
     it('returns status code 200 and sends token', async () => {
       const user = {
         name: 'Mario',
-        email: 'mario@example.com',
+        email: 'mario@gmail.com',
         password: '123456',
       }
 

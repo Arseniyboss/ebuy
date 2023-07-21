@@ -1,29 +1,30 @@
 import { Types } from 'mongoose'
+import { Product } from '@config/mongoMemoryServer'
+
 const { ObjectId } = Types
 
-const products = [
+const products: Product[] = [
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2b5'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b3'),
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
-    description:
-      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
     brand: 'Apple',
     category: 'Electronics',
+    description:
+      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
     price: 129.99,
     countInStock: 3,
     rating: 4.5,
     numReviews: 7,
-    isPublished: true,
     reviews: [
       {
-        userId: '62dbfa7f31c12b460f19f2b3',
+        userId: new ObjectId('62dbfa7f31c12b460f19f2b2'),
         username: 'Jane Doe',
         rating: 4,
         comment: 'Very Good Airpods!',
       },
       {
-        userId: '62dbfa7f31c12b460f19f2b2',
+        userId: new ObjectId('62dbfa7f31c12b460f19f2b1'),
         username: 'John Doe',
         rating: 5,
         comment: '',
@@ -31,7 +32,7 @@ const products = [
     ],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2b6'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b4'),
     name: 'iPhone 11 Pro 256GB Memory',
     image: '/images/phone.jpg',
     description:
@@ -42,10 +43,9 @@ const products = [
     countInStock: 10,
     rating: 4,
     numReviews: 5,
-    isPublished: true,
     reviews: [
       {
-        userId: '62dbfa7f31c12b460f19f2b2',
+        userId: new ObjectId('62dbfa7f31c12b460f19f2b1'),
         username: 'John Doe',
         rating: 4,
         comment: '',
@@ -53,7 +53,7 @@ const products = [
     ],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2b7'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b5'),
     name: 'Logitech G-Series Gaming Mouse',
     image: '/images/mouse.jpg',
     description:
@@ -64,11 +64,10 @@ const products = [
     countInStock: 7,
     rating: 5,
     numReviews: 3,
-    isPublished: true,
     reviews: [],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2b8'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b6'),
     name: 'Cannon EOS 80D DSLR Camera',
     image: '/images/camera.jpg',
     description:
@@ -79,11 +78,10 @@ const products = [
     countInStock: 5,
     rating: 3.5,
     numReviews: 3,
-    isPublished: true,
     reviews: [],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2b9'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b7'),
     name: 'Sony Playstation 4 Pro White Version',
     image: '/images/playstation.jpg',
     description:
@@ -94,11 +92,10 @@ const products = [
     countInStock: 10,
     rating: 3.5,
     numReviews: 7,
-    isPublished: true,
     reviews: [],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2ba'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b8'),
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/alexa.jpg',
     description:
@@ -109,11 +106,10 @@ const products = [
     countInStock: 3,
     rating: 4,
     numReviews: 4,
-    isPublished: true,
     reviews: [],
   },
   {
-    _id: new ObjectId('62dbfa7f31c12b460f19f2bb'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2b9'),
     name: 'Sample product',
     image: '/images/sample.jpg',
     description: 'Sample description',
@@ -121,7 +117,6 @@ const products = [
     category: 'Sample category',
     price: 99.99,
     countInStock: 1,
-    isPublished: false,
     rating: 0,
     numReviews: 0,
     reviews: [],

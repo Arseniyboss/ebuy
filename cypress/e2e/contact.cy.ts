@@ -1,6 +1,6 @@
 before(() => {
   cy.task('seedUsers')
-  cy.login({ email: 'john@example.com', password: '123456' })
+  cy.login({ email: 'john@gmail.com', password: '123456' })
 })
 
 beforeEach(() => {
@@ -14,7 +14,7 @@ after(() => {
 describe('Contact Page', () => {
   it('gets user details for the logged in user', () => {
     cy.assertValue('name-input', 'John Doe')
-    cy.assertValue('email-input', 'john@example.com')
+    cy.assertValue('email-input', 'john@gmail.com')
   })
 
   it('submits the form with empty input fields and shows error messages', () => {

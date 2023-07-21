@@ -1,7 +1,8 @@
 import { Schema, models, model } from 'mongoose'
-import { Review, Product as ProductSchema, ProductModel } from 'types/product'
+import { ReviewSchema, ProductModel } from 'types/models'
+import { Product as ProductSchema } from 'types/product'
 
-const reviewSchema = new Schema<Review>(
+const reviewSchema = new Schema<ReviewSchema>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -20,7 +21,7 @@ const reviewSchema = new Schema<Review>(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: true, _id: false }
 )
 
 const productSchema = new Schema<ProductSchema>({

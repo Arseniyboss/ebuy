@@ -1,7 +1,7 @@
 import { Product } from '../../src/types/api'
 import { formatReviewDate } from '../../src/utils/formatReviewDate'
 
-const id = '62dbfa7f31c12b460f19f2b5'
+const id = '62dbfa7f31c12b460f19f2b3'
 
 before(() => {
   cy.task('seedProducts')
@@ -44,8 +44,8 @@ describe('Product Page', () => {
 
   describe('shows info message', () => {
     it('for no product reviews', () => {
-      const id = '62dbfa7f31c12b460f19f2b7'
-      cy.login({ email: 'john@example.com', password: '123456' })
+      const id = '62dbfa7f31c12b460f19f2b5'
+      cy.login({ email: 'john@gmail.com', password: '123456' })
       cy.visit(`/product/${id}`)
       cy.getMessage('info-message', 'No Reviews')
     })
@@ -58,7 +58,7 @@ describe('Product Page', () => {
 
   describe('validates review form', () => {
     beforeEach(() => {
-      cy.login({ email: 'john@example.com', password: '123456' })
+      cy.login({ email: 'john@gmail.com', password: '123456' })
       cy.visit(`/product/${id}`)
     })
 
@@ -114,9 +114,9 @@ describe('Product Page', () => {
   })
 
   it('submits a review with a rating and a comment', () => {
-    const id = '62dbfa7f31c12b460f19f2b8'
+    const id = '62dbfa7f31c12b460f19f2b6'
     cy.intercept('POST', `/api/products/${id}/review`).as('createReview')
-    cy.login({ email: 'john@example.com', password: '123456' })
+    cy.login({ email: 'john@gmail.com', password: '123456' })
     cy.visit(`/product/${id}`)
 
     cy.selectOption({
@@ -148,7 +148,7 @@ describe('Product Page', () => {
 
   it('adds product to the cart', () => {
     cy.intercept('POST', '/api/cart').as('addCartItem')
-    cy.login({ email: 'jane@example.com', password: '123456' })
+    cy.login({ email: 'jane@gmail.com', password: '123456' })
     cy.visit(`/product/${id}`)
     cy.getByTestId('product-button').click()
 

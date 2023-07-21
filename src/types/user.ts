@@ -1,5 +1,13 @@
-import { Model } from 'mongoose'
-import { CartItem } from './product'
+import { Types } from 'mongoose'
+
+export type CartItem = {
+  _id: Types.ObjectId
+  name: string
+  image: string
+  price: number
+  countInStock: number
+  quantity: number
+}
 
 export type ShippingAddress = {
   address: string
@@ -22,9 +30,3 @@ export type User = {
   cartItems: CartItem[]
   checkout?: Checkout
 }
-
-export interface UserSchema extends User {
-  matchPassword: (password: string) => Promise<boolean>
-}
-
-export type UserModel = Model<UserSchema>

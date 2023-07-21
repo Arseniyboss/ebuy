@@ -1,15 +1,15 @@
 import { NextRequest } from 'next/server'
-import { JwtPayload } from 'types/jwtPayload'
+import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/products/[id]/review/route'
 import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
-import { BASE_URL } from '@baseUrl'
+import { fakeProductId, fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
 const { _id, name } = users[2]
 
-const payload = {
+const defaultPayload = {
   id: _id.toString(),
   name,
 }
@@ -19,12 +19,7 @@ const review = {
   comment: 'Excellent Product!',
 }
 
-type Params = {
-  productId: string
-  payload: JwtPayload
-}
-
-const createReview = async ({ productId, payload }: Params) => {
+const createReview = async (productId: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/products/${productId}/review`
   const token = await generateToken(payload)
   const request = new NextRequest(url, {
@@ -48,8 +43,7 @@ beforeAll(async () => {
 describe('POST /api/products/:id/review', () => {
   describe('given the product does not exist', () => {
     it('returns status code 404', async () => {
-      const productId = '62dbfa7f31c12b460f19f2b4'
-      const { status, statusText } = await createReview({ productId, payload })
+      const { status, statusText } = await createReview(fakeProductId)
 
       expect(status).toBe(404)
       expect(statusText).toBe('Product not found')
@@ -61,15 +55,10 @@ describe('POST /api/products/:id/review', () => {
       it('returns status code 404', async () => {
         const productId = products[0]._id.toString()
 
-        const payload = {
-          id: '62dbfa7f31c12b460f19f2b0',
-          name: 'John',
-        }
-
-        const { status, statusText } = await createReview({
+        const { status, statusText } = await createReview(
           productId,
-          payload,
-        })
+          fakePayload
+        )
 
         expect(status).toBe(404)
         expect(statusText).toBe('User not found')
@@ -80,10 +69,7 @@ describe('POST /api/products/:id/review', () => {
       describe('given the product has already been reviewed', () => {
         it('returns status code 400', async () => {
           const productId = products[0]._id.toString()
-          const { status, statusText } = await createReview({
-            productId,
-            payload,
-          })
+          const { status, statusText } = await createReview(productId)
 
           expect(status).toBe(400)
           expect(statusText).toBe('Product already reviewed')
@@ -91,10 +77,10 @@ describe('POST /api/products/:id/review', () => {
       })
 
       describe('given the product has not yet been reviewed', () => {
-        it('returns status code 201', async () => {
+        it('returns status code 201 and creates a review', async () => {
           const productId = products[1]._id.toString()
 
-          const { status } = await createReview({ productId, payload })
+          const { status } = await createReview(productId)
           const newProducts = await getProducts()
 
           const product = newProducts[1]

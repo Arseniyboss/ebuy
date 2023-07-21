@@ -130,7 +130,7 @@ describe('Home Page', () => {
     })
 
     it('user dropdown', () => {
-      cy.login({ email: 'john@example.com', password: '123456' })
+      cy.login({ email: 'john@gmail.com', password: '123456' })
 
       cy.assertText('user-initials', 'JD')
 

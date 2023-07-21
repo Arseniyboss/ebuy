@@ -56,7 +56,7 @@ const Product = async ({ params }: PageParams) => {
           <Message variant='info'>No Reviews</Message>
         ) : (
           product.reviews.map((review) => (
-            <Review key={review._id} {...review} />
+            <Review key={review.userId} {...review} />
           ))
         )}
         {!user ? (

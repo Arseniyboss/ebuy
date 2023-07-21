@@ -1,5 +1,5 @@
 import { Types } from 'mongoose'
-import { CartItem as CartItemType } from './product'
+import { CartItem as CartItemType } from './api'
 
 export type WithId<T> = T & {
   _id: Types.ObjectId

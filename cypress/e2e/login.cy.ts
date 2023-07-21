@@ -35,7 +35,7 @@ describe('Login Page', () => {
   })
 
   it('submits the form with invalid credentials and shows an error message', () => {
-    cy.typeInto('email-input', 'john@example.com')
+    cy.typeInto('email-input', 'john@gmail.com')
     cy.typeInto('password-input', '12345')
     cy.submitForm('login-form')
     cy.getMessage('error-message', 'Invalid credentials')
@@ -44,7 +44,7 @@ describe('Login Page', () => {
   it('submits the form with valid input fields and logs the user in', () => {
     cy.intercept('POST', '/api/users/login').as('login')
 
-    cy.typeInto('email-input', 'john@example.com')
+    cy.typeInto('email-input', 'john@gmail.com')
     cy.typeInto('password-input', '123456')
     cy.submitForm('login-form')
 

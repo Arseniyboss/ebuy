@@ -1,16 +1,22 @@
 import bcrypt from 'bcryptjs'
 import { NextRequest } from 'next/server'
+import { UpdateUserParams } from 'types/params'
+import { BASE_URL } from '@baseUrl'
 import { PUT } from '@app/api/users/user/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
 import { verifyToken } from '@auth/verifyToken'
-import { BASE_URL } from '@baseUrl'
-import { UpdateUserParams } from 'types/params'
 import users from '@mocks/users'
 
+const { _id, name } = users[1]
+
+const payload = {
+  id: _id.toString(),
+  name,
+}
+
 const updateUser = async (user: UpdateUserParams) => {
-  const { _id, name } = users[1]
-  const token = await generateToken({ id: _id.toString(), name })
+  const token = await generateToken(payload)
   const url = `${BASE_URL}/api/users/user`
   const request = new NextRequest(url, {
     method: 'PUT',
@@ -31,7 +37,7 @@ describe('PUT /api/users/user', () => {
     it('returns status code 400', async () => {
       const user = {
         name: 'John',
-        email: 'jane@example.com',
+        email: 'jane@gmail.com',
         password: '',
       }
 
@@ -46,7 +52,7 @@ describe('PUT /api/users/user', () => {
     it('returns status code 200 and updates user name', async () => {
       const user = {
         name: 'John',
-        email: 'john@example.com',
+        email: 'john@gmail.com',
         password: '',
       }
 
@@ -61,7 +67,7 @@ describe('PUT /api/users/user', () => {
     it('returns status code 200 and updates user email', async () => {
       const user = {
         name: 'John',
-        email: 'johndoe@example.com',
+        email: 'johndoe@gmail.com',
         password: '',
       }
 
@@ -74,7 +80,7 @@ describe('PUT /api/users/user', () => {
     it('returns status code 200 and updates user password', async () => {
       const user = {
         name: 'John',
-        email: 'john@example.com',
+        email: 'john@gmail.com',
         password: '12345678',
       }
 

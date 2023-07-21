@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.task('seedUsers')
-  cy.login({ email: 'john@example.com', password: '123456' })
+  cy.login({ email: 'john@gmail.com', password: '123456' })
   cy.visit('/profile')
 })
 
@@ -11,7 +11,7 @@ afterEach(() => {
 describe('Profile Page', () => {
   it('gets user details', () => {
     cy.assertValue('name-input', 'John Doe')
-    cy.assertValue('email-input', 'john@example.com')
+    cy.assertValue('email-input', 'john@gmail.com')
   })
 
   describe('tests name input', () => {
@@ -48,7 +48,7 @@ describe('Profile Page', () => {
 
     it('does not update the user with an email already in use', () => {
       cy.clearInput('email-input')
-      cy.typeInto('email-input', 'jane@example.com')
+      cy.typeInto('email-input', 'jane@gmail.com')
       cy.submitForm('profile-form')
       cy.getMessage('error-message', 'Email is already in use')
     })
@@ -57,14 +57,14 @@ describe('Profile Page', () => {
       cy.intercept('PUT', '/api/users/user').as('updateUser')
 
       cy.clearInput('email-input')
-      cy.typeInto('email-input', 'johndoe@example.com')
+      cy.typeInto('email-input', 'johndoe@gmail.com')
       cy.submitForm('profile-form')
 
       cy.getByTestId('email-error').should('not.exist')
       cy.assertDisabled('update-button')
 
       cy.getMessage('success-message', 'Profile Updated')
-      cy.verifyUserUpdate('email-input', 'johndoe@example.com')
+      cy.verifyUserUpdate('email-input', 'johndoe@gmail.com')
     })
   })
 
@@ -92,7 +92,7 @@ describe('Profile Page', () => {
       cy.getMessage('success-message', 'Profile Updated')
 
       cy.logout()
-      cy.login({ email: 'john@example.com', password: '1234567' })
+      cy.login({ email: 'john@gmail.com', password: '1234567' })
     })
   })
 
@@ -105,7 +105,7 @@ describe('Profile Page', () => {
 
     it('removes error message', () => {
       cy.clearInput('email-input')
-      cy.typeInto('email-input', 'jane@example.com')
+      cy.typeInto('email-input', 'jane@gmail.com')
       cy.submitForm('profile-form')
       cy.getTemporaryMessage('error-message', 'Email is already in use')
     })
@@ -124,7 +124,7 @@ describe('Profile Page', () => {
 
     it('removes server error message', () => {
       cy.clearInput('email-input')
-      cy.typeInto('email-input', 'jane@example.com')
+      cy.typeInto('email-input', 'jane@gmail.com')
       cy.submitForm('profile-form')
       cy.getMessage('error-message', 'Email is already in use')
 

@@ -21,7 +21,7 @@ describe('Cart Page', () => {
 
   describe('given the user is logged in', () => {
     beforeEach(() => {
-      cy.login({ email: 'john@example.com', password: '123456' })
+      cy.login({ email: 'john@gmail.com', password: '123456' })
     })
 
     it('navigates to the checkout page', () => {

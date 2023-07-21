@@ -1,11 +1,10 @@
 import { NextRequest } from 'next/server'
+import { QueryParams } from 'types/params'
+import { Product, GetProductsData } from 'types/api'
+import { SortOrder, SortKey } from 'types/sort'
+import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/products/route'
 import { seedProducts } from '@config/mongoMemoryServer'
-import { BASE_URL } from '@baseUrl'
-import { SortOrder, SortKey } from 'types/sort'
-import { QueryParams } from 'types/params'
-import { Product } from 'types/api'
-import { GetProductsData } from 'types/api'
 
 type VerifySortParams = {
   order: SortOrder

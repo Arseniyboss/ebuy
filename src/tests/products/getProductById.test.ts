@@ -1,8 +1,9 @@
 import { NextRequest } from 'next/server'
+import { Product } from 'types/api'
+import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/products/[id]/route'
 import { seedProducts } from '@config/mongoMemoryServer'
-import { BASE_URL } from '@baseUrl'
-import { Product } from 'types/api'
+import { fakeProductId } from '@mocks/fakeData'
 import products from '@mocks/products'
 
 const getProductById = async (id: string) => {
@@ -18,8 +19,7 @@ beforeAll(async () => await seedProducts())
 describe('GET /api/products/:id', () => {
   describe('given the product does not exist', () => {
     it('returns status code 404', async () => {
-      const id = '62dbfa7f31c12b460f19f2b4'
-      const { status, statusText } = await getProductById(id)
+      const { status, statusText } = await getProductById(fakeProductId)
 
       expect(status).toBe(404)
       expect(statusText).toBe('Product not found')

@@ -79,7 +79,7 @@ describe('Register Page', () => {
 
   it('submits the form with valid input fields and an email already in use', () => {
     cy.typeInto('name-input', 'John')
-    cy.typeInto('email-input', 'john@example.com')
+    cy.typeInto('email-input', 'john@gmail.com')
     cy.typeInto('password-input', '123456')
     cy.typeInto('confirm-password-input', '123456')
     cy.submitForm('register-form')

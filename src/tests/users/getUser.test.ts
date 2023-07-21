@@ -1,11 +1,19 @@
 import { NextRequest } from 'next/server'
+import { JwtPayload } from 'types/jwtPayload'
+import { User } from 'types/api'
+import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/users/user/route'
 import { seedUsers } from '@config/mongoMemoryServer'
 import { generateToken } from '@auth/generateToken'
-import { BASE_URL } from '@baseUrl'
-import { User } from 'types/api'
-import { JwtPayload } from 'types/jwtPayload'
+import { fakePayload } from '@mocks/fakeData'
 import users from '@mocks/users'
+
+const { _id, name } = users[0]
+
+const payload = {
+  id: _id.toString(),
+  name,
+}
 
 const getUser = async (payload: JwtPayload) => {
   const url = `${BASE_URL}/api/users/user`
@@ -25,12 +33,7 @@ beforeAll(async () => await seedUsers())
 describe('GET /api/users/user', () => {
   describe('given the user does not exist', () => {
     it('returns status code 404', async () => {
-      const payload = {
-        id: '62dbfa7f31c12b460f19f2b0',
-        name: 'John',
-      }
-
-      const { status, statusText } = await getUser(payload)
+      const { status, statusText } = await getUser(fakePayload)
 
       expect(status).toBe(404)
       expect(statusText).toBe('User not found')
@@ -39,13 +42,6 @@ describe('GET /api/users/user', () => {
 
   describe('given the user exists', () => {
     it('returns status code 200 and the user', async () => {
-      const { _id, name } = users[0]
-
-      const payload = {
-        id: _id.toString(),
-        name,
-      }
-
       const { status, user } = await getUser(payload)
 
       expect(status).toBe(200)

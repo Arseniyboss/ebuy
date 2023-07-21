@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --watchAll",
     "e2e": "start-server-and-test start 3000 \"cypress open --e2e\"",
-    "e2e:headless": "start-server-and-test start 3000 \"cypress run --e2e\"",
+    "e2e:headless": "start-server-and-test start 3000 \"cypress run --spec cypress/e2e/${spec=**/*}.cy.ts --e2e\"",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

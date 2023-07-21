@@ -1,12 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
-import { CartItem as CartSchema } from 'types/api'
-import {
-  ShippingAddress as ShippingAddressSchema,
-  Checkout as CheckoutSchema,
-  User as UserSchema,
-  UserModel,
-} from 'types/user'
+import { CartSchema, UserModel } from 'types/models'
+import { ShippingAddress, Checkout, User as UserSchema } from 'types/user'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
@@ -40,41 +35,47 @@ const cartSchema = new Schema<CartSchema>({
   },
 })
 
-const shippingAddressSchema = new Schema<ShippingAddressSchema>({
-  address: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  country: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  city: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  postalCode: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-})
-
-const checkoutSchema = new Schema<CheckoutSchema>({
-  shippingAddress: shippingAddressSchema,
-  paymentMethod: {
-    type: String,
-    required: true,
-    enum: {
-      values: ['Stripe', 'PayPal'],
-      message: 'Payment method is invalid',
+const shippingAddressSchema = new Schema<ShippingAddress>(
+  {
+    address: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    default: 'PayPal',
+    country: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    postalCode: {
+      type: String,
+      required: true,
+      trim: true,
+    },
   },
-})
+  { _id: false }
+)
+
+const checkoutSchema = new Schema<Checkout>(
+  {
+    shippingAddress: shippingAddressSchema,
+    paymentMethod: {
+      type: String,
+      required: true,
+      enum: {
+        values: ['Stripe', 'PayPal'],
+        message: 'Payment method is invalid',
+      },
+      default: 'PayPal',
+    },
+  },
+  { _id: false }
+)
 
 const userSchema = new Schema<UserSchema>({
   name: {
