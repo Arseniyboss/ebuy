@@ -1,7 +1,6 @@
 import { Types, mongo } from 'mongoose'
-import { CartItem as CartItemType } from 'types/api'
 import { Product as ProductType } from 'types/product'
-import { User as UserType } from 'types/user'
+import { CartItem as CartItemType, User as UserType } from 'types/user'
 
 type WithId<T> = T & {
   _id: Types.ObjectId

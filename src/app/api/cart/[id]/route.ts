@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PageParams } from 'types/params'
-import { CartItem } from 'types/mongo/documents'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
@@ -16,9 +15,7 @@ export const DELETE = async (request: NextRequest, { params }: PageParams) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const cartItems = user.cartItems as CartItem[]
-
-  const cartItem = cartItems.find(({ id }) => params.id === id)
+  const cartItem = user.cartItems.find(({ id }) => params.id === id)
 
   if (!cartItem) {
     return throwError({ error: 'Cart item not found', status: 404 })
@@ -43,9 +40,7 @@ export const PATCH = async (request: NextRequest, { params }: PageParams) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const cartItems = user.cartItems as CartItem[]
-
-  const cartItem = cartItems.find(({ id }) => params.id === id)
+  const cartItem = user.cartItems.find(({ id }) => params.id === id)
 
   if (!cartItem) {
     return throwError({ error: 'Cart item not found', status: 404 })

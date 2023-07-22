@@ -1,3 +1,10 @@
+import {
+  OmitId,
+  OmitUserId,
+  OmitPassword,
+  OmitReviews,
+  OmitCartItems,
+} from './omitters'
 import { Review as ReviewType, Product as ProductType } from './product'
 import { CartItem as CartItemType, User as UserType } from './user'
 
@@ -8,12 +15,6 @@ type WithId<T> = T & {
 type WithUserId<T> = T & {
   userId: string
 }
-
-type OmitReviews<T> = Omit<T, 'reviews'>
-type OmitUserId<T> = Omit<T, 'userId'>
-type OmitPassword<T> = Omit<T, 'password'>
-type OmitCartItems<T> = Omit<T, 'cartItems'>
-export type OmitId<T> = Omit<T, '_id'>
 
 export type CartItem = WithId<OmitId<CartItemType>>
 
