@@ -8,11 +8,15 @@ import { generateToken } from '@auth/generateToken'
 import { verifyToken } from '@auth/verifyToken'
 import users from '@mocks/users'
 
-const { _id, name } = users[1]
+const { _id, name, isAdmin } = users[1]
 
 const payload = {
   id: _id.toString(),
   name,
+  isAdmin,
+  cartItems: true,
+  shippingAddress: true,
+  paymentMethod: false,
 }
 
 const updateUser = async (user: UpdateUserParams) => {

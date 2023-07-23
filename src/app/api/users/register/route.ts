@@ -1,7 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { UserRegisterParams as Body } from 'types/params'
+import { User as UserType } from 'types/jwtPayload'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
+import { setCookie } from '@utils/setCookie'
+import { generatePayload } from '@auth/generatePayload'
 import { generateTokenCookie } from '@auth/generateTokenCookie'
 import User from '@models/user'
 
@@ -18,13 +21,8 @@ export const POST = async (request: NextRequest) => {
 
   const user = await User.create({ name, email, password })
 
-  const tokenCookie = await generateTokenCookie({
-    id: user.id,
-    name: user.name,
-  })
+  const payload = generatePayload(user as UserType)
+  const tokenCookie = await generateTokenCookie(payload)
 
-  return NextResponse.json(null, {
-    status: 201,
-    headers: { 'Set-Cookie': tokenCookie },
-  })
+  return setCookie(tokenCookie, 201)
 }

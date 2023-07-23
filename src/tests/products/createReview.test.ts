@@ -7,11 +7,15 @@ import { fakeProductId, fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
-const { _id, name } = users[2]
+const { _id, name, isAdmin } = users[2]
 
 const defaultPayload = {
   id: _id.toString(),
   name,
+  isAdmin,
+  cartItems: false,
+  shippingAddress: false,
+  paymentMethod: false,
 }
 
 const review = {

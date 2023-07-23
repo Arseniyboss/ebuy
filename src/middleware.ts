@@ -17,9 +17,21 @@ export const middleware = async (request: NextRequest) => {
     return redirect('/login')
   }
 
-  return NextResponse.next()
+  if (pathname === '/shippingAddress' && !user.cartItems) {
+    return redirect('/cart')
+  }
+
+  if (pathname === '/paymentMethod' && !user.shippingAddress) {
+    return redirect('/shippingAddress')
+  }
 }
 
 export const config = {
-  matcher: ['/profile', '/login', '/register'],
+  matcher: [
+    '/profile',
+    '/shippingAddress',
+    '/paymentMethod',
+    '/login',
+    '/register',
+  ],
 }

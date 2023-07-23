@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { JwtPayload } from 'types/jwtPayload'
+import { UserPayload } from 'types/jwtPayload'
 import { ShippingAddress } from 'types/user'
 import { BASE_URL } from '@baseUrl'
 import { PUT } from '@app/api/checkout/shippingAddress/route'
@@ -17,7 +17,7 @@ const shippingAddress = {
 
 const addShippingAddress = async (
   shippingAddress: ShippingAddress,
-  payload: JwtPayload
+  payload: UserPayload
 ) => {
   const url = `${BASE_URL}/api/checkout/shippingAddress`
   const token = await generateToken(payload)
@@ -49,11 +49,15 @@ describe('PUT /api/checkout/shippingAddress', () => {
 
   describe('given the user exists', () => {
     describe('given the shipping address does not exist', () => {
-      const { _id, name } = users[2]
+      const { _id, name, isAdmin } = users[2]
 
       const payload = {
         id: _id.toString(),
         name,
+        isAdmin,
+        cartItems: false,
+        shippingAddress: false,
+        paymentMethod: false,
       }
       it('returns status code 201 and adds shipping address', async () => {
         const { status } = await addShippingAddress(shippingAddress, payload)
@@ -66,13 +70,17 @@ describe('PUT /api/checkout/shippingAddress', () => {
       })
     })
     describe('given the shipping address already exists', () => {
-      const { _id, name, checkout } = users[1]
+      const { _id, name, isAdmin, checkout } = users[1]
 
       const initialPaymentMethod = checkout?.paymentMethod
 
       const payload = {
         id: _id.toString(),
         name,
+        isAdmin,
+        cartItems: true,
+        shippingAddress: true,
+        paymentMethod: false,
       }
       it('returns status code 201 and updates shipping address', async () => {
         const { status } = await addShippingAddress(shippingAddress, payload)

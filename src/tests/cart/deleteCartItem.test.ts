@@ -7,11 +7,15 @@ import { fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
-const { _id, name } = users[1]
+const { _id, name, isAdmin } = users[1]
 
 const defaultPayload = {
   id: _id.toString(),
   name,
+  isAdmin,
+  cartItems: true,
+  shippingAddress: true,
+  paymentMethod: false,
 }
 
 const deleteCartItem = async (id: string, payload = defaultPayload) => {

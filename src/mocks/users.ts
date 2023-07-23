@@ -10,6 +10,7 @@ const users: User[] = [
     name: 'Admin User',
     email: 'admin@gmail.com',
     password: hashSync('123456', 10),
+    isAdmin: true,
     cartItems: [],
   },
   {
@@ -17,6 +18,7 @@ const users: User[] = [
     name: 'John Doe',
     email: 'john@gmail.com',
     password: hashSync('123456', 10),
+    isAdmin: false,
     cartItems: [
       {
         _id: new ObjectId('62dbfa7f31c12b460f19f2b3'),
@@ -42,6 +44,7 @@ const users: User[] = [
     name: 'Jane Doe',
     email: 'jane@gmail.com',
     password: hashSync('123456', 10),
+    isAdmin: false,
     cartItems: [],
   },
 ]

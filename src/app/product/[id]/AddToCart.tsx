@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation'
 import { getQuantities } from '@utils/getQuantities'
 import { addCartItem } from '@api/cart/addCartItem'
 import { Product } from 'types/api'
-import { JwtPayload } from 'types/jwtPayload'
+import { UserPayload } from 'types/jwtPayload'
 import { FlexGroup, ProductQuantity } from '@styles/globals'
 import { ProductButton, ProductStatus } from './styles'
 
 type Props = {
   product: Product
-  user?: JwtPayload
+  user?: UserPayload
 }
 
 const AddToCart = ({ product, user }: Props) => {

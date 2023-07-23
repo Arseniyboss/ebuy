@@ -30,7 +30,7 @@ interface ProductSchema extends OmitReviews<Product> {
   reviews: Reviews
 }
 
-interface UserSchema extends OmitCartItems<User> {
+export interface UserSchema extends OmitCartItems<User> {
   cartItems: CartItems
   matchPassword: (password: string) => Promise<boolean>
 }

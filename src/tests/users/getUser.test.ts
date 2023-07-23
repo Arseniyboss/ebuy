@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { JwtPayload } from 'types/jwtPayload'
+import { UserPayload } from 'types/jwtPayload'
 import { User } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/users/user/route'
@@ -8,14 +8,18 @@ import { generateToken } from '@auth/generateToken'
 import { fakePayload } from '@mocks/fakeData'
 import users from '@mocks/users'
 
-const { _id, name } = users[0]
+const { _id, name, isAdmin } = users[0]
 
 const payload = {
   id: _id.toString(),
   name,
+  isAdmin,
+  cartItems: false,
+  shippingAddress: false,
+  paymentMethod: false,
 }
 
-const getUser = async (payload: JwtPayload) => {
+const getUser = async (payload: UserPayload) => {
   const url = `${BASE_URL}/api/users/user`
   const token = await generateToken(payload)
   const request = new NextRequest(url, {

@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { UpdateUserParams as Body } from 'types/params'
+import { User as UserType } from 'types/jwtPayload'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
+import { setCookie } from '@utils/setCookie'
+import { generatePayload } from '@auth/generatePayload'
 import { generateTokenCookie } from '@auth/generateTokenCookie'
 import User from '@models/user'
 
@@ -41,13 +44,8 @@ export const PUT = async (request: NextRequest) => {
 
   await user.save()
 
-  const tokenCookie = await generateTokenCookie({
-    id: user.id,
-    name: user.name,
-  })
+  const payload = generatePayload(user as UserType)
+  const tokenCookie = await generateTokenCookie(payload)
 
-  return NextResponse.json(null, {
-    status: 200,
-    headers: { 'Set-Cookie': tokenCookie },
-  })
+  return setCookie(tokenCookie)
 }

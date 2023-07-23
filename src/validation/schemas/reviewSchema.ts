@@ -1,10 +1,6 @@
+import { CreateReviewParams as InitialValues } from 'types/params'
 import { FieldValidation } from '@hooks/useForm'
 import { RATING_REQUIRED } from '@validation/constants/errors'
-
-type InitialValues = {
-  rating: number
-  comment: string
-}
 
 export const reviewSchema: FieldValidation<InitialValues> = {
   rating: {

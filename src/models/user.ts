@@ -96,6 +96,11 @@ const userSchema = new Schema<UserSchema>({
     required: [true, PASSWORD_REQUIRED],
     minlength: [6, PASSWORD_INVALID],
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   cartItems: [cartSchema],
   checkout: checkoutSchema,
 })

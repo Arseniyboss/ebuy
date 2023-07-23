@@ -1,6 +1,8 @@
-import { jwtVerify } from 'jose'
-import { JwtPayload } from 'types/jwtPayload'
+import { jwtVerify, JWTPayload } from 'jose'
+import { UserPayload } from 'types/jwtPayload'
 import { getJwtSecret } from './getJwtSecret'
+
+type Payload = JWTPayload & UserPayload
 
 export const verifyToken = async (token?: string) => {
   if (!token) return
@@ -8,8 +10,21 @@ export const verifyToken = async (token?: string) => {
   const JWT_SECRET = getJwtSecret()
 
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET)
-    const user = { id: payload.id, name: payload.name } as JwtPayload
+    const jwtVerifyResult = await jwtVerify(token, JWT_SECRET)
+    const payload = jwtVerifyResult.payload as Payload
+
+    const { id, name, isAdmin, cartItems, shippingAddress, paymentMethod } =
+      payload
+
+    const user = {
+      id,
+      name,
+      isAdmin,
+      cartItems,
+      shippingAddress,
+      paymentMethod,
+    }
+
     return user
   } catch (error) {
     return
