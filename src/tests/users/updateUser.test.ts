@@ -4,20 +4,12 @@ import { UpdateUserParams } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 import { PUT } from '@app/api/users/user/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
+import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { verifyToken } from '@auth/verifyToken'
 import users from '@mocks/users'
 
-const { _id, name, isAdmin } = users[1]
-
-const payload = {
-  id: _id.toString(),
-  name,
-  isAdmin,
-  cartItems: true,
-  shippingAddress: true,
-  paymentMethod: false,
-}
+const payload = generatePayload(users[1])
 
 const updateUser = async (user: UpdateUserParams) => {
   const token = await generateToken(payload)

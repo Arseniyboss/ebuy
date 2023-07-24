@@ -1,4 +1,6 @@
-import { UserSchema } from './mongo/models'
+import { OmitCartItems, OmitPush } from './omitters'
+import { CartItem } from './user'
+import { User as UserType } from 'types/mongo/documents'
 
 export type UserPayload = {
   id: string
@@ -9,6 +11,6 @@ export type UserPayload = {
   paymentMethod: boolean
 }
 
-export interface User extends UserSchema {
-  id: string
+export interface User extends OmitCartItems<UserType> {
+  cartItems: OmitPush<CartItem[]>
 }

@@ -28,11 +28,11 @@ describe('Home Page', () => {
 
       cy.getImage('product-image')
 
-      cy.getByTestId('product-name').each((element, index) => {
-        expect(element).to.have.text(products[index].name)
-      })
-      cy.getByTestId('product-price').each((element, index) => {
-        expect(element).to.have.text(`$${products[index].price}`)
+      products.forEach((product, index) => {
+        const { name, price } = product
+
+        cy.assertText('product-name', name, index)
+        cy.assertText('product-price', `$${price}`, index)
       })
 
       cy.verifyFirstDynamicLink('product-link', `/product/${products[0]._id}`)

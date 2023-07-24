@@ -2,21 +2,17 @@ import { NextRequest } from 'next/server'
 import { BASE_URL } from '@baseUrl'
 import { DELETE } from '@app/api/cart/[id]/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
+import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
-const { _id, name, isAdmin } = users[1]
+const user = users[2]
 
-const defaultPayload = {
-  id: _id.toString(),
-  name,
-  isAdmin,
-  cartItems: true,
-  shippingAddress: true,
-  paymentMethod: false,
-}
+const { cartItems: initialCartItems } = user
+
+const defaultPayload = generatePayload(user)
 
 const deleteCartItem = async (id: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/cart/${id}`
@@ -48,7 +44,7 @@ describe('DELETE /api/cart/:id', () => {
   describe('given the user exists', () => {
     describe('given the cart item does not exist', () => {
       it('returns status code 404', async () => {
-        const id = products[1]._id.toString()
+        const id = products[2]._id.toString()
 
         const { status, statusText } = await deleteCartItem(id)
 
@@ -64,10 +60,10 @@ describe('DELETE /api/cart/:id', () => {
         const { status } = await deleteCartItem(id)
         const users = await getUsers()
 
-        const cartItems = users[1].cartItems
+        const cartItems = users[2].cartItems
 
         expect(status).toBe(200)
-        expect(cartItems.length).toBe(0)
+        expect(cartItems.length).toBe(initialCartItems.length - 1)
       })
     })
   })

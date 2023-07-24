@@ -18,16 +18,12 @@ export type ShippingAddress = {
 
 type PaymentMethod = 'Stripe' | 'PayPal'
 
-export type Checkout = {
-  shippingAddress?: ShippingAddress
-  paymentMethod?: PaymentMethod
-}
-
 export type User = {
   name: string
   email: string
   password: string
   isAdmin: boolean
   cartItems: CartItem[]
-  checkout?: Checkout
+  shippingAddress?: ShippingAddress
+  paymentMethod?: PaymentMethod
 }

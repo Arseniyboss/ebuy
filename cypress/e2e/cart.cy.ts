@@ -21,7 +21,7 @@ describe('Cart Page', () => {
 
   describe('given the user is logged in', () => {
     beforeEach(() => {
-      cy.login({ email: 'john@gmail.com', password: '123456' })
+      cy.login({ email: 'jane@gmail.com', password: '123456' })
     })
 
     it('navigates to the checkout page', () => {
@@ -42,27 +42,35 @@ describe('Cart Page', () => {
         }).then((response) => {
           const { status, body } = response
           const { cartItems }: User = body
-          const { name, price, quantity } = cartItems[0]
 
           expect(status).to.equal(200)
 
           cy.getImage('product-image')
 
-          cy.assertText('product-name', name)
-          cy.assertText('product-price', `$${price}`)
-          cy.assertValue('product-quantity', quantity.toString())
+          cartItems.forEach((cartItem, index) => {
+            const { name, price, quantity } = cartItem
+
+            cy.assertText('product-name', name, index)
+            cy.assertText('product-price', `$${price}`, index)
+            cy.assertValue('product-quantity', quantity.toString(), index)
+          })
         })
       })
     })
 
     it('updates cart item', () => {
-      cy.selectOption({ testId: 'product-quantity', text: '1', value: '1' })
-      cy.assertValue('product-quantity', '1')
+      cy.selectOption({
+        testId: 'product-quantity',
+        text: '1',
+        value: '1',
+        index: 0,
+      })
+      cy.assertValue('product-quantity', '1', 0)
     })
 
     it('deletes cart item', () => {
-      cy.getByTestId('delete-button').click()
-      cy.assertLength('cart-item', 0)
+      cy.getByTestId('delete-button').eq(0).click()
+      cy.assertLength('cart-item', 1)
     })
   })
 })

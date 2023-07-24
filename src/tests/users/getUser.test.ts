@@ -4,20 +4,12 @@ import { User } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/users/user/route'
 import { seedUsers } from '@config/mongoMemoryServer'
+import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { fakePayload } from '@mocks/fakeData'
 import users from '@mocks/users'
 
-const { _id, name, isAdmin } = users[0]
-
-const payload = {
-  id: _id.toString(),
-  name,
-  isAdmin,
-  cartItems: false,
-  shippingAddress: false,
-  paymentMethod: false,
-}
+const payload = generatePayload(users[1])
 
 const getUser = async (payload: UserPayload) => {
   const url = `${BASE_URL}/api/users/user`

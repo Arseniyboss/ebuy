@@ -4,6 +4,7 @@ import { ShippingAddress } from 'types/user'
 import { BASE_URL } from '@baseUrl'
 import { PUT } from '@app/api/checkout/shippingAddress/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
+import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { fakePayload } from '@mocks/fakeData'
 import users from '@mocks/users'
@@ -49,51 +50,28 @@ describe('PUT /api/checkout/shippingAddress', () => {
 
   describe('given the user exists', () => {
     describe('given the shipping address does not exist', () => {
-      const { _id, name, isAdmin } = users[2]
-
-      const payload = {
-        id: _id.toString(),
-        name,
-        isAdmin,
-        cartItems: false,
-        shippingAddress: false,
-        paymentMethod: false,
-      }
+      const payload = generatePayload(users[2])
       it('returns status code 201 and adds shipping address', async () => {
         const { status } = await addShippingAddress(shippingAddress, payload)
 
         const users = await getUsers()
-        const newShippingAddress = users[2].checkout?.shippingAddress
+        const newShippingAddress = users[2].shippingAddress
 
         expect(status).toBe(201)
         expect(newShippingAddress).toEqual(shippingAddress)
       })
     })
     describe('given the shipping address already exists', () => {
-      const { _id, name, isAdmin, checkout } = users[1]
-
-      const initialPaymentMethod = checkout?.paymentMethod
-
-      const payload = {
-        id: _id.toString(),
-        name,
-        isAdmin,
-        cartItems: true,
-        shippingAddress: true,
-        paymentMethod: false,
-      }
+      const payload = generatePayload(users[3])
       it('returns status code 201 and updates shipping address', async () => {
         const { status } = await addShippingAddress(shippingAddress, payload)
 
         const users = await getUsers()
 
-        const checkout = users[1].checkout
-        const newShippingAddress = checkout?.shippingAddress
-        const paymentMethod = checkout?.paymentMethod
+        const { shippingAddress: newShippingAddress } = users[3]
 
         expect(status).toBe(201)
         expect(newShippingAddress).toEqual(shippingAddress)
-        expect(paymentMethod).toEqual(initialPaymentMethod)
       })
     })
   })

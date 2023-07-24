@@ -9,9 +9,7 @@ const ShippingAddress = async () => {
     return notFound()
   }
 
-  return (
-    <ShippingAddressForm shippingAddress={user.checkout?.shippingAddress} />
-  )
+  return <ShippingAddressForm shippingAddress={user.shippingAddress} />
 }
 
 export default ShippingAddress

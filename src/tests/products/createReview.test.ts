@@ -2,21 +2,13 @@ import { NextRequest } from 'next/server'
 import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/products/[id]/review/route'
 import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
+import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { fakeProductId, fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
-const { _id, name, isAdmin } = users[2]
-
-const defaultPayload = {
-  id: _id.toString(),
-  name,
-  isAdmin,
-  cartItems: false,
-  shippingAddress: false,
-  paymentMethod: false,
-}
+const defaultPayload = generatePayload(users[2])
 
 const review = {
   rating: 5,

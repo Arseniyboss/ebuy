@@ -20,11 +20,7 @@ export const PUT = async (request: NextRequest) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  if (!user.checkout) {
-    user.checkout = {}
-  }
-
-  user.checkout.shippingAddress = shippingAddress
+  user.shippingAddress = shippingAddress
 
   await user.save()
 

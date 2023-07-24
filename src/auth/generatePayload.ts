@@ -1,18 +1,20 @@
 import { User } from 'types/jwtPayload'
+import { getBooleanValue } from '@utils/getBooleanValue'
 
 export const generatePayload = ({
-  id,
+  _id,
   name,
   isAdmin,
   cartItems,
-  checkout,
+  shippingAddress,
+  paymentMethod,
 }: User) => {
   return {
-    id,
+    id: _id.toString(),
     name,
     isAdmin,
-    cartItems: cartItems.length ? true : false,
-    shippingAddress: checkout?.shippingAddress ? true : false,
-    paymentMethod: checkout?.paymentMethod ? true : false,
+    cartItems: getBooleanValue(cartItems.length),
+    shippingAddress: getBooleanValue(shippingAddress),
+    paymentMethod: getBooleanValue(paymentMethod),
   }
 }

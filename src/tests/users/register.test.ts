@@ -4,6 +4,7 @@ import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/users/register/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { verifyToken } from '@auth/verifyToken'
+import initialUsers from '@mocks/users'
 
 const register = async (user: UserRegisterParams) => {
   const url = `${BASE_URL}/api/users/login`
@@ -47,7 +48,7 @@ describe('GET /api/users/register', () => {
       const users = await getUsers()
 
       expect(status).toBe(201)
-      expect(users.length).toBe(4)
+      expect(users.length).toBe(initialUsers.length + 1)
       expect(user.name).toBe(payload?.name)
     })
   })

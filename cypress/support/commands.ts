@@ -22,12 +22,12 @@ Cypress.Commands.add('getImage', (testId) => {
     })
 })
 
-Cypress.Commands.add('assertText', (testId, text) => {
-  cy.getByTestId(testId).should('have.text', text)
+Cypress.Commands.add('assertText', (testId, text, index = 0) => {
+  cy.getByTestId(testId).eq(index).should('have.text', text)
 })
 
-Cypress.Commands.add('assertValue', (testId, value) => {
-  cy.getByTestId(testId).should('have.value', value)
+Cypress.Commands.add('assertValue', (testId, value, index = 0) => {
+  cy.getByTestId(testId).eq(index).should('have.value', value)
 })
 
 Cypress.Commands.add('assertEmpty', (testId) => {
@@ -46,8 +46,8 @@ Cypress.Commands.add('typeInto', (dataId, text) => {
   cy.getByTestId(dataId).type(text).should('have.value', text)
 })
 
-Cypress.Commands.add('selectOption', ({ testId, text, value }) => {
-  cy.getByTestId(testId).select(text).should('have.value', value)
+Cypress.Commands.add('selectOption', ({ testId, text, value, index = 0 }) => {
+  cy.getByTestId(testId).eq(index).select(text).should('have.value', value)
 })
 
 Cypress.Commands.add('clearInput', (dataId) => {
