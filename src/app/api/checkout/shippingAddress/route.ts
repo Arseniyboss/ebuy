@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
 import { ShippingAddress } from 'types/user'
-import { User as UserType } from 'types/jwtPayload'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
@@ -29,7 +28,7 @@ export const PUT = async (request: NextRequest) => {
 
   await user.save()
 
-  const payload = generatePayload(user as UserType)
+  const payload = generatePayload(user)
   const tokenCookie = await generateTokenCookie(payload)
 
   return setCookie(tokenCookie, 201)

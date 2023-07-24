@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { UpdateUserParams as Body } from 'types/params'
-import { User as UserType } from 'types/jwtPayload'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
@@ -44,7 +43,7 @@ export const PUT = async (request: NextRequest) => {
 
   await user.save()
 
-  const payload = generatePayload(user as UserType)
+  const payload = generatePayload(user)
   const tokenCookie = await generateTokenCookie(payload)
 
   return setCookie(tokenCookie)

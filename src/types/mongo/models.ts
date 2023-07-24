@@ -31,6 +31,7 @@ interface ProductSchema extends OmitReviews<Product> {
 }
 
 export interface UserSchema extends OmitCartItems<User> {
+  id: string
   cartItems: CartItems
   matchPassword: (password: string) => Promise<boolean>
 }

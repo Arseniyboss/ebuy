@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
 import { UserLoginParams as Body } from 'types/params'
-import { User as UserType } from 'types/jwtPayload'
 import { connectToDB } from '@config/mongodb'
 import { throwError } from '@utils/throwError'
 import { setCookie } from '@utils/setCookie'
@@ -21,7 +20,7 @@ export const POST = async (request: NextRequest) => {
     return throwError({ error: 'Invalid credentials', status: 401 })
   }
 
-  const payload = generatePayload(user as UserType)
+  const payload = generatePayload(user)
   const tokenCookie = await generateTokenCookie(payload)
 
   return setCookie(tokenCookie)
