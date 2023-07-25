@@ -6,6 +6,7 @@ import { PUT } from '@app/api/checkout/shippingAddress/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
+import { verifyToken } from '@auth/verifyToken'
 import { fakePayload } from '@mocks/fakeData'
 import users from '@mocks/users'
 
@@ -29,8 +30,9 @@ const addShippingAddress = async (
       Authorization: `Bearer ${token}`,
     },
   })
-  const { status, statusText } = await PUT(request)
-  return { status, statusText }
+  const { status, statusText, cookies } = await PUT(request)
+  const newToken = cookies.get('token')?.value
+  return { status, statusText, token: newToken }
 }
 
 beforeAll(async () => await seedUsers())
@@ -52,13 +54,18 @@ describe('PUT /api/checkout/shippingAddress', () => {
     describe('given the shipping address does not exist', () => {
       const payload = generatePayload(users[2])
       it('returns status code 201 and adds shipping address', async () => {
-        const { status } = await addShippingAddress(shippingAddress, payload)
+        const { status, token } = await addShippingAddress(
+          shippingAddress,
+          payload
+        )
 
+        const newPayload = await verifyToken(token)
         const users = await getUsers()
         const newShippingAddress = users[2].shippingAddress
 
         expect(status).toBe(201)
         expect(newShippingAddress).toEqual(shippingAddress)
+        expect(newPayload?.shippingAddress).toBeTruthy()
       })
     })
     describe('given the shipping address already exists', () => {

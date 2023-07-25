@@ -73,7 +73,7 @@ describe('Contact Page', () => {
       cy.getTemporaryMessage('success-message', 'Message Sent')
     })
 
-    it('when form error occurs removes success message', () => {
+    it('removes success message when form error occurs ', () => {
       cy.submitForm('contact-form')
       cy.getByTestId('success-message').should('not.exist')
     })

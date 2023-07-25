@@ -93,7 +93,7 @@ const ProfileForm = ({ shippingAddress }: Props) => {
           value={values.postalCode}
           onChange={handleChange}
           autoComplete='on'
-          data-testid='postalCode-input'
+          data-testid='postal-code-input'
         />
         {errors.postalCode && (
           <FormError data-testid='postal-code-error'>
