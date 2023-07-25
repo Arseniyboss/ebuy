@@ -29,21 +29,21 @@ Fullstack e-commerce website built with NextJS
 
 ## Pages
 
-| Page            | Type     | API Route | API Route Test | UI  | E2E Test |
-| --------------- | -------- | :-------: | :------------: | :-: | :------: |
-| Home            | Standard |    ✅     |       ✅       | ✅  |    ✅    |
-| Product         | Standard |    ✅     |       ✅       | ✅  |    ✅    |
-| Contact         | Standard |    ✅     |       ✅       | ✅  |    ✅    |
-| Login           | Standard |    ✅     |       ✅       | ✅  |    ✅    |
-| Register        | Standard |    ✅     |       ✅       | ✅  |    ✅    |
-| Profile         | User     |    ✅     |       ✅       | ✅  |    ✅    |
-| Cart            | User     |    ✅     |       ✅       | ✅  |    ✅    |
-| ShippingAddress | User     |    ✅     |       ✅       | ✅  |    ❌    |
-| Payment         | User     |    ❌     |       ❌       | ❌  |    ❌    |
-| PlaceOrder      | User     |    ❌     |       ❌       | ❌  |    ❌    |
-| Order           | User     |    ❌     |       ❌       | ❌  |    ❌    |
-| UserOrders      | User     |    ❌     |       ❌       | ❌  |    ❌    |
-| OrderList       | Admin    |    ❌     |       ❌       | ❌  |    ❌    |
+| Page            | API Route | API Route Test | UI  | E2E Test |
+| --------------- | :-------: | :------------: | :-: | :------: |
+| Home            |    ✅     |       ✅       | ✅  |    ✅    |
+| Product         |    ✅     |       ✅       | ✅  |    ✅    |
+| Contact         |    ✅     |       ✅       | ✅  |    ✅    |
+| Login           |    ✅     |       ✅       | ✅  |    ✅    |
+| Register        |    ✅     |       ✅       | ✅  |    ✅    |
+| Profile         |    ✅     |       ✅       | ✅  |    ✅    |
+| Cart            |    ✅     |       ✅       | ✅  |    ✅    |
+| ShippingAddress |    ✅     |       ✅       | ✅  |    ✅    |
+| PaymentMethod   |    ❌     |       ❌       | ❌  |    ❌    |
+| PlaceOrder      |    ❌     |       ❌       | ❌  |    ❌    |
+| Order           |    ❌     |       ❌       | ❌  |    ❌    |
+| UserOrders      |    ❌     |       ❌       | ❌  |    ❌    |
+| OrderList       |    ❌     |       ❌       | ❌  |    ❌    |
 
 ## Features
 
