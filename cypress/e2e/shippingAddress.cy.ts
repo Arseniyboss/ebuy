@@ -12,10 +12,17 @@ describe('Shipping Address Page', () => {
       cy.login({ email: 'kyle@gmail.com', password: '123456' })
       cy.visit('/shippingAddress')
 
-      cy.assertValue('address-input', 'Address')
-      cy.assertValue('country-input', 'Country')
-      cy.assertValue('city-input', 'City')
-      cy.assertValue('postal-code-input', 'Postal Code')
+      cy.getUser().then((response) => {
+        const { status, body } = response
+        const { address, country, city, postalCode } = body.shippingAddress
+
+        expect(status).to.equal(200)
+
+        cy.assertValue('address-input', address)
+        cy.assertValue('country-input', country)
+        cy.assertValue('city-input', city)
+        cy.assertValue('postal-code-input', postalCode)
+      })
     })
   })
 

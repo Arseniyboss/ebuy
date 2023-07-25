@@ -25,7 +25,7 @@ const CartItems = async () => {
         ))}
       </CartItemContainer>
       <CartTotal>
-        <h2>Total: ${totalPrice}</h2>
+        <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
         <Link href='/shippingAddress'>
           <CheckoutButton data-testid='checkout-button'>
             Checkout

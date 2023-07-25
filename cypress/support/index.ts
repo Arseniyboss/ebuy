@@ -1,4 +1,5 @@
 import { UserLoginParams } from '../../src/types/params'
+import { User } from '../../src/types/api'
 
 type SelectOption = {
   testId: string
@@ -48,6 +49,7 @@ declare global {
       verifyUserUpdate(input: string, value: string): Chainable<Element>
       login(userCredentials: UserLoginParams): Chainable<Element>
       logout(): Chainable<Element>
+      getUser(): Chainable<Response<User>>
     }
   }
 }

@@ -1,4 +1,6 @@
-import { User } from '../../src/types/api'
+import { getTotalPrice } from '../../src/utils/getTotalPrice'
+
+const id = '62dbfa7f31c12b460f19f2b1'
 
 before(() => {
   cy.task('seedUsers')
@@ -30,47 +32,53 @@ describe('Cart Page', () => {
     })
 
     it('gets cart items', () => {
-      cy.getCookie('token').then((cookie) => {
-        const token = cookie.value
+      cy.getUser().then((response) => {
+        const { status, body } = response
+        const { cartItems } = body
 
-        cy.request({
-          method: 'GET',
-          url: '/api/users/user',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }).then((response) => {
-          const { status, body } = response
-          const { cartItems }: User = body
+        const totalPrice = getTotalPrice(cartItems)
 
-          expect(status).to.equal(200)
+        expect(status).to.equal(200)
 
-          cy.getImage('product-image')
+        cy.getImage('product-image')
 
-          cartItems.forEach((cartItem, index) => {
-            const { name, price, quantity } = cartItem
+        cartItems.forEach((cartItem, index) => {
+          const { name, price, quantity } = cartItem
 
-            cy.assertText('product-name', name, index)
-            cy.assertText('product-price', `$${price}`, index)
-            cy.assertValue('product-quantity', quantity.toString(), index)
-          })
+          cy.assertText('product-name', name, index)
+          cy.assertText('product-price', `$${price}`, index)
+          cy.assertValue('product-quantity', quantity.toString(), index)
         })
+
+        cy.assertText('total-price', `Total: $${totalPrice}`)
       })
     })
 
     it('updates cart item', () => {
+      cy.intercept('PATCH', `/api/cart/${id}`).as('updateCartItem')
+
       cy.selectOption({
         testId: 'product-quantity',
         text: '1',
         value: '1',
         index: 0,
       })
-      cy.assertValue('product-quantity', '1', 0)
+
+      cy.wait('@updateCartItem').then(({ response }) => {
+        expect(response.statusCode).to.equal(200)
+        cy.assertValue('product-quantity', '1', 0)
+      })
     })
 
     it('deletes cart item', () => {
+      cy.intercept('DELETE', `/api/cart/${id}`).as('deleteCartItem')
+
       cy.getByTestId('delete-button').eq(0).click()
-      cy.assertLength('cart-item', 1)
+
+      cy.wait('@deleteCartItem').then(({ response }) => {
+        expect(response.statusCode).to.equal(200)
+        cy.assertLength('cart-item', 1)
+      })
     })
   })
 })

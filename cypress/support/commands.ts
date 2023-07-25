@@ -137,3 +137,16 @@ Cypress.Commands.add('logout', () => {
     cy.reload()
   })
 })
+
+Cypress.Commands.add('getUser', () => {
+  cy.getCookie('token').then((cookie) => {
+    const token = cookie.value
+    cy.request({
+      method: 'GET',
+      url: '/api/users/user',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  })
+})

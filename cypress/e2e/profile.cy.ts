@@ -10,8 +10,14 @@ afterEach(() => {
 
 describe('Profile Page', () => {
   it('gets user details', () => {
-    cy.assertValue('name-input', 'John Doe')
-    cy.assertValue('email-input', 'john@gmail.com')
+    cy.getUser().then((response) => {
+      const { status, body: user } = response
+
+      expect(status).to.equal(200)
+
+      cy.assertValue('name-input', user.name)
+      cy.assertValue('email-input', user.email)
+    })
   })
 
   describe('tests name input', () => {
