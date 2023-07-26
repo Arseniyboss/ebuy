@@ -57,7 +57,7 @@ const CartItem = ({
         <ItemImage
           src={image}
           height={153}
-          width={170}
+          width={192}
           alt={name}
           priority
           data-testid='product-image'

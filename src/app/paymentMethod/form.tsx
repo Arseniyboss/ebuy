@@ -15,8 +15,10 @@ type Props = {
   paymentMethod?: PaymentMethod
 }
 
-// Bug: checked radio button is unchecked on page reload
-// Fix: update next to the latest version
+// Bug: https://github.com/vercel/next.js/issues/49499)
+
+// 1.checked radio button is unchecked on page reload
+// 2.does not occur in production
 
 const PaymentMethodForm = ({ paymentMethod }: Props) => {
   const initialValues: InitialValues = {
@@ -49,6 +51,7 @@ const PaymentMethodForm = ({ paymentMethod }: Props) => {
           value='PayPal'
           onChange={handleChange}
           checked={values.paymentMethod === 'PayPal'}
+          data-testid='paypal-input'
         />
         <label htmlFor='paypal'>PayPal</label>
       </div>
@@ -60,6 +63,7 @@ const PaymentMethodForm = ({ paymentMethod }: Props) => {
           value='Stripe'
           onChange={handleChange}
           checked={values.paymentMethod === 'Stripe'}
+          data-testid='stripe-input'
         />
         <label htmlFor='stripe'>Stripe</label>
       </div>
