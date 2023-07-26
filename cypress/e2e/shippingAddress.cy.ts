@@ -8,7 +8,7 @@ after(() => {
 
 describe('Shipping Address Page', () => {
   describe('given the shipping address already exists', () => {
-    it('gets user address', () => {
+    it('gets the shipping address', () => {
       cy.login({ email: 'kyle@gmail.com', password: '123456' })
       cy.visit('/shippingAddress')
 
@@ -89,7 +89,7 @@ describe('Shipping Address Page', () => {
       cy.getByTestId('postal-code-error').should('not.exist')
     })
 
-    it('submits the form with valid input fields and gets new user address', () => {
+    it('submits the form with valid input fields and gets the new shipping address', () => {
       cy.intercept('PUT', '/api/checkout/shippingAddress').as(
         'addShippingAddress'
       )

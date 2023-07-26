@@ -42,6 +42,10 @@ Cypress.Commands.add('assertDisabled', (testId) => {
   cy.getByTestId(testId).should('be.disabled')
 })
 
+Cypress.Commands.add('assertChecked', (testId) => {
+  cy.getByTestId(testId).should('be.checked')
+})
+
 Cypress.Commands.add('typeInto', (dataId, text) => {
   cy.getByTestId(dataId).type(text).should('have.value', text)
 })
