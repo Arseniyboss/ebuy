@@ -13,7 +13,7 @@ type Props = {
   shippingAddress?: ShippingAddress
 }
 
-const ProfileForm = ({ shippingAddress }: Props) => {
+const ShippingAddressForm = ({ shippingAddress }: Props) => {
   const initialValues = {
     address: shippingAddress?.address || '',
     country: shippingAddress?.country || '',
@@ -108,4 +108,4 @@ const ProfileForm = ({ shippingAddress }: Props) => {
   )
 }
 
-export default ProfileForm
+export default ShippingAddressForm

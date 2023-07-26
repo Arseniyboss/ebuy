@@ -24,6 +24,10 @@ export const middleware = async (request: NextRequest) => {
   if (pathname === '/paymentMethod' && !user.shippingAddress) {
     return redirect('/shippingAddress')
   }
+
+  if (pathname === '/placeOrder' && !user.paymentMethod) {
+    return redirect('/paymentMethod')
+  }
 }
 
 export const config = {
@@ -31,6 +35,7 @@ export const config = {
     '/profile',
     '/shippingAddress',
     '/paymentMethod',
+    '/placeOrder',
     '/login',
     '/register',
   ],

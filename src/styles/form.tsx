@@ -24,6 +24,11 @@ export const FormGroup = styled.div`
   gap: 0.8rem;
 `
 
+export const FormRadio = styled.input`
+  margin-right: 0.5rem;
+  cursor: pointer;
+`
+
 export const FormButton = styled(Button)`
   background-color: var(--blue);
   padding: 0.6rem 1rem;

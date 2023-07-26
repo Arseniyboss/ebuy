@@ -1,7 +1,15 @@
-import { Heading } from '@styles/globals'
+import { notFound } from 'next/navigation'
+import { getUser } from '@api/users/getUser'
+import PaymentMethodForm from './form'
 
-const PaymentMethod = () => {
-  return <Heading>Payment Method</Heading>
+const PaymentMethod = async () => {
+  const user = await getUser()
+
+  if (!user) {
+    return notFound()
+  }
+
+  return <PaymentMethodForm paymentMethod={user.paymentMethod} />
 }
 
 export default PaymentMethod
