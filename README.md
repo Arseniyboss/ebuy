@@ -39,7 +39,7 @@ Fullstack e-commerce website built with NextJS
 | Profile         |    ✅     |       ✅       | ✅  |    ✅    |
 | Cart            |    ✅     |       ✅       | ✅  |    ✅    |
 | ShippingAddress |    ✅     |       ✅       | ✅  |    ✅    |
-| PaymentMethod   |    ✅     |       ✅       | ❌  |    ❌    |
+| PaymentMethod   |    ✅     |       ✅       | ✅  |    ❌    |
 | PlaceOrder      |    ❌     |       ❌       | ❌  |    ❌    |
 | Order           |    ❌     |       ❌       | ❌  |    ❌    |
 | UserOrders      |    ❌     |       ❌       | ❌  |    ❌    |

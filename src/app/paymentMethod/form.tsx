@@ -16,6 +16,7 @@ type Props = {
 }
 
 // Bug: checked radio button is unchecked on page reload
+// Fix: update next to the latest version
 
 const PaymentMethodForm = ({ paymentMethod }: Props) => {
   const initialValues: InitialValues = {
