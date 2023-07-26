@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+import { CreateReviewParams as Review } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/products/[id]/review/route'
 import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
@@ -10,7 +11,7 @@ import users from '@mocks/users'
 
 const defaultPayload = generatePayload(users[2])
 
-const review = {
+const review: Review = {
   rating: 5,
   comment: 'Excellent Product!',
 }

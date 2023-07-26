@@ -7,7 +7,7 @@ export const addPaymentMethod = async (paymentMethod: PaymentMethod) => {
 
   const response = await fetch(`${BASE_URL}/api/checkout/paymentMethod`, {
     method: 'PUT',
-    body: paymentMethod,
+    body: JSON.stringify(paymentMethod),
     headers: {
       Authorization: `Bearer ${token}`,
     },

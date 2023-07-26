@@ -74,8 +74,7 @@ describe('PUT /api/checkout/shippingAddress', () => {
         const { status } = await addShippingAddress(shippingAddress, payload)
 
         const users = await getUsers()
-
-        const { shippingAddress: newShippingAddress } = users[3]
+        const newShippingAddress = users[3].shippingAddress
 
         expect(status).toBe(201)
         expect(newShippingAddress).toEqual(shippingAddress)
