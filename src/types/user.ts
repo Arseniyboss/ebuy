@@ -16,7 +16,7 @@ export type ShippingAddress = {
   postalCode: string
 }
 
-type PaymentMethod = 'Stripe' | 'PayPal'
+export type PaymentMethod = 'Stripe' | 'PayPal'
 
 export type User = {
   name: string
