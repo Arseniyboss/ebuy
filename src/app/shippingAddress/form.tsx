@@ -3,17 +3,20 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
+import { UserPayload } from 'types/jwtPayload'
 import { ShippingAddress } from 'types/user'
 import { shippingAddressSchema } from '@validation/schemas/shippingAddressSchema'
 import { addShippingAddress } from '@api/checkout/addShippingAddress'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
+import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 
 type Props = {
   shippingAddress?: ShippingAddress
+  payload: UserPayload
 }
 
-const ShippingAddressForm = ({ shippingAddress }: Props) => {
+const ShippingAddressForm = ({ shippingAddress, payload }: Props) => {
   const initialValues = {
     address: shippingAddress?.address || '',
     country: shippingAddress?.country || '',
@@ -38,6 +41,7 @@ const ShippingAddressForm = ({ shippingAddress }: Props) => {
   })
   return (
     <Form onSubmit={handleSubmit} data-testid='shipping-address-form'>
+      <CheckoutSteps user={payload} />
       <h1>Shipping Address</h1>
       <FormGroup>
         <label htmlFor='address'>Address</label>

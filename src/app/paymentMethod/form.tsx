@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
+import { UserPayload } from 'types/jwtPayload'
 import { PaymentMethod } from 'types/user'
 import {
   InitialValues,
@@ -10,9 +11,11 @@ import {
 } from '@validation/schemas/paymentMethodSchema'
 import { addPaymentMethod } from '@api/checkout/addPaymentMethod'
 import { Form, FormRadio, FormButton, FormError } from '@styles/form'
+import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 
 type Props = {
   paymentMethod?: PaymentMethod
+  payload: UserPayload
 }
 
 // Bug: https://github.com/vercel/next.js/issues/49499)
@@ -20,7 +23,7 @@ type Props = {
 // 1.checked radio button is unchecked on page reload
 // 2.does not occur in production
 
-const PaymentMethodForm = ({ paymentMethod }: Props) => {
+const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
   const initialValues: InitialValues = {
     paymentMethod: paymentMethod || '',
   }
@@ -42,6 +45,7 @@ const PaymentMethodForm = ({ paymentMethod }: Props) => {
   })
   return (
     <Form onSubmit={handleSubmit} data-testid='payment-method-form'>
+      <CheckoutSteps user={payload} />
       <h1>Payment Method</h1>
       <div>
         <FormRadio
