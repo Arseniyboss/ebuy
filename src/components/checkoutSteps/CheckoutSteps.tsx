@@ -9,15 +9,22 @@ type Props = {
 }
 
 const CheckoutSteps = ({ user, center }: Props) => {
+  console.log('rerender')
   return (
     <Container $center={center}>
-      <NavLink href='/shippingAddress'>Shipping</NavLink>
-      <NavLink href='/paymentMethod' disabled={!user.shippingAddress}>
+      <NavLink href='/address'>Address</NavLink>
+      {/* <NavLink href='/payment' disabled={true}>
+        Payment
+      </NavLink> */}
+      <NavLink href='/payment' disabled={!user.address}>
         Payment
       </NavLink>
-      <NavLink href='/placeOrder' disabled={!user.paymentMethod}>
-        Place Order
+      {/* <NavLink href='/payment' disabled={!user.address}>
+        Payment
       </NavLink>
+      <NavLink href='/order/review' disabled={!user.paymentMethod}>
+        Review
+      </NavLink> */}
     </Container>
   )
 }

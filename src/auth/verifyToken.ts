@@ -13,15 +13,14 @@ export const verifyToken = async (token?: string) => {
     const jwtVerifyResult = await jwtVerify(token, JWT_SECRET)
     const payload = jwtVerifyResult.payload as Payload
 
-    const { id, name, isAdmin, cartItems, shippingAddress, paymentMethod } =
-      payload
+    const { id, name, isAdmin, cartItems, address, paymentMethod } = payload
 
     const user = {
       id,
       name,
       isAdmin,
       cartItems,
-      shippingAddress,
+      address,
       paymentMethod,
     }
 

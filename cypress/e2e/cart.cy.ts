@@ -28,7 +28,7 @@ describe('Cart Page', () => {
 
     it('navigates to the checkout page', () => {
       cy.getByTestId('checkout-button').click()
-      cy.verifyUrl('/shippingAddress')
+      cy.verifyUrl('/address')
     })
 
     it('gets cart items', () => {

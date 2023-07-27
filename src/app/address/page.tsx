@@ -1,9 +1,14 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getUser } from '@api/users/getUser'
 import { decodeToken } from '@auth/decodeToken/cookies'
-import ShippingAddressForm from './form'
+import AddressForm from './form'
 
-const ShippingAddress = async () => {
+export const metadata: Metadata = {
+  title: 'Address',
+}
+
+const Address = async () => {
   const user = await getUser()
   const payload = await decodeToken()
 
@@ -11,12 +16,7 @@ const ShippingAddress = async () => {
     return notFound()
   }
 
-  return (
-    <ShippingAddressForm
-      shippingAddress={user.shippingAddress}
-      payload={payload!}
-    />
-  )
+  return <AddressForm address={user.address} payload={payload!} />
 }
 
-export default ShippingAddress
+export default Address

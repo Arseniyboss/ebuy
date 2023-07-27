@@ -6,7 +6,7 @@ export type InitialValues = {
   paymentMethod: PaymentMethod | ''
 }
 
-export const paymentMethodSchema: FieldValidation<InitialValues> = {
+export const validationSchema: FieldValidation<InitialValues> = {
   paymentMethod: {
     required: { value: true, message: PAYMENT_METHOD_REQUIRED },
   },

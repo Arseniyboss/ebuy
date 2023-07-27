@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
-import { loginSchema } from '@validation/schemas/loginSchema'
+import { validationSchema } from '@validation/schemas/loginSchema'
 import { login } from '@api/users/login'
 import { Input } from '@styles/globals'
 import {
@@ -45,7 +45,7 @@ const Login = () => {
   const { values, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: loginSchema,
+    validationSchema,
   })
   return (
     <Form onSubmit={handleSubmit} data-testid='login-form'>

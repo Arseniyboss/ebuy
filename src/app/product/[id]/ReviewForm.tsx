@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
 import { PageParams } from 'types/params'
-import { reviewSchema } from '@validation/schemas/reviewSchema'
+import { validationSchema } from '@validation/schemas/reviewSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormError, FormButton } from '@styles/form'
 import { createReview } from '@api/products/createReview'
@@ -46,7 +46,7 @@ const ReviewForm = ({ params }: PageParams) => {
   const { values, setValues, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: reviewSchema,
+    validationSchema,
   })
 
   useTimeout(

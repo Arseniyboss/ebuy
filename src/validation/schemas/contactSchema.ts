@@ -14,7 +14,7 @@ type InitialValues = {
   message: string
 }
 
-export const contactSchema: FieldValidation<InitialValues> = {
+export const validationSchema: FieldValidation<InitialValues> = {
   name: {
     required: { value: true, message: USERNAME_REQUIRED },
     pattern: { value: USERNAME_PATTERN, message: USERNAME_INVALID },

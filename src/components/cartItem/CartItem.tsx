@@ -9,7 +9,13 @@ import { getQuantities } from '@utils/getQuantities'
 import { deleteCartItem } from '@api/cart/deleteCartItem'
 import { updateCartItem } from '@api/cart/updateCartItem'
 import { InvisibleButton, ProductQuantity } from '@styles/globals'
-import { Container, ItemImage, ItemDetails, FlexGroup } from './styles'
+import {
+  Container,
+  ItemImage,
+  ItemDetails,
+  ItemName,
+  FlexGroup,
+} from './styles'
 
 const CartItem = ({
   _id,
@@ -64,7 +70,7 @@ const CartItem = ({
         />
       </Link>
       <ItemDetails>
-        <h2 data-testid='product-name'>{name}</h2>
+        <ItemName data-testid='product-name'>{name}</ItemName>
         <h3 data-testid='product-price'>${price}</h3>
         <FlexGroup>
           <ProductQuantity

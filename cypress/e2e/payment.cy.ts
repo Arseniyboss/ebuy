@@ -10,7 +10,7 @@ describe('Payment Method Page', () => {
   describe('given the payment method already exists', () => {
     it('gets the payment method', () => {
       cy.login({ email: 'robert@gmail.com', password: '123456' })
-      cy.visit('/paymentMethod')
+      cy.visit('/payment')
       cy.assertChecked('stripe-input')
     })
   })
@@ -18,7 +18,7 @@ describe('Payment Method Page', () => {
   describe('given the payment method does not exist', () => {
     beforeEach(() => {
       cy.login({ email: 'kyle@gmail.com', password: '123456' })
-      cy.visit('/paymentMethod')
+      cy.visit('/payment')
     })
 
     it('submits the form without payment method and shows an error message', () => {
@@ -28,18 +28,18 @@ describe('Payment Method Page', () => {
     })
 
     it('submits the form with a payment method and gets the new payment method', () => {
-      cy.intercept('PUT', '/api/checkout/paymentMethod').as('addPaymentMethod')
+      cy.intercept('PUT', '/api/checkout/payment').as('setPaymentMethod')
 
       cy.getByTestId('paypal-input').check()
       cy.submitForm('payment-method-form')
 
       cy.assertDisabled('continue-button')
-      cy.verifyUrl('/placeOrder')
+      cy.verifyUrl('/order/review')
 
-      cy.wait('@addPaymentMethod').then(({ response }) => {
+      cy.wait('@setPaymentMethod').then(({ response }) => {
         expect(response.statusCode).to.equal(201)
 
-        cy.visit('/paymentMethod')
+        cy.visit('/payment')
         cy.assertChecked('paypal-input')
       })
     })

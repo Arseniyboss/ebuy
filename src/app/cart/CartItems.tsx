@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { getUser } from '@api/users/getUser'
 import { getTotalPrice } from '@utils/getTotalPrice'
 import {
   Container,
   CartItemContainer,
   CartTotal,
+  CheckoutLink,
   CheckoutButton,
 } from './styles'
 import Message from '@components/message/Message'
@@ -26,11 +26,11 @@ const CartItems = async () => {
       </CartItemContainer>
       <CartTotal>
         <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
-        <Link href='/shippingAddress'>
+        <CheckoutLink href='/address'>
           <CheckoutButton data-testid='checkout-button'>
             Checkout
           </CheckoutButton>
-        </Link>
+        </CheckoutLink>
       </CartTotal>
     </Container>
   )

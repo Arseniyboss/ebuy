@@ -1,9 +1,13 @@
 'use client'
 
 import styled from 'styled-components'
+import Link from 'next/link'
 import { Button } from '@styles/globals'
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 1200px;
   max-width: 90vw;
   margin: 0 auto;
@@ -20,14 +24,17 @@ export const CartTotal = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: var(--gap);
 
   @media screen and (max-width: 400px) {
     flex-direction: column;
     align-items: initial;
-    text-align: center;
     gap: 1rem;
   }
+`
+
+export const CheckoutLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
 `
 
 export const CheckoutButton = styled(Button)`

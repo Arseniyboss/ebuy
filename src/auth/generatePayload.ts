@@ -6,7 +6,7 @@ export const generatePayload = ({
   name,
   isAdmin,
   cartItems,
-  shippingAddress,
+  address,
   paymentMethod,
 }: User) => {
   return {
@@ -14,7 +14,7 @@ export const generatePayload = ({
     name,
     isAdmin,
     cartItems: getBooleanValue(cartItems.length),
-    shippingAddress: getBooleanValue(shippingAddress),
+    address: getBooleanValue(address),
     paymentMethod: getBooleanValue(paymentMethod),
   }
 }

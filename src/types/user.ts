@@ -9,8 +9,8 @@ export type CartItem = {
   quantity: number
 }
 
-export type ShippingAddress = {
-  address: string
+export type Address = {
+  street: string
   country: string
   city: string
   postalCode: string
@@ -24,6 +24,6 @@ export type User = {
   password: string
   isAdmin: boolean
   cartItems: CartItem[]
-  shippingAddress?: ShippingAddress
+  address?: Address
   paymentMethod?: PaymentMethod
 }

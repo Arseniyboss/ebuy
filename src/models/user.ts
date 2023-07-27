@@ -1,8 +1,16 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
 import { CartSchema, UserModel } from 'types/mongo/models'
-import { ShippingAddress, User as UserSchema } from 'types/user'
+import { Address, User as UserSchema } from 'types/user'
 import {
+  STREET_REQUIRED,
+  STREET_INVALID,
+  COUNTRY_REQUIRED,
+  COUNTRY_INVALID,
+  CITY_REQUIRED,
+  CITY_INVALID,
+  POSTAL_CODE_REQUIRED,
+  POSTAL_CODE_INVALID,
   USERNAME_REQUIRED,
   USERNAME_INVALID,
   EMAIL_REQUIRED,
@@ -10,7 +18,14 @@ import {
   PASSWORD_REQUIRED,
   PASSWORD_INVALID,
 } from '@validation/constants/errors'
-import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
+import {
+  STREET_PATTERN,
+  COUNTRY_PATTERN,
+  CITY_PATTERN,
+  POSTAL_CODE_PATTERN,
+  USERNAME_PATTERN,
+  EMAIL_PATTERN,
+} from '@validation/constants/patterns'
 
 const cartSchema = new Schema<CartSchema>({
   name: {
@@ -35,26 +50,30 @@ const cartSchema = new Schema<CartSchema>({
   },
 })
 
-const shippingAddressSchema = new Schema<ShippingAddress>(
+const addressSchema = new Schema<Address>(
   {
-    address: {
+    street: {
       type: String,
-      required: true,
+      required: [true, STREET_REQUIRED],
+      validate: [STREET_PATTERN, STREET_INVALID],
       trim: true,
     },
     country: {
       type: String,
-      required: true,
+      required: [true, COUNTRY_REQUIRED],
+      validate: [COUNTRY_PATTERN, COUNTRY_INVALID],
       trim: true,
     },
     city: {
       type: String,
-      required: true,
+      required: [true, CITY_REQUIRED],
+      validate: [CITY_PATTERN, CITY_INVALID],
       trim: true,
     },
     postalCode: {
       type: String,
-      required: true,
+      required: [true, POSTAL_CODE_REQUIRED],
+      validate: [POSTAL_CODE_PATTERN, POSTAL_CODE_INVALID],
       trim: true,
     },
   },
@@ -86,7 +105,7 @@ const userSchema = new Schema<UserSchema>({
     default: false,
   },
   cartItems: [cartSchema],
-  shippingAddress: shippingAddressSchema,
+  address: addressSchema,
   paymentMethod: {
     type: String,
     enum: {

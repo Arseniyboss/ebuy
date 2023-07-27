@@ -7,6 +7,6 @@ export const fakePayload: UserPayload = {
   name: 'John',
   isAdmin: false,
   cartItems: false,
-  shippingAddress: false,
+  address: false,
   paymentMethod: false,
 }

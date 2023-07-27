@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
 import { User } from 'types/api'
-import { contactSchema } from '@validation/schemas/contactSchema'
+import { validationSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
 import Message from '@components/message/Message'
@@ -41,7 +41,7 @@ const ContactForm = ({ user }: Props) => {
   const { values, setValues, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: contactSchema,
+    validationSchema,
   })
 
   useTimeout(

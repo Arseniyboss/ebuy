@@ -7,7 +7,7 @@ export type UserPayload = {
   name: string
   isAdmin: boolean
   cartItems: boolean
-  shippingAddress: boolean
+  address: boolean
   paymentMethod: boolean
 }
 

@@ -16,6 +16,6 @@ export const Container = styled.div<ContainerProps>`
 `
 
 export const NavLink = styled(Link)<NavLinkProps>`
-  color: ${({ disabled }) => disabled && 'lightgrey'};
+  color: ${({ disabled }) => (disabled ? 'lightgrey' : 'var(--gray)')};
   pointer-events: ${({ disabled }) => disabled && 'none'};
 `

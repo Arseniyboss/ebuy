@@ -70,8 +70,8 @@ const users: User[] = [
         quantity: 1,
       },
     ],
-    shippingAddress: {
-      address: 'Address',
+    address: {
+      street: 'Street',
       country: 'Country',
       city: 'City',
       postalCode: 'Postal Code',
@@ -101,8 +101,8 @@ const users: User[] = [
         quantity: 1,
       },
     ],
-    shippingAddress: {
-      address: 'Address',
+    address: {
+      street: 'Street',
       country: 'Country',
       city: 'City',
       postalCode: 'Postal Code',

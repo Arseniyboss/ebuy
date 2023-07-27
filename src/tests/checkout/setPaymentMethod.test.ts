@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { UserPayload } from 'types/jwtPayload'
 import { PaymentMethod } from 'types/user'
 import { BASE_URL } from '@baseUrl'
-import { PUT } from '@app/api/checkout/paymentMethod/route'
+import { PUT } from '@app/api/checkout/payment/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
 import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
@@ -12,11 +12,11 @@ import users from '@mocks/users'
 
 const paymentMethod = 'PayPal'
 
-const addPaymentMethod = async (
+const setPaymentMethod = async (
   paymentMethod: PaymentMethod,
   payload: UserPayload
 ) => {
-  const url = `${BASE_URL}/api/checkout/paymentMethod`
+  const url = `${BASE_URL}/api/checkout/payment`
   const token = await generateToken(payload)
   const request = new NextRequest(url, {
     method: 'PUT',
@@ -32,10 +32,10 @@ const addPaymentMethod = async (
 
 beforeAll(async () => await seedUsers())
 
-describe('PUT /api/checkout/paymentMethod', () => {
+describe('PUT /api/checkout/payment', () => {
   describe('given the user does not exist', () => {
     it('returns status code 404', async () => {
-      const { status, statusText } = await addPaymentMethod(
+      const { status, statusText } = await setPaymentMethod(
         paymentMethod,
         fakePayload
       )
@@ -49,7 +49,7 @@ describe('PUT /api/checkout/paymentMethod', () => {
     describe('given the payment method does not exist', () => {
       const payload = generatePayload(users[3])
       it('returns status code 201 and adds payment method', async () => {
-        const { status, token } = await addPaymentMethod(paymentMethod, payload)
+        const { status, token } = await setPaymentMethod(paymentMethod, payload)
 
         const newPayload = await verifyToken(token)
         const users = await getUsers()
@@ -63,7 +63,7 @@ describe('PUT /api/checkout/paymentMethod', () => {
     describe('given the payment method already exists', () => {
       const payload = generatePayload(users[4])
       it('returns status code 201 and updates payment method', async () => {
-        const { status } = await addPaymentMethod(paymentMethod, payload)
+        const { status } = await setPaymentMethod(paymentMethod, payload)
 
         const users = await getUsers()
         const newPaymentMethod = users[4].paymentMethod

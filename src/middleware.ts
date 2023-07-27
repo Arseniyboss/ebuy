@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { redirect } from '@utils/redirect'
 import { decodeToken } from '@auth/decodeToken/requestCookies'
 
+// checkout steps make the last e2e test in Address and Payment Method pages fail
+
 export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
   const user = await decodeToken(request)
@@ -17,25 +19,25 @@ export const middleware = async (request: NextRequest) => {
     return redirect('/login')
   }
 
-  if (pathname === '/shippingAddress' && !user.cartItems) {
+  if (pathname === '/address' && !user.cartItems) {
     return redirect('/cart')
   }
 
-  if (pathname === '/paymentMethod' && !user.shippingAddress) {
-    return redirect('/shippingAddress')
+  if (pathname === '/payment' && !user.address) {
+    return redirect('/address')
   }
 
-  if (pathname === '/placeOrder' && !user.paymentMethod) {
-    return redirect('/paymentMethod')
+  if (pathname === '/order/review' && !user.paymentMethod) {
+    return redirect('/payment')
   }
 }
 
 export const config = {
   matcher: [
     '/profile',
-    '/shippingAddress',
-    '/paymentMethod',
-    '/placeOrder',
+    '/address',
+    '/payment',
+    '/order/review',
     '/login',
     '/register',
   ],

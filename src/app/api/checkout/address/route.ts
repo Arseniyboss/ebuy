@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { ShippingAddress } from 'types/user'
+import { Address } from 'types/user'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/throwError'
@@ -11,7 +11,7 @@ import User from '@models/user'
 export const PUT = async (request: NextRequest) => {
   await connectToDB()
 
-  const shippingAddress: ShippingAddress = await request.json()
+  const address: Address = await request.json()
 
   const decoded = await decodeToken(request)
   const user = await User.findById(decoded?.id)
@@ -20,7 +20,7 @@ export const PUT = async (request: NextRequest) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  user.shippingAddress = shippingAddress
+  user.address = address
 
   await user.save()
 

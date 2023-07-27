@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
 import { User } from 'types/api'
-import { profileSchema } from '@validation/schemas/profileSchema'
+import { validationSchema } from '@validation/schemas/profileSchema'
 import { updateUser } from '@api/users/updateUser'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
@@ -48,7 +48,7 @@ const ProfileForm = ({ user }: Props) => {
   const { values, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: profileSchema,
+    validationSchema,
   })
 
   useTimeout(

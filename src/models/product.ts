@@ -1,6 +1,12 @@
 import { Schema, models, model } from 'mongoose'
 import { ReviewSchema, ProductModel } from 'types/mongo/models'
 import { Product as ProductSchema } from 'types/product'
+import {
+  USERNAME_REQUIRED,
+  USERNAME_INVALID,
+  RATING_REQUIRED,
+} from '@validation/constants/errors'
+import { USERNAME_PATTERN } from '@validation/constants/patterns'
 
 const reviewSchema = new Schema<ReviewSchema>(
   {
@@ -11,11 +17,12 @@ const reviewSchema = new Schema<ReviewSchema>(
     },
     username: {
       type: String,
-      required: true,
+      required: [true, USERNAME_REQUIRED],
+      validate: [USERNAME_PATTERN, USERNAME_INVALID],
     },
     rating: {
       type: Number,
-      required: true,
+      required: [true, RATING_REQUIRED],
     },
     comment: {
       type: String,

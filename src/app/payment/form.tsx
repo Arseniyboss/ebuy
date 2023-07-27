@@ -7,9 +7,9 @@ import { UserPayload } from 'types/jwtPayload'
 import { PaymentMethod } from 'types/user'
 import {
   InitialValues,
-  paymentMethodSchema,
+  validationSchema,
 } from '@validation/schemas/paymentMethodSchema'
-import { addPaymentMethod } from '@api/checkout/addPaymentMethod'
+import { setPaymentMethod } from '@api/checkout/setPaymentMethod'
 import { Form, FormRadio, FormButton, FormError } from '@styles/form'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 
@@ -17,11 +17,6 @@ type Props = {
   paymentMethod?: PaymentMethod
   payload: UserPayload
 }
-
-// Bug: https://github.com/vercel/next.js/issues/49499)
-
-// 1.checked radio button is unchecked on page reload
-// 2.does not occur in production
 
 const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
   const initialValues: InitialValues = {
@@ -33,15 +28,15 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
 
   const onSubmit = async () => {
     setLoading(true)
-    await addPaymentMethod(values.paymentMethod as PaymentMethod)
-    router.push('/placeOrder')
+    await setPaymentMethod(values.paymentMethod as PaymentMethod)
+    router.push('/order/review')
     router.refresh()
   }
 
   const { values, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: paymentMethodSchema,
+    validationSchema,
   })
   return (
     <Form onSubmit={handleSubmit} data-testid='payment-method-form'>

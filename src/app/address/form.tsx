@@ -4,24 +4,24 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { UserPayload } from 'types/jwtPayload'
-import { ShippingAddress } from 'types/user'
-import { shippingAddressSchema } from '@validation/schemas/shippingAddressSchema'
-import { addShippingAddress } from '@api/checkout/addShippingAddress'
+import { Address } from 'types/user'
+import { validationSchema } from '@validation/schemas/addressSchema'
+import { setAddress } from '@api/checkout/setAddress'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 
 type Props = {
-  shippingAddress?: ShippingAddress
+  address?: Address
   payload: UserPayload
 }
 
-const ShippingAddressForm = ({ shippingAddress, payload }: Props) => {
+const AddressForm = ({ address, payload }: Props) => {
   const initialValues = {
-    address: shippingAddress?.address || '',
-    country: shippingAddress?.country || '',
-    city: shippingAddress?.city || '',
-    postalCode: shippingAddress?.postalCode || '',
+    street: address?.street || '',
+    country: address?.country || '',
+    city: address?.city || '',
+    postalCode: address?.postalCode || '',
   }
 
   const [loading, setLoading] = useState(false)
@@ -29,33 +29,33 @@ const ShippingAddressForm = ({ shippingAddress, payload }: Props) => {
 
   const onSubmit = async () => {
     setLoading(true)
-    await addShippingAddress(values)
-    router.push('/paymentMethod')
+    await setAddress(values)
+    router.push('/payment')
     router.refresh()
   }
 
   const { values, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: shippingAddressSchema,
+    validationSchema,
   })
   return (
-    <Form onSubmit={handleSubmit} data-testid='shipping-address-form'>
+    <Form onSubmit={handleSubmit} data-testid='address-form'>
       <CheckoutSteps user={payload} />
-      <h1>Shipping Address</h1>
+      <h1>Address</h1>
       <FormGroup>
-        <label htmlFor='address'>Address</label>
+        <label htmlFor='street'>Street</label>
         <Input
           type='text'
-          name='address'
-          id='address'
-          value={values.address}
+          name='street'
+          id='street'
+          value={values.street}
           onChange={handleChange}
           autoComplete='on'
-          data-testid='address-input'
+          data-testid='street-input'
         />
-        {errors.address && (
-          <FormError data-testid='address-error'>{errors.address}</FormError>
+        {errors.street && (
+          <FormError data-testid='street-error'>{errors.street}</FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -112,4 +112,4 @@ const ShippingAddressForm = ({ shippingAddress, payload }: Props) => {
   )
 }
 
-export default ShippingAddressForm
+export default AddressForm

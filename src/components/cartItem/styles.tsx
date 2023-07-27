@@ -38,6 +38,10 @@ export const ItemDetails = styled.div`
   }
 `
 
+export const ItemName = styled.h2`
+  font-size: 1.3rem;
+`
+
 export const FlexGroup = styled.div`
   display: flex;
   align-items: center;

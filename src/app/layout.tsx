@@ -9,11 +9,6 @@ type Props = {
   children: ReactNode
 }
 
-export const metadata = {
-  title: 'Ebuy',
-  description: 'Buy high quality products by cheapest prices',
-}
-
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang='en'>

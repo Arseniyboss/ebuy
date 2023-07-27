@@ -29,26 +29,27 @@ Fullstack e-commerce website built with NextJS
 
 ## Pages
 
-| Page            | API Route | API Route Test | UI  | E2E Test |
-| --------------- | :-------: | :------------: | :-: | :------: |
-| Home            |    ✅     |       ✅       | ✅  |    ✅    |
-| Product         |    ✅     |       ✅       | ✅  |    ✅    |
-| Contact         |    ✅     |       ✅       | ✅  |    ✅    |
-| Login           |    ✅     |       ✅       | ✅  |    ✅    |
-| Register        |    ✅     |       ✅       | ✅  |    ✅    |
-| Profile         |    ✅     |       ✅       | ✅  |    ✅    |
-| Cart            |    ✅     |       ✅       | ✅  |    ✅    |
-| ShippingAddress |    ✅     |       ✅       | ✅  |    ✅    |
-| PaymentMethod   |    ✅     |       ✅       | ✅  |    ✅    |
-| PlaceOrder      |    ❌     |       ❌       | ❌  |    ❌    |
-| Order           |    ❌     |       ❌       | ❌  |    ❌    |
-| UserOrders      |    ❌     |       ❌       | ❌  |    ❌    |
-| OrderList       |    ❌     |       ❌       | ❌  |    ❌    |
+| Page        | API Route | API Route Test | UI  | E2E Test |
+| ----------- | :-------: | :------------: | :-: | :------: |
+| Home        |    ✅     |       ✅       | ✅  |    ✅    |
+| Product     |    ✅     |       ✅       | ✅  |    ✅    |
+| Contact     |    ✅     |       ✅       | ✅  |    ✅    |
+| Login       |    ✅     |       ✅       | ✅  |    ✅    |
+| Register    |    ✅     |       ✅       | ✅  |    ✅    |
+| Profile     |    ✅     |       ✅       | ✅  |    ✅    |
+| Cart        |    ✅     |       ✅       | ✅  |    ✅    |
+| Address     |    ✅     |       ✅       | ✅  |    ✅    |
+| Payment     |    ✅     |       ✅       | ✅  |    ✅    |
+| OrderReview |    ❌     |       ❌       | ✅  |    ❌    |
+| Order       |    ❌     |       ❌       | ❌  |    ❌    |
+| UserOrders  |    ❌     |       ❌       | ❌  |    ❌    |
+| OrderList   |    ❌     |       ❌       | ❌  |    ❌    |
 
 ## Features
 
 - Product Search
 - Product Sorting
 - Product Pagination
-- Full featured shopping cart
-- Secure authentication with httpOnly and sameSite cookie
+- Full Featured Shopping Cart
+- Secure Authentication with httpOnly and sameSite cookie
+- Checkout Process: **Address > Payment > Review**

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
-import { registerSchema } from '@validation/schemas/registerSchema'
+import { validationSchema } from '@validation/schemas/registerSchema'
 import { register } from '@api/users/register'
 import { Input } from '@styles/globals'
 import {
@@ -48,7 +48,7 @@ const Register = () => {
   const { values, errors, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validationSchema: registerSchema,
+    validationSchema,
   })
   return (
     <Form onSubmit={handleSubmit} data-testid='register-form'>
