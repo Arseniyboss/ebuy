@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { redirect } from '@utils/redirect'
 import { decodeToken } from '@auth/decodeToken/requestCookies'
-
-// checkout steps make the last e2e test in Address and Payment Method pages fail
+import { redirect } from '@utils/redirect'
 
 export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
