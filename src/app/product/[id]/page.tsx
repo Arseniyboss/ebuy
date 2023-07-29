@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { PageParams } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
@@ -16,7 +17,9 @@ import Message from '@components/message/Message'
 import Review from '@components/review/Review'
 import ReviewForm from './ReviewForm'
 
-export const generateMetadata = async ({ params }: PageParams) => {
+export const generateMetadata = async ({
+  params,
+}: PageParams): Promise<Metadata> => {
   const product = await getProductById(params.id)
   return { title: product ? product.name : 'Not Found' }
 }
