@@ -3,7 +3,7 @@ export const breakpoints = {
     small: '465px',
   },
   product: {
-    medium: '860px',
+    medium: '900px',
   },
   cart: {
     small: '517px',

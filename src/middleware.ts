@@ -17,16 +17,28 @@ export const middleware = async (request: NextRequest) => {
     return redirect('/login')
   }
 
-  if (pathname === '/address' && !user.cartItems) {
-    return redirect('/cart')
+  if (pathname === '/address') {
+    if (!user.cartItems) {
+      return redirect('/cart')
+    }
   }
 
-  if (pathname === '/payment' && !user.address) {
-    return redirect('/address')
+  if (pathname === '/payment') {
+    if (!user.cartItems) {
+      return redirect('/cart')
+    }
+    if (!user.address) {
+      return redirect('/address')
+    }
   }
 
-  if (pathname === '/order/review' && !user.paymentMethod) {
-    return redirect('/payment')
+  if (pathname === '/order/review') {
+    if (!user.cartItems) {
+      return redirect('/cart')
+    }
+    if (!user.paymentMethod) {
+      return redirect('/payment')
+    }
   }
 }
 
