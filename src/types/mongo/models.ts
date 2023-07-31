@@ -16,9 +16,20 @@ type WithUserId<T> = T & {
   userId: Types.ObjectId
 }
 
-type WithPush<T, K> = T & {
-  push: (...items: K[]) => number
-}
+// caveat: return type is any
+type Push<T> =
+  | {
+      push: (...items: T[]) => number
+    }
+  | {
+      push: (...items: any) => any
+    }
+
+type WithPush<T, K> = T & Push<K>
+
+// type WithPush<T, K> = T & {
+//   push: (...items: K[]) => number
+// }
 
 type WithCartItemPush<T> = WithPush<T, CartItemType>
 type WithReviewPush<T> = WithPush<T, OmitTimestamps<ReviewType>>

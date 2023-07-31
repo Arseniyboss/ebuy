@@ -48,6 +48,7 @@ export const config = {
     '/address',
     '/payment',
     '/order/review',
+    '/order/:id*',
     '/login',
     '/register',
   ],

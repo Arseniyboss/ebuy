@@ -35,3 +35,23 @@ export const POST = async (request: NextRequest) => {
 
   return setCookie(tokenCookie, 201)
 }
+
+export const DELETE = async (request: NextRequest) => {
+  await connectToDB()
+
+  const decoded = await decodeToken(request)
+  const user = await User.findById(decoded?.id)
+
+  if (!user) {
+    return throwError({ error: 'User not found', status: 404 })
+  }
+
+  user.cartItems = []
+
+  await user.save()
+
+  const payload = generatePayload(user)
+  const tokenCookie = await generateTokenCookie(payload)
+
+  return setCookie(tokenCookie)
+}

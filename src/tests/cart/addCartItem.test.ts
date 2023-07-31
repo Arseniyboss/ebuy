@@ -55,7 +55,7 @@ describe('POST /api/cart', () => {
         const { status, statusText } = await addCartItem(cartItem)
         const users = await getUsers()
 
-        const cartItems = users[2].cartItems
+        const { cartItems } = users[2]
 
         expect(status).toBe(400)
         expect(statusText).toBe('Item is already in the cart')
@@ -72,7 +72,7 @@ describe('POST /api/cart', () => {
         const { status } = await addCartItem(cartItem)
         const users = await getUsers()
 
-        const cartItems = users[2].cartItems
+        const { cartItems } = users[2]
 
         expect(status).toBe(201)
         expect(cartItems[0]).toEqual(initialCartItems[0])

@@ -31,3 +31,8 @@ export type CreateReviewParams = {
   rating: number
   comment: string
 }
+
+export type UpdateProductParams = {
+  id: string
+  quantity: number
+}

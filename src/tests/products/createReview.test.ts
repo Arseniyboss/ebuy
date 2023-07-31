@@ -9,7 +9,9 @@ import { fakeProductId, fakePayload } from '@mocks/fakeData'
 import products from '@mocks/products'
 import users from '@mocks/users'
 
-const defaultPayload = generatePayload(users[2])
+const user = users[2]
+
+const defaultPayload = generatePayload(user)
 
 const review: Review = {
   rating: 5,
@@ -85,8 +87,8 @@ describe('POST /api/products/:id/review', () => {
           const { userId, username, rating, comment } = review
 
           expect(status).toBe(201)
-          expect(userId.toString()).toBe(users[2]._id.toString())
-          expect(username).toBe(users[2].name)
+          expect(userId.toString()).toBe(user._id.toString())
+          expect(username).toBe(user.name)
           expect(rating).toBe(review.rating)
           expect(comment).toBe(review.comment)
           expect(product.rating).toBe(4.5)

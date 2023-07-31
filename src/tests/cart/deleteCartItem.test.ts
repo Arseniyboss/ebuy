@@ -60,7 +60,7 @@ describe('DELETE /api/cart/:id', () => {
         const { status } = await deleteCartItem(id)
         const users = await getUsers()
 
-        const cartItems = users[2].cartItems
+        const { cartItems } = users[2]
 
         expect(status).toBe(200)
         expect(cartItems.length).toBe(initialCartItems.length - 1)

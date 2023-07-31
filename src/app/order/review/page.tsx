@@ -4,10 +4,11 @@ import { getUser } from '@api/users/getUser'
 import { decodeToken } from '@auth/decodeToken/cookies'
 import { getDeliveryDate } from '@utils/getDeliveryDate'
 import { getTotalPrice } from '@utils/getTotalPrice'
-import { Container, CartTotal, CheckoutButton } from '@app/cart/styles'
+import { Container, CartTotal } from '@app/cart/styles'
 import { OrderSummary, OrderDetails } from './styles'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 import OrderItem from '@components/OrderItem'
+import PlaceOrder from './PlaceOrder'
 
 export const metadata: Metadata = {
   title: 'Order Review',
@@ -50,7 +51,14 @@ const OrderReview = async () => {
         </OrderSummary>
         <CartTotal>
           <h2>Total: ${totalPrice}</h2>
-          <CheckoutButton>Place Order</CheckoutButton>
+          <PlaceOrder
+            order={{
+              orderItems: cartItems,
+              address,
+              paymentMethod,
+              totalPrice,
+            }}
+          />
         </CartTotal>
       </Container>
     </>

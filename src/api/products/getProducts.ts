@@ -8,7 +8,7 @@ export const getProducts = async ({
   sort = 'createdAt.desc',
 }: QueryParams) => {
   const url = `${BASE_URL}/api/products?page=${page}&search=${search}&sort=${sort}`
-  const response = await fetch(url, { next: { tags: ['products'] } })
+  const response = await fetch(url)
   const { products, pages }: Data = await response.json()
   return { products, pages }
 }
