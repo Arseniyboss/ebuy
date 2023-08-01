@@ -1,3 +1,6 @@
+import { CartItem } from 'types/api'
+import { Address, PaymentMethod } from 'types/user'
+
 export type PageParams = {
   params: {
     id: string
@@ -35,4 +38,11 @@ export type CreateReviewParams = {
 export type UpdateProductParams = {
   id: string
   quantity: number
+}
+
+export type CreateOrderParams = {
+  orderItems: CartItem[]
+  address: Address
+  paymentMethod: PaymentMethod
+  totalPrice: number
 }

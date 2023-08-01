@@ -1,8 +1,13 @@
+import { Metadata } from 'next'
 import { PageParams } from 'types/params'
-import { Heading } from '@styles/globals'
+import { OrderId } from './styles'
+
+export const metadata: Metadata = {
+  title: 'Order',
+}
 
 const Order = ({ params }: PageParams) => {
-  return <Heading>Order {params.id}</Heading>
+  return <OrderId>Order {params.id}</OrderId>
 }
 
 export default Order

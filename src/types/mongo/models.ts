@@ -10,6 +10,7 @@ import {
 import { CartItem } from 'types/mongo/documents'
 import { Review, Product } from 'types/product'
 import { CartItem as CartSchemaType, User } from 'types/user'
+import { Order as OrderSchema } from 'types/order'
 import { CartItem as CartItemType, Review as ReviewType } from 'types/api'
 
 type WithUserId<T> = T & {
@@ -51,3 +52,4 @@ export type CartSchema = OmitId<CartSchemaType>
 
 export type ProductModel = Model<ProductSchema>
 export type UserModel = Model<UserSchema>
+export type OrderModel = Model<OrderSchema>

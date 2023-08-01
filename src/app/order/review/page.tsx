@@ -52,12 +52,10 @@ const OrderReview = async () => {
         <CartTotal>
           <h2>Total: ${totalPrice}</h2>
           <PlaceOrder
-            order={{
-              orderItems: cartItems,
-              address,
-              paymentMethod,
-              totalPrice,
-            }}
+            orderItems={cartItems}
+            address={address}
+            paymentMethod={paymentMethod}
+            totalPrice={totalPrice}
           />
         </CartTotal>
       </Container>

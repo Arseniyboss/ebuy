@@ -7,6 +7,7 @@ import {
 } from './omitters'
 import { Review as ReviewType, Product as ProductType } from './product'
 import { CartItem as CartItemType, User as UserType } from './user'
+import { Order as OrderType } from './order'
 
 type WithId<T> = T & {
   _id: string
@@ -30,6 +31,8 @@ export interface Review extends WithUserId<OmitUserId<ReviewType>> {
 export interface Product extends OmitReviews<WithId<ProductType>> {
   reviews: Review[]
 }
+
+export type Order = WithId<OmitId<OrderType>>
 
 export type GetProductsData = {
   products: Product[]
