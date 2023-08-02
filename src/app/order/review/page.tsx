@@ -37,12 +37,12 @@ const OrderReview = async () => {
           <h1>Order Review</h1>
           <h2>Order Details</h2>
           <OrderDetails>
-            <p>Delivery Date: {deliveryDate}</p>
-            <p>Street: {address.street}</p>
-            <p>Country: {address.country}</p>
-            <p>City: {address.city}</p>
-            <p>Postal Code: {address.postalCode}</p>
-            <p>Payment Method: {paymentMethod}</p>
+            <p data-testid='delivery-date'>Delivery Date: {deliveryDate}</p>
+            <p data-testid='street'>Street: {address.street}</p>
+            <p data-testid='country'>Country: {address.country}</p>
+            <p data-testid='city'>City: {address.city}</p>
+            <p data-testid='postal-code'>Postal Code: {address.postalCode}</p>
+            <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
           </OrderDetails>
           <h2>Order Items</h2>
           {cartItems.map((cartItem) => (
@@ -50,7 +50,7 @@ const OrderReview = async () => {
           ))}
         </OrderSummary>
         <CartTotal>
-          <h2>Total: ${totalPrice}</h2>
+          <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
           <PlaceOrder
             orderItems={cartItems}
             address={address}

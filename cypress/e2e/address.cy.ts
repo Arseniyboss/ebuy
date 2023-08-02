@@ -8,6 +8,16 @@ after(() => {
 
 describe('Address Page', () => {
   describe('given the user address already exists', () => {
+    beforeEach(() => {
+      cy.login({ email: 'kyle@gmail.com', password: '123456' })
+      cy.visit('/address')
+    })
+
+    it('gets checkout steps', () => {
+      cy.verifyLink('payment-link', '/payment')
+      cy.assertDisabledLink('order-review-link')
+    })
+
     it('gets the user address', () => {
       cy.login({ email: 'kyle@gmail.com', password: '123456' })
       cy.visit('/address')
@@ -30,6 +40,11 @@ describe('Address Page', () => {
     beforeEach(() => {
       cy.login({ email: 'jane@gmail.com', password: '123456' })
       cy.visit('/address')
+    })
+
+    it('gets checkout steps', () => {
+      cy.assertDisabledLink('payment-link')
+      cy.assertDisabledLink('order-review-link')
     })
 
     it('submits the form with empty input fields and shows error messages', () => {

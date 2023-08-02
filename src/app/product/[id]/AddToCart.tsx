@@ -45,7 +45,7 @@ const AddToCart = ({ product, user }: Props) => {
   }
 
   return countInStock === 0 ? (
-    <ProductStatus>Out Of Stock</ProductStatus>
+    <ProductStatus data-testid='product-status'>Out Of Stock</ProductStatus>
   ) : (
     <>
       <FlexGroup>

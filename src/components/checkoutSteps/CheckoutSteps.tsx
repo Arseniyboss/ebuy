@@ -11,11 +11,21 @@ type Props = {
 const CheckoutSteps = ({ user, center }: Props) => {
   return (
     <Container $center={center}>
-      <NavLink href='/address'>Address</NavLink>
-      <NavLink href='/payment' disabled={!user.address}>
+      <NavLink href='/address' data-testid='address-link'>
+        Address
+      </NavLink>
+      <NavLink
+        href='/payment'
+        disabled={!user.address}
+        data-testid='payment-link'
+      >
         Payment
       </NavLink>
-      <NavLink href='/order/review' disabled={!user.paymentMethod}>
+      <NavLink
+        href='/order/review'
+        disabled={!user.paymentMethod}
+        data-testid='order-review-link'
+      >
         Review
       </NavLink>
     </Container>

@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { Product } from '../../src/types/api'
+
 Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
 })
@@ -42,8 +44,26 @@ Cypress.Commands.add('assertDisabled', (testId) => {
   cy.getByTestId(testId).should('be.disabled')
 })
 
+Cypress.Commands.add('assertDisabledLink', (testId) => {
+  cy.getByTestId(testId).should('have.css', 'pointer-events', 'none')
+})
+
 Cypress.Commands.add('assertChecked', (testId) => {
   cy.getByTestId(testId).should('be.checked')
+})
+
+Cypress.Commands.add('assertCountInStock', (productId, countInStock) => {
+  cy.request(`/api/products/${productId}`).then((response) => {
+    const product: Product = response.body
+    expect(product.countInStock).to.equal(countInStock)
+
+    if (countInStock === 0) {
+      cy.assertText('product-status', 'Out Of Stock')
+    } else {
+      cy.getByTestId('product-quantity').should('contain', countInStock)
+      cy.getByTestId('product-quantity').should('not.contain', countInStock + 1)
+    }
+  })
 })
 
 Cypress.Commands.add('typeInto', (dataId, text) => {

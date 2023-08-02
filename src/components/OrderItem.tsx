@@ -15,11 +15,18 @@ const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
   return (
     <Container>
       <Link href={`/product/${_id}`}>
-        <ItemImage src={image} height={153} width={192} alt={name} priority />
+        <ItemImage
+          src={image}
+          height={153}
+          width={192}
+          alt={name}
+          priority
+          data-testid='item-image'
+        />
       </Link>
       <ItemDetails>
-        <ItemName>{name}</ItemName>
-        <p>
+        <ItemName data-testid='item-name'>{name}</ItemName>
+        <p data-testid='item-total-price'>
           {quantity} x ${price} = ${totalPrice}
         </p>
       </ItemDetails>

@@ -52,7 +52,11 @@ const PlaceOrder = ({
     revalidateTag('product')
   }
   return (
-    <CheckoutButton disabled={loading} onClick={placeOrder}>
+    <CheckoutButton
+      disabled={loading}
+      onClick={placeOrder}
+      data-testid='place-order-button'
+    >
       Place Order
     </CheckoutButton>
   )

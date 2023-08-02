@@ -8,9 +8,17 @@ after(() => {
 
 describe('Payment Method Page', () => {
   describe('given the payment method already exists', () => {
-    it('gets the payment method', () => {
+    beforeEach(() => {
       cy.login({ email: 'robert@gmail.com', password: '123456' })
       cy.visit('/payment')
+    })
+
+    it('gets checkout steps', () => {
+      cy.verifyLink('address-link', '/address')
+      cy.verifyLink('order-review-link', '/order/review')
+    })
+
+    it('gets the payment method', () => {
       cy.assertChecked('stripe-input')
     })
   })
@@ -19,6 +27,11 @@ describe('Payment Method Page', () => {
     beforeEach(() => {
       cy.login({ email: 'kyle@gmail.com', password: '123456' })
       cy.visit('/payment')
+    })
+
+    it('gets checkout steps', () => {
+      cy.verifyLink('address-link', '/address')
+      cy.assertDisabledLink('order-review-link')
     })
 
     it('submits the form without payment method and shows an error message', () => {

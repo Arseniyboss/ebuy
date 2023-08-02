@@ -28,7 +28,12 @@ declare global {
       assertEmpty(testId: string): Chainable<Element>
       assertLength(testId: string, value: number): Chainable<Element>
       assertDisabled(testId: string): Chainable<Element>
+      assertDisabledLink(testId: string): Chainable<Element>
       assertChecked(testId: string): Chainable<Element>
+      assertCountInStock(
+        productId: string,
+        countInStock: number
+      ): Chainable<Element>
       typeInto(dataId: string, text: string): Chainable<Element>
       selectOption({
         testId,
