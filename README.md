@@ -10,8 +10,8 @@ Fullstack e-commerce website built with NextJS
 - Framework: **NextJS**
 - Styling: **Styled Components**
 - Database: **MongoDB**
-- API Route Tests: **Jest**
-- E2E Tests: **Cypress**
+- API Route Testing: **Jest**
+- E2E Testing: **Cypress**
 
 ## Commands
 
