@@ -4,20 +4,17 @@ import { getTotalPrice } from '../../src/utils/getTotalPrice'
 import { formatPrice } from '../../src/utils/formatPrice'
 
 before(() => {
+  cy.task('seedUsers')
   cy.task('seedProducts')
 })
 
 beforeEach(() => {
-  cy.task('seedUsers')
   cy.login({ email: 'robert@gmail.com', password: '123456' })
   cy.visit('/order/review')
 })
 
-afterEach(() => {
-  cy.task('deleteUsers')
-})
-
 after(() => {
+  cy.task('deleteUsers')
   cy.task('deleteProducts')
 })
 
@@ -63,44 +60,39 @@ describe('Order Review Page', () => {
     })
   })
 
-  describe('after placing the order', () => {
-    it('creates order', () => {
-      cy.intercept('POST', '/api/orders').as('createOrder')
-      cy.getByTestId('place-order-button').click()
+  it('places the order', () => {
+    const productIds = ['62dbfa7f31c12b460f19f2b1', '62dbfa7f31c12b460f19f2b2']
 
-      cy.wait('@createOrder').then(({ response }) => {
-        const { statusCode, body } = response
-        const { _id }: Order = body
+    cy.intercept('POST', '/api/orders').as('createOrder')
+    cy.intercept('PATCH', '/api/products/*').as('updateStock')
+    cy.intercept('DELETE', '/api/cart').as('clearCart')
 
-        expect(statusCode).to.equal(201)
-        cy.verifyUrl(`/order/${_id}`)
-      })
+    cy.getByTestId('place-order-button').click()
+
+    cy.wait('@createOrder').then(({ response }) => {
+      const { statusCode, body } = response
+      const { _id }: Order = body
+
+      expect(statusCode).to.equal(201)
+      cy.verifyUrl(`/order/${_id}`)
     })
 
-    it('updates stock', () => {
-      const id1 = '62dbfa7f31c12b460f19f2b1'
-      const id2 = '62dbfa7f31c12b460f19f2b2'
+    cy.wait('@updateStock').then(({ response }) => {
+      expect(response.statusCode).to.equal(200)
 
-      cy.getByTestId('place-order-button').click()
+      cy.visit(`/product/${productIds[0]}`)
+      cy.assertCountInStock(productIds[0], 0)
 
-      cy.visit(`/product/${id1}`)
-      cy.assertCountInStock(id1, 0)
-
-      cy.visit(`/product/${id2}`)
-      cy.assertCountInStock(id2, 9)
+      cy.visit(`/product/${productIds[1]}`)
+      cy.assertCountInStock(productIds[1], 9)
     })
 
-    it('clears cart', () => {
-      cy.intercept('DELETE', '/api/cart').as('clearCart')
-      cy.getByTestId('place-order-button').click()
+    cy.wait('@clearCart').then(({ response }) => {
+      expect(response.statusCode).to.equal(200)
 
-      cy.wait('@clearCart').then(({ response }) => {
-        expect(response.statusCode).to.equal(200)
-
-        cy.visit('/cart')
-        cy.getMessage('info-message', 'Your cart is empty')
-        cy.assertLength('cart-item', 0)
-      })
+      cy.visit('/cart')
+      cy.getMessage('info-message', 'Your cart is empty')
+      cy.assertLength('cart-item', 0)
     })
   })
 })

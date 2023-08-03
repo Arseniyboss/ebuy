@@ -1,7 +1,5 @@
 import { getTotalPrice } from '../../src/utils/getTotalPrice'
 
-const id = '62dbfa7f31c12b460f19f2b1'
-
 before(() => {
   cy.task('seedUsers')
 })
@@ -55,7 +53,7 @@ describe('Cart Page', () => {
     })
 
     it('updates cart item', () => {
-      cy.intercept('PATCH', `/api/cart/${id}`).as('updateCartItem')
+      cy.intercept('PATCH', '/api/cart/*').as('updateCartItem')
 
       cy.selectOption({
         testId: 'product-quantity',
@@ -71,7 +69,7 @@ describe('Cart Page', () => {
     })
 
     it('deletes cart item', () => {
-      cy.intercept('DELETE', `/api/cart/${id}`).as('deleteCartItem')
+      cy.intercept('DELETE', '/api/cart/*').as('deleteCartItem')
 
       cy.getByTestId('delete-button').eq(0).click()
 
