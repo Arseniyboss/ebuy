@@ -5,7 +5,7 @@ import { decodeToken } from '@auth/decodeToken/cookies'
 import { getDeliveryDate } from '@utils/getDeliveryDate'
 import { getTotalPrice } from '@utils/getTotalPrice'
 import { Container, CartTotal } from '@app/cart/styles'
-import { OrderSummary, OrderDetails } from './styles'
+import { OrderDetails } from '@app/order/styles'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 import OrderItem from '@components/OrderItem'
 import PlaceOrder from './PlaceOrder'
@@ -33,22 +33,20 @@ const OrderReview = async () => {
     <>
       <Container>
         <CheckoutSteps user={payload!} center={true} />
-        <OrderSummary>
-          <h1>Order Review</h1>
-          <h2>Order Details</h2>
-          <OrderDetails>
-            <p data-testid='delivery-date'>Delivery Date: {deliveryDate}</p>
-            <p data-testid='street'>Street: {address.street}</p>
-            <p data-testid='country'>Country: {address.country}</p>
-            <p data-testid='city'>City: {address.city}</p>
-            <p data-testid='postal-code'>Postal Code: {address.postalCode}</p>
-            <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
-          </OrderDetails>
-          <h2>Order Items</h2>
-          {cartItems.map((cartItem) => (
-            <OrderItem key={cartItem._id} {...cartItem} />
-          ))}
-        </OrderSummary>
+        <h1>Order Review</h1>
+        <h2>Order Details</h2>
+        <OrderDetails>
+          <p data-testid='delivery-date'>Delivery Date: {deliveryDate}</p>
+          <p data-testid='street'>Street: {address.street}</p>
+          <p data-testid='country'>Country: {address.country}</p>
+          <p data-testid='city'>City: {address.city}</p>
+          <p data-testid='postal-code'>Postal Code: {address.postalCode}</p>
+          <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
+        </OrderDetails>
+        <h2>Order Items</h2>
+        {cartItems.map((cartItem) => (
+          <OrderItem key={cartItem._id} {...cartItem} />
+        ))}
         <CartTotal>
           <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
           <PlaceOrder

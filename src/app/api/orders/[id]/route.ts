@@ -7,7 +7,7 @@ import Order from '@models/order'
 export const GET = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const order = await Order.findById(params.id).populate('userId', [
+  const order = await Order.findById(params.id).populate('user', [
     'name',
     'email',
   ])

@@ -1,9 +1,11 @@
 import {
   OmitId,
   OmitUserId,
+  OmitUser,
   OmitPassword,
   OmitReviews,
   OmitCartItems,
+  OmitOrderItems,
 } from './omitters'
 import { Review as ReviewType, Product as ProductType } from './product'
 import { CartItem as CartItemType, User as UserType } from './user'
@@ -32,7 +34,14 @@ export interface Product extends OmitReviews<WithId<ProductType>> {
   reviews: Review[]
 }
 
-export type Order = WithId<OmitId<OrderType>>
+export interface Order
+  extends OmitOrderItems<OmitUser<WithId<OmitId<OrderType>>>> {
+  orderItems: CartItem[]
+  user: {
+    name: string
+    email: string
+  }
+}
 
 export type GetProductsData = {
   products: Product[]

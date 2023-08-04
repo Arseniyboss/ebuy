@@ -4,7 +4,7 @@ import { Order as Data } from 'types/api'
 import { CartItem } from 'types/user'
 import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/orders/route'
-import { seedUsers, getOrders } from '@config/mongoMemoryServer'
+import { seedUsers, seedOrders, getOrders } from '@config/mongoMemoryServer'
 import { generatePayload } from '@auth/generatePayload'
 import { generateToken } from '@auth/generateToken'
 import { getTotalPrice } from '@utils/getTotalPrice'
@@ -55,7 +55,10 @@ const createOrder = async (payload = defaultPayload) => {
   }
 }
 
-beforeAll(async () => await seedUsers())
+beforeAll(async () => {
+  await seedUsers()
+  await seedOrders()
+})
 
 describe('POST /api/orders', () => {
   describe('given the user does not exist', () => {
@@ -72,15 +75,14 @@ describe('POST /api/orders', () => {
       const { status, order } = await createOrder()
 
       const orders = await getOrders()
-      const orderItems = stringifyItemsId(order.orderItems)
 
       expect(status).toBe(201)
 
       expect(orders.length).toBe(initialOrders.length + 1)
 
-      expect(order.userId.toString()).toBe(user._id.toString())
+      expect(order.user.toString()).toBe(user._id.toString())
 
-      expect(orderItems).toEqual(cartItems)
+      expect(order.orderItems).toEqual(cartItems)
       expect(order.address).toEqual(address)
       expect(order.paymentMethod).toEqual(paymentMethod)
       expect(order.totalPrice).toEqual(totalPrice)

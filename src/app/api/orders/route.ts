@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
     return throwError({ error: 'User not found', status: 404 })
   }
 
-  const order = await Order.create({ ...body, userId: user.id })
+  const order = await Order.create({ ...body, user: user.id })
 
   return NextResponse.json(order, { status: 201 })
 }

@@ -20,7 +20,7 @@ export const ItemImage = styled(Image)`
   border-radius: var(--border-radius);
 
   @media screen and (max-width: ${breakpoints.cart.small}) {
-    width: 270px;
+    width: 90vw;
     height: auto;
     margin-bottom: 1rem;
   }
