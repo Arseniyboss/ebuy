@@ -2,6 +2,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 import products from '@mocks/products'
 import users from '@mocks/users'
+import orders from '@mocks/orders'
 import {
   Data,
   Document,
@@ -37,6 +38,10 @@ export const seedProducts = async () => {
 
 export const seedUsers = async () => {
   await seedCollection('users', users)
+}
+
+export const seedOrders = async () => {
+  await seedCollection('orders', orders)
 }
 
 const getDocuments = <T>(name: string) => {
