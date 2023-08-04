@@ -2,8 +2,10 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import Product from '@models/product'
 import User from '@models/user'
+import Order from '@models/order'
 import products from '@mocks/products'
 import users from '@mocks/users'
+import orders from '@mocks/orders'
 
 dotenv.config()
 
@@ -36,4 +38,14 @@ export const seedUsers = async () => {
 export const deleteUsers = async () => {
   if (process.env.CYPRESS_TEST !== 'true') return
   await User.deleteMany()
+}
+
+export const seedOrders = async () => {
+  if (process.env.CYPRESS_TEST !== 'true') return
+  await Order.insertMany(orders)
+}
+
+export const deleteOrders = async () => {
+  if (process.env.CYPRESS_TEST !== 'true') return
+  await Order.deleteMany()
 }

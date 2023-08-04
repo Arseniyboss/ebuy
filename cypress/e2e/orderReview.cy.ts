@@ -26,8 +26,8 @@ describe('Order Review Page', () => {
 
   it('gets user order', () => {
     cy.getUser().then((response) => {
-      const { status, body } = response
-      const { address, paymentMethod, cartItems } = body
+      const { status, body: user } = response
+      const { address, paymentMethod, cartItems } = user
 
       const deliveryDate = getDeliveryDate()
       const totalPrice = getTotalPrice(cartItems)
@@ -35,6 +35,8 @@ describe('Order Review Page', () => {
       expect(status).to.equal(200)
 
       cy.assertText('delivery-date', `Delivery Date: ${deliveryDate}`)
+      cy.assertText('username', `Username: ${user.name}`)
+      cy.assertText('email', `Email: ${user.email}`)
       cy.assertText('street', `Street: ${address.street}`)
       cy.assertText('country', `Country: ${address.country}`)
       cy.assertText('city', `City: ${address.city}`)

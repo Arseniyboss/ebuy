@@ -5,6 +5,8 @@ import {
   deleteProducts,
   seedUsers,
   deleteUsers,
+  seedOrders,
+  deleteOrders,
 } from './src/config/mongodb'
 
 export default defineConfig({
@@ -29,6 +31,14 @@ export default defineConfig({
         },
         deleteUsers: async () => {
           await deleteUsers()
+          return null
+        },
+        seedOrders: async () => {
+          await seedOrders()
+          return null
+        },
+        deleteOrders: async () => {
+          await deleteOrders()
           return null
         },
       })

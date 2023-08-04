@@ -30,9 +30,13 @@ const Order = async ({ params }: PageParams) => {
       <OrderId>Order {order._id}</OrderId>
       <h2>Order Details</h2>
       <OrderDetails>
-        <p data-testid='delivery-date'>
-          Delivery Date: {order.isPaid ? order.deliveryDate : deliveryDate}
-        </p>
+        {order.isDelivered ? (
+          <p data-testid='delivery-date'>Delivered At: {order.deliveredAt}</p>
+        ) : (
+          <p data-testid='delivery-date'>
+            Delivery Date: {order.isPaid ? order.deliveryDate : deliveryDate}
+          </p>
+        )}
         <p data-testid='username'>Username: {user.name}</p>
         <p data-testid='email'>Email: {user.email}</p>
         <p data-testid='street'>Street: {address.street}</p>
