@@ -1,7 +1,6 @@
 import {
   OmitId,
   OmitUserId,
-  OmitUser,
   OmitPassword,
   OmitReviews,
   OmitCartItems,
@@ -34,13 +33,8 @@ export interface Product extends OmitReviews<WithId<ProductType>> {
   reviews: Review[]
 }
 
-export interface Order
-  extends OmitOrderItems<OmitUser<WithId<OmitId<OrderType>>>> {
+export interface Order extends OmitOrderItems<WithId<OmitId<OrderType>>> {
   orderItems: CartItem[]
-  user: {
-    name: string
-    email: string
-  }
 }
 
 export type GetProductsData = {

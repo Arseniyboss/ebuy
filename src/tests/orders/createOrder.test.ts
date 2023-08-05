@@ -80,7 +80,7 @@ describe('POST /api/orders', () => {
 
       expect(orders.length).toBe(initialOrders.length + 1)
 
-      expect(order.user.toString()).toBe(user._id.toString())
+      expect(order.userId.toString()).toBe(user._id.toString())
 
       expect(order.orderItems).toEqual(cartItems)
       expect(order.address).toEqual(address)

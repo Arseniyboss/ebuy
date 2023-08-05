@@ -1,7 +1,5 @@
 import { Order } from '../../src/types/api'
 import { getDeliveryDate } from '../../src/utils/getDeliveryDate'
-import { getTotalPrice } from '../../src/utils/getTotalPrice'
-import { formatPrice } from '../../src/utils/formatPrice'
 
 before(() => {
   cy.task('seedUsers')
@@ -30,35 +28,14 @@ describe('Order Review Page', () => {
       const { address, paymentMethod, cartItems } = user
 
       const deliveryDate = getDeliveryDate()
-      const totalPrice = getTotalPrice(cartItems)
 
       expect(status).to.equal(200)
 
-      cy.assertText('delivery-date', `Delivery Date: ${deliveryDate}`)
-      cy.assertText('username', `Username: ${user.name}`)
-      cy.assertText('email', `Email: ${user.email}`)
-      cy.assertText('street', `Street: ${address.street}`)
-      cy.assertText('country', `Country: ${address.country}`)
-      cy.assertText('city', `City: ${address.city}`)
-      cy.assertText('postal-code', `Postal Code: ${address.postalCode}`)
-      cy.assertText('payment-method', `Payment Method: ${paymentMethod}`)
-
-      cy.getImage('item-image')
-
-      cartItems.forEach((cartItem, index) => {
-        const { name, quantity, price } = cartItem
-
-        const totalPrice = formatPrice(quantity * price)
-
-        cy.assertText('item-name', name, index)
-        cy.assertText(
-          'item-total-price',
-          `${quantity} x $${price} = $${totalPrice}`,
-          index
-        )
-      })
-
-      cy.assertText('total-price', `Total: $${totalPrice}`)
+      cy.assertDeliveryDate(deliveryDate)
+      cy.assertAddress(address)
+      cy.assertPaymentMethod(paymentMethod)
+      cy.assertOrderItems(cartItems)
+      cy.assertTotalPrice(cartItems)
     })
   })
 

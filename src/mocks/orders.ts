@@ -6,7 +6,7 @@ const { ObjectId } = Types
 const orders: Order[] = [
   {
     _id: new ObjectId('62dbfa7f31c12b460f19f2c1'),
-    user: new ObjectId('62dbfa7f31c12b460f19f2a5'),
+    userId: new ObjectId('62dbfa7f31c12b460f19f2a5'),
     orderItems: [
       {
         _id: new ObjectId('62dbfa7f31c12b460f19f2b1'),

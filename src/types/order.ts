@@ -2,7 +2,7 @@ import { Types } from 'mongoose'
 import { CartItem, Address, PaymentMethod } from './user'
 
 export type Order = {
-  user: Types.ObjectId
+  userId: Types.ObjectId
   orderItems: CartItem[]
   address: Address
   paymentMethod: PaymentMethod

@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
 import { Product } from '../../src/types/api'
+import { formatPrice } from '../../src/utils/formatPrice'
+import { getTotalPrice } from '../../src/utils/getTotalPrice'
 
 Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
@@ -50,6 +52,55 @@ Cypress.Commands.add('assertDisabledLink', (testId) => {
 
 Cypress.Commands.add('assertChecked', (testId) => {
   cy.getByTestId(testId).should('be.checked')
+})
+
+Cypress.Commands.add('assertTotalPrice', (items) => {
+  const totalPrice = getTotalPrice(items)
+  cy.assertText('total-price', `Total: $${totalPrice}`)
+})
+
+Cypress.Commands.add('assertDeliveryDate', (deliveryDate) => {
+  cy.assertText('delivery-date', `Delivery Date: ${deliveryDate}`)
+})
+
+Cypress.Commands.add('assertAddress', (address) => {
+  cy.assertText('street', `Street: ${address.street}`)
+  cy.assertText('country', `Country: ${address.country}`)
+  cy.assertText('city', `City: ${address.city}`)
+  cy.assertText('postal-code', `Postal Code: ${address.postalCode}`)
+})
+
+Cypress.Commands.add('assertPaymentMethod', (paymentMethod) => {
+  cy.assertText('payment-method', `Payment Method: ${paymentMethod}`)
+})
+
+Cypress.Commands.add('assertCartItems', (cartItems) => {
+  cy.getImage('product-image')
+
+  cartItems.forEach((cartItem, index) => {
+    const { name, price, quantity } = cartItem
+
+    cy.assertText('product-name', name, index)
+    cy.assertText('product-price', `$${price}`, index)
+    cy.assertValue('product-quantity', quantity.toString(), index)
+  })
+})
+
+Cypress.Commands.add('assertOrderItems', (orderItems) => {
+  cy.getImage('item-image')
+
+  orderItems.forEach((orderItems, index) => {
+    const { name, quantity, price } = orderItems
+
+    const totalPrice = formatPrice(quantity * price)
+
+    cy.assertText('item-name', name, index)
+    cy.assertText(
+      'item-total-price',
+      `${quantity} x $${price} = $${totalPrice}`,
+      index
+    )
+  })
 })
 
 Cypress.Commands.add('assertCountInStock', (productId, countInStock) => {

@@ -6,6 +6,7 @@ import { getDeliveryDate } from '@utils/getDeliveryDate'
 import { getTotalPrice } from '@utils/getTotalPrice'
 import { Container, CartTotal } from '@app/cart/styles'
 import { OrderDetails, OrderId } from '@app/order/styles'
+import Address from '@app/order/Address'
 import Message from '@components/message/Message'
 import OrderItem from '@components/OrderItem'
 
@@ -20,7 +21,7 @@ const Order = async ({ params }: PageParams) => {
     return notFound()
   }
 
-  const { user, address, paymentMethod, orderItems } = order
+  const { address, paymentMethod, orderItems } = order
 
   const deliveryDate = getDeliveryDate()
   const totalPrice = getTotalPrice(orderItems)
@@ -37,12 +38,7 @@ const Order = async ({ params }: PageParams) => {
             Delivery Date: {order.isPaid ? order.deliveryDate : deliveryDate}
           </p>
         )}
-        <p data-testid='username'>Username: {user.name}</p>
-        <p data-testid='email'>Email: {user.email}</p>
-        <p data-testid='street'>Street: {address.street}</p>
-        <p data-testid='country'>Country: {address.country}</p>
-        <p data-testid='city'>City: {address.city}</p>
-        <p data-testid='postal-code'>Postal Code: {address.postalCode}</p>
+        <Address {...address} />
         <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
       </OrderDetails>
       {order.isDelivered ? (

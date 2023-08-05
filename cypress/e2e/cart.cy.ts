@@ -1,5 +1,3 @@
-import { getTotalPrice } from '../../src/utils/getTotalPrice'
-
 before(() => {
   cy.task('seedUsers')
 })
@@ -34,21 +32,10 @@ describe('Cart Page', () => {
         const { status, body } = response
         const { cartItems } = body
 
-        const totalPrice = getTotalPrice(cartItems)
-
         expect(status).to.equal(200)
 
-        cy.getImage('product-image')
-
-        cartItems.forEach((cartItem, index) => {
-          const { name, price, quantity } = cartItem
-
-          cy.assertText('product-name', name, index)
-          cy.assertText('product-price', `$${price}`, index)
-          cy.assertValue('product-quantity', quantity.toString(), index)
-        })
-
-        cy.assertText('total-price', `Total: $${totalPrice}`)
+        cy.assertCartItems(cartItems)
+        cy.assertTotalPrice(cartItems)
       })
     })
 

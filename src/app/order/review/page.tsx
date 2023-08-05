@@ -7,6 +7,7 @@ import { getTotalPrice } from '@utils/getTotalPrice'
 import { Container, CartTotal } from '@app/cart/styles'
 import { OrderDetails } from '@app/order/styles'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
+import Address from '@app/order/Address'
 import OrderItem from '@components/OrderItem'
 import PlaceOrder from './PlaceOrder'
 
@@ -37,12 +38,7 @@ const OrderReview = async () => {
         <h2>Order Details</h2>
         <OrderDetails>
           <p data-testid='delivery-date'>Delivery Date: {deliveryDate}</p>
-          <p data-testid='username'>Username: {user.name}</p>
-          <p data-testid='email'>Email: {user.email}</p>
-          <p data-testid='street'>Street: {address.street}</p>
-          <p data-testid='country'>Country: {address.country}</p>
-          <p data-testid='city'>City: {address.city}</p>
-          <p data-testid='postal-code'>Postal Code: {address.postalCode}</p>
+          <Address {...address} />
           <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
         </OrderDetails>
         <h2>Order Items</h2>

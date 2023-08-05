@@ -1,5 +1,6 @@
 import { UserLoginParams } from '../../src/types/params'
-import { User } from '../../src/types/api'
+import { CartItem, User } from '../../src/types/api'
+import { Address, PaymentMethod } from '../../src/types/user'
 
 type SelectOption = {
   testId: string
@@ -11,7 +12,7 @@ type SelectOption = {
 declare global {
   namespace Cypress {
     interface Chainable {
-      getByTestId(testId: string): Chainable<void>
+      getByTestId(testId: string): Chainable<Element>
       getMessage(testId: string, value: string): Chainable<Element>
       getTemporaryMessage(testId: string, value: string): Chainable<Element>
       getImage(testId: string): Chainable<Element>
@@ -30,6 +31,12 @@ declare global {
       assertDisabled(testId: string): Chainable<Element>
       assertDisabledLink(testId: string): Chainable<Element>
       assertChecked(testId: string): Chainable<Element>
+      assertTotalPrice(items: CartItem[]): Chainable<Element>
+      assertDeliveryDate(deliveryDate: string): Chainable<Element>
+      assertAddress(address: Address): Chainable<Element>
+      assertPaymentMethod(paymentMethod: PaymentMethod): Chainable<Element>
+      assertCartItems(cartItem: CartItem[]): Chainable<Element>
+      assertOrderItems(orderItems: CartItem[]): Chainable<Element>
       assertCountInStock(
         productId: string,
         countInStock: number

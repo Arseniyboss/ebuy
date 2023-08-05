@@ -1,6 +1,5 @@
 export type OmitId<T> = Omit<T, '_id'>
 export type OmitUserId<T> = Omit<T, 'userId'>
-export type OmitUser<T> = Omit<T, 'user'>
 export type OmitPassword<T> = Omit<T, 'password'>
 export type OmitCartItems<T> = Omit<T, 'cartItems'>
 export type OmitOrderItems<T> = Omit<T, 'orderItems'>
