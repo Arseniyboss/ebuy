@@ -40,17 +40,17 @@ const Order = async ({ params }: PageParams) => {
         )}
         <Address {...address} />
         <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
+        {order.isDelivered ? (
+          <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+        ) : (
+          <Message variant='error'>Not Delivered</Message>
+        )}
+        {order.isPaid ? (
+          <Message variant='success'>Paid on {order.paidAt}</Message>
+        ) : (
+          <Message variant='error'>Not Paid</Message>
+        )}
       </OrderDetails>
-      {order.isDelivered ? (
-        <Message variant='success'>Delivered on {order.deliveredAt}</Message>
-      ) : (
-        <Message variant='error'>Not Delivered</Message>
-      )}
-      {order.isPaid ? (
-        <Message variant='success'>Paid on {order.paidAt}</Message>
-      ) : (
-        <Message variant='error'>Not Paid</Message>
-      )}
       <h2>Order Items</h2>
       {orderItems.map((orderItem) => (
         <OrderItem key={orderItem._id} {...orderItem} />
