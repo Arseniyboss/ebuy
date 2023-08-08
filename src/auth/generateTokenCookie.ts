@@ -11,7 +11,7 @@ export const generateTokenCookie = async (payload: UserPayload) => {
     maxAge: hour,
     secure: process.env.NODE_ENV !== 'development',
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: 'lax', // stops stripe from resetting token cookie
   })
   return tokenCookie.toString()
 }

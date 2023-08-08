@@ -29,6 +29,7 @@ Fullstack e-commerce website built with NextJS
 | spec=[filename] npm run e2e:headless | runs the specified e2e test in terminal |
 | npm run compile                      | detects typescript errors               |
 | npm run update:latest                | updates dependencies to latest versions |
+| npm run webhook                      | tests stripe webhook locally            |
 
 ## Pages
 

@@ -10,6 +10,7 @@ import Address from '@app/order/Address'
 import Message from '@components/message/Message'
 import OrderItem from '@components/OrderItem'
 import PayPalButton from './PayPalButton'
+import StripeButton from './StripeButton'
 
 export const metadata: Metadata = {
   title: 'Order',
@@ -61,7 +62,9 @@ const Order = async ({ params }: PageParams) => {
         {!order.isPaid && (
           <>
             {paymentMethod === 'PayPal' && <PayPalButton amount={totalPrice} />}
-            {paymentMethod === 'Stripe' && <div>Stripe Form</div>}
+            {paymentMethod === 'Stripe' && (
+              <StripeButton orderItems={orderItems} />
+            )}
           </>
         )}
       </CartTotal>
