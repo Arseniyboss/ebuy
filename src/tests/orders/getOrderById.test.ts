@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { Order } from 'types/api'
 import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/orders/[id]/route'
-import { seedUsers, seedOrders } from '@config/mongoMemoryServer'
+import { seedOrders } from '@config/mongoMemoryServer'
 import { fakeOrderId } from '@mocks/fakeData'
 import orders from '@mocks/orders'
 
@@ -14,10 +14,7 @@ const getOrderById = async (id: string) => {
   return { status: response.status, statusText: response.statusText, order }
 }
 
-beforeAll(async () => {
-  await seedUsers()
-  await seedOrders()
-})
+beforeAll(async () => await seedOrders())
 
 describe('GET /api/orders/:id', () => {
   describe('given the orders does not exist', () => {
