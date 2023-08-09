@@ -30,14 +30,13 @@ export const SkeletonBody = styled.div`
   background: lightgrey;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 1.9rem;
+  gap: 1rem;
+  padding: 2.3rem;
 `
 
 export const SkeletonText = styled.div<Props>`
-  width: ${({ $long }) => ($long ? '80%' : '50%')};
-  height: 30px;
   background: var(--skeleton-background);
-  border-radius: 5px;
-  margin: 0.4rem 0;
+  border-radius: var(--border-radius);
+  width: ${({ $long }) => ($long ? '80%' : '50%')};
+  padding: 1rem;
 `

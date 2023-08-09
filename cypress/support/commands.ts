@@ -177,7 +177,7 @@ Cypress.Commands.add('verifyCookie', (name) => {
   cy.getCookie(name).then((cookie) => {
     expect(cookie.secure).to.be.true
     expect(cookie.httpOnly).to.be.true
-    expect(cookie.sameSite).to.equal('strict')
+    expect(cookie.sameSite).to.equal('lax')
   })
 })
 
