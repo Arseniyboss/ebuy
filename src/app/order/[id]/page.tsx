@@ -61,9 +61,11 @@ const Order = async ({ params }: PageParams) => {
         <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
         {!order.isPaid && (
           <>
-            {paymentMethod === 'PayPal' && <PayPalButton amount={totalPrice} />}
+            {paymentMethod === 'PayPal' && (
+              <PayPalButton amount={totalPrice} orderId={order._id} />
+            )}
             {paymentMethod === 'Stripe' && (
-              <StripeButton orderItems={orderItems} />
+              <StripeButton orderItems={orderItems} orderId={order._id} />
             )}
           </>
         )}

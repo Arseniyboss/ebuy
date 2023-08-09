@@ -4,9 +4,14 @@ import { stripe } from '@utils/stripe'
 import { getStripeItems } from '@utils/getStripeItems'
 import { throwError } from '@utils/throwError'
 
+type Body = {
+  orderItems: CartItem[]
+  orderId: string
+}
+
 export const POST = async (request: NextRequest) => {
   const orderUrl = request.headers.get('referer')!
-  const orderItems: CartItem[] = await request.json()
+  const { orderItems, orderId }: Body = await request.json()
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -14,6 +19,7 @@ export const POST = async (request: NextRequest) => {
     line_items: getStripeItems(orderItems),
     cancel_url: orderUrl,
     success_url: orderUrl,
+    metadata: { orderId },
   })
 
   if (!session) {

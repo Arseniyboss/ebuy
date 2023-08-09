@@ -8,6 +8,7 @@ import { createCheckoutSession } from '@api/stripe/createCheckoutSession'
 
 type Props = {
   orderItems: CartItem[]
+  orderId: string
 }
 
 // To test payment success:
@@ -16,13 +17,13 @@ type Props = {
 // 2.click Stripe Checkout button
 // 3.complete the payment to see 'Payment Successful!' in the console
 
-const StripeButton = ({ orderItems }: Props) => {
+const StripeButton = ({ orderItems, orderId }: Props) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleStripe = async () => {
     setLoading(true)
-    const sessionUrl = await createCheckoutSession(orderItems)
+    const sessionUrl = await createCheckoutSession(orderItems, orderId)
     if (!sessionUrl) {
       return setLoading(false)
     }
