@@ -1,7 +1,7 @@
 import { BASE_URL } from '@baseUrl'
 
-export const markAsPaid = async (id: string) => {
-  const response = await fetch(`${BASE_URL}/api/orders/${id}/markAsPaid`, {
+export const updateOrderToPaid = async (id: string) => {
+  const response = await fetch(`${BASE_URL}/api/orders/${id}/updateToPaid`, {
     method: 'PUT',
   })
 

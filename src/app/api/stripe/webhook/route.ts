@@ -1,7 +1,7 @@
 import Stripe from 'stripe'
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@utils/stripe'
-import { markAsPaid } from '@api/orders/markAsPaid'
+import { updateOrderToPaid } from '@api/orders/updateOrderToPaid'
 import { revalidateTag } from '@api/revalidateTag'
 
 type Metadata = {
@@ -20,7 +20,7 @@ export const POST = async (request: NextRequest) => {
     const metadata = session.metadata as Metadata
     const orderId = metadata.orderId
 
-    await markAsPaid(orderId)
+    await updateOrderToPaid(orderId)
     await revalidateTag('order')
   }
 

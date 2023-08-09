@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
-import { markAsPaid } from '@api/orders/markAsPaid'
+import { updateOrderToPaid } from '@api/orders/updateOrderToPaid'
 import { revalidateTag } from '@api/revalidateTag'
 
 type Props = {
@@ -31,7 +31,7 @@ const PayPalButton = ({ amount, orderId }: Props) => {
         }}
         onApprove={async (_, actions) => {
           await actions.order?.capture()
-          await markAsPaid(orderId)
+          await updateOrderToPaid(orderId)
           await revalidateTag('order')
           router.refresh()
         }}

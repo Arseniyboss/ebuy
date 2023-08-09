@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { BASE_URL } from '@baseUrl'
-import { PUT } from '@app/api/orders/[id]/markAsPaid/route'
+import { PUT } from '@app/api/orders/[id]/updateToPaid/route'
 import { seedOrders, getOrders } from '@config/mongoMemoryServer'
 import { getCurrentDate } from '@utils/getCurrentDate'
 import { getDeliveryDate } from '@utils/getDeliveryDate'
@@ -9,8 +9,8 @@ import orders from '@mocks/orders'
 
 const orderId = orders[0]._id.toString()
 
-const markAsPaid = async (id: string) => {
-  const url = `${BASE_URL}/api/orders/${id}/markAsPaid`
+const updateOrderToPaid = async (id: string) => {
+  const url = `${BASE_URL}/api/orders/${id}/updateToPaid`
   const request = new NextRequest(url)
   const response = await PUT(request, { params: { id } })
   return { status: response.status, statusText: response.statusText }
@@ -18,10 +18,10 @@ const markAsPaid = async (id: string) => {
 
 beforeAll(async () => await seedOrders())
 
-describe('PUT /api/orders/:id/markAsPaid', () => {
+describe('PUT /api/orders/:id/updateToPaid', () => {
   describe('given the orders does not exist', () => {
     it('returns status code 404', async () => {
-      const { status, statusText } = await markAsPaid(fakeOrderId)
+      const { status, statusText } = await updateOrderToPaid(fakeOrderId)
 
       expect(status).toBe(404)
       expect(statusText).toBe('Order not found')
@@ -29,8 +29,8 @@ describe('PUT /api/orders/:id/markAsPaid', () => {
   })
 
   describe('given the order exists', () => {
-    it('returns status code 200 and marks the order as paid', async () => {
-      const { status } = await markAsPaid(orderId)
+    it('returns status code 200 and updates order to paid', async () => {
+      const { status } = await updateOrderToPaid(orderId)
       const orders = await getOrders()
 
       const order = orders[0]
