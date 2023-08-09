@@ -24,5 +24,5 @@ export const POST = async (request: NextRequest) => {
     await revalidateTag('order')
   }
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json(null)
 }
