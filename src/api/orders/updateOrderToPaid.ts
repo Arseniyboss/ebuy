@@ -1,8 +1,18 @@
 import { BASE_URL } from '@baseUrl'
+import { getToken } from '@auth/getToken'
 
-export const updateOrderToPaid = async (id: string) => {
-  const response = await fetch(`${BASE_URL}/api/orders/${id}/updateToPaid`, {
+export const updateOrderToPaid = async (
+  orderId: string,
+  sessionId?: string
+) => {
+  const url = `${BASE_URL}/api/orders/${orderId}/updateToPaid`
+  const token = await getToken()
+
+  const response = await fetch(url, {
     method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token || sessionId}`,
+    },
   })
 
   if (!response.ok) {

@@ -1,9 +1,19 @@
 import { Order } from 'types/api'
 import { BASE_URL } from '@baseUrl'
+import { getToken } from '@auth/getToken'
 
 export const getOrderById = async (id: string) => {
   const url = `${BASE_URL}/api/orders/${id}`
-  const response = await fetch(url, { next: { tags: ['order'] } })
+  const token = await getToken()
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    next: {
+      tags: ['order'],
+    },
+  })
 
   if (!response.ok) return
 
