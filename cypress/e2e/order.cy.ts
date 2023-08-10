@@ -1,5 +1,3 @@
-import { Order } from '../../src/types/api'
-
 const id = '62dbfa7f31c12b460f19f2c1'
 
 before(() => {
@@ -19,9 +17,9 @@ after(() => {
 
 describe('Order Page', () => {
   it('gets user order', () => {
-    cy.request(`/api/orders/${id}`).then((response) => {
+    cy.getOrder(id).then((response) => {
       const { status, body } = response
-      const { address, paymentMethod, orderItems }: Order = body
+      const { address, paymentMethod, orderItems } = body
 
       expect(status).to.equal(200)
 

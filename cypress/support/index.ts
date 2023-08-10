@@ -1,5 +1,5 @@
 import { UserLoginParams } from '../../src/types/params'
-import { CartItem, User } from '../../src/types/api'
+import { CartItem, User, Order } from '../../src/types/api'
 import { Address, PaymentMethod } from '../../src/types/user'
 
 type SelectOption = {
@@ -63,6 +63,7 @@ declare global {
       login(userCredentials: UserLoginParams): Chainable<Element>
       logout(): Chainable<Element>
       getUser(): Chainable<Response<User>>
+      getOrder(id: string): Chainable<Response<Order>>
     }
   }
 }

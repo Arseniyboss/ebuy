@@ -47,4 +47,5 @@ select {
 
 textarea {
   resize: none;
+  font-family: inherit;
 }
