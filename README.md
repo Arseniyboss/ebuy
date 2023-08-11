@@ -46,7 +46,7 @@ Fullstack e-commerce website built with NextJS
 | Address     |    ✅     |       ✅       | ✅  |    ✅    |
 | Payment     |    ✅     |       ✅       | ✅  |    ✅    |
 | OrderReview |    ✅     |       ✅       | ✅  |    ✅    |
-| Order       |    ❌     |       ❌       | ✅  |    ❌    |
+| Order       |    ✅     |       ✅       | ✅  |    ❌    |
 | UserOrders  |    ❌     |       ❌       | ❌  |    ❌    |
 | Orders      |    ❌     |       ❌       | ❌  |    ❌    |
 
