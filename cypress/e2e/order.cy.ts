@@ -30,9 +30,30 @@ describe('Order Page', () => {
     })
   })
 
+  // cy.getMessage('error-message', 'Not Paid')
+  // cy.getMessage('error-message', 'Not Delivered')
+
+  // cy.getMessage('success-message', `Paid on ${date}`)
+  // cy.getMessage('success-message', `Delivered on ${date}`)
+
+  // cy.getByTestId('paypal-button')
+  // cy.getByTestId('stripe-button')
+  // cy.getByTestId('admin-button')
+
   // describe('gets order delivery address and status messages', () => {
   //   it('given the order is not paid', () => {})
   //   it('given the order is paid but not delivered', () => {})
   //   it('given the order is paid and delivered', () => {})
+  // })
+
+  // describe('tests payment', () => {
+  //   describe('updates order to paid', () => {
+  //     it('given the payment method is PayPal', () => {})
+  //     it('given the payment method is Stripe', () => {})
+  //   })
+  // })
+
+  // describe('given the user is an admin', () => {
+  //   it('updates order to delivered', () => {})
   // })
 })

@@ -54,8 +54,8 @@ describe('GET /api/orders/:id', () => {
     })
 
     describe('given the order exists', () => {
-      describe('given the order does not belong to the current user', () => {
-        describe('given the current user is not an admin', () => {
+      describe('given the order does not belong to the user', () => {
+        describe('given the user is not an admin', () => {
           it('returns status code 404', async () => {
             const payload = generatePayload(users[3])
 
@@ -66,7 +66,7 @@ describe('GET /api/orders/:id', () => {
           })
         })
 
-        describe('given the current user is an admin', () => {
+        describe('given the user is an admin', () => {
           it('returns status code 200 and the order', async () => {
             const payload = generatePayload(users[0])
             const { status, order } = await getOrderById(orderId, payload)
@@ -77,7 +77,7 @@ describe('GET /api/orders/:id', () => {
         })
       })
 
-      describe('given the order belongs to the current user', () => {
+      describe('given the order belongs to the user', () => {
         it('returns status code 200 and the order', async () => {
           const { status, order } = await getOrderById(orderId)
 

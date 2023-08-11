@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { updateOrderToPaid } from '@api/orders/updateOrderToPaid'
-import { revalidateTag } from '@api/revalidateTag'
 
 type Props = {
   amount: number
@@ -17,6 +16,7 @@ const PayPalButton = ({ amount, orderId }: Props) => {
       options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
     >
       <PayPalButtons
+        data-testid='paypal-button'
         style={{ layout: 'horizontal', height: 45, tagline: false }}
         createOrder={(_, { order }) => {
           return order.create({
@@ -32,7 +32,6 @@ const PayPalButton = ({ amount, orderId }: Props) => {
         onApprove={async (_, actions) => {
           await actions.order?.capture()
           await updateOrderToPaid(orderId)
-          await revalidateTag('order')
           router.refresh()
         }}
       />
