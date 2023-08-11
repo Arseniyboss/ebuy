@@ -13,7 +13,11 @@ declare global {
   namespace Cypress {
     interface Chainable {
       getByTestId(testId: string): Chainable<Element>
-      getMessage(testId: string, value: string): Chainable<Element>
+      getMessage(
+        testId: string,
+        value: string,
+        index?: number
+      ): Chainable<Element>
       getTemporaryMessage(testId: string, value: string): Chainable<Element>
       getImage(testId: string): Chainable<Element>
       assertText(

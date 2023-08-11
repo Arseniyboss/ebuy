@@ -8,8 +8,8 @@ Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
 })
 
-Cypress.Commands.add('getMessage', (dataId, value) => {
-  cy.getByTestId(dataId).should('have.text', value)
+Cypress.Commands.add('getMessage', (dataId, value, index = 0) => {
+  cy.getByTestId(dataId).eq(index).should('have.text', value)
 })
 
 Cypress.Commands.add('getTemporaryMessage', (dataId, value) => {

@@ -1,13 +1,11 @@
+import { getDeliveryDate } from './../../src/utils/getDeliveryDate'
+import { getCurrentDate } from '../../src/utils/getCurrentDate'
+
 const id = '62dbfa7f31c12b460f19f2c1'
 
 before(() => {
   cy.task('seedUsers')
   cy.task('seedOrders')
-})
-
-beforeEach(() => {
-  cy.login({ email: 'robert@gmail.com', password: '123456' })
-  cy.visit(`/order/${id}`)
 })
 
 after(() => {
@@ -16,44 +14,83 @@ after(() => {
 })
 
 describe('Order Page', () => {
-  it('gets user order', () => {
-    cy.getOrder(id).then((response) => {
-      const { status, body } = response
-      const { address, paymentMethod, orderItems } = body
+  describe('given the user is not an admin', () => {
+    beforeEach(() => {
+      cy.login({ email: 'robert@gmail.com', password: '123456' })
+    })
 
-      expect(status).to.equal(200)
+    it('gets user order', () => {
+      cy.visit(`/order/${id}`)
 
-      cy.assertAddress(address)
-      cy.assertPaymentMethod(paymentMethod)
-      cy.assertOrderItems(orderItems)
-      cy.assertTotalPrice(orderItems)
+      cy.getOrder(id).then((response) => {
+        const { status, body } = response
+        const { address, paymentMethod, orderItems } = body
+
+        expect(status).to.equal(200)
+
+        cy.assertAddress(address)
+        cy.assertPaymentMethod(paymentMethod)
+        cy.assertOrderItems(orderItems)
+        cy.assertTotalPrice(orderItems)
+      })
+    })
+
+    describe('gets order delivery address and status messages', () => {
+      it('given the order is not paid', () => {
+        cy.visit(`/order/${id}`)
+
+        const deliveryDate = getDeliveryDate()
+
+        cy.assertDeliveryDate(deliveryDate)
+
+        cy.getMessage('error-message', 'Not Paid')
+        cy.getMessage('error-message', 'Not Delivered', 1)
+      })
+
+      it('given the order is paid but not delivered', () => {
+        const id = '62dbfa7f31c12b460f19f2c2'
+        cy.visit(`/order/${id}`)
+
+        cy.getOrder(id).then((response) => {
+          const { paidAt, deliveryDate } = response.body
+
+          cy.assertDeliveryDate(deliveryDate)
+
+          cy.getMessage('success-message', `Paid on ${paidAt}`)
+          cy.getMessage('error-message', 'Not Delivered')
+        })
+      })
+
+      it('given the order is paid and delivered', () => {
+        const id = '62dbfa7f31c12b460f19f2c3'
+        cy.visit(`/order/${id}`)
+
+        cy.getOrder(id).then((response) => {
+          const { paidAt, deliveredAt } = response.body
+          cy.getMessage('success-message', `Paid on ${paidAt}`)
+          cy.getMessage('success-message', `Delivered on ${deliveredAt}`, 1)
+        })
+      })
     })
   })
 
-  // cy.getMessage('error-message', 'Not Paid')
-  // cy.getMessage('error-message', 'Not Delivered')
+  describe('given the user is an admin', () => {
+    it('updates order to delivered', () => {
+      const id = '62dbfa7f31c12b460f19f2c2'
+      cy.intercept('PUT', `/api/orders/${id}/updateToDelivered`).as(
+        'updateOrderToDelivered'
+      )
+      cy.login({ email: 'admin@gmail.com', password: '123456' })
+      cy.visit(`/order/${id}`)
 
-  // cy.getMessage('success-message', `Paid on ${date}`)
-  // cy.getMessage('success-message', `Delivered on ${date}`)
+      cy.getByTestId('admin-button').click()
 
-  // cy.getByTestId('paypal-button')
-  // cy.getByTestId('stripe-button')
-  // cy.getByTestId('admin-button')
+      cy.wait('@updateOrderToDelivered').then(({ response }) => {
+        expect(response.statusCode).to.equal(200)
 
-  // describe('gets order delivery address and status messages', () => {
-  //   it('given the order is not paid', () => {})
-  //   it('given the order is paid but not delivered', () => {})
-  //   it('given the order is paid and delivered', () => {})
-  // })
-
-  // describe('tests payment', () => {
-  //   describe('updates order to paid', () => {
-  //     it('given the payment method is PayPal', () => {})
-  //     it('given the payment method is Stripe', () => {})
-  //   })
-  // })
-
-  // describe('given the user is an admin', () => {
-  //   it('updates order to delivered', () => {})
-  // })
+        const currentDate = getCurrentDate()
+        cy.getMessage('success-message', `Delivered on ${currentDate}`, 1)
+      })
+    })
+  })
 })

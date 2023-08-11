@@ -16,7 +16,6 @@ const PayPalButton = ({ amount, orderId }: Props) => {
       options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
     >
       <PayPalButtons
-        data-testid='paypal-button'
         style={{ layout: 'horizontal', height: 45, tagline: false }}
         createOrder={(_, { order }) => {
           return order.create({
