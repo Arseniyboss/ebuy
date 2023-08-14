@@ -4,10 +4,11 @@ import { useState } from 'react'
 import { useDebounce } from '@hooks/useDebounce'
 import { useQueryParams } from '@hooks/useQueryParams'
 import { useUpdateEffect } from '@hooks/useUpdateEffect'
+import { HomeQueryParams } from 'types/params'
 import { SearchInput } from './styles'
 
 const Search = () => {
-  const { queryParams, setQueryParams } = useQueryParams()
+  const { queryParams, setQueryParams } = useQueryParams<HomeQueryParams>()
   const [search, setSearch] = useState(queryParams.search)
   const debouncedSearch = useDebounce(search)
 

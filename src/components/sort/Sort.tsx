@@ -2,10 +2,11 @@
 
 import { ChangeEvent, useState } from 'react'
 import { useQueryParams } from '@hooks/useQueryParams'
+import { HomeQueryParams } from 'types/params'
 import { Select } from './styles'
 
 const Sort = () => {
-  const { queryParams, setQueryParams } = useQueryParams()
+  const { queryParams, setQueryParams } = useQueryParams<HomeQueryParams>()
   const [sort, setSort] = useState(queryParams.sort)
 
   const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {

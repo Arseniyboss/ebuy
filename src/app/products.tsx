@@ -1,4 +1,4 @@
-import { QueryParams } from 'types/params'
+import { HomeQueryParams as QueryParams } from 'types/params'
 import { getProducts } from '@api/products/getProducts'
 import { SearchFailText, ProductContainer } from './styles'
 import Product from '@components/product/Product'

@@ -13,3 +13,5 @@ export type Order = {
   deliveredAt?: string
   deliveryDate?: string
 }
+
+export type UserOrdersStatus = 'pay' | ''

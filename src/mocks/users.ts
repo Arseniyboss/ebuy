@@ -109,6 +109,21 @@ const users: User[] = [
     },
     paymentMethod: 'Stripe',
   },
+  {
+    _id: new ObjectId('62dbfa7f31c12b460f19f2a6'),
+    name: 'Mike',
+    email: 'mike@gmail.com',
+    password: hashSync('123456', 10),
+    isAdmin: false,
+    cartItems: [],
+    address: {
+      street: 'Street',
+      country: 'Country',
+      city: 'City',
+      postalCode: 'Postal Code',
+    },
+    paymentMethod: 'Stripe',
+  },
 ]
 
 export default users

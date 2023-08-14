@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { QueryParams } from 'types/params'
+import { HomeQueryParams as QueryParams } from 'types/params'
 import { Heading } from '@styles/globals'
 import { FlexGroup } from './styles'
 import Search from '@components/search/Search'

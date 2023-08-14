@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
-import { QueryParams } from 'types/params'
-import { Product, GetProductsData } from 'types/api'
+import { HomeQueryParams } from 'types/params'
+import { Product, GetProductsData as Data } from 'types/api'
 import { SortOrder, SortKey } from 'types/sort'
 import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/products/route'
@@ -16,11 +16,11 @@ const getProducts = async ({
   page = 1,
   search = '',
   sort = 'createdAt.desc',
-}: QueryParams = {}) => {
+}: HomeQueryParams = {}) => {
   const url = `${BASE_URL}/api/products?page=${page}&search=${search}&sort=${sort}`
   const request = new NextRequest(url)
   const response = await GET(request)
-  const { products, pages }: GetProductsData = await response.json()
+  const { products, pages }: Data = await response.json()
   return { status: response.status, products, pages }
 }
 

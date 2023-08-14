@@ -1,5 +1,6 @@
 import { CartItem } from 'types/api'
 import { Address, PaymentMethod } from 'types/user'
+import { UserOrdersStatus } from './order'
 
 export type PageParams = {
   params: {
@@ -7,10 +8,15 @@ export type PageParams = {
   }
 }
 
-export type QueryParams = {
+export type HomeQueryParams = {
   page?: number
   search?: string
   sort?: string
+}
+
+export type UserOrdersQueryParams = {
+  page?: number
+  status?: UserOrdersStatus
 }
 
 export type UserLoginParams = {

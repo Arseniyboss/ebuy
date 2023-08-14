@@ -58,6 +58,13 @@ const orders: Order[] = [
     isDelivered: true,
     deliveredAt: '12.08.2023',
   },
+  {
+    ...baseOrder,
+    userId: new ObjectId('62dbfa7f31c12b460f19f2a6'),
+    _id: new ObjectId('62dbfa7f31c12b460f19f2c4'),
+    isPaid: false,
+    isDelivered: false,
+  },
 ]
 
 export default orders
