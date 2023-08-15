@@ -1,7 +1,7 @@
 'use client'
 
 import { useQueryParams } from '@hooks/useQueryParams'
-import { HomeQueryParams } from 'types/params'
+import { QueryParams } from 'types/params'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { PaginationContainer, PaginationButton } from './styles'
 import { getValidPage } from '@utils/validateQueryParams'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Pagination = ({ pages }: Props) => {
-  const { queryParams, setQueryParams } = useQueryParams<HomeQueryParams>()
+  const { queryParams, setQueryParams } = useQueryParams<QueryParams>()
   const page = getValidPage(Number(queryParams.page), pages)
   return (
     <PaginationContainer>

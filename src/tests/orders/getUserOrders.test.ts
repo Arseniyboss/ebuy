@@ -80,7 +80,7 @@ describe('GET /api/orders', () => {
     describe('given the status is applied', () => {
       it('returns status code 200 and filtered user orders', async () => {
         const { status, orders } = await getUserOrders(payload, {
-          status: 'pay',
+          status: 'not-paid',
         })
 
         expect(status).toBe(200)

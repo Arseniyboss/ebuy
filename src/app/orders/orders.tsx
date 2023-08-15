@@ -1,13 +1,23 @@
 import { notFound } from 'next/navigation'
+import { Status } from 'types/order'
 import { UserOrdersQueryParams } from 'types/params'
 import { getUserOrders } from '@api/orders/getUserOrders'
 import { Table } from '@styles/table'
 import Message from '@components/message/Message'
+import OrderFilter from '@components/orderFilter/OrderFilter'
 import Order from '@components/Order'
+import Pagination from '@components/pagination/Pagination'
 
 type Props = {
   searchParams: UserOrdersQueryParams
 }
+
+const statuses: Status[] = [
+  {
+    name: 'not-paid',
+    label: 'Not Paid',
+  },
+]
 
 const Orders = async ({ searchParams }: Props) => {
   const data = await getUserOrders(searchParams)
@@ -22,6 +32,7 @@ const Orders = async ({ searchParams }: Props) => {
     <Message variant='info'>No orders</Message>
   ) : (
     <>
+      <OrderFilter statuses={statuses} />
       <Table>
         <thead>
           <tr>
@@ -38,7 +49,7 @@ const Orders = async ({ searchParams }: Props) => {
           ))}
         </tbody>
       </Table>
-      {/* <Pagination pages={pages} /> */}
+      <Pagination pages={pages} />
     </>
   )
 }

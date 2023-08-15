@@ -14,4 +14,9 @@ export type Order = {
   deliveryDate?: string
 }
 
-export type UserOrdersStatus = 'pay' | ''
+export type UserOrdersStatus = 'not-paid' | ''
+
+export type Status = {
+  name: UserOrdersStatus
+  label: string
+}

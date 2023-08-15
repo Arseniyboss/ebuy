@@ -8,14 +8,16 @@ export type PageParams = {
   }
 }
 
-export type HomeQueryParams = {
+export interface QueryParams {
   page?: number
+}
+
+export interface HomeQueryParams extends QueryParams {
   search?: string
   sort?: string
 }
 
-export type UserOrdersQueryParams = {
-  page?: number
+export interface UserOrdersQueryParams extends QueryParams {
   status?: UserOrdersStatus
 }
 

@@ -26,7 +26,7 @@ export const GET = async (request: NextRequest) => {
     isPaid: false,
   }
 
-  const filterQuery = status === 'pay' ? filters : { userId: user.id }
+  const filterQuery = status === 'not-paid' ? filters : { userId: user.id }
 
   const ordersPerPage = 2
   const numberOfOrders = await Order.countDocuments(filterQuery)
