@@ -137,6 +137,9 @@ describe('Home Page', () => {
       cy.getByTestId('user-initials').click()
       cy.verifyLink('profile-link', '/profile')
 
+      // cy.getByTestId('user-initials').click()
+      // cy.verifyLink('orders-link', '/orders')
+
       cy.getByTestId('user-initials').click()
       cy.getByTestId('logout-text').click()
 

@@ -1,7 +1,6 @@
 'use client'
 
 import styled from 'styled-components'
-import Link from 'next/link'
 import { Button } from '@styles/globals'
 
 export const Container = styled.div`
@@ -32,12 +31,8 @@ export const CartTotal = styled.div`
   }
 `
 
-export const CheckoutLink = styled(Link)`
-  display: flex;
-  flex-direction: column;
-`
-
 export const CheckoutButton = styled(Button)`
   background-color: var(--gray);
   padding: 0.8rem 1.5rem;
+  text-align: center;
 `

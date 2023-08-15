@@ -40,6 +40,11 @@ const Avatar = ({ initials }: Props) => {
             </Link>
           </li>
           <li>
+            <Link href='/orders' data-testid='orders-link'>
+              <DropdownText>Orders</DropdownText>
+            </Link>
+          </li>
+          <li>
             <DropdownText onClick={handleLogout} data-testid='logout-text'>
               Logout
             </DropdownText>

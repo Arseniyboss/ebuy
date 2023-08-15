@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { HomeQueryParams as QueryParams } from 'types/params'
+import { HomeQueryParams } from 'types/params'
 import { Heading } from '@styles/globals'
 import { FlexGroup } from './styles'
 import Search from '@components/search/Search'
@@ -8,7 +8,7 @@ import SkeletonLoaders from './skeletons'
 import Products from './products'
 
 type Props = {
-  searchParams: QueryParams
+  searchParams: HomeQueryParams
 }
 
 const Home = ({ searchParams }: Props) => {
