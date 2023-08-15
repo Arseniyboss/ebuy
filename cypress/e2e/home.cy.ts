@@ -1,9 +1,8 @@
-import { Product } from '../../src/types/api'
+import { GetProductsData as Body } from '../../src/types/api'
 
 before(() => {
   cy.task('seedProducts')
   cy.task('seedUsers')
-  cy.request('/api/revalidate?tag=products')
 })
 
 beforeEach(() => {
@@ -20,10 +19,10 @@ describe('Home Page', () => {
     const url = "/api/products?page=1&search=''&sort=createdAt.desc"
 
     cy.request(url).then((response) => {
-      const { status, body } = response
-      const products: Product[] = body.products
+      const body: Body = response.body
+      const { products } = body
 
-      expect(status).to.equal(200)
+      expect(response.status).to.equal(200)
       expect(products.length).to.equal(4)
 
       cy.getImage('product-image')
@@ -137,8 +136,8 @@ describe('Home Page', () => {
       cy.getByTestId('user-initials').click()
       cy.verifyLink('profile-link', '/profile')
 
-      // cy.getByTestId('user-initials').click()
-      // cy.verifyLink('orders-link', '/orders')
+      cy.getByTestId('user-initials').click()
+      cy.verifyLink('orders-link', '/orders')
 
       cy.getByTestId('user-initials').click()
       cy.getByTestId('logout-text').click()

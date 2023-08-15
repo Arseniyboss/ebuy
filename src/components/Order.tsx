@@ -10,13 +10,17 @@ const Order = ({
   deliveredAt,
 }: Props) => {
   return (
-    <tr>
-      <td>{_id}</td>
-      <td>${totalPrice}</td>
-      <td>{isPaid ? paidAt : <Cross />}</td>
-      <td>{isDelivered ? deliveredAt : <Cross />}</td>
+    <tr data-testid='order'>
+      <td data-testid='order-id'>{_id}</td>
+      <td data-testid='order-total-price'>${totalPrice}</td>
+      <td data-testid='order-paid-status'>{isPaid ? paidAt : <Cross />}</td>
+      <td data-testid='order-delivered-status'>
+        {isDelivered ? deliveredAt : <Cross />}
+      </td>
       <td>
-        <OrderLink href={`/order/${_id}`}>Details</OrderLink>
+        <OrderLink href={`/order/${_id}`} data-testid='order-link'>
+          Details
+        </OrderLink>
       </td>
     </tr>
   )

@@ -238,3 +238,16 @@ Cypress.Commands.add('getOrder', (id) => {
     })
   })
 })
+
+Cypress.Commands.add('getUserOrders', ({ page = 1, status = '' } = {}) => {
+  cy.getCookie('token').then((cookie) => {
+    const token = cookie.value
+    cy.request({
+      method: 'GET',
+      url: `/api/orders/?page=${page}&status=${status}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  })
+})

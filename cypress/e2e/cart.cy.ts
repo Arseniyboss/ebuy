@@ -23,7 +23,7 @@ describe('Cart Page', () => {
     })
 
     it('navigates to the checkout page', () => {
-      cy.getByTestId('checkout-button').click()
+      cy.getByTestId('checkout-link').click()
       cy.verifyUrl('/address')
     })
 

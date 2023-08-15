@@ -14,6 +14,7 @@ beforeEach(() => {
 after(() => {
   cy.task('deleteUsers')
   cy.task('deleteProducts')
+  cy.task('deleteOrders')
 })
 
 describe('Order Review Page', () => {
