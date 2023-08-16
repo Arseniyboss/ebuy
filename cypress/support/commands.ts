@@ -103,6 +103,49 @@ Cypress.Commands.add('assertOrderItems', (orderItems) => {
   })
 })
 
+Cypress.Commands.add('assertOrders', (response) => {
+  const { status, body } = response
+  const { orders } = body
+
+  expect(status).to.equal(200)
+  expect(orders.length).to.equal(2)
+
+  orders.forEach((order, index) => {
+    cy.assertText('order-id', order._id, index)
+    cy.assertText('order-total-price', `$${order.totalPrice}`, index)
+
+    if (order.isPaid) {
+      cy.assertText('order-paid-status', order.paidAt, index)
+    }
+
+    if (order.isDelivered) {
+      cy.assertText('order-delivered-status', order.deliveredAt, index)
+    }
+  })
+
+  cy.verifyFirstDynamicLink('order-link', `/order/${orders[0]._id}`)
+})
+
+Cypress.Commands.add('assertPaginatedOrders', (number) => {
+  cy.assertDisabled('left-arrow')
+
+  cy.getByTestId('right-arrow').click()
+  cy.assertDisabled('right-arrow')
+  cy.getByTestId('left-arrow').should('not.be.disabled')
+
+  cy.assertLength('order', number.secondPage)
+
+  cy.getByTestId('left-arrow').click()
+
+  cy.assertLength('order', number.firstPage)
+})
+
+Cypress.Commands.add('assertFilterOrders', (orders) => {
+  cy.getByTestId('order-id').each((element, index) => {
+    expect(element[index]).to.have.text(orders[index]._id)
+  })
+})
+
 Cypress.Commands.add('assertCountInStock', (productId, countInStock) => {
   cy.request(`/api/products/${productId}`).then((response) => {
     const product: Product = response.body
@@ -245,6 +288,19 @@ Cypress.Commands.add('getUserOrders', ({ page = 1, status = '' } = {}) => {
     cy.request({
       method: 'GET',
       url: `/api/orders/?page=${page}&status=${status}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  })
+})
+
+Cypress.Commands.add('getOrders', ({ page = 1, status = '' } = {}) => {
+  cy.getCookie('token').then((cookie) => {
+    const token = cookie.value
+    cy.request({
+      method: 'GET',
+      url: `/api/admin/orders/?page=${page}&status=${status}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

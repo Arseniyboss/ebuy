@@ -1,6 +1,6 @@
 import { CartItem } from 'types/api'
 import { Address, PaymentMethod } from 'types/user'
-import { UserOrdersStatus } from './order'
+import { UserOrdersStatus, OrdersStatus } from './order'
 
 export type PageParams = {
   params: {
@@ -19,6 +19,10 @@ export interface HomeQueryParams extends QueryParams {
 
 export interface UserOrdersQueryParams extends QueryParams {
   status?: UserOrdersStatus
+}
+
+export interface OrdersQueryParams extends QueryParams {
+  status?: OrdersStatus
 }
 
 export type UserLoginParams = {

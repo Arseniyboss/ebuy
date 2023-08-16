@@ -19,7 +19,7 @@ export const PUT = async (request: NextRequest, { params }: PageParams) => {
   }
 
   if (!user.isAdmin) {
-    return throwError({ error: 'Not authorized', status: 404 })
+    return throwError({ error: 'Not authorized', status: 401 })
   }
 
   if (!order) {

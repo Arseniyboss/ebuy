@@ -128,22 +128,35 @@ describe('Home Page', () => {
       cy.verifyNavLink('home-nav-link', '/')
     })
 
-    it('user dropdown', () => {
-      cy.login({ email: 'john@gmail.com', password: '123456' })
+    describe('user dropdown', () => {
+      afterEach(() => {
+        cy.getByTestId('user-initials').click()
+        cy.verifyLink('profile-link', '/profile')
 
-      cy.assertText('user-initials', 'JD')
+        cy.getByTestId('user-initials').click()
+        cy.getByTestId('logout-text').click()
 
-      cy.getByTestId('user-initials').click()
-      cy.verifyLink('profile-link', '/profile')
+        cy.getCookie('token').then((cookie) => {
+          expect(cookie).to.be.null
+        })
+      })
 
-      cy.getByTestId('user-initials').click()
-      cy.verifyLink('orders-link', '/orders')
+      it('given the user is an admin', () => {
+        cy.login({ email: 'admin@gmail.com', password: '123456' })
 
-      cy.getByTestId('user-initials').click()
-      cy.getByTestId('logout-text').click()
+        cy.assertText('user-initials', 'AU')
 
-      cy.getCookie('token').then((cookie) => {
-        expect(cookie).to.be.null
+        cy.getByTestId('user-initials').click()
+        cy.verifyLink('orders-link', '/admin/orders')
+      })
+
+      it('given the user is not an admin', () => {
+        cy.login({ email: 'john@gmail.com', password: '123456' })
+
+        cy.assertText('user-initials', 'JD')
+
+        cy.getByTestId('user-initials').click()
+        cy.verifyLink('orders-link', '/orders')
       })
     })
   })

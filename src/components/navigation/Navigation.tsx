@@ -23,7 +23,10 @@ const Navigation = ({ user }: Props) => {
         </li>
         {user ? (
           <li>
-            <Avatar initials={getUserInitials(user.name)} />
+            <Avatar
+              isAdmin={user.isAdmin}
+              initials={getUserInitials(user.name)}
+            />
           </li>
         ) : (
           <li>

@@ -52,14 +52,14 @@ describe('PUT /api/orders/:id/updateToDelivered', () => {
           payload
         )
 
-        expect(status).toBe(404)
+        expect(status).toBe(401)
         expect(statusText).toBe('Not authorized')
       })
     })
 
     describe('given the user is an admin', () => {
       describe('given the order does not exist', () => {
-        it('returns status code 404', async () => {
+        it('returns status code 401', async () => {
           const { status, statusText } = await updateOrderToDelivered(
             fakeOrderId
           )

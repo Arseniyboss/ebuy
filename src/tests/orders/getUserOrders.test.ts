@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { UserPayload } from 'types/jwtPayload'
-import { GetUserOrdersData as Data } from 'types/api'
-import { UserOrdersQueryParams } from 'types/params'
+import { GetOrdersData as Data } from 'types/api'
+import { UserOrdersQueryParams as QueryParams } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 import { GET } from '@app/api/orders/route'
 import { seedUsers, seedOrders } from '@config/mongoMemoryServer'
@@ -14,7 +14,7 @@ const payload = generatePayload(users[4])
 
 const getUserOrders = async (
   payload: UserPayload,
-  { page = 1, status = '' }: UserOrdersQueryParams = {}
+  { page = 1, status = '' }: QueryParams = {}
 ) => {
   const url = `${BASE_URL}/api/orders?page=${page}&status=${status}`
   const token = await generateToken(payload)

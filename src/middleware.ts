@@ -17,6 +17,10 @@ export const middleware = async (request: NextRequest) => {
     return redirect('/login')
   }
 
+  if (pathname.startsWith('/admin') && !user.isAdmin) {
+    return redirect('/')
+  }
+
   if (pathname === '/address') {
     if (!user.cartItems) {
       return redirect('/cart')
@@ -46,6 +50,7 @@ export const config = {
   matcher: [
     '/profile',
     '/orders',
+    '/admin/orders',
     '/address',
     '/payment',
     '/order/review',

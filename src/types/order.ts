@@ -15,8 +15,6 @@ export type Order = {
 }
 
 export type UserOrdersStatus = 'not-paid' | ''
+export type OrdersStatus = 'not-delivered' | ''
 
-export type Status = {
-  name: UserOrdersStatus
-  label: string
-}
+export type Status = UserOrdersStatus | OrdersStatus

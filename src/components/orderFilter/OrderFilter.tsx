@@ -3,16 +3,18 @@
 import { ChangeEvent, useState } from 'react'
 import { useQueryParams } from '@hooks/useQueryParams'
 import { Status, UserOrdersStatus } from 'types/order'
-import { UserOrdersQueryParams } from 'types/params'
+import { UserOrdersQueryParams as QueryParams } from 'types/params'
 import { StatusSelect } from './styles'
 
 type Props = {
-  statuses: Status[]
+  statuses: {
+    name: Status
+    label: string
+  }[]
 }
 
 const OrderFilter = ({ statuses }: Props) => {
-  const { queryParams, setQueryParams } =
-    useQueryParams<UserOrdersQueryParams>()
+  const { queryParams, setQueryParams } = useQueryParams<QueryParams>()
   const [status, setStatus] = useState(queryParams.status)
 
   const handleStatus = (e: ChangeEvent<HTMLSelectElement>) => {

@@ -42,7 +42,7 @@ export type GetProductsData = {
   pages: number
 }
 
-export type GetUserOrdersData = {
+export type GetOrdersData = {
   orders: Order[]
   pages: number
 }

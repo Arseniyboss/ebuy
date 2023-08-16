@@ -56,12 +56,12 @@ describe('GET /api/orders/:id', () => {
     describe('given the order exists', () => {
       describe('given the order does not belong to the user', () => {
         describe('given the user is not an admin', () => {
-          it('returns status code 404', async () => {
+          it('returns status code 401', async () => {
             const payload = generatePayload(users[3])
 
             const { status, statusText } = await getOrderById(orderId, payload)
 
-            expect(status).toBe(404)
+            expect(status).toBe(401)
             expect(statusText).toBe('Not authorized')
           })
         })

@@ -1,12 +1,21 @@
-import { UserLoginParams, UserOrdersQueryParams } from '../../src/types/params'
-import { CartItem, User, Order, GetUserOrdersData } from '../../src/types/api'
+import {
+  UserLoginParams,
+  UserOrdersQueryParams,
+  OrdersQueryParams,
+} from '../../src/types/params'
+import { CartItem, User, Order, GetOrdersData } from '../../src/types/api'
 import { Address, PaymentMethod } from '../../src/types/user'
 
-type SelectOption = {
+type SelectOptionParams = {
   testId: string
   text: string
   value: string
   index?: number
+}
+
+type AssertPaginatedOrdersParams = {
+  firstPage: number
+  secondPage: number
 }
 
 declare global {
@@ -41,17 +50,17 @@ declare global {
       assertPaymentMethod(paymentMethod: PaymentMethod): Chainable<Element>
       assertCartItems(cartItem: CartItem[]): Chainable<Element>
       assertOrderItems(orderItems: CartItem[]): Chainable<Element>
+      assertOrders(response: Response<GetOrdersData>): Chainable<Element>
+      assertFilterOrders(orders: Order[]): Chainable<Element>
+      assertPaginatedOrders(
+        number: AssertPaginatedOrdersParams
+      ): Chainable<Element>
       assertCountInStock(
         productId: string,
         countInStock: number
       ): Chainable<Element>
       typeInto(dataId: string, text: string): Chainable<Element>
-      selectOption({
-        testId,
-        text,
-        value,
-        index,
-      }: SelectOption): Chainable<Element>
+      selectOption(params: SelectOptionParams): Chainable<Element>
       clearInput(dataId: string): Chainable<Element>
       submitForm(dataId: string): Chainable<Element>
       waitDebounce(): Chainable<Element>
@@ -70,7 +79,10 @@ declare global {
       getOrder(id: string): Chainable<Response<Order>>
       getUserOrders(
         queryParams?: UserOrdersQueryParams
-      ): Chainable<Response<GetUserOrdersData>>
+      ): Chainable<Response<GetOrdersData>>
+      getOrders(
+        queryParams?: OrdersQueryParams
+      ): Chainable<Response<GetOrdersData>>
     }
   }
 }

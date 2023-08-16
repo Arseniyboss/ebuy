@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
-import { UserOrdersStatus } from 'types/order'
-import { UserOrdersQueryParams as QueryParams } from 'types/params'
-import { getUserOrders } from '@api/orders/getUserOrders'
+import { OrdersStatus } from 'types/order'
+import { OrdersQueryParams as QueryParams } from 'types/params'
+import { getOrders } from '@api/orders/getOrders'
 import { Table } from '@styles/table'
 import Message from '@components/message/Message'
 import OrderFilter from '@components/orderFilter/OrderFilter'
@@ -13,19 +13,19 @@ type Props = {
 }
 
 type Status = {
-  name: UserOrdersStatus
+  name: OrdersStatus
   label: string
 }
 
 const statuses: Status[] = [
   {
-    name: 'not-paid',
-    label: 'Not Paid',
+    name: 'not-delivered',
+    label: 'Not Delivered',
   },
 ]
 
-const UserOrders = async ({ searchParams }: Props) => {
-  const data = await getUserOrders(searchParams)
+const Orders = async ({ searchParams }: Props) => {
+  const data = await getOrders(searchParams)
 
   if (!data) {
     return notFound()
@@ -59,4 +59,4 @@ const UserOrders = async ({ searchParams }: Props) => {
   )
 }
 
-export default UserOrders
+export default Orders

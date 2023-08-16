@@ -7,10 +7,11 @@ import { AvatarContainer, UserInitials, Dropdown, DropdownText } from './styles'
 import Link from 'next/link'
 
 type Props = {
+  isAdmin: boolean
   initials: string
 }
 
-const Avatar = ({ initials }: Props) => {
+const Avatar = ({ isAdmin, initials }: Props) => {
   const [isDropdownOpen, toggleDropdown] = useToggle()
 
   const router = useRouter()
@@ -40,7 +41,10 @@ const Avatar = ({ initials }: Props) => {
             </Link>
           </li>
           <li>
-            <Link href='/orders' data-testid='orders-link'>
+            <Link
+              href={isAdmin ? '/admin/orders' : '/orders'}
+              data-testid='orders-link'
+            >
               <DropdownText>Orders</DropdownText>
             </Link>
           </li>

@@ -22,7 +22,7 @@ export const GET = async (request: NextRequest, { params }: PageParams) => {
   }
 
   if (!user.isAdmin && order.userId.toString() !== user.id) {
-    return throwError({ error: 'Not authorized', status: 404 })
+    return throwError({ error: 'Not authorized', status: 401 })
   }
 
   return NextResponse.json(order)
