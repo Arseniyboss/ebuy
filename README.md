@@ -34,27 +34,16 @@ Fullstack e-commerce website built with NextJS
 
 ## Pages
 
-| Page        | API Route | API Route Test | UI  | E2E Test |
-| ----------- | :-------: | :------------: | :-: | :------: |
-| Home        |    ✅     |       ✅       | ✅  |    ✅    |
-| Product     |    ✅     |       ✅       | ✅  |    ✅    |
-| Contact     |    ✅     |       ✅       | ✅  |    ✅    |
-| Login       |    ✅     |       ✅       | ✅  |    ✅    |
-| Register    |    ✅     |       ✅       | ✅  |    ✅    |
-| Profile     |    ✅     |       ✅       | ✅  |    ✅    |
-| Cart        |    ✅     |       ✅       | ✅  |    ✅    |
-| Address     |    ✅     |       ✅       | ✅  |    ✅    |
-| Payment     |    ✅     |       ✅       | ✅  |    ✅    |
-| OrderReview |    ✅     |       ✅       | ✅  |    ✅    |
-| Order       |    ✅     |       ✅       | ✅  |    ✅    |
-| UserOrders  |    ✅     |       ✅       | ✅  |    ✅    |
-| Orders      |    ✅     |       ✅       | ✅  |    ✅    |
-
-## Features
-
-- Product Search
-- Product Sorting
-- Product Pagination
-- Full Featured Shopping Cart
-- Secure Authentication with httpOnly and sameSite cookie
-- Checkout Process: **Address > Payment > Review**
+- Home
+- Product
+- Contact
+- Login
+- Register
+- Profile
+- Cart
+- Address
+- Payment
+- OrderReview
+- Order
+- UserOrders
+- Orders
