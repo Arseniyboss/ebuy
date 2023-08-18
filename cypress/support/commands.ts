@@ -192,6 +192,11 @@ Cypress.Commands.add('verifyUrl', (url) => {
   cy.location('pathname').should('eq', url)
 })
 
+Cypress.Commands.add('verifyProtectedUrl', (url) => {
+  cy.visit(url)
+  cy.verifyUrl('/login')
+})
+
 Cypress.Commands.add('verifyLink', (testId, url) => {
   cy.getByTestId(testId).click()
   cy.verifyUrl(url)
