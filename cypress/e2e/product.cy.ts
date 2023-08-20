@@ -1,5 +1,5 @@
 import { Product } from '../../src/types/api'
-import { formatReviewDate } from '../../src/utils/formatReviewDate'
+import { formatReviewDate } from '../../src/utils/formatters/formatReviewDate'
 
 const id = '62dbfa7f31c12b460f19f2b1'
 

@@ -1,5 +1,5 @@
 import { Review as Props } from 'types/api'
-import { formatReviewDate } from '@utils/formatReviewDate'
+import { formatReviewDate } from '@utils/formatters/formatReviewDate'
 import { ReviewContainer, Comment } from './styles'
 import Rating from '@components/rating/Rating'
 

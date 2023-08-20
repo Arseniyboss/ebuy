@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { CartItem as Props } from 'types/api'
-import { formatPrice } from '@utils/formatPrice'
+import { formatPrice } from '@utils/formatters/formatPrice'
 import {
   Container,
   ItemImage,

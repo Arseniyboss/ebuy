@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getQuantities } from '@utils/getQuantities'
+import { getQuantities } from '@utils/getters/getQuantities'
 import { addCartItem } from '@api/cart/addCartItem'
 import { Product } from 'types/api'
 import { UserPayload } from 'types/jwtPayload'

@@ -1,5 +1,5 @@
-import { getDeliveryDate } from './../../src/utils/getDeliveryDate'
-import { getCurrentDate } from '../../src/utils/getCurrentDate'
+import { getDeliveryDate } from './../../src/utils/getters/getDeliveryDate'
+import { getCurrentDate } from '../../src/utils/getters/getCurrentDate'
 
 const id = '62dbfa7f31c12b460f19f2c1'
 

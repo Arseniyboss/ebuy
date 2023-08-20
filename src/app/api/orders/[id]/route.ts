@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server'
 import { PageParams } from 'types/params'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
-import { throwError } from '@utils/throwError'
+import { throwError } from '@utils/api/throwError'
 import User from '@models/user'
 import Order from '@models/order'
 

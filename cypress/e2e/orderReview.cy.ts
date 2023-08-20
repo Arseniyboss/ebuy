@@ -1,5 +1,5 @@
 import { Order } from '../../src/types/api'
-import { getDeliveryDate } from '../../src/utils/getDeliveryDate'
+import { getDeliveryDate } from '../../src/utils/getters/getDeliveryDate'
 
 before(() => {
   cy.task('seedUsers')

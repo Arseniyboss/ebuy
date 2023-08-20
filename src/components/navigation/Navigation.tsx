@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { UserPayload } from 'types/jwtPayload'
-import { getUserInitials } from '@utils/getUserInitials'
+import { getUserInitials } from '@utils/getters/getUserInitials'
 import { NavLinks, NavLink } from './styles'
 import { FaShoppingCart, FaEnvelope, FaUserCircle } from 'react-icons/fa'
 import Avatar from '@components/avatar/Avatar'

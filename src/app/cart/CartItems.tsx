@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getUser } from '@api/users/getUser'
-import { getTotalPrice } from '@utils/getTotalPrice'
+import { getTotalPrice } from '@utils/getters/getTotalPrice'
 import {
   Container,
   CartItemContainer,

@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { stripe } from '../utils/stripe'
+import { stripe } from '@utils/api/stripe'
 
 export const verifyStripeCheckoutSession = async (request: NextRequest) => {
   const sessionId = request.headers.get('authorization')?.split(' ')[1]

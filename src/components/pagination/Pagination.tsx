@@ -4,7 +4,7 @@ import { useQueryParams } from '@hooks/useQueryParams'
 import { QueryParams } from 'types/params'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { PaginationContainer, PaginationButton } from './styles'
-import { getValidPage } from '@utils/validateQueryParams'
+import { getValidPage } from '@utils/api/validateQueryParams'
 
 type Props = {
   pages: number

@@ -1,5 +1,5 @@
 import { CartItem } from 'types/api'
-import { convertToCents } from './convertToCents'
+import { convertToCents } from '@utils/converters/convertToCents'
 
 export const getStripeItems = (orderItems: CartItem[]) => {
   return orderItems.map((item) => {
