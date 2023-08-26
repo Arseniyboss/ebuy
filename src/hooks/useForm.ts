@@ -9,53 +9,37 @@ import {
 } from 'react'
 import { validate } from '@validation/validate'
 
-export type ValidationSchema<T> = {
-  required?: {
+export type ValidationOptions<T> = {
+  required: {
     value: boolean
     message: string
   }
-  pattern?: {
-    value: RegExp | ((inputValue: string) => boolean)
+  pattern: {
+    value: RegExp
     message: string
   }
-  ref?: {
-    value: keyof T
-    pattern: (currentInputValue: string, refInputValue: string) => boolean
-    message: string
-  }
-  min?: {
+  minLength: {
     value: number
     message: string
   }
-  max?: {
-    value: number
-    message: string
-  }
-  minLength?: {
-    value: number
-    message: string
-  }
-  maxLength?: {
-    value: number
-    message: string
-  }
-  length?: {
-    value: number
-    message: string
-  }
-  match?: {
+  match: {
     ref: keyof T
     message: string
   }
 }
 
-export type FieldValidation<T> = Partial<Record<keyof T, ValidationSchema<T>>>
+type FieldValidation<T> = Record<keyof T, Partial<ValidationOptions<T>>>
+
+export type ValidationSchema<T> = Partial<FieldValidation<T>>
+
 export type Errors<T> = Partial<Record<keyof T, string>>
 
 type SetValues<T> = Dispatch<SetStateAction<T>>
+
 type ChangeEventType = ChangeEvent<
   HTMLInputElement & HTMLTextAreaElement & HTMLSelectElement
 >
+
 type FormEventType = FormEvent<HTMLFormElement>
 
 type ReturnValues<T> = {
@@ -66,10 +50,12 @@ type ReturnValues<T> = {
   handleSubmit: (e: FormEventType) => void
 }
 
-export const useForm = <T>(options: {
+export type Value = string | number
+
+export const useForm = <T extends Record<string, Value>>(options: {
   initialValues: T
   onSubmit: () => void
-  validationSchema?: FieldValidation<T>
+  validationSchema?: ValidationSchema<T>
 }): ReturnValues<T> => {
   const { initialValues, onSubmit, validationSchema } = options
 
@@ -95,8 +81,8 @@ export const useForm = <T>(options: {
   }, [validationSchema, values, isSubmitted, isChanging])
 
   const handleChange = (e: ChangeEventType) => {
-    const { name, value, type, checked } = e.target
-    setValues({ ...values, [name]: type === 'checkbox' ? checked : value })
+    const { name, value } = e.target
+    setValues({ ...values, [name]: value })
     setIsChanging(true)
     setIsSubmitting(false)
   }

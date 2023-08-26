@@ -1,5 +1,4 @@
-import { UserRegisterParams } from 'types/params'
-import { FieldValidation } from '../../hooks/useForm'
+import { ValidationSchema } from '../../hooks/useForm'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
@@ -11,11 +10,14 @@ import {
 } from '@validation/constants/errors'
 import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
 
-interface InitialValues extends UserRegisterParams {
+type InitialValues = {
+  name: string
+  email: string
+  password: string
   confirmPassword: string
 }
 
-export const validationSchema: FieldValidation<InitialValues> = {
+export const validationSchema: ValidationSchema<InitialValues> = {
   name: {
     required: { value: true, message: USERNAME_REQUIRED },
     pattern: { value: USERNAME_PATTERN, message: USERNAME_INVALID },

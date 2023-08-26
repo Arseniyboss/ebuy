@@ -1,10 +1,15 @@
-import { ValidationSchema, FieldValidation, Errors } from '@hooks/useForm'
+import {
+  ValidationOptions,
+  ValidationSchema,
+  Errors,
+  Value,
+} from '@hooks/useForm'
 
-type Field<T> = [keyof T, ValidationSchema<T>]
+type Field<T> = [keyof T, ValidationOptions<T>]
 
-export const validate = <T extends Record<keyof T, any>>(
+export const validate = <T extends Record<keyof T, Value>>(
   values: T,
-  validationSchema: FieldValidation<T>
+  validationSchema: ValidationSchema<T>
 ): Errors<T> => {
   const errors: Errors<T> = {}
 
@@ -26,12 +31,7 @@ export const validate = <T extends Record<keyof T, any>>(
 
     const required = value?.required
     const pattern = value?.pattern
-    const ref = value?.ref
-    const min = value?.min
-    const max = value?.max
-    const length = value?.length
     const minLength = value?.minLength
-    const maxLength = value?.maxLength
     const match = value?.match
 
     if (
@@ -49,7 +49,7 @@ export const validate = <T extends Record<keyof T, any>>(
       values[property] &&
       pattern?.value &&
       ((pattern.value instanceof RegExp &&
-        !pattern.value.test(values[property])) ||
+        !pattern.value.test(values[property].toString())) ||
         (pattern.value instanceof Function &&
           !pattern.value(values[property]))) &&
       typeof pattern.message === 'string'
@@ -58,70 +58,14 @@ export const validate = <T extends Record<keyof T, any>>(
     }
 
     if (
-      options.ref &&
-      values[property] &&
-      ref?.value &&
-      typeof ref.value === 'string' &&
-      ref.pattern instanceof Function &&
-      !ref.pattern(values[property], values[ref.value]) &&
-      typeof ref.message === 'string'
-    ) {
-      errors[property] = ref.message
-    }
-
-    if (
-      options.min &&
-      values[property] &&
-      min?.value &&
-      typeof min.value === 'number' &&
-      parseInt(values[property]) < min.value &&
-      typeof min.message === 'string'
-    ) {
-      errors[property] = min.message
-    }
-
-    if (
-      options.max &&
-      values[property] &&
-      max?.value &&
-      typeof max.value === 'number' &&
-      parseInt(values[property]) > max.value &&
-      typeof max.message === 'string'
-    ) {
-      errors[property] = max.message
-    }
-
-    if (
-      options.length &&
-      values[property] &&
-      length?.value &&
-      typeof length.value === 'number' &&
-      values[property].length !== length.value &&
-      typeof length.message === 'string'
-    ) {
-      errors[property] = length.message
-    }
-
-    if (
       options.minLength &&
       values[property] &&
       minLength?.value &&
       typeof minLength.value === 'number' &&
-      values[property].length < minLength.value &&
+      values[property].toString().length < minLength.value &&
       typeof minLength.message === 'string'
     ) {
       errors[property] = minLength.message
-    }
-
-    if (
-      options.maxLength &&
-      values[property] &&
-      maxLength?.value &&
-      typeof maxLength.value === 'number' &&
-      values[property].length > maxLength.value &&
-      typeof maxLength.message === 'string'
-    ) {
-      errors[property] = maxLength.message
     }
 
     if (

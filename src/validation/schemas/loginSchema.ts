@@ -1,8 +1,8 @@
 import { UserLoginParams as InitialValues } from 'types/params'
-import { FieldValidation } from '@hooks/useForm'
+import { ValidationSchema } from '@hooks/useForm'
 import { EMAIL_REQUIRED, PASSWORD_REQUIRED } from '@validation/constants/errors'
 
-export const validationSchema: FieldValidation<InitialValues> = {
+export const validationSchema: ValidationSchema<InitialValues> = {
   email: {
     required: { value: true, message: EMAIL_REQUIRED },
   },
