@@ -3,8 +3,9 @@
 import { useRouter, usePathname } from 'next/navigation'
 import { useToggle } from '@hooks/useToggle'
 import { logout } from '@api/users/logout'
-import { AvatarContainer, UserInitials, Dropdown, DropdownText } from './styles'
+import { AvatarContainer, UserInitials, Dropdown } from './styles'
 import Link from 'next/link'
+import { InvisibleButton } from '@styles/globals'
 
 type Props = {
   isAdmin: boolean
@@ -37,7 +38,7 @@ const Avatar = ({ isAdmin, initials }: Props) => {
         <Dropdown onClick={toggleDropdown}>
           <li>
             <Link href='/profile' data-testid='profile-link'>
-              <DropdownText>Profile</DropdownText>
+              Profile
             </Link>
           </li>
           <li>
@@ -45,13 +46,13 @@ const Avatar = ({ isAdmin, initials }: Props) => {
               href={isAdmin ? '/admin/orders' : '/orders'}
               data-testid='orders-link'
             >
-              <DropdownText>Orders</DropdownText>
+              Orders
             </Link>
           </li>
           <li>
-            <DropdownText onClick={handleLogout} data-testid='logout-text'>
+            <InvisibleButton onClick={handleLogout} data-testid='logout-button'>
               Logout
-            </DropdownText>
+            </InvisibleButton>
           </li>
         </Dropdown>
       )}

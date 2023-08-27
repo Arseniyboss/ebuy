@@ -39,6 +39,7 @@ export const InvisibleButton = styled.button`
   background: none;
   color: inherit;
   font-size: inherit;
+  font-weight: inherit;
   display: inherit;
 `
 

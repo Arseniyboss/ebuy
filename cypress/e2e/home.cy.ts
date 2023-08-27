@@ -134,7 +134,7 @@ describe('Home Page', () => {
         cy.verifyLink('profile-link', '/profile')
 
         cy.getByTestId('user-initials').click()
-        cy.getByTestId('logout-text').click()
+        cy.getByTestId('logout-button').click()
 
         cy.getCookie('token').then((cookie) => {
           expect(cookie).to.be.null

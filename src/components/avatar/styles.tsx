@@ -1,3 +1,4 @@
+import { InvisibleButton } from '@styles/globals'
 import styled from 'styled-components'
 
 type Props = {
@@ -9,7 +10,7 @@ export const AvatarContainer = styled.div`
   justify-content: center;
 `
 
-export const UserInitials = styled.p<Props>`
+export const UserInitials = styled(InvisibleButton)<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,14 +37,13 @@ export const Dropdown = styled.ul`
   margin-top: 3rem;
   border-radius: 0.5rem;
   overflow: hidden;
-`
 
-export const DropdownText = styled.p`
-  padding: 0.3rem 0.6rem;
-  cursor: pointer;
+  li {
+    padding: 0.3rem 0.6rem;
 
-  &:hover {
-    background: lightgrey;
-    color: #303545;
+    &:hover {
+      background: lightgrey;
+      color: #303545;
+    }
   }
 `
