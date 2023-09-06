@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
+import { UpdateUserParams as Values } from 'types/params'
 import { User } from 'types/api'
 import { validationSchema } from '@validation/schemas/profileSchema'
 import { updateUser } from '@api/users/updateUser'
@@ -16,7 +17,7 @@ type Props = {
 }
 
 const ProfileForm = ({ user }: Props) => {
-  const initialValues = {
+  const initialValues: Values = {
     name: user.name,
     email: user.email,
     password: '',

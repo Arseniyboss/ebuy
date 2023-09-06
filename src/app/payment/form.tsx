@@ -6,7 +6,7 @@ import { useForm } from '@hooks/useForm'
 import { UserPayload } from 'types/jwtPayload'
 import { PaymentMethod } from 'types/user'
 import {
-  InitialValues,
+  Values,
   validationSchema,
 } from '@validation/schemas/paymentMethodSchema'
 import { setPaymentMethod } from '@api/checkout/setPaymentMethod'
@@ -19,7 +19,7 @@ type Props = {
 }
 
 const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
-  const initialValues: InitialValues = {
+  const initialValues: Values = {
     paymentMethod: paymentMethod || '',
   }
 

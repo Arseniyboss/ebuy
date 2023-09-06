@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from '@hooks/useForm'
 import { useTimeout } from '@hooks/useTimeout'
 import { User } from 'types/api'
-import { validationSchema } from '@validation/schemas/contactSchema'
+import { Values, validationSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
 import Message from '@components/message/Message'
@@ -14,7 +14,7 @@ type Props = {
 }
 
 const ContactForm = ({ user }: Props) => {
-  const initialValues = {
+  const initialValues: Values = {
     name: user?.name || '',
     email: user?.email || '',
     message: '',

@@ -17,7 +17,7 @@ type Props = {
 }
 
 const AddressForm = ({ address, payload }: Props) => {
-  const initialValues = {
+  const initialValues: Address = {
     street: address?.street || '',
     country: address?.country || '',
     city: address?.city || '',

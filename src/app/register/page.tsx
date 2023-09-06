@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
-import { validationSchema } from '@validation/schemas/registerSchema'
+import { Values, validationSchema } from '@validation/schemas/registerSchema'
 import { register } from '@api/users/register'
 import { Input } from '@styles/globals'
 import {
@@ -17,7 +17,7 @@ import {
 import Message from '@components/message/Message'
 
 const Register = () => {
-  const initialValues = {
+  const initialValues: Values = {
     name: '',
     email: '',
     password: '',

@@ -10,14 +10,14 @@ import {
 } from '@validation/constants/errors'
 import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
 
-type InitialValues = {
+export type Values = {
   name: string
   email: string
   password: string
   confirmPassword: string
 }
 
-export const validationSchema: ValidationSchema<InitialValues> = {
+export const validationSchema: ValidationSchema<Values> = {
   name: {
     required: { value: true, message: USERNAME_REQUIRED },
     pattern: { value: USERNAME_PATTERN, message: USERNAME_INVALID },
@@ -28,7 +28,10 @@ export const validationSchema: ValidationSchema<InitialValues> = {
   },
   password: {
     required: { value: true, message: PASSWORD_REQUIRED },
-    minLength: { value: 6, message: PASSWORD_INVALID },
+    isValid: {
+      value: (password) => password.length >= 6,
+      message: PASSWORD_INVALID,
+    },
   },
   confirmPassword: {
     required: { value: true, message: PASSWORD_REQUIRED },

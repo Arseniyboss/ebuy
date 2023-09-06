@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
+import { UserLoginParams as Values } from 'types/params'
 import { validationSchema } from '@validation/schemas/loginSchema'
 import { login } from '@api/users/login'
 import { Input } from '@styles/globals'
@@ -17,7 +18,7 @@ import {
 import Message from '@components/message/Message'
 
 const Login = () => {
-  const initialValues = {
+  const initialValues: Values = {
     email: '',
     password: '',
   }

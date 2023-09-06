@@ -1,88 +1,57 @@
-import {
-  ValidationOptions,
-  ValidationSchema,
-  Errors,
-  Value,
-} from '@hooks/useForm'
+import { ValidationOptions, ValidationSchema, Errors } from '@hooks/useForm'
 
-type Field<T> = [keyof T, ValidationOptions<T>]
+type Entry<T> = [keyof T, ValidationOptions<T, keyof T>]
 
-export const validate = <T extends Record<keyof T, Value>>(
+export const validate = <T extends Record<keyof T, string>>(
   values: T,
   validationSchema: ValidationSchema<T>
 ): Errors<T> => {
   const errors: Errors<T> = {}
 
-  const printErrors = (field: Field<T>) => {
-    const property = field[0]
-    const value = field[1]
-
-    const options = {
-      required: value?.hasOwnProperty('required'),
-      pattern: value?.hasOwnProperty('pattern'),
-      ref: value?.hasOwnProperty('ref'),
-      min: value?.hasOwnProperty('min'),
-      max: value?.hasOwnProperty('max'),
-      length: value?.hasOwnProperty('length'),
-      minLength: value?.hasOwnProperty('minLength'),
-      maxLength: value?.hasOwnProperty('maxLength'),
-      match: value?.hasOwnProperty('match'),
-    }
-
-    const required = value?.required
-    const pattern = value?.pattern
-    const minLength = value?.minLength
-    const match = value?.match
+  const setErrors = (entry: Entry<T>) => {
+    const [input, options] = entry
+    const { required, pattern, match, isValid } = options
 
     if (
-      options.required &&
-      !values[property] &&
+      !values[input] &&
       required?.value &&
-      typeof required.message === 'string' &&
-      typeof required.value === 'boolean'
+      typeof required.value === 'boolean' &&
+      typeof required.message === 'string'
     ) {
-      errors[property] = required.message
+      errors[input] = required.message
     }
 
     if (
-      options.pattern &&
-      values[property] &&
-      pattern?.value &&
-      ((pattern.value instanceof RegExp &&
-        !pattern.value.test(values[property].toString())) ||
-        (pattern.value instanceof Function &&
-          !pattern.value(values[property]))) &&
+      values[input] &&
+      pattern?.value instanceof RegExp &&
+      !pattern.value.test(values[input]) &&
       typeof pattern.message === 'string'
     ) {
-      errors[property] = pattern.message
+      errors[input] = pattern.message
     }
 
     if (
-      options.minLength &&
-      values[property] &&
-      minLength?.value &&
-      typeof minLength.value === 'number' &&
-      values[property].toString().length < minLength.value &&
-      typeof minLength.message === 'string'
+      values[input] &&
+      isValid?.value instanceof Function &&
+      !isValid.value(values[input]) &&
+      typeof isValid.message === 'string'
     ) {
-      errors[property] = minLength.message
+      errors[input] = isValid.message
     }
 
     if (
-      options.match &&
-      values[property] &&
-      match?.ref &&
-      typeof match.ref === 'string' &&
-      values[match.ref] !== values[property] &&
+      values[input] &&
+      typeof match?.ref === 'string' &&
+      values[match.ref] !== values[input] &&
       typeof match.message === 'string'
     ) {
-      errors[property] = match.message
+      errors[input] = match.message
     }
   }
 
-  Object.entries(validationSchema).forEach((field) =>
-    printErrors(field as Field<T>)
-  )
+  Object.entries(validationSchema).forEach((entry) => {
+    setErrors(entry as Entry<T>)
+  })
 
   return errors
 }
