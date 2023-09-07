@@ -33,8 +33,7 @@ const Register = () => {
     setLoading(true)
     setError('')
 
-    const { name, email, password } = values
-    const response = await register({ name, email, password })
+    const response = await register(values)
 
     if (!response.ok) {
       setLoading(false)
