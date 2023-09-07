@@ -31,6 +31,7 @@ const Register = () => {
 
   const onSubmit = async () => {
     setLoading(true)
+    setError('')
 
     const { name, email, password } = values
     const response = await register({ name, email, password })
