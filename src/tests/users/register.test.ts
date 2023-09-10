@@ -3,7 +3,7 @@ import { UserRegisterParams } from 'types/params'
 import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/users/register/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'
-import { verifyToken } from '@auth/verifyToken'
+import { verifyToken } from '@auth/token/verifyToken'
 import initialUsers from '@mocks/users'
 
 const register = async (user: UserRegisterParams) => {

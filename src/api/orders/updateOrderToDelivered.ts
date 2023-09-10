@@ -1,5 +1,5 @@
 import { BASE_URL } from '@baseUrl'
-import { getToken } from '@auth/getToken'
+import { getToken } from '@auth/token/getters/getToken'
 
 export const updateOrderToDelivered = async (orderId: string) => {
   const url = `${BASE_URL}/api/orders/${orderId}/updateToDelivered`

@@ -1,6 +1,6 @@
 import { PaymentMethod } from 'types/base/user'
 import { BASE_URL } from '@baseUrl'
-import { getToken } from '@auth/getToken'
+import { getToken } from '@auth/token/getters/getToken'
 
 export const setPaymentMethod = async (paymentMethod: PaymentMethod) => {
   const token = await getToken()

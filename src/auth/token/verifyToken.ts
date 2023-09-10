@@ -1,6 +1,6 @@
 import { jwtVerify, JWTPayload } from 'jose'
 import { UserPayload } from 'types/jwtPayload'
-import { getJwtSecret } from './getJwtSecret'
+import { getJwtSecret } from './getters/getJwtSecret'
 
 type Payload = JWTPayload & UserPayload
 

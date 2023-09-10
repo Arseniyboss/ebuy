@@ -1,6 +1,6 @@
 import { SignJWT } from 'jose'
 import { UserPayload } from 'types/jwtPayload'
-import { getJwtSecret } from './getJwtSecret'
+import { getJwtSecret } from '@auth/token/getters/getJwtSecret'
 
 export const hour = 60 * 60
 

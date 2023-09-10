@@ -4,8 +4,8 @@ import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/api/throwError'
 import { setCookie } from '@utils/api/setCookie'
-import { generatePayload } from '@auth/generatePayload'
-import { generateTokenCookie } from '@auth/generateTokenCookie'
+import { generatePayload } from '@auth/token/generators/generatePayload'
+import { generateTokenCookie } from '@auth/token/generators/generateTokenCookie'
 import User from '@models/user'
 
 export const DELETE = async (request: NextRequest, { params }: PageParams) => {
