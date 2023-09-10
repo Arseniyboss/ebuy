@@ -9,7 +9,7 @@ import { Input } from '@styles/globals'
 import { Form, FormGroup, FormError, FormButton } from '@styles/form'
 import { createReview } from '@api/products/createReview'
 import { revalidateTag } from '@api/revalidateTag'
-import Message from '@components/message/Message'
+import Message from '@components/feedback/message/Message'
 
 const ReviewForm = ({ params }: PageParams) => {
   const initialValues: Values = {

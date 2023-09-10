@@ -5,7 +5,7 @@ import { User } from 'types/api'
 import { Values, validationSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
 import { Form, FormGroup, FormButton, FormError } from '@styles/form'
-import Message from '@components/message/Message'
+import Message from '@components/feedback/message/Message'
 
 type Props = {
   user?: User

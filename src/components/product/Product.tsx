@@ -7,7 +7,7 @@ import {
   ProductDetails,
   ProductPrice,
 } from './styles'
-import Rating from '@components/rating/Rating'
+import Rating from '@components/product/rating/Rating'
 
 const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
   return (

@@ -3,9 +3,9 @@ import { UserOrdersStatus } from 'types/order'
 import { UserOrdersQueryParams as QueryParams } from 'types/params'
 import { getUserOrders } from '@api/orders/getUserOrders'
 import { Table } from '@styles/table'
-import Message from '@components/message/Message'
-import OrderFilter from '@components/orderFilter/OrderFilter'
-import Order from '@components/Order'
+import Message from '@components/feedback/message/Message'
+import OrderFilter from '@components/order/filter/OrderFilter'
+import Order from '@components/order/Order'
 import Pagination from '@components/pagination/Pagination'
 
 type Props = {

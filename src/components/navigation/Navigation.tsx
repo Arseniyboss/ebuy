@@ -5,7 +5,7 @@ import { UserPayload } from 'types/jwtPayload'
 import { getUserInitials } from '@utils/getters/getUserInitials'
 import { NavLinks, NavLink } from './styles'
 import { FaShoppingCart, FaEnvelope, FaUserCircle } from 'react-icons/fa'
-import Avatar from '@components/avatar/Avatar'
+import Avatar from '@components/navigation/avatar/Avatar'
 
 type Props = {
   user?: UserPayload

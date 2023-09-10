@@ -8,7 +8,7 @@ import { Container, CartTotal } from '@app/cart/styles'
 import { OrderDetails } from '@app/order/styles'
 import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
 import Address from '@app/order/Address'
-import OrderItem from '@components/OrderItem'
+import OrderItem from '@components/item/OrderItem'
 import PlaceOrder from './PlaceOrder'
 
 export const metadata: Metadata = {

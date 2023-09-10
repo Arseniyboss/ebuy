@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { UserOrdersQueryParams as QueryParams } from 'types/params'
 import { Heading } from '@styles/globals'
-import Spinner from '@components/loader/spinner/Spinner'
+import Spinner from '@components/feedback/spinner/Spinner'
 import UserOrders from './orders'
 
 type Props = {

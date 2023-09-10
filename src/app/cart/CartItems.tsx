@@ -7,8 +7,8 @@ import {
   CartTotal,
   CheckoutButton,
 } from './styles'
-import Message from '@components/message/Message'
-import CartItem from '@components/cartItem/CartItem'
+import Message from '@components/feedback/message/Message'
+import CartItem from '@components/item/CartItem'
 
 const CartItems = async () => {
   const user = await getUser()

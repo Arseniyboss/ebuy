@@ -8,7 +8,7 @@ import {
   ItemImage,
   ItemDetails,
   ItemName,
-} from '@components/cartItem/styles'
+} from '@components/item/styles'
 
 const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
   const totalPrice = formatPrice(quantity * price)

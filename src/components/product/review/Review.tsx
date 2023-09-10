@@ -1,7 +1,7 @@
 import { Review as Props } from 'types/api'
 import { formatReviewDate } from '@utils/formatters/formatReviewDate'
 import { ReviewContainer, Comment } from './styles'
-import Rating from '@components/rating/Rating'
+import Rating from '@components/product/rating/Rating'
 
 const Review = ({ username, comment, rating, createdAt }: Props) => {
   return (

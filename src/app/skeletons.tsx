@@ -1,5 +1,5 @@
 import { ProductContainer } from './styles'
-import SkeletonLoader from '@components/loader/skeleton/SkeletonLoader'
+import SkeletonLoader from '@components/product/skeleton/SkeletonLoader'
 
 const SkeletonLoaders = () => {
   return (

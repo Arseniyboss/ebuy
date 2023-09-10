@@ -13,7 +13,7 @@ import {
   FormLink,
   FormError,
 } from '@styles/form'
-import Message from '@components/message/Message'
+import Message from '@components/feedback/message/Message'
 
 const Register = () => {
   const initialValues: Values = {
