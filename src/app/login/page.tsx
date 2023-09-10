@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { UserLoginParams as Values } from 'types/params'
@@ -23,28 +22,24 @@ const Login = () => {
     password: '',
   }
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
   const router = useRouter()
 
   const onSubmit = async () => {
-    setLoading(true)
-    setError('')
-
     const response = await login(values)
-
-    if (!response.ok) {
-      setLoading(false)
-      setError(response.statusText)
-      return
-    }
-
+    if (!response.ok) return response.statusText
     router.push('/')
     router.refresh()
   }
 
-  const { values, errors, handleChange, handleSubmit } = useForm({
+  const {
+    values,
+    errors,
+    error,
+    isSubmitted,
+    isValid,
+    handleChange,
+    handleSubmit,
+  } = useForm({
     initialValues,
     onSubmit,
     validationSchema,
@@ -83,7 +78,7 @@ const Login = () => {
           <FormError data-testid='password-error'>{errors.password}</FormError>
         )}
       </FormGroup>
-      <FormButton disabled={loading} data-testid='login-button'>
+      <FormButton disabled={!isValid || isSubmitted} data-testid='login-button'>
         Sign In
       </FormButton>
       <FormFooter>

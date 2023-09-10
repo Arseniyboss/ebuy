@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { Values, validationSchema } from '@validation/schemas/registerSchema'
@@ -24,28 +23,24 @@ const Register = () => {
     confirmPassword: '',
   }
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
   const router = useRouter()
 
   const onSubmit = async () => {
-    setLoading(true)
-    setError('')
-
     const response = await register(values)
-
-    if (!response.ok) {
-      setLoading(false)
-      setError(response.statusText)
-      return
-    }
-
+    if (!response.ok) return response.statusText
     router.push('/')
     router.refresh()
   }
 
-  const { values, errors, handleChange, handleSubmit } = useForm({
+  const {
+    values,
+    errors,
+    error,
+    isSubmitted,
+    isValid,
+    handleChange,
+    handleSubmit,
+  } = useForm({
     initialValues,
     onSubmit,
     validationSchema,
@@ -116,7 +111,10 @@ const Register = () => {
           </FormError>
         )}
       </FormGroup>
-      <FormButton disabled={loading} data-testid='register-button'>
+      <FormButton
+        disabled={!isValid || isSubmitted}
+        data-testid='register-button'
+      >
         Sign Up
       </FormButton>
       <FormFooter>

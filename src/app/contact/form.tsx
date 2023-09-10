@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { useForm } from '@hooks/useForm'
-import { useTimeout } from '@hooks/useTimeout'
 import { User } from 'types/api'
 import { Values, validationSchema } from '@validation/schemas/contactSchema'
 import { Input } from '@styles/globals'
@@ -20,44 +18,29 @@ const ContactForm = ({ user }: Props) => {
     message: '',
   }
 
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
   const onSubmit = async () => {
-    setLoading(true)
-    setSuccess(false)
-
     await fetch('https://formspree.io/f/xwkylwdy', {
       method: 'POST',
       body: JSON.stringify(values),
       mode: 'no-cors',
     })
-
-    setLoading(false)
-    setSuccess(true)
     setValues({ ...values, message: '' })
   }
 
-  const { values, setValues, errors, handleChange, handleSubmit } = useForm({
+  const {
+    values,
+    errors,
+    loading,
+    success,
+    isValid,
+    setValues,
+    handleChange,
+    handleSubmit,
+  } = useForm({
     initialValues,
     onSubmit,
     validationSchema,
   })
-
-  useTimeout(
-    () => {
-      if (success) {
-        setSuccess(false)
-      }
-    },
-    3000,
-    [success]
-  )
-
-  useEffect(() => {
-    setSuccess(false)
-  }, [errors])
-
   return (
     <>
       <Form onSubmit={handleSubmit} data-testid='contact-form'>
@@ -108,7 +91,7 @@ const ContactForm = ({ user }: Props) => {
             <FormError data-testid='message-error'>{errors.message}</FormError>
           )}
         </FormGroup>
-        <FormButton disabled={loading} data-testid='submit-button'>
+        <FormButton disabled={!isValid || loading} data-testid='submit-button'>
           Submit
         </FormButton>
       </Form>

@@ -8,8 +8,9 @@ import {
   SetStateAction,
 } from 'react'
 import { validate } from '@validation/validate'
+import { useFormState } from './useFormState'
 
-export type ValidationOptions<T, P> = {
+export type ValidationOptions<T, P extends keyof T> = {
   required: {
     value: boolean
     message: string
@@ -19,7 +20,7 @@ export type ValidationOptions<T, P> = {
     message: string
   }
   isValid: {
-    value: (inputValue: string) => boolean
+    value: (inputValue: T[P]) => boolean
     message: string
   }
   match: {
@@ -34,9 +35,13 @@ export type FieldValidation<T> = {
 
 export type ValidationSchema<T> = Partial<FieldValidation<T>>
 
+export type Value = string | number | boolean
+
 type SetValues<T> = Dispatch<SetStateAction<T>>
 
 export type Errors<T> = Partial<Record<keyof T, string>>
+
+export type OnSubmit = () => void | Promise<string | void>
 
 type HTMLChangeElement =
   | HTMLInputElement
@@ -45,44 +50,77 @@ type HTMLChangeElement =
 
 type ReturnValues<T> = {
   values: T
-  setValues: SetValues<T>
   errors: Errors<T>
+  error: string
+  loading: boolean
+  success: boolean
+  isSubmitted: boolean
+  isValid: boolean
+  setValues: SetValues<T>
   handleChange: (e: ChangeEvent<HTMLChangeElement>) => void
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
-export const useForm = <T extends Record<string, string>>(options: {
+type Props<T> = {
   initialValues: T
-  onSubmit: () => void
+  onSubmit: OnSubmit
   validationSchema?: ValidationSchema<T>
-}): ReturnValues<T> => {
-  const { initialValues, onSubmit, validationSchema } = options
+}
 
+export const useForm = <T extends Record<string, Value>>({
+  initialValues,
+  onSubmit,
+  validationSchema,
+}: Props<T>): ReturnValues<T> => {
   const [values, setValues] = useState<T>(initialValues)
   const [errors, setErrors] = useState<Errors<T>>({})
   const [isChanging, setIsChanging] = useState<boolean>(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const [validatedOnSubmit, setValidatedOnSubmit] = useState<boolean>(false)
+
+  const { error, loading, success, isSubmitted, onSuccess } = useFormState({
+    onSubmit,
+    errors,
+  })
 
   const isValid = Object.keys(errors).length === 0
 
   const validateOnSubmit = () => {
     if (validationSchema && isValid) {
       setErrors(validate(values, validationSchema))
-      setIsSubmitted(true)
+      setValidatedOnSubmit(true)
     }
   }
 
   const validateOnChange = useCallback(() => {
-    if (validationSchema && isSubmitted && isChanging) {
+    if (validationSchema && validatedOnSubmit && isChanging) {
       setErrors(validate(values, validationSchema))
       setIsChanging(false)
     }
-  }, [validationSchema, values, isSubmitted, isChanging])
+  }, [validationSchema, values, validatedOnSubmit, isChanging])
+
+  const setValue = (e: ChangeEvent<HTMLChangeElement>) => {
+    const { name, type, value } = e.target
+    switch (type) {
+      case 'number':
+        const { valueAsNumber } = e.target as HTMLInputElement
+        setValues({ ...values, [name]: valueAsNumber || value })
+        break
+      case 'checkbox':
+        const { checked } = e.target as HTMLInputElement
+        setValues({ ...values, [name]: checked })
+        break
+      case 'select-one':
+        setValues({ ...values, [name]: Number(value) || value })
+        break
+      default:
+        setValues({ ...values, [name]: value })
+        break
+    }
+  }
 
   const handleChange = (e: ChangeEvent<HTMLChangeElement>) => {
-    const { name, value } = e.target
-    setValues({ ...values, [name]: value })
+    setValue(e)
     setIsChanging(true)
     setIsSubmitting(false)
   }
@@ -100,11 +138,22 @@ export const useForm = <T extends Record<string, string>>(options: {
 
   useEffect(() => {
     if (isValid && isSubmitting) {
-      onSubmit()
+      onSuccess()
       setIsSubmitting(false)
-      setIsSubmitted(false)
+      setValidatedOnSubmit(false)
     }
-  }, [errors, isValid, isSubmitting, onSubmit])
+  }, [errors, isValid, isSubmitting, onSuccess])
 
-  return { values, setValues, errors, handleChange, handleSubmit }
+  return {
+    values,
+    errors,
+    error,
+    loading,
+    success,
+    isSubmitted,
+    isValid,
+    setValues,
+    handleChange,
+    handleSubmit,
+  }
 }

@@ -1,9 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
-import { useTimeout } from '@hooks/useTimeout'
 import { UpdateUserParams as Values } from 'types/params'
 import { User } from 'types/api'
 import { validationSchema } from '@validation/schemas/profileSchema'
@@ -23,52 +21,28 @@ const ProfileForm = ({ user }: Props) => {
     password: '',
   }
 
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState('')
   const router = useRouter()
 
   const onSubmit = async () => {
-    setLoading(true)
-    setSuccess(false)
-    setError('')
-
     const response = await updateUser(values)
-
-    if (!response.ok) {
-      setLoading(false)
-      setError(response.statusText)
-      return
-    }
-
-    setLoading(false)
-    setSuccess(true)
+    if (!response.ok) return response.statusText
     router.refresh()
   }
 
-  const { values, errors, handleChange, handleSubmit } = useForm({
+  const {
+    values,
+    errors,
+    error,
+    loading,
+    success,
+    isValid,
+    handleChange,
+    handleSubmit,
+  } = useForm({
     initialValues,
     onSubmit,
     validationSchema,
   })
-
-  useTimeout(
-    () => {
-      if (success) {
-        setSuccess(false)
-      }
-      if (error) {
-        setError('')
-      }
-    },
-    3000,
-    [success, error]
-  )
-
-  useEffect(() => {
-    setError('')
-    setSuccess(false)
-  }, [errors])
   return (
     <Form onSubmit={handleSubmit} data-testid='profile-form'>
       <h1>User Profile</h1>
@@ -119,7 +93,7 @@ const ProfileForm = ({ user }: Props) => {
           <FormError data-testid='password-error'>{errors.password}</FormError>
         )}
       </FormGroup>
-      <FormButton disabled={loading} data-testid='update-button'>
+      <FormButton disabled={!isValid || loading} data-testid='update-button'>
         Update
       </FormButton>
     </Form>

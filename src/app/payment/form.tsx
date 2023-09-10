@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { UserPayload } from 'types/jwtPayload'
@@ -23,22 +22,21 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
     paymentMethod: paymentMethod || '',
   }
 
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const onSubmit = async () => {
-    setLoading(true)
     await setPaymentMethod(values.paymentMethod as PaymentMethod)
     router.prefetch('/order/review') // required in production because of Link prefetch in CheckoutSteps
     router.push('/order/review')
     router.refresh()
   }
 
-  const { values, errors, handleChange, handleSubmit } = useForm({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  })
+  const { values, errors, isSubmitted, isValid, handleChange, handleSubmit } =
+    useForm({
+      initialValues,
+      onSubmit,
+      validationSchema,
+    })
   return (
     <Form onSubmit={handleSubmit} data-testid='payment-method-form'>
       <CheckoutSteps user={payload} />
@@ -70,7 +68,10 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
       {errors.paymentMethod && (
         <FormError data-testid='form-error'>{errors.paymentMethod}</FormError>
       )}
-      <FormButton disabled={loading} data-testid='continue-button'>
+      <FormButton
+        disabled={!isValid || isSubmitted}
+        data-testid='continue-button'
+      >
         Continue
       </FormButton>
     </Form>

@@ -1,8 +1,13 @@
-import { ValidationOptions, ValidationSchema, Errors } from '@hooks/useForm'
+import {
+  ValidationOptions,
+  ValidationSchema,
+  Errors,
+  Value,
+} from '@hooks/useForm'
 
 type Entry<T> = [keyof T, ValidationOptions<T, keyof T>]
 
-export const validate = <T extends Record<keyof T, string>>(
+export const validate = <T extends Record<keyof T, Value>>(
   values: T,
   validationSchema: ValidationSchema<T>
 ): Errors<T> => {
@@ -24,7 +29,7 @@ export const validate = <T extends Record<keyof T, string>>(
     if (
       values[input] &&
       pattern?.value instanceof RegExp &&
-      !pattern.value.test(values[input]) &&
+      !pattern.value.test(values[input].toString()) &&
       typeof pattern.message === 'string'
     ) {
       errors[input] = pattern.message
