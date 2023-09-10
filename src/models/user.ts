@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
 import { CartSchema, UserModel } from 'types/mongo/models'
-import { Address as AddressSchema, User as UserSchema } from 'types/user'
+import { Address as AddressSchema, User as UserSchema } from 'types/base/user'
 import {
   STREET_REQUIRED,
   STREET_INVALID,

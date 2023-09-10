@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useForm } from '@hooks/useForm'
 import { UserPayload } from 'types/jwtPayload'
-import { PaymentMethod } from 'types/user'
+import { PaymentMethod } from 'types/base/user'
 import {
   Values,
   validationSchema,

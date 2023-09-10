@@ -1,6 +1,6 @@
 import { Schema, models, model } from 'mongoose'
 import { ReviewSchema, ProductModel } from 'types/mongo/models'
-import { Product as ProductSchema } from 'types/product'
+import { Product as ProductSchema } from 'types/base/product'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,

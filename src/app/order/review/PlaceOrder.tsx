@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { CartItem } from 'types/api'
-import { Address, PaymentMethod } from 'types/user'
+import { Address, PaymentMethod } from 'types/base/user'
 import { clearCart } from '@api/cart/clearCart'
 import { updateProduct } from '@api/products/updateProduct'
 import { createOrder } from '@api/orders/createOrder'

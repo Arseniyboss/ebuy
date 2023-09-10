@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { PaymentMethod } from 'types/user'
+import { PaymentMethod } from 'types/base/user'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/api/throwError'

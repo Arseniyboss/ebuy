@@ -6,9 +6,9 @@ import {
   OmitCartItems,
   OmitOrderItems,
 } from './omitters'
-import { Review as ReviewType, Product as ProductType } from './product'
-import { CartItem as CartItemType, User as UserType } from './user'
-import { Order as OrderType } from './order'
+import { Review as ReviewType, Product as ProductType } from './base/product'
+import { CartItem as CartItemType, User as UserType } from './base/user'
+import { Order as OrderType } from './base/order'
 
 type WithId<T> = T & {
   _id: string

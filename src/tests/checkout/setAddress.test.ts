@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { UserPayload } from 'types/jwtPayload'
-import { Address } from 'types/user'
+import { Address } from 'types/base/user'
 import { BASE_URL } from '@baseUrl'
 import { PUT } from '@app/api/checkout/address/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'

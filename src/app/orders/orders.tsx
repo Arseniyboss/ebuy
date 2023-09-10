@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { UserOrdersStatus } from 'types/order'
+import { UserOrdersStatus } from 'types/base/order'
 import { UserOrdersQueryParams as QueryParams } from 'types/params'
 import { getUserOrders } from '@api/orders/getUserOrders'
 import { Table } from '@styles/table'

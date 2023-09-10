@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { CreateOrderParams as Body } from 'types/params'
-import { UserOrdersStatus } from 'types/order'
+import { UserOrdersStatus } from 'types/base/order'
 import { connectToDB } from '@config/mongodb'
 import { decodeToken } from '@auth/decodeToken/requestHeaders'
 import { throwError } from '@utils/api/throwError'

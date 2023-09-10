@@ -1,4 +1,4 @@
-import { Address as Values } from 'types/user'
+import { Address as Values } from 'types/base/user'
 import { ValidationSchema } from '../../hooks/useForm'
 import {
   STREET_REQUIRED,

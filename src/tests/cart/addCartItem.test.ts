@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { CartItem } from 'types/user'
+import { CartItem } from 'types/base/user'
 import { BASE_URL } from '@baseUrl'
 import { POST } from '@app/api/cart/route'
 import { seedUsers, getUsers } from '@config/mongoMemoryServer'

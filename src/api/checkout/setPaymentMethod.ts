@@ -1,4 +1,4 @@
-import { PaymentMethod } from 'types/user'
+import { PaymentMethod } from 'types/base/user'
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
 

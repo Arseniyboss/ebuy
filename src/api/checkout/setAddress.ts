@@ -1,4 +1,4 @@
-import { Address } from 'types/user'
+import { Address } from 'types/base/user'
 import { BASE_URL } from '@baseUrl'
 import { getToken } from '@auth/getToken'
 
