@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { OrdersStatus } from 'types/base/order'
 import { connectToDB } from '@config/mongodb'
-import { decodeToken } from '@auth/decodeToken/requestHeaders'
+import { decodeToken } from '@auth/token/decode/requestHeaders'
 import { throwError } from '@utils/api/throwError'
 import { getSearchParams } from '@utils/getters/getSearchParams'
 import { getValidPage } from '@utils/api/validateQueryParams'

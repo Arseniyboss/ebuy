@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { decodeToken } from '@auth/decodeToken/cookies'
+import { decodeToken } from '@auth/token/decode/cookies'
 import { HeaderContainer } from './styles'
 import Navigation from '@components/navigation/Navigation'
 

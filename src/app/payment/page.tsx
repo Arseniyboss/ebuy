@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getUser } from '@api/users/getUser'
-import { decodeToken } from '@auth/decodeToken/cookies'
+import { decodeToken } from '@auth/token/decode/cookies'
 import PaymentMethodForm from './form'
 
 export const metadata: Metadata = {

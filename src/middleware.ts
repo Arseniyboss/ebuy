@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { decodeToken } from '@auth/decodeToken/requestCookies'
+import { decodeToken } from '@auth/token/decode/requestCookies'
 import { redirect } from '@utils/api/redirect'
 
 export const middleware = async (request: NextRequest) => {

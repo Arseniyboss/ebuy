@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PageParams } from 'types/params'
 import { connectToDB } from '@config/mongodb'
-import { decodeToken } from '@auth/decodeToken/requestHeaders'
+import { decodeToken } from '@auth/token/decode/requestHeaders'
 import { throwError } from '@utils/api/throwError'
 import { setCookie } from '@utils/api/setCookie'
 import { generatePayload } from '@auth/token/generators/generatePayload'

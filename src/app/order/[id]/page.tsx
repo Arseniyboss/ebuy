@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { PageParams } from 'types/params'
-import { decodeToken } from '@auth/decodeToken/cookies'
+import { decodeToken } from '@auth/token/decode/cookies'
 import { getOrderById } from '@api/orders/getOrderById'
 import { getDeliveryDate } from '@utils/getters/getDeliveryDate'
 import { getTotalPrice } from '@utils/getters/getTotalPrice'
