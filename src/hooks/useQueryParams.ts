@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
-export const useQueryParams = <T>() => {
+export const useQueryParams = <T extends Record<string, string | number>>() => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
