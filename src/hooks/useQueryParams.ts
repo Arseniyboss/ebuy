@@ -16,7 +16,7 @@ export const useQueryParams = <T extends Record<string, string | number>>() => {
     })
     const searchParams = urlSearchParams.toString()
     const query = searchParams ? `?${searchParams}` : ''
-    router.push(`${pathname}${query}`)
+    router.replace(`${pathname}${query}`)
   }
 
   return { queryParams, setQueryParams }
