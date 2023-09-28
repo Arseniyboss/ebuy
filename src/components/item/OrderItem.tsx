@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { CartItem as Props } from 'types/api'
 import { formatPrice } from '@utils/formatters/formatPrice'
+import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
 import {
   Container,
   ItemImage,
@@ -27,7 +28,7 @@ const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
       <ItemDetails>
         <ItemName data-testid='item-name'>{name}</ItemName>
         <p data-testid='item-total-price'>
-          {quantity} x ${price} = ${totalPrice}
+          {quantity} x ${price} = ${formatTotalPrice(totalPrice)}
         </p>
       </ItemDetails>
     </Container>

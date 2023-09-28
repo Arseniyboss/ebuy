@@ -2,6 +2,7 @@
 
 import { Product } from '../../src/types/api'
 import { formatPrice } from '../../src/utils/formatters/formatPrice'
+import { formatTotalPrice } from '../../src/utils/formatters/formatTotalPrice'
 import { getTotalPrice } from '../../src/utils/getters/getTotalPrice'
 
 Cypress.Commands.add('getByTestId', (testId) => {
@@ -80,8 +81,10 @@ Cypress.Commands.add('assertCartItems', (cartItems) => {
   cartItems.forEach((cartItem, index) => {
     const { name, price, quantity } = cartItem
 
+    const totalPrice = formatPrice(quantity * price)
+
     cy.assertText('product-name', name, index)
-    cy.assertText('product-price', `$${price}`, index)
+    cy.assertText('product-price', `$${formatTotalPrice(totalPrice)}`, index)
     cy.assertValue('product-quantity', quantity.toString(), index)
   })
 })
@@ -97,7 +100,7 @@ Cypress.Commands.add('assertOrderItems', (orderItems) => {
     cy.assertText('item-name', name, index)
     cy.assertText(
       'item-total-price',
-      `${quantity} x $${price} = $${totalPrice}`,
+      `${quantity} x $${price} = $${formatTotalPrice(totalPrice)}`,
       index
     )
   })

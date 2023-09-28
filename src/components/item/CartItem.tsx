@@ -5,6 +5,8 @@ import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaTrashAlt } from 'react-icons/fa'
 import { CartItem as Props } from 'types/api'
+import { formatPrice } from '@utils/formatters/formatPrice'
+import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
 import { getQuantities } from '@utils/getters/getQuantities'
 import { deleteCartItem } from '@api/cart/deleteCartItem'
 import { updateCartItem } from '@api/cart/updateCartItem'
@@ -25,6 +27,7 @@ const CartItem = ({
   countInStock,
   quantity,
 }: Props) => {
+  const totalPrice = formatPrice(quantity * price)
   const quantities = getQuantities(countInStock)
 
   const [loading, setLoading] = useState(false)
@@ -58,7 +61,7 @@ const CartItem = ({
       </Link>
       <ItemDetails>
         <ItemName data-testid='product-name'>{name}</ItemName>
-        <h3 data-testid='product-price'>${price}</h3>
+        <h3 data-testid='product-price'>${formatTotalPrice(totalPrice)}</h3>
         <FlexGroup>
           <ProductQuantity
             value={quantity}

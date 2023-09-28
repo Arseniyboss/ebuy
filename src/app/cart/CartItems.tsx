@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getUser } from '@api/users/getUser'
 import { getTotalPrice } from '@utils/getters/getTotalPrice'
+import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
 import {
   Container,
   CartItemContainer,
@@ -25,7 +26,9 @@ const CartItems = async () => {
         ))}
       </CartItemContainer>
       <CartTotal>
-        <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
+        <h2 data-testid='total-price'>
+          Total: ${formatTotalPrice(totalPrice)}
+        </h2>
         <CheckoutButton as={Link} href='/address' data-testid='checkout-link'>
           Checkout
         </CheckoutButton>

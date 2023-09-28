@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getUser } from '@api/users/getUser'
 import { decodeToken } from '@auth/token/decode/cookies'
 import { getDeliveryDate } from '@utils/getters/getDeliveryDate'
+import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
 import { getTotalPrice } from '@utils/getters/getTotalPrice'
 import { Container, CartTotal } from '@app/cart/styles'
 import { OrderDetails } from '@app/order/styles'
@@ -46,7 +47,9 @@ const OrderReview = async () => {
           <OrderItem key={cartItem._id} {...cartItem} />
         ))}
         <CartTotal>
-          <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
+          <h2 data-testid='total-price'>
+            Total: ${formatTotalPrice(totalPrice)}
+          </h2>
           <PlaceOrder
             orderItems={cartItems}
             address={address}

@@ -5,6 +5,7 @@ import { decodeToken } from '@auth/token/decode/cookies'
 import { getOrderById } from '@api/orders/getOrderById'
 import { getDeliveryDate } from '@utils/getters/getDeliveryDate'
 import { getTotalPrice } from '@utils/getters/getTotalPrice'
+import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
 import { Container, CartTotal } from '@app/cart/styles'
 import { OrderDetails, OrderId } from '@app/order/styles'
 import Address from '@app/order/Address'
@@ -30,7 +31,6 @@ const Order = async ({ params }: PageParams) => {
 
   const deliveryDate = getDeliveryDate()
   const totalPrice = getTotalPrice(orderItems)
-
   return (
     <Container>
       <OrderId>Order {order._id}</OrderId>
@@ -59,7 +59,9 @@ const Order = async ({ params }: PageParams) => {
         <OrderItem key={orderItem._id} {...orderItem} />
       ))}
       <CartTotal>
-        <h2 data-testid='total-price'>Total: ${totalPrice}</h2>
+        <h2 data-testid='total-price'>
+          Total: ${formatTotalPrice(totalPrice)}
+        </h2>
         {!user.isAdmin && !order.isPaid && (
           <>
             {paymentMethod === 'PayPal' && (
