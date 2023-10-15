@@ -22,6 +22,7 @@ const Search = () => {
       placeholder='Search products...'
       value={search || ''}
       onChange={(e) => setSearch(e.target.value)}
+      aria-label='search input'
       data-testid='search-input'
     />
   )
