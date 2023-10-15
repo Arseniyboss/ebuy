@@ -49,12 +49,12 @@ const CartItem = ({
   }
   return (
     <Container data-testid='cart-item'>
-      <Link href={`/product/${_id}`}>
+      <Link href={`/product/${_id}`} aria-label='product link'>
         <ItemImage
           src={image}
           height={153}
           width={192}
-          alt={name}
+          alt=''
           priority
           data-testid='product-image'
         />
@@ -66,6 +66,7 @@ const CartItem = ({
           <ProductQuantity
             value={quantity}
             onChange={handleUpdate}
+            aria-label='select item quantity'
             data-testid='product-quantity'
           >
             {quantities.map((quantity) => (

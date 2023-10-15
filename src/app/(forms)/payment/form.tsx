@@ -40,40 +40,44 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
   return (
     <Form onSubmit={handleSubmit} data-testid='payment-method-form'>
       <CheckoutSteps user={payload} />
-      <h1>Payment Method</h1>
-      <div>
-        <FormRadio
-          type='radio'
-          name='paymentMethod'
-          id='paypal'
-          value='PayPal'
-          onChange={handleChange}
-          checked={values.paymentMethod === 'PayPal'}
-          data-testid='paypal-input'
-        />
-        <label htmlFor='paypal'>PayPal</label>
-      </div>
-      <div>
-        <FormRadio
-          type='radio'
-          name='paymentMethod'
-          id='stripe'
-          value='Stripe'
-          onChange={handleChange}
-          checked={values.paymentMethod === 'Stripe'}
-          data-testid='stripe-input'
-        />
-        <label htmlFor='stripe'>Stripe</label>
-      </div>
-      {errors.paymentMethod && (
-        <FormError data-testid='form-error'>{errors.paymentMethod}</FormError>
-      )}
-      <FormButton
-        disabled={!isValid || isSubmitted}
-        data-testid='continue-button'
-      >
-        Continue
-      </FormButton>
+      <fieldset>
+        <legend>
+          <h1>Payment Method</h1>
+        </legend>
+        <div>
+          <FormRadio
+            type='radio'
+            name='paymentMethod'
+            id='paypal'
+            value='PayPal'
+            onChange={handleChange}
+            checked={values.paymentMethod === 'PayPal'}
+            data-testid='paypal-input'
+          />
+          <label htmlFor='paypal'>PayPal</label>
+        </div>
+        <div>
+          <FormRadio
+            type='radio'
+            name='paymentMethod'
+            id='stripe'
+            value='Stripe'
+            onChange={handleChange}
+            checked={values.paymentMethod === 'Stripe'}
+            data-testid='stripe-input'
+          />
+          <label htmlFor='stripe'>Stripe</label>
+        </div>
+        {errors.paymentMethod && (
+          <FormError data-testid='form-error'>{errors.paymentMethod}</FormError>
+        )}
+        <FormButton
+          disabled={!isValid || isSubmitted}
+          data-testid='continue-button'
+        >
+          Continue
+        </FormButton>
+      </fieldset>
     </Form>
   )
 }

@@ -19,8 +19,12 @@ const Order = ({
         {isDelivered ? deliveredAt : <Cross />}
       </td>
       <td>
-        <OrderLink href={`/order/${_id}`} data-testid='order-link'>
-          Details
+        <OrderLink
+          href={`/order/${_id}`}
+          data-testid='order-link'
+          aria-label='order details page'
+        >
+          Order Details
         </OrderLink>
       </td>
     </tr>

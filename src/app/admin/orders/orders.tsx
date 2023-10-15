@@ -45,7 +45,7 @@ const Orders = async ({ searchParams }: Props) => {
             <th>Total</th>
             <th>Paid</th>
             <th>Delivered</th>
-            <th />
+            <td />
           </tr>
         </thead>
         <tbody>

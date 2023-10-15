@@ -22,7 +22,7 @@ const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
           data-testid='product-image'
         />
         <ProductDetails>
-          <h1 data-testid='product-name'>{name}</h1>
+          <h2 data-testid='product-name'>{name}</h2>
           <ProductPrice data-testid='product-price'>${price}</ProductPrice>
           <FlexGroup>
             <Rating value={rating} />

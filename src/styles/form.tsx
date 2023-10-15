@@ -7,15 +7,27 @@ type Props = {
 }
 
 export const Form = styled.form<Props>`
+  --spacing: 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: var(--spacing);
   width: 340px;
   padding: 2rem;
   margin: ${({ $center = true }) => ($center ? 'auto' : 0)};
   color: var(--gray);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+
+  fieldset {
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+  }
+
+  legend {
+    margin-bottom: var(--spacing);
+  }
 `
 
 export const FormGroup = styled.div`

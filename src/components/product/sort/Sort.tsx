@@ -18,7 +18,7 @@ const Sort = () => {
     <SortSelect
       value={sort}
       onChange={handleSort}
-      aria-label='sort select'
+      aria-label='sort products'
       data-testid='sort-select'
     >
       <option value=''>Default Order</option>

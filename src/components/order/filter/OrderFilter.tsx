@@ -26,6 +26,7 @@ const OrderFilter = ({ statuses }: Props) => {
     <StatusSelect
       value={status}
       onChange={handleStatus}
+      aria-label='select order status'
       data-testid='status-select'
     >
       <option value=''>Status</option>

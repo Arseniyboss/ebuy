@@ -47,9 +47,10 @@ const ReviewForm = ({ params }: PageParams) => {
       <h2>Write a review</h2>
       {error && <Message variant='error'>{error}</Message>}
       <FormGroup>
-        <label>Rating</label>
+        <label htmlFor='rating'>Rating</label>
         <Input
           name='rating'
+          id='rating'
           as='select'
           value={values.rating}
           onChange={handleChange}

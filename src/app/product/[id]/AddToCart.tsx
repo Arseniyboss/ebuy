@@ -53,6 +53,7 @@ const AddToCart = ({ product, user }: Props) => {
         <ProductQuantity
           value={quantity}
           onChange={(e) => setQuantity(parseInt(e.target.value))}
+          aria-label='select product quantity'
           data-testid='product-quantity'
         >
           {quantities.map((quantity) => (

@@ -58,9 +58,18 @@ const Login = () => {
           onChange={handleChange}
           autoComplete='on'
           data-testid='email-input'
+          aria-required
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email && 'email-error'}
         />
         {errors.email && (
-          <FormError data-testid='email-error'>{errors.email}</FormError>
+          <FormError
+            id='email-error'
+            aria-live='polite'
+            data-testid='email-error'
+          >
+            {errors.email}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
