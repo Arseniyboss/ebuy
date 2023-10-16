@@ -28,7 +28,7 @@ export const ProductDetails = styled.div`
   color: var(--gray);
 `
 
-export const ProductPrice = styled.h2`
-  font-size: 1.4rem;
+export const ProductPrice = styled.h3`
+  font-size: 1.3rem;
   letter-spacing: 1px;
 `
