@@ -34,7 +34,8 @@ export const Table = styled.table`
 `
 
 export const OrderLink = styled(Link)`
-  background: white;
+  background: var(--gray);
+  color: white;
   padding: 0.4rem 0.8rem;
   font-size: 0.9rem;
 `

@@ -22,9 +22,9 @@ const Order = ({
         <OrderLink
           href={`/order/${_id}`}
           data-testid='order-link'
-          aria-label='order details page'
+          aria-label='view order details'
         >
-          Order Details
+          View
         </OrderLink>
       </td>
     </tr>

@@ -59,6 +59,6 @@ export const FormLink = styled(Link)`
 `
 
 export const FormError = styled.p`
-  color: red;
+  color: #e10000;
   font-weight: bold;
 `
