@@ -2,12 +2,8 @@ import Link from 'next/link'
 import { getUser } from '@api/users/getUser'
 import { getTotalPrice } from '@utils/getters/getTotalPrice'
 import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
-import {
-  Container,
-  CartItemContainer,
-  CartTotal,
-  CheckoutButton,
-} from './styles'
+import { PageContainer } from '@styles/globals'
+import { CartTotal, CheckoutButton } from './styles'
 import Message from '@components/feedback/message/Message'
 import CartItem from '@components/item/CartItem'
 
@@ -19,13 +15,13 @@ const CartItems = async () => {
   return cartItems.length === 0 ? (
     <Message variant='info'>Your cart is empty</Message>
   ) : (
-    <Container>
-      <CartItemContainer>
+    <PageContainer className='container'>
+      <section className='container' aria-label='cart items'>
         {cartItems.map((cartItem) => (
           <CartItem key={cartItem._id} {...cartItem} />
         ))}
-      </CartItemContainer>
-      <CartTotal>
+      </section>
+      <CartTotal aria-label='cart total'>
         <h2 data-testid='total-price'>
           Total: ${formatTotalPrice(totalPrice)}
         </h2>
@@ -33,7 +29,7 @@ const CartItems = async () => {
           Checkout
         </CheckoutButton>
       </CartTotal>
-    </Container>
+    </PageContainer>
   )
 }
 

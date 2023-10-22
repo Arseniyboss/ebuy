@@ -3,23 +3,7 @@
 import styled from 'styled-components'
 import { Button } from '@styles/globals'
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 1200px;
-  max-width: 90vw;
-  margin: 0 auto;
-  color: var(--gray);
-`
-
-export const CartItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
-`
-
-export const CartTotal = styled.div`
+export const CartTotal = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;

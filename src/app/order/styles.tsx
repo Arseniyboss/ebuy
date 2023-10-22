@@ -1,12 +1,10 @@
 'use client'
 
 import styled from 'styled-components'
-import { CartItemContainer } from '@app/cart/styles'
 
-export const OrderDetails = styled(CartItemContainer)`
+export const OrderDetails = styled.div`
   width: 570px;
   max-width: 90vw;
-  gap: 1rem;
   word-wrap: break-word;
 `
 

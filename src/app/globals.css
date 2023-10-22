@@ -7,7 +7,7 @@
 :root {
   --gray: #555;
   --darkgray: #333;
-  --blue: hsl(193, 82%, 31%);
+  --blue: hsl(193, 68%, 25%);
   --skeleton-background: #b8b8b8;
   --box-shadow: 0 0 0.25rem darkgrey;
   --border-radius: 0.25rem;
@@ -48,4 +48,14 @@ select {
 textarea {
   resize: none;
   font-family: inherit;
+}
+
+address {
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

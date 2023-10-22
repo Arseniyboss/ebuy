@@ -17,7 +17,7 @@ const Products = async ({ searchParams }: Props) => {
     </SearchFailText>
   ) : (
     <>
-      <ProductContainer>
+      <ProductContainer aria-label='product list'>
         {products.map((product) => (
           <Product key={product._id} {...product} />
         ))}

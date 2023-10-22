@@ -14,11 +14,16 @@ type Props = {
 const Navigation = ({ user }: Props) => {
   const pathname = usePathname()
   return (
-    <nav>
+    <nav aria-label='primary navigation'>
       <NavLinks>
         <li>
-          <NavLink href='/cart' data-testid='cart-nav-link' pathname={pathname}>
-            <FaShoppingCart aria-label='shopping cart' />
+          <NavLink
+            href='/cart'
+            data-testid='cart-nav-link'
+            aria-label='cart link'
+            pathname={pathname}
+          >
+            <FaShoppingCart />
           </NavLink>
         </li>
         {user ? (
@@ -33,6 +38,7 @@ const Navigation = ({ user }: Props) => {
             <NavLink
               href='/login'
               data-testid='login-nav-link'
+              aria-label='login link'
               pathname={pathname}
             >
               <FaUserCircle aria-label='user' />
@@ -43,6 +49,7 @@ const Navigation = ({ user }: Props) => {
           <NavLink
             href='/contact'
             data-testid='contact-nav-link'
+            aria-label='contact link'
             pathname={pathname}
           >
             <FaEnvelope aria-label='envelope' />

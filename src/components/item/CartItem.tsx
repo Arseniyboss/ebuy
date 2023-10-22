@@ -16,6 +16,7 @@ import {
   ItemImage,
   ItemDetails,
   ItemName,
+  ItemPrice,
   FlexGroup,
 } from './styles'
 
@@ -59,9 +60,11 @@ const CartItem = ({
           data-testid='product-image'
         />
       </Link>
-      <ItemDetails>
+      <ItemDetails aria-label='cart item details'>
         <ItemName data-testid='product-name'>{name}</ItemName>
-        <h3 data-testid='product-price'>${formatTotalPrice(totalPrice)}</h3>
+        <ItemPrice data-testid='product-price'>
+          ${formatTotalPrice(totalPrice)}
+        </ItemPrice>
         <FlexGroup>
           <ProductQuantity
             value={quantity}

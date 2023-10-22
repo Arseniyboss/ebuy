@@ -1,11 +1,10 @@
 import { Product as Props } from 'types/api'
-import { FlexGroup } from '@styles/globals'
+import { FlexGroup, ProductPrice } from '@styles/globals'
 import {
   ProductLink,
   ProductContainer,
   ProductImage,
   ProductDetails,
-  ProductPrice,
 } from './styles'
 import Rating from '@components/product/rating/Rating'
 

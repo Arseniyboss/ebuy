@@ -19,16 +19,11 @@ export const ProductImage = styled(Image)`
   height: auto;
 `
 
-export const ProductDetails = styled.div`
+export const ProductDetails = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
   padding-top: 0.7rem;
   color: var(--gray);
-`
-
-export const ProductPrice = styled.h3`
-  font-size: 1.3rem;
-  letter-spacing: 1px;
 `

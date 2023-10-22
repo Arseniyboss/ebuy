@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 
-export const ReviewContainer = styled.div`
+export const ReviewContainer = styled.article`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

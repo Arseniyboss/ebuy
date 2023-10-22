@@ -47,7 +47,11 @@ const Login = () => {
   return (
     <Form onSubmit={handleSubmit} data-testid='login-form'>
       <h1>Sign In</h1>
-      {error && <Message variant='error'>{error}</Message>}
+      {error && (
+        <Message variant='error' dynamic>
+          {error}
+        </Message>
+      )}
       <FormGroup>
         <label htmlFor='email'>Email</label>
         <Input
@@ -82,9 +86,18 @@ const Login = () => {
           onChange={handleChange}
           autoComplete='on'
           data-testid='password-input'
+          aria-required
+          aria-invalid={!!errors.password}
+          aria-describedby={errors.password && 'password-error'}
         />
         {errors.password && (
-          <FormError data-testid='password-error'>{errors.password}</FormError>
+          <FormError
+            id='password-error'
+            aria-live='polite'
+            data-testid='password-error'
+          >
+            {errors.password}
+          </FormError>
         )}
       </FormGroup>
       <FormButton disabled={!isValid || isSubmitted} data-testid='login-button'>

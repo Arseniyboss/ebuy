@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { breakpoints } from '@breakpoints'
 
-export const Container = styled.div`
+export const Container = styled.article`
   display: flex;
   column-gap: 2rem;
-  padding-bottom: 1.3rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid lightgrey;
 
   @media screen and (max-width: ${breakpoints.cart.small}) {
@@ -26,7 +26,7 @@ export const ItemImage = styled(Image)`
   }
 `
 
-export const ItemDetails = styled.div`
+export const ItemDetails = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -40,6 +40,11 @@ export const ItemDetails = styled.div`
 
 export const ItemName = styled.h2`
   font-size: 1.3rem;
+`
+
+export const ItemPrice = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
 `
 
 export const FlexGroup = styled.div`

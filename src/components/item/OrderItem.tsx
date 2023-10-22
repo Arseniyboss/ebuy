@@ -25,7 +25,7 @@ const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
           data-testid='item-image'
         />
       </Link>
-      <ItemDetails>
+      <ItemDetails aria-label='order item details'>
         <ItemName data-testid='item-name'>{name}</ItemName>
         <p data-testid='item-total-price'>
           {quantity} x ${price} = ${formatTotalPrice(totalPrice)}

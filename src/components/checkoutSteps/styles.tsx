@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-type ContainerProps = {
+type NavLinksProps = {
   $center?: boolean
 }
 
@@ -9,7 +9,7 @@ type NavLinkProps = {
   disabled?: boolean
 }
 
-export const Container = styled.div<ContainerProps>`
+export const NavLinks = styled.ul<NavLinksProps>`
   display: flex;
   justify-content: ${({ $center }) => ($center ? 'center' : 'space-between')};
   gap: ${({ $center }) => $center && '1rem'};

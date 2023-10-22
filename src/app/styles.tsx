@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 import { breakpoints } from '@breakpoints'
 
-export const ProductContainer = styled.div`
+export const ProductContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;

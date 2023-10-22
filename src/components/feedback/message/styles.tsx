@@ -9,15 +9,15 @@ export const Message = styled.p`
 
 export const InfoMessage = styled(Message)`
   background: #d2ebf5;
-  color: #10516c;
+  color: #0c435a;
 `
 
 export const SuccessMessage = styled(Message)`
   background: #d4edda;
-  color: #155724;
+  color: #145322;
 `
 
 export const ErrorMessage = styled(Message)`
   background: #f8d7da;
-  color: #721c24;
+  color: #62181f;
 `

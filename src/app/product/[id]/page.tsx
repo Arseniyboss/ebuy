@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { PageParams } from 'types/params'
 import { getProductById } from '@api/products/getProductById'
 import { decodeToken } from '@auth/token/decode/cookies'
-import { FlexGroup } from '@styles/globals'
+import { FlexGroup, ProductPrice } from '@styles/globals'
 import {
   ProductContainer,
   ProductImage,
@@ -42,9 +42,11 @@ const Product = async ({ params }: PageParams) => {
         priority
         data-testid='product-image'
       />
-      <ProductDetails>
+      <ProductDetails className='container' aria-label='product details'>
         <ProductName data-testid='product-name'>{product.name}</ProductName>
-        <h2 data-testid='product-price'>${product.price}</h2>
+        <ProductPrice data-testid='product-price'>
+          ${product.price}
+        </ProductPrice>
         <FlexGroup>
           <Rating value={product.rating} />
           <p>{product.numReviews}</p>
@@ -53,8 +55,8 @@ const Product = async ({ params }: PageParams) => {
         <p data-testid='product-description'>{product.description}</p>
         <AddToCart product={product} user={user} />
       </ProductDetails>
-      <ProductReviews>
-        <h2>Reviews</h2>
+      <ProductReviews className='container' aria-labelledby='reviews'>
+        <h2 id='reviews'>Reviews</h2>
         {product.reviews.length === 0 ? (
           <Message variant='info'>No Reviews</Message>
         ) : (

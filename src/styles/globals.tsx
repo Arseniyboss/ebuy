@@ -9,6 +9,13 @@ export const Container = styled.main`
   gap: var(--gap);
 `
 
+export const PageContainer = styled.div`
+  width: 1200px;
+  max-width: 90vw;
+  margin: 0 auto;
+  color: var(--gray);
+`
+
 export const FlexGroup = styled.div`
   display: flex;
   align-items: center;
@@ -65,6 +72,10 @@ export const Select = styled.select`
   &:focus {
     border: 1px solid #aaa;
   }
+`
+
+export const ProductPrice = styled.p`
+  font-size: 1.3rem;
 `
 
 export const ProductQuantity = styled.select`

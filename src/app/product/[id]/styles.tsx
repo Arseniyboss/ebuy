@@ -32,10 +32,10 @@ export const ProductImage = styled(Image)`
   }
 `
 
-export const ProductDetails = styled.div`
-  display: flex;
+export const ProductDetails = styled.section`
+  /* display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1rem; */
   max-width: 600px;
 
   @media screen and (max-width: ${breakpoints.product.medium}) {
@@ -61,9 +61,7 @@ export const ProductStatus = styled.p`
   font-size: 1.2rem;
 `
 
-export const ProductReviews = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+export const ProductReviews = styled.section`
   margin-top: 1rem;
+  gap: 1.5rem;
 `

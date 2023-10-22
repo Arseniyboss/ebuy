@@ -1,6 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
+import Link from 'next/link'
 
 export const HeaderContainer = styled.header`
   background: white;
@@ -13,4 +14,9 @@ export const HeaderContainer = styled.header`
   box-shadow: var(--box-shadow);
   color: var(--gray);
   z-index: var(--header-z-index);
+`
+
+export const HeaderLogo = styled(Link)`
+  font-size: 2rem;
+  font-weight: bold;
 `

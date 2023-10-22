@@ -12,7 +12,7 @@ type Props = {
 
 const Rating = ({ value }: Props) => {
   return (
-    <Star>
+    <Star aria-label={`${value} stars`}>
       {[...new Array(5)].map((_, index) => (
         <Fragment key={index}>
           {value >= index + 1 ? (

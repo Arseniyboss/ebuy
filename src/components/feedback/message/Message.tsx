@@ -4,9 +4,10 @@ import { ErrorMessage, SuccessMessage, InfoMessage } from './styles'
 type Props = {
   children: ReactNode
   variant: 'info' | 'success' | 'error'
+  dynamic?: boolean
 }
 
-const Message = ({ children, variant }: Props) => {
+const Message = ({ children, variant, dynamic }: Props) => {
   return (
     <>
       {variant === 'info' && (
@@ -18,7 +19,12 @@ const Message = ({ children, variant }: Props) => {
         </SuccessMessage>
       )}
       {variant === 'error' && (
-        <ErrorMessage data-testid='error-message'>{children}</ErrorMessage>
+        <ErrorMessage
+          data-testid='error-message'
+          aria-live={dynamic ? 'polite' : 'off'}
+        >
+          {children}
+        </ErrorMessage>
       )}
     </>
   )
