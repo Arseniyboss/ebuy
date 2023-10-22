@@ -57,10 +57,19 @@ const ProfileForm = ({ user }: Props) => {
           value={values.name}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name && 'name-error'}
           data-testid='name-input'
         />
         {errors.name && (
-          <FormError data-testid='name-error'>{errors.name}</FormError>
+          <FormError
+            id='name-error'
+            aria-live='polite'
+            data-testid='name-error'
+          >
+            {errors.name}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -72,10 +81,19 @@ const ProfileForm = ({ user }: Props) => {
           value={values.email}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email && 'email-error'}
           data-testid='email-input'
         />
         {errors.email && (
-          <FormError data-testid='email-error'>{errors.email}</FormError>
+          <FormError
+            id='email-error'
+            aria-live='polite'
+            data-testid='email-error'
+          >
+            {errors.email}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -87,10 +105,18 @@ const ProfileForm = ({ user }: Props) => {
           value={values.password}
           onChange={handleChange}
           autoComplete='on'
+          aria-invalid={!!errors.password}
+          aria-describedby={errors.password && 'password-error'}
           data-testid='password-input'
         />
         {errors.password && (
-          <FormError data-testid='password-error'>{errors.password}</FormError>
+          <FormError
+            id='password-error'
+            aria-live='polite'
+            data-testid='password-error'
+          >
+            {errors.password}
+          </FormError>
         )}
       </FormGroup>
       <FormButton disabled={!isValid || loading} data-testid='update-button'>

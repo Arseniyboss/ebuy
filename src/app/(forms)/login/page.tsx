@@ -47,11 +47,7 @@ const Login = () => {
   return (
     <Form onSubmit={handleSubmit} data-testid='login-form'>
       <h1>Sign In</h1>
-      {error && (
-        <Message variant='error' dynamic>
-          {error}
-        </Message>
-      )}
+      {error && <Message variant='error'>{error}</Message>}
       <FormGroup>
         <label htmlFor='email'>Email</label>
         <Input
@@ -61,10 +57,9 @@ const Login = () => {
           value={values.email}
           onChange={handleChange}
           autoComplete='on'
-          data-testid='email-input'
           aria-required
-          aria-invalid={!!errors.email}
           aria-describedby={errors.email && 'email-error'}
+          data-testid='email-input'
         />
         {errors.email && (
           <FormError
@@ -85,10 +80,9 @@ const Login = () => {
           value={values.password}
           onChange={handleChange}
           autoComplete='on'
-          data-testid='password-input'
           aria-required
-          aria-invalid={!!errors.password}
           aria-describedby={errors.password && 'password-error'}
+          data-testid='password-input'
         />
         {errors.password && (
           <FormError

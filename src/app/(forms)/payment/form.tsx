@@ -69,7 +69,9 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
           <label htmlFor='stripe'>Stripe</label>
         </div>
         {errors.paymentMethod && (
-          <FormError data-testid='form-error'>{errors.paymentMethod}</FormError>
+          <FormError aria-live='polite' data-testid='form-error'>
+            {errors.paymentMethod}
+          </FormError>
         )}
         <FormButton
           disabled={!isValid || isSubmitted}

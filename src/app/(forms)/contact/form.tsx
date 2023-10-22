@@ -55,10 +55,19 @@ const ContactForm = ({ user }: Props) => {
             value={values.name}
             onChange={handleChange}
             autoComplete='on'
+            aria-required
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name && 'name-error'}
             data-testid='name-input'
           />
           {errors.name && (
-            <FormError data-testid='name-error'>{errors.name}</FormError>
+            <FormError
+              id='name-error'
+              aria-live='polite'
+              data-testid='name-error'
+            >
+              {errors.name}
+            </FormError>
           )}
         </FormGroup>
         <FormGroup>
@@ -70,10 +79,19 @@ const ContactForm = ({ user }: Props) => {
             value={values.email}
             onChange={handleChange}
             autoComplete='on'
+            aria-required
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email && 'email-error'}
             data-testid='email-input'
           />
           {errors.email && (
-            <FormError data-testid='email-error'>{errors.email}</FormError>
+            <FormError
+              id='email-error'
+              aria-live='polite'
+              data-testid='email-error'
+            >
+              {errors.email}
+            </FormError>
           )}
         </FormGroup>
         <FormGroup>
@@ -85,10 +103,18 @@ const ContactForm = ({ user }: Props) => {
             rows={5}
             value={values.message}
             onChange={handleChange}
+            aria-required
+            aria-describedby={errors.message && 'message-error'}
             data-testid='message-input'
           />
           {errors.message && (
-            <FormError data-testid='message-error'>{errors.message}</FormError>
+            <FormError
+              id='message-error'
+              aria-live='polite'
+              data-testid='message-error'
+            >
+              {errors.message}
+            </FormError>
           )}
         </FormGroup>
         <FormButton disabled={!isValid || loading} data-testid='submit-button'>

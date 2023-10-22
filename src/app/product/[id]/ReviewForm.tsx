@@ -54,6 +54,8 @@ const ReviewForm = ({ params }: PageParams) => {
           as='select'
           value={values.rating}
           onChange={handleChange}
+          aria-required
+          aria-describedby={errors.rating && 'rating-error'}
           data-testid='rating-select'
         >
           <option value=''>Select</option>
@@ -64,7 +66,13 @@ const ReviewForm = ({ params }: PageParams) => {
           <option value='5'>5 - Excellent</option>
         </Input>
         {errors.rating && (
-          <FormError data-testid='rating-error'>{errors.rating}</FormError>
+          <FormError
+            id='rating-error'
+            aria-live='polite'
+            data-testid='rating-error'
+          >
+            {errors.rating}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>

@@ -58,10 +58,19 @@ const Register = () => {
           value={values.name}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name && 'name-error'}
           data-testid='name-input'
         />
         {errors.name && (
-          <FormError data-testid='name-error'>{errors.name}</FormError>
+          <FormError
+            id='name-error'
+            aria-live='polite'
+            data-testid='name-error'
+          >
+            {errors.name}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -73,10 +82,19 @@ const Register = () => {
           value={values.email}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email && 'email-error'}
           data-testid='email-input'
         />
         {errors.email && (
-          <FormError data-testid='email-error'>{errors.email}</FormError>
+          <FormError
+            id='email-error'
+            aria-live='polite'
+            data-testid='email-error'
+          >
+            {errors.email}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -88,10 +106,19 @@ const Register = () => {
           value={values.password}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.password}
+          aria-describedby={errors.password && 'password-error'}
           data-testid='password-input'
         />
         {errors.password && (
-          <FormError data-testid='password-error'>{errors.password}</FormError>
+          <FormError
+            id='password-error'
+            aria-live='polite'
+            data-testid='password-error'
+          >
+            {errors.password}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -103,10 +130,17 @@ const Register = () => {
           value={values.confirmPassword}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.confirmPassword}
+          aria-describedby={errors.confirmPassword && 'confirm-password-error'}
           data-testid='confirm-password-input'
         />
         {errors.confirmPassword && (
-          <FormError data-testid='confirm-password-error'>
+          <FormError
+            id='confirm-password-error'
+            aria-live='polite'
+            data-testid='confirm-password-error'
+          >
             {errors.confirmPassword}
           </FormError>
         )}

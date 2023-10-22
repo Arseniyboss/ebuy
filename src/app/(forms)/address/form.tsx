@@ -51,10 +51,19 @@ const AddressForm = ({ address, payload }: Props) => {
           value={values.street}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.street}
+          aria-describedby={errors.street && 'street-error'}
           data-testid='street-input'
         />
         {errors.street && (
-          <FormError data-testid='street-error'>{errors.street}</FormError>
+          <FormError
+            id='street-error'
+            aria-live='polite'
+            data-testid='street-error'
+          >
+            {errors.street}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -66,10 +75,19 @@ const AddressForm = ({ address, payload }: Props) => {
           value={values.country}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.country}
+          aria-describedby={errors.country && 'country-error'}
           data-testid='country-input'
         />
         {errors.country && (
-          <FormError data-testid='country-error'>{errors.country}</FormError>
+          <FormError
+            id='country-error'
+            aria-live='polite'
+            data-testid='country-error'
+          >
+            {errors.country}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -81,10 +99,19 @@ const AddressForm = ({ address, payload }: Props) => {
           value={values.city}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.city}
+          aria-describedby={errors.city && 'city-error'}
           data-testid='city-input'
         />
         {errors.city && (
-          <FormError data-testid='city-error'>{errors.city}</FormError>
+          <FormError
+            id='city-error'
+            aria-live='polite'
+            data-testid='city-error'
+          >
+            {errors.city}
+          </FormError>
         )}
       </FormGroup>
       <FormGroup>
@@ -96,10 +123,17 @@ const AddressForm = ({ address, payload }: Props) => {
           value={values.postalCode}
           onChange={handleChange}
           autoComplete='on'
+          aria-required
+          aria-invalid={!!errors.postalCode}
+          aria-describedby={errors.postalCode && 'postal-code-error'}
           data-testid='postal-code-input'
         />
         {errors.postalCode && (
-          <FormError data-testid='postal-code-error'>
+          <FormError
+            id='postal-code-error'
+            aria-live='polite'
+            data-testid='postal-code-error'
+          >
             {errors.postalCode}
           </FormError>
         )}
