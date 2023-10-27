@@ -1,10 +1,10 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { Values, validationSchema } from '@validation/schemas/registerSchema'
-import { register } from '@api/users/register'
-import { Input } from '@styles/globals'
+import { useForm } from '@/hooks/useForm'
+import { Values, validationSchema } from '@/validation/schemas/registerSchema'
+import { register } from '@/api/users/register'
+import { Input } from '@/styles/globals'
 import {
   Form,
   FormGroup,
@@ -12,8 +12,8 @@ import {
   FormFooter,
   FormLink,
   FormError,
-} from '@styles/form'
-import Message from '@components/feedback/message/Message'
+} from '@/styles/form'
+import Message from '@/components/feedback/message/Message'
 
 const Register = () => {
   const initialValues: Values = {

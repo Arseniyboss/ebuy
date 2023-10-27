@@ -1,4 +1,4 @@
-import { getUserInitials } from '@utils/getters/getUserInitials'
+import { getUserInitials } from '@/utils/getters/getUserInitials'
 
 it('gets user initials', () => {
   const username = 'Kristin Scott Thomas'

@@ -1,14 +1,14 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { UserPayload } from 'types/jwtPayload'
-import { Address } from 'types/base/user'
-import { validationSchema } from '@validation/schemas/addressSchema'
-import { setAddress } from '@api/checkout/setAddress'
-import { Input } from '@styles/globals'
-import { Form, FormGroup, FormButton, FormError } from '@styles/form'
-import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
+import { useForm } from '@/hooks/useForm'
+import { UserPayload } from '@/types/jwtPayload'
+import { Address } from '@/types/base/user'
+import { validationSchema } from '@/validation/schemas/addressSchema'
+import { setAddress } from '@/api/checkout/setAddress'
+import { Input } from '@/styles/globals'
+import { Form, FormGroup, FormButton, FormError } from '@/styles/form'
+import CheckoutSteps from '@/components/checkoutSteps/CheckoutSteps'
 
 type Props = {
   address?: Address

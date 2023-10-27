@@ -2,10 +2,10 @@ import './globals.css'
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import StyledComponentsRegistry from '@lib/registry'
-import Header from '@components/layout/header/Header'
-import Footer from '@components/layout/footer/Footer'
-import { Container, SkipLink } from '@styles/globals'
+import StyledComponentsRegistry from '@/lib/registry'
+import Header from '@/components/layout/header/Header'
+import Footer from '@/components/layout/footer/Footer'
+import { Container, SkipLink } from '@/styles/globals'
 
 type Props = {
   children: ReactNode

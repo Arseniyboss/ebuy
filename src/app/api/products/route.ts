@@ -1,13 +1,13 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { SortOrder } from 'types/sort'
-import { connectToDB } from '@config/mongodb'
-import { getSearchParams } from '@utils/getters/getSearchParams'
+import { SortOrder } from '@/types/sort'
+import { connectToDB } from '@/config/mongodb'
+import { getSearchParams } from '@/utils/getters/getSearchParams'
 import {
   validateSearch,
   validateSortOrder,
   getValidPage,
-} from '@utils/api/validateQueryParams'
-import Product from '@models/product'
+} from '@/utils/api/validateQueryParams'
+import Product from '@/models/product'
 
 export const GET = async (request: NextRequest) => {
   await connectToDB()

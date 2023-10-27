@@ -2,9 +2,9 @@ import {
   UserLoginParams,
   UserOrdersQueryParams,
   OrdersQueryParams,
-} from '../../src/types/params'
-import { CartItem, User, Order, GetOrdersData } from '../../src/types/api'
-import { Address, PaymentMethod } from '../../src/types/base/user'
+} from '@/types/params'
+import { CartItem, User, Order, GetOrdersData } from '@/types/api'
+import { Address, PaymentMethod } from '@/types/base/user'
 
 type SelectOptionParams = {
   testId: string

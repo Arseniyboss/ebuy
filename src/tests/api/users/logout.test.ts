@@ -1,4 +1,4 @@
-import { POST } from '@app/api/users/logout/route'
+import { POST } from '@/app/api/users/logout/route'
 
 const logout = async () => {
   const { status, cookies } = await POST()

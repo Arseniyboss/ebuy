@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CreateOrderParams as Body } from 'types/params'
-import { UserOrdersStatus } from 'types/base/order'
-import { connectToDB } from '@config/mongodb'
-import { decodeToken } from '@auth/token/decode/requestHeaders'
-import { throwError } from '@utils/api/throwError'
-import { getSearchParams } from '@utils/getters/getSearchParams'
-import { getValidPage } from '@utils/api/validateQueryParams'
-import User from '@models/user'
-import Order from '@models/order'
+import { CreateOrderParams as Body } from '@/types/params'
+import { UserOrdersStatus } from '@/types/base/order'
+import { connectToDB } from '@/config/mongodb'
+import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { throwError } from '@/utils/api/throwError'
+import { getSearchParams } from '@/utils/getters/getSearchParams'
+import { getValidPage } from '@/utils/api/validateQueryParams'
+import User from '@/models/user'
+import Order from '@/models/order'
 
 export const GET = async (request: NextRequest) => {
   await connectToDB()

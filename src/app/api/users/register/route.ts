@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
-import { UserRegisterParams as Body } from 'types/params'
-import { connectToDB } from '@config/mongodb'
-import { throwError } from '@utils/api/throwError'
-import { setCookie } from '@utils/api/setCookie'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateTokenCookie } from '@auth/token/generators/generateTokenCookie'
-import User from '@models/user'
+import { UserRegisterParams as Body } from '@/types/params'
+import { connectToDB } from '@/config/mongodb'
+import { throwError } from '@/utils/api/throwError'
+import { setCookie } from '@/utils/api/setCookie'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
+import User from '@/models/user'
 
 export const POST = async (request: NextRequest) => {
   await connectToDB()

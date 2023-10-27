@@ -1,4 +1,4 @@
-import { Address as Props } from 'types/base/user'
+import { Address as Props } from '@/types/base/user'
 
 const Address = ({ street, country, city, postalCode }: Props) => {
   return (

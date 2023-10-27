@@ -3,7 +3,7 @@ import {
   ValidationSchema,
   Errors,
   Value,
-} from '@hooks/useForm'
+} from '@/hooks/useForm'
 
 type Entry<T> = [keyof T, ValidationOptions<T, keyof T>]
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { Button } from '@styles/globals'
+import { Button } from '@/styles/globals'
 
 type Props = {
   $center?: boolean
@@ -59,6 +59,6 @@ export const FormLink = styled(Link)`
 `
 
 export const FormError = styled.p`
-  color: #e10000;
+  color: var(--red);
   font-weight: bold;
 `

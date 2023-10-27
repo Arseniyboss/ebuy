@@ -1,12 +1,16 @@
 import { NextRequest } from 'next/server'
-import { BASE_URL } from '@baseUrl'
-import { PATCH } from '@app/api/products/[id]/route'
-import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakeProductId, fakePayload } from '@mocks/fakeData'
-import products from '@mocks/products'
-import users from '@mocks/users'
+import { BASE_URL } from '@/baseUrl'
+import { PATCH } from '@/app/api/products/[id]/route'
+import {
+  seedProducts,
+  seedUsers,
+  getProducts,
+} from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakeProductId, fakePayload } from '@/mocks/fakeData'
+import products from '@/mocks/products'
+import users from '@/mocks/users'
 
 const quantity = 2
 

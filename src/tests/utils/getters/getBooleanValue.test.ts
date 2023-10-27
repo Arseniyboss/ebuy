@@ -1,4 +1,4 @@
-import { getBooleanValue } from '@utils/getters/getBooleanValue'
+import { getBooleanValue } from '@/utils/getters/getBooleanValue'
 
 it('gets boolean value', () => {
   expect(getBooleanValue(undefined)).toBe(false)

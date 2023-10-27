@@ -1,4 +1,4 @@
-import { formatPrice } from '@utils/formatters/formatPrice'
+import { formatPrice } from '@/utils/formatters/formatPrice'
 
 it('formats price', () => {
   const price = 10.123456

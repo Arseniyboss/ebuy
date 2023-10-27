@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import Product from '@models/product'
-import User from '@models/user'
-import Order from '@models/order'
-import products from '@mocks/products'
-import users from '@mocks/users'
-import orders from '@mocks/orders'
+import Product from '@/models/product'
+import User from '@/models/user'
+import Order from '@/models/order'
+import products from '@/mocks/products'
+import users from '@/mocks/users'
+import orders from '@/mocks/orders'
 
 dotenv.config()
 

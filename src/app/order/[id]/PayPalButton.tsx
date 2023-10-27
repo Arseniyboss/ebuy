@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
-import { updateOrderToPaid } from '@api/orders/updateOrderToPaid'
+import { updateOrderToPaid } from '@/api/orders/updateOrderToPaid'
 
 type Props = {
   amount: number

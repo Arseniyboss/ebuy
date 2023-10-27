@@ -1,5 +1,5 @@
-import { BASE_URL } from '@baseUrl'
-import { getToken } from '@auth/token/getters/getToken'
+import { BASE_URL } from '@/baseUrl'
+import { getToken } from '@/auth/token/getters/getToken'
 
 export const updateCartItem = async (id: string, quantity: number) => {
   const token = await getToken()

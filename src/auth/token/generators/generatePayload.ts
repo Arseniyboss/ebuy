@@ -1,5 +1,5 @@
-import { User } from 'types/jwtPayload'
-import { getBooleanValue } from '@utils/getters/getBooleanValue'
+import { User } from '@/types/jwtPayload'
+import { getBooleanValue } from '@/utils/getters/getBooleanValue'
 
 export const generatePayload = ({
   _id,

@@ -1,6 +1,6 @@
-import { Order as Props } from 'types/api'
-import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
-import { Cross, OrderLink } from '@styles/table'
+import { Order as Props } from '@/types/api'
+import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
+import { Cross, OrderLink } from '@/styles/table'
 
 const Order = ({
   _id,

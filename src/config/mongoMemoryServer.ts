@@ -1,15 +1,15 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
-import products from '@mocks/products'
-import users from '@mocks/users'
-import orders from '@mocks/orders'
+import products from '@/mocks/products'
+import users from '@/mocks/users'
+import orders from '@/mocks/orders'
 import {
   Data,
   Document,
   ProductDocuments,
   UserDocuments,
   OrderDocuments,
-} from 'types/mongo/documents'
+} from '@/types/mongo/documents'
 
 const collections = mongoose.connection.collections
 

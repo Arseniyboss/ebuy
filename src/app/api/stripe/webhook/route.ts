@@ -1,8 +1,8 @@
 import Stripe from 'stripe'
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@utils/api/stripe'
-import { updateOrderToPaid } from '@api/orders/updateOrderToPaid'
-import { revalidateTag } from '@api/revalidateTag'
+import { stripe } from '@/utils/api/stripe'
+import { updateOrderToPaid } from '@/api/orders/updateOrderToPaid'
+import { revalidateTag } from '@/api/revalidateTag'
 
 type Metadata = {
   orderId: string

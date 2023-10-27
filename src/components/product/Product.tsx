@@ -1,12 +1,12 @@
-import { Product as Props } from 'types/api'
-import { FlexGroup, ProductPrice } from '@styles/globals'
+import { Product as Props } from '@/types/api'
+import { FlexGroup, ProductPrice } from '@/styles/globals'
 import {
   ProductLink,
   ProductContainer,
   ProductImage,
   ProductDetails,
 } from './styles'
-import Rating from '@components/product/rating/Rating'
+import Rating from '@/components/product/rating/Rating'
 
 const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
   return (

@@ -1,6 +1,6 @@
 import { Schema, models, model } from 'mongoose'
-import { Order as OrderSchema } from 'types/base/order'
-import { OrderModel } from 'types/mongo/models'
+import { Order as OrderSchema } from '@/types/base/order'
+import { OrderModel } from '@/types/mongo/models'
 import { cartSchema, addressSchema } from './user'
 
 const orderSchema = new Schema<OrderSchema>({

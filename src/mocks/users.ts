@@ -1,6 +1,6 @@
 import { hashSync } from 'bcryptjs'
 import { Types } from 'mongoose'
-import { User } from 'types/mongo/documents'
+import { User } from '@/types/mongo/documents'
 
 const { ObjectId } = Types
 

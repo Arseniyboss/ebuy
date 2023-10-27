@@ -1,6 +1,6 @@
 import { OmitCartItems, OmitPush } from './omitters'
 import { CartItem } from './base/user'
-import { User as UserType } from 'types/mongo/documents'
+import { User as UserType } from '@/types/mongo/documents'
 
 export type UserPayload = {
   id: string

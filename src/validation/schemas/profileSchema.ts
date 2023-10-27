@@ -1,4 +1,4 @@
-import { UpdateUserParams as Values } from 'types/params'
+import { UpdateUserParams as Values } from '@/types/params'
 import { ValidationSchema } from '../../hooks/useForm'
 import {
   USERNAME_REQUIRED,
@@ -6,8 +6,11 @@ import {
   EMAIL_REQUIRED,
   EMAIL_INVALID,
   PASSWORD_INVALID,
-} from '@validation/constants/errors'
-import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
+} from '@/validation/constants/errors'
+import {
+  USERNAME_PATTERN,
+  EMAIL_PATTERN,
+} from '@/validation/constants/patterns'
 
 export const validationSchema: ValidationSchema<Values> = {
   name: {

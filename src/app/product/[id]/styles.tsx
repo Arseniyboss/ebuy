@@ -2,8 +2,8 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
-import { Button } from '@styles/globals'
-import { breakpoints } from '@breakpoints'
+import { Button } from '@/styles/globals'
+import { breakpoints } from '@/breakpoints'
 
 export const ProductContainer = styled.article`
   display: grid;
@@ -57,7 +57,7 @@ export const ProductButton = styled(Button)`
 `
 
 export const ProductStatus = styled.p`
-  color: red;
+  color: var(--red);
   font-size: 1.2rem;
 `
 

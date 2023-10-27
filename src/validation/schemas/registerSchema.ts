@@ -7,8 +7,11 @@ import {
   PASSWORD_REQUIRED,
   PASSWORD_INVALID,
   PASSWORDS_DIFFERENT,
-} from '@validation/constants/errors'
-import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
+} from '@/validation/constants/errors'
+import {
+  USERNAME_PATTERN,
+  EMAIL_PATTERN,
+} from '@/validation/constants/patterns'
 
 export type Values = {
   name: string

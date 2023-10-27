@@ -1,16 +1,16 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { UserPayload } from 'types/jwtPayload'
-import { PaymentMethod } from 'types/base/user'
+import { useForm } from '@/hooks/useForm'
+import { UserPayload } from '@/types/jwtPayload'
+import { PaymentMethod } from '@/types/base/user'
 import {
   Values,
   validationSchema,
-} from '@validation/schemas/paymentMethodSchema'
-import { setPaymentMethod } from '@api/checkout/setPaymentMethod'
-import { Form, FormRadio, FormButton, FormError } from '@styles/form'
-import CheckoutSteps from '@components/checkoutSteps/CheckoutSteps'
+} from '@/validation/schemas/paymentMethodSchema'
+import { setPaymentMethod } from '@/api/checkout/setPaymentMethod'
+import { Form, FormRadio, FormButton, FormError } from '@/styles/form'
+import CheckoutSteps from '@/components/checkoutSteps/CheckoutSteps'
 
 type Props = {
   paymentMethod?: PaymentMethod

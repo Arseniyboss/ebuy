@@ -1,13 +1,13 @@
 import bcrypt from 'bcryptjs'
 import { NextRequest } from 'next/server'
-import { UpdateUserParams } from 'types/params'
-import { BASE_URL } from '@baseUrl'
-import { PUT } from '@app/api/users/user/route'
-import { seedUsers, getUsers } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { verifyToken } from '@auth/token/verifyToken'
-import users from '@mocks/users'
+import { UpdateUserParams } from '@/types/params'
+import { BASE_URL } from '@/baseUrl'
+import { PUT } from '@/app/api/users/user/route'
+import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { verifyToken } from '@/auth/token/verifyToken'
+import users from '@/mocks/users'
 
 const payload = generatePayload(users[1])
 

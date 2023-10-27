@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { decodeToken } from '@auth/token/decode/requestCookies'
-import { redirect } from '@utils/api/redirect'
+import { decodeToken } from '@/auth/token/decode/requestCookies'
+import { redirect } from '@/utils/api/redirect'
 
 export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname

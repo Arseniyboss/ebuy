@@ -1,15 +1,15 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { PageParams } from 'types/params'
-import { CreateReviewParams as Values } from 'types/params'
-import { validationSchema } from '@validation/schemas/reviewSchema'
-import { Input } from '@styles/globals'
-import { Form, FormGroup, FormError, FormButton } from '@styles/form'
-import { createReview } from '@api/products/createReview'
-import { revalidateTag } from '@api/revalidateTag'
-import Message from '@components/feedback/message/Message'
+import { useForm } from '@/hooks/useForm'
+import { PageParams } from '@/types/params'
+import { CreateReviewParams as Values } from '@/types/params'
+import { validationSchema } from '@/validation/schemas/reviewSchema'
+import { Input } from '@/styles/globals'
+import { Form, FormGroup, FormError, FormButton } from '@/styles/form'
+import { createReview } from '@/api/products/createReview'
+import { revalidateTag } from '@/api/revalidateTag'
+import Message from '@/components/feedback/message/Message'
 
 const ReviewForm = ({ params }: PageParams) => {
   const initialValues: Values = {

@@ -1,5 +1,5 @@
 import { Types } from 'mongoose'
-import { getRating } from '@utils/getters/getRating'
+import { getRating } from '@/utils/getters/getRating'
 
 const { ObjectId } = Types
 

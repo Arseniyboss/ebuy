@@ -1,4 +1,4 @@
-import Message from '@components/feedback/message/Message'
+import Message from '@/components/feedback/message/Message'
 
 const NotFound = () => {
   return <Message variant='error'>Order not found</Message>

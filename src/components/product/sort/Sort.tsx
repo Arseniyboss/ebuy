@@ -1,8 +1,8 @@
 'use client'
 
 import { ChangeEvent, useState } from 'react'
-import { useQueryParams } from '@hooks/useQueryParams'
-import { HomeQueryParams } from 'types/params'
+import { useQueryParams } from '@/hooks/useQueryParams'
+import { HomeQueryParams } from '@/types/params'
 import { SortSelect } from './styles'
 
 const Sort = () => {

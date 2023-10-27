@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useDebounce } from '@hooks/useDebounce'
-import { useQueryParams } from '@hooks/useQueryParams'
-import { useUpdateEffect } from '@hooks/useUpdateEffect'
-import { HomeQueryParams } from 'types/params'
+import { useDebounce } from '@/hooks/useDebounce'
+import { useQueryParams } from '@/hooks/useQueryParams'
+import { useUpdateEffect } from '@/hooks/useUpdateEffect'
+import { HomeQueryParams } from '@/types/params'
 import { SearchInput } from './styles'
 
 const Search = () => {

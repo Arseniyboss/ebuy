@@ -1,4 +1,4 @@
-import { InvisibleButton } from '@styles/globals'
+import { InvisibleButton } from '@/styles/globals'
 import styled from 'styled-components'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { getQuantities } from '@utils/getters/getQuantities'
+import { getQuantities } from '@/utils/getters/getQuantities'
 
 it('gets product quantities', () => {
   const quantities = getQuantities(5)

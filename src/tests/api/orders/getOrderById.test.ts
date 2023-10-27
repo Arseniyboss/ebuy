@@ -1,13 +1,13 @@
 import { NextRequest } from 'next/server'
-import { Order } from 'types/api'
-import { BASE_URL } from '@baseUrl'
-import { GET } from '@app/api/orders/[id]/route'
-import { seedUsers, seedOrders } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakeOrderId, fakePayload } from '@mocks/fakeData'
-import orders from '@mocks/orders'
-import users from '@mocks/users'
+import { Order } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
+import { GET } from '@/app/api/orders/[id]/route'
+import { seedUsers, seedOrders } from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakeOrderId, fakePayload } from '@/mocks/fakeData'
+import orders from '@/mocks/orders'
+import users from '@/mocks/users'
 
 const defaultPayload = generatePayload(users[4])
 const orderId = orders[0]._id.toString()

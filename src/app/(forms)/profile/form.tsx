@@ -1,14 +1,14 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { UpdateUserParams as Values } from 'types/params'
-import { User } from 'types/api'
-import { validationSchema } from '@validation/schemas/profileSchema'
-import { updateUser } from '@api/users/updateUser'
-import { Input } from '@styles/globals'
-import { Form, FormGroup, FormButton, FormError } from '@styles/form'
-import Message from '@components/feedback/message/Message'
+import { useForm } from '@/hooks/useForm'
+import { UpdateUserParams as Values } from '@/types/params'
+import { User } from '@/types/api'
+import { validationSchema } from '@/validation/schemas/profileSchema'
+import { updateUser } from '@/api/users/updateUser'
+import { Input } from '@/styles/globals'
+import { Form, FormGroup, FormButton, FormError } from '@/styles/form'
+import Message from '@/components/feedback/message/Message'
 
 type Props = {
   user: User

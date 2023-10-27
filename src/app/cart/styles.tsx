@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { Button } from '@styles/globals'
+import { Button } from '@/styles/globals'
 
 export const CartTotal = styled.section`
   display: flex;

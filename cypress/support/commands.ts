@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { Product } from '../../src/types/api'
-import { formatPrice } from '../../src/utils/formatters/formatPrice'
-import { formatTotalPrice } from '../../src/utils/formatters/formatTotalPrice'
-import { getTotalPrice } from '../../src/utils/getters/getTotalPrice'
+import { Product } from '@/types/api'
+import { formatPrice } from '@/utils/formatters/formatPrice'
+import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
+import { getTotalPrice } from '@/utils/getters/getTotalPrice'
 
 Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)

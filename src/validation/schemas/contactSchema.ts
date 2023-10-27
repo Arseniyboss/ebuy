@@ -5,8 +5,11 @@ import {
   EMAIL_REQUIRED,
   EMAIL_INVALID,
   MESSAGE_REQUIRED,
-} from '@validation/constants/errors'
-import { USERNAME_PATTERN, EMAIL_PATTERN } from '@validation/constants/patterns'
+} from '@/validation/constants/errors'
+import {
+  USERNAME_PATTERN,
+  EMAIL_PATTERN,
+} from '@/validation/constants/patterns'
 
 export type Values = {
   name: string

@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
-import { HomeQueryParams } from 'types/params'
-import { Heading } from '@styles/globals'
+import { HomeQueryParams } from '@/types/params'
+import { Heading } from '@/styles/globals'
 import { FlexGroup } from './styles'
-import Search from '@components/product/search/Search'
-import Sort from '@components/product/sort/Sort'
+import Search from '@/components/product/search/Search'
+import Sort from '@/components/product/sort/Sort'
 import SkeletonLoaders from './skeletons'
 import Products from './products'
 

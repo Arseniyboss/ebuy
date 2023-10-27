@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { breakpoints } from '@breakpoints'
+import { breakpoints } from '@/breakpoints'
 
 export const ProductContainer = styled.section`
   display: grid;

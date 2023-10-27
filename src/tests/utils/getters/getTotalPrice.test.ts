@@ -1,4 +1,4 @@
-import { getTotalPrice } from '@utils/getters/getTotalPrice'
+import { getTotalPrice } from '@/utils/getters/getTotalPrice'
 
 const cartItems = [
   {

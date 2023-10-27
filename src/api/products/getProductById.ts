@@ -1,5 +1,5 @@
-import { Product } from 'types/api'
-import { BASE_URL } from '@baseUrl'
+import { Product } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
 
 export const getProductById = async (id: string) => {
   const url = `${BASE_URL}/api/products/${id}`

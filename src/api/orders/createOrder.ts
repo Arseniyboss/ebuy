@@ -1,7 +1,7 @@
-import { CreateOrderParams } from 'types/params'
-import { Order } from 'types/api'
-import { BASE_URL } from '@baseUrl'
-import { getToken } from '@auth/token/getters/getToken'
+import { CreateOrderParams } from '@/types/params'
+import { Order } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
+import { getToken } from '@/auth/token/getters/getToken'
 
 export const createOrder = async (order: CreateOrderParams) => {
   const token = await getToken()

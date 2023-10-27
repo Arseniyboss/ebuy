@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation'
-import { UserOrdersStatus } from 'types/base/order'
-import { UserOrdersQueryParams as QueryParams } from 'types/params'
-import { getUserOrders } from '@api/orders/getUserOrders'
-import { Table } from '@styles/table'
-import Message from '@components/feedback/message/Message'
-import OrderFilter from '@components/order/filter/OrderFilter'
-import Order from '@components/order/Order'
-import Pagination from '@components/pagination/Pagination'
+import { UserOrdersStatus } from '@/types/base/order'
+import { UserOrdersQueryParams as QueryParams } from '@/types/params'
+import { getUserOrders } from '@/api/orders/getUserOrders'
+import { Table } from '@/styles/table'
+import Message from '@/components/feedback/message/Message'
+import OrderFilter from '@/components/order/filter/OrderFilter'
+import Order from '@/components/order/Order'
+import Pagination from '@/components/pagination/Pagination'
 
 type Props = {
   searchParams: QueryParams

@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { PageParams } from 'types/params'
-import { getProductById } from '@api/products/getProductById'
-import { decodeToken } from '@auth/token/decode/cookies'
-import { FlexGroup, ProductPrice } from '@styles/globals'
+import { PageParams } from '@/types/params'
+import { getProductById } from '@/api/products/getProductById'
+import { decodeToken } from '@/auth/token/decode/cookies'
+import { FlexGroup, ProductPrice } from '@/styles/globals'
 import {
   ProductContainer,
   ProductImage,
@@ -11,10 +11,10 @@ import {
   ProductName,
   ProductReviews,
 } from './styles'
-import Rating from '@components/product/rating/Rating'
+import Rating from '@/components/product/rating/Rating'
 import AddToCart from './AddToCart'
-import Message from '@components/feedback/message/Message'
-import Review from '@components/product/review/Review'
+import Message from '@/components/feedback/message/Message'
+import Review from '@/components/product/review/Review'
 import ReviewForm from './ReviewForm'
 
 export const generateMetadata = async ({

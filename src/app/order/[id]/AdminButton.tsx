@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { updateOrderToDelivered } from '@api/orders/updateOrderToDelivered'
-import { CheckoutButton } from '@app/cart/styles'
+import { updateOrderToDelivered } from '@/api/orders/updateOrderToDelivered'
+import { CheckoutButton } from '@/app/cart/styles'
 
 type Props = {
   orderId: string

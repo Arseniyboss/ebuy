@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
-import { BASE_URL } from '@baseUrl'
-import { DELETE } from '@app/api/cart/route'
-import { seedUsers, getUsers } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakePayload } from '@mocks/fakeData'
-import users from '@mocks/users'
+import { BASE_URL } from '@/baseUrl'
+import { DELETE } from '@/app/api/cart/route'
+import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakePayload } from '@/mocks/fakeData'
+import users from '@/mocks/users'
 
 const defaultPayload = generatePayload(users[2])
 

@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter, usePathname } from 'next/navigation'
-import { useToggle } from '@hooks/useToggle'
-import { logout } from '@api/users/logout'
+import { useToggle } from '@/hooks/useToggle'
+import { logout } from '@/api/users/logout'
 import { AvatarContainer, UserInitials, Dropdown } from './styles'
 import Link from 'next/link'
-import { InvisibleButton } from '@styles/globals'
+import { InvisibleButton } from '@/styles/globals'
 
 type Props = {
   isAdmin: boolean

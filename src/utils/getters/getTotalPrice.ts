@@ -1,4 +1,4 @@
-import { CartItem } from 'types/api'
+import { CartItem } from '@/types/api'
 import { formatPrice } from '../formatters/formatPrice'
 
 export const getTotalPrice = (cartItems: CartItem[]) => {

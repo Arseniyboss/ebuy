@@ -1,6 +1,6 @@
-import { decodeToken } from '@auth/token/decode/cookies'
+import { decodeToken } from '@/auth/token/decode/cookies'
 import { HeaderContainer, HeaderLogo } from './styles'
-import Navigation from '@components/navigation/Navigation'
+import Navigation from '@/components/navigation/Navigation'
 
 const Header = async () => {
   const user = await decodeToken()

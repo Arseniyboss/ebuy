@@ -1,15 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { CartItem as Props } from 'types/api'
-import { formatPrice } from '@utils/formatters/formatPrice'
-import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
+import { CartItem as Props } from '@/types/api'
+import { formatPrice } from '@/utils/formatters/formatPrice'
+import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
 import {
   Container,
   ItemImage,
   ItemDetails,
   ItemName,
-} from '@components/item/styles'
+} from '@/components/item/styles'
 
 const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
   const totalPrice = formatPrice(quantity * price)

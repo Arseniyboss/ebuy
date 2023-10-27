@@ -1,11 +1,11 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { PageParams, CreateReviewParams as Body } from 'types/params'
-import { connectToDB } from '@config/mongodb'
-import { decodeToken } from '@auth/token/decode/requestHeaders'
-import { throwError } from '@utils/api/throwError'
-import { getRating } from '@utils/getters/getRating'
-import Product from '@models/product'
-import User from '@models/user'
+import { PageParams, CreateReviewParams as Body } from '@/types/params'
+import { connectToDB } from '@/config/mongodb'
+import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { throwError } from '@/utils/api/throwError'
+import { getRating } from '@/utils/getters/getRating'
+import Product from '@/models/product'
+import User from '@/models/user'
 
 export const POST = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()

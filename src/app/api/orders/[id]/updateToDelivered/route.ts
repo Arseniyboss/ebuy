@@ -1,11 +1,11 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { PageParams } from 'types/params'
-import { connectToDB } from '@config/mongodb'
-import { decodeToken } from '@auth/token/decode/requestHeaders'
-import { throwError } from '@utils/api/throwError'
-import { getCurrentDate } from '@utils/getters/getCurrentDate'
-import Order from '@models/order'
-import User from '@models/user'
+import { PageParams } from '@/types/params'
+import { connectToDB } from '@/config/mongodb'
+import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { throwError } from '@/utils/api/throwError'
+import { getCurrentDate } from '@/utils/getters/getCurrentDate'
+import Order from '@/models/order'
+import User from '@/models/user'
 
 export const PUT = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()

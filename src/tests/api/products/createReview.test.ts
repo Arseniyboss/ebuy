@@ -1,13 +1,17 @@
 import { NextRequest } from 'next/server'
-import { CreateReviewParams as Review } from 'types/params'
-import { BASE_URL } from '@baseUrl'
-import { POST } from '@app/api/products/[id]/review/route'
-import { seedProducts, seedUsers, getProducts } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakeProductId, fakePayload } from '@mocks/fakeData'
-import products from '@mocks/products'
-import users from '@mocks/users'
+import { CreateReviewParams as Review } from '@/types/params'
+import { BASE_URL } from '@/baseUrl'
+import { POST } from '@/app/api/products/[id]/review/route'
+import {
+  seedProducts,
+  seedUsers,
+  getProducts,
+} from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakeProductId, fakePayload } from '@/mocks/fakeData'
+import products from '@/mocks/products'
+import users from '@/mocks/users'
 
 const user = users[2]
 

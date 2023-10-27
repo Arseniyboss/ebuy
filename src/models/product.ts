@@ -1,12 +1,12 @@
 import { Schema, models, model } from 'mongoose'
-import { ReviewSchema, ProductModel } from 'types/mongo/models'
-import { Product as ProductSchema } from 'types/base/product'
+import { ReviewSchema, ProductModel } from '@/types/mongo/models'
+import { Product as ProductSchema } from '@/types/base/product'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
   RATING_REQUIRED,
-} from '@validation/constants/errors'
-import { USERNAME_PATTERN } from '@validation/constants/patterns'
+} from '@/validation/constants/errors'
+import { USERNAME_PATTERN } from '@/validation/constants/patterns'
 
 const reviewSchema = new Schema<ReviewSchema>(
   {

@@ -6,12 +6,12 @@ import {
   OmitReviews,
   OmitTimestamps,
   OmitPush,
-} from 'types/omitters'
-import { CartItem } from 'types/mongo/documents'
-import { Review, Product } from 'types/base/product'
-import { CartItem as CartSchemaType, User } from 'types/base/user'
-import { Order as OrderSchema } from 'types/base/order'
-import { CartItem as CartItemType, Review as ReviewType } from 'types/api'
+} from '@/types/omitters'
+import { CartItem } from '@/types/mongo/documents'
+import { Review, Product } from '@/types/base/product'
+import { CartItem as CartSchemaType, User } from '@/types/base/user'
+import { Order as OrderSchema } from '@/types/base/order'
+import { CartItem as CartItemType, Review as ReviewType } from '@/types/api'
 
 type WithUserId<T> = T & {
   userId: Types.ObjectId

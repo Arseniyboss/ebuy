@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server'
-import { Product } from 'types/api'
-import { BASE_URL } from '@baseUrl'
-import { GET } from '@app/api/products/[id]/route'
-import { seedProducts } from '@config/mongoMemoryServer'
-import { fakeProductId } from '@mocks/fakeData'
-import products from '@mocks/products'
+import { Product } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
+import { GET } from '@/app/api/products/[id]/route'
+import { seedProducts } from '@/config/mongoMemoryServer'
+import { fakeProductId } from '@/mocks/fakeData'
+import products from '@/mocks/products'
 
 const getProductById = async (id: string) => {
   const url = `${BASE_URL}/api/products/${id}`

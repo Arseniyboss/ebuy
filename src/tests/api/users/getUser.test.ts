@@ -1,13 +1,13 @@
 import { NextRequest } from 'next/server'
-import { UserPayload } from 'types/jwtPayload'
-import { User } from 'types/api'
-import { BASE_URL } from '@baseUrl'
-import { GET } from '@app/api/users/user/route'
-import { seedUsers } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakePayload } from '@mocks/fakeData'
-import users from '@mocks/users'
+import { UserPayload } from '@/types/jwtPayload'
+import { User } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
+import { GET } from '@/app/api/users/user/route'
+import { seedUsers } from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakePayload } from '@/mocks/fakeData'
+import users from '@/mocks/users'
 
 const payload = generatePayload(users[1])
 

@@ -1,4 +1,4 @@
-import { UserPayload } from 'types/jwtPayload'
+import { UserPayload } from '@/types/jwtPayload'
 
 export const fakeProductId: string = '62dbfa7f31c12b460f19f2b0'
 export const fakeOrderId: string = '62dbfa7f31c12b460f19f2c0'

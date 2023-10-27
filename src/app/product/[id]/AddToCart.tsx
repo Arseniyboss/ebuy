@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getQuantities } from '@utils/getters/getQuantities'
-import { addCartItem } from '@api/cart/addCartItem'
-import { Product } from 'types/api'
-import { UserPayload } from 'types/jwtPayload'
-import { FlexGroup, ProductQuantity } from '@styles/globals'
+import { getQuantities } from '@/utils/getters/getQuantities'
+import { addCartItem } from '@/api/cart/addCartItem'
+import { Product } from '@/types/api'
+import { UserPayload } from '@/types/jwtPayload'
+import { FlexGroup, ProductQuantity } from '@/styles/globals'
 import { ProductButton, ProductStatus } from './styles'
 
 type Props = {

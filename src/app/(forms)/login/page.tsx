@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useForm } from '@hooks/useForm'
-import { UserLoginParams as Values } from 'types/params'
-import { validationSchema } from '@validation/schemas/loginSchema'
-import { login } from '@api/users/login'
-import { Input } from '@styles/globals'
+import { useForm } from '@/hooks/useForm'
+import { UserLoginParams as Values } from '@/types/params'
+import { validationSchema } from '@/validation/schemas/loginSchema'
+import { login } from '@/api/users/login'
+import { Input } from '@/styles/globals'
 import {
   Form,
   FormGroup,
@@ -13,8 +13,8 @@ import {
   FormFooter,
   FormLink,
   FormError,
-} from '@styles/form'
-import Message from '@components/feedback/message/Message'
+} from '@/styles/form'
+import Message from '@/components/feedback/message/Message'
 
 const Login = () => {
   const initialValues: Values = {

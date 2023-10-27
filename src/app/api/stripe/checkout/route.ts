@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CartItem } from 'types/api'
-import { stripe } from '@utils/api/stripe'
-import { getStripeItems } from '@utils/getters/getStripeItems'
-import { throwError } from '@utils/api/throwError'
+import { CartItem } from '@/types/api'
+import { stripe } from '@/utils/api/stripe'
+import { getStripeItems } from '@/utils/getters/getStripeItems'
+import { throwError } from '@/utils/api/throwError'
 
 type Body = {
   orderItems: CartItem[]

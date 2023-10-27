@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { getUser } from '@api/users/getUser'
-import { getTotalPrice } from '@utils/getters/getTotalPrice'
-import { formatTotalPrice } from '@utils/formatters/formatTotalPrice'
-import { PageContainer } from '@styles/globals'
+import { getUser } from '@/api/users/getUser'
+import { getTotalPrice } from '@/utils/getters/getTotalPrice'
+import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
+import { PageContainer } from '@/styles/globals'
 import { CartTotal, CheckoutButton } from './styles'
-import Message from '@components/feedback/message/Message'
-import CartItem from '@components/item/CartItem'
+import Message from '@/components/feedback/message/Message'
+import CartItem from '@/components/item/CartItem'
 
 const CartItems = async () => {
   const user = await getUser()

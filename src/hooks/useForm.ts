@@ -7,7 +7,7 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react'
-import { validate } from '@validation/validate'
+import { validate } from '@/validation/validate'
 import { useFormState } from './useFormState'
 
 export type ValidationOptions<T, P extends keyof T> = {

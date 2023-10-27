@@ -1,5 +1,5 @@
-import { CartItem } from 'types/api'
-import { BASE_URL } from '@baseUrl'
+import { CartItem } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
 
 export const createCheckoutSession = async (
   orderItems: CartItem[],

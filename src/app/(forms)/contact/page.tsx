@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getUser } from '@api/users/getUser'
+import { getUser } from '@/api/users/getUser'
 import ContactForm from './form'
 
 export const metadata: Metadata = {

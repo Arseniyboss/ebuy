@@ -1,7 +1,7 @@
 'use client'
 
 import { NavLinks, NavLink } from './styles'
-import { UserPayload } from 'types/jwtPayload'
+import { UserPayload } from '@/types/jwtPayload'
 
 type Props = {
   user: UserPayload

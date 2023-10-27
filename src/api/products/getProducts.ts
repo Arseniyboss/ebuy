@@ -1,6 +1,6 @@
-import { HomeQueryParams } from 'types/params'
-import { GetProductsData as Data } from 'types/api'
-import { BASE_URL } from '@baseUrl'
+import { HomeQueryParams } from '@/types/params'
+import { GetProductsData as Data } from '@/types/api'
+import { BASE_URL } from '@/baseUrl'
 
 export const getProducts = async ({
   page = 1,

@@ -1,4 +1,4 @@
-import { GetProductsData as Body } from '../../src/types/api'
+import { GetProductsData as Body } from '@/types/api'
 
 before(() => {
   cy.task('seedProducts')

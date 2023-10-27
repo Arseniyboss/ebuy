@@ -1,8 +1,8 @@
-import { HomeQueryParams } from 'types/params'
-import { getProducts } from '@api/products/getProducts'
+import { HomeQueryParams } from '@/types/params'
+import { getProducts } from '@/api/products/getProducts'
 import { SearchFailText, ProductContainer } from './styles'
-import Product from '@components/product/Product'
-import Pagination from '@components/pagination/Pagination'
+import Product from '@/components/product/Product'
+import Pagination from '@/components/pagination/Pagination'
 
 type Props = {
   searchParams: HomeQueryParams

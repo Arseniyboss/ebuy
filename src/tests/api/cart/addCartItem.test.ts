@@ -1,13 +1,13 @@
 import { NextRequest } from 'next/server'
-import { CartItem } from 'types/base/user'
-import { BASE_URL } from '@baseUrl'
-import { POST } from '@app/api/cart/route'
-import { seedUsers, getUsers } from '@config/mongoMemoryServer'
-import { generatePayload } from '@auth/token/generators/generatePayload'
-import { generateToken } from '@auth/token/generators/generateToken'
-import { fakePayload } from '@mocks/fakeData'
-import products from '@mocks/products'
-import users from '@mocks/users'
+import { CartItem } from '@/types/base/user'
+import { BASE_URL } from '@/baseUrl'
+import { POST } from '@/app/api/cart/route'
+import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
+import { generatePayload } from '@/auth/token/generators/generatePayload'
+import { generateToken } from '@/auth/token/generators/generateToken'
+import { fakePayload } from '@/mocks/fakeData'
+import products from '@/mocks/products'
+import users from '@/mocks/users'
 
 const user = users[2]
 
