@@ -11,13 +11,22 @@ dotenv.config()
 
 const isConnected = mongoose.connection.readyState === 1
 
+const getMongoURI = (env: typeof process.env) => {
+  if (env.CYPRESS_TEST === 'true') {
+    return process.env.TEST_MONGO_URI
+  }
+  if (env.NODE_ENV === 'development') {
+    return process.env.DEV_MONGO_URI
+  }
+  if (env.NODE_ENV === 'production') {
+    return process.env.MONGO_URI
+  }
+}
+
 export const connectToDB = async () => {
   if (isConnected || process.env.NODE_ENV === 'test') return
-  if (process.env.CYPRESS_TEST === 'true') {
-    await mongoose.connect(process.env.TEST_MONGO_URI)
-  } else {
-    await mongoose.connect(process.env.MONGO_URI)
-  }
+  const uri = getMongoURI(process.env)!
+  await mongoose.connect(uri)
 }
 
 export const seedProducts = async () => {
