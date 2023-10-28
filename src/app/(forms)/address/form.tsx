@@ -59,7 +59,7 @@ const AddressForm = ({ address, payload }: Props) => {
         {errors.street && (
           <FormError
             id='street-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='street-error'
           >
             {errors.street}
@@ -83,7 +83,7 @@ const AddressForm = ({ address, payload }: Props) => {
         {errors.country && (
           <FormError
             id='country-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='country-error'
           >
             {errors.country}
@@ -107,7 +107,7 @@ const AddressForm = ({ address, payload }: Props) => {
         {errors.city && (
           <FormError
             id='city-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='city-error'
           >
             {errors.city}
@@ -131,7 +131,7 @@ const AddressForm = ({ address, payload }: Props) => {
         {errors.postalCode && (
           <FormError
             id='postal-code-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='postal-code-error'
           >
             {errors.postalCode}

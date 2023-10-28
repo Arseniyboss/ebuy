@@ -69,7 +69,7 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
           <label htmlFor='stripe'>Stripe</label>
         </div>
         {errors.paymentMethod && (
-          <FormError aria-live='polite' data-testid='form-error'>
+          <FormError aria-live='assertive' data-testid='form-error'>
             {errors.paymentMethod}
           </FormError>
         )}

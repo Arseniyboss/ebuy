@@ -68,7 +68,7 @@ const ReviewForm = ({ params }: PageParams) => {
         {errors.rating && (
           <FormError
             id='rating-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='rating-error'
           >
             {errors.rating}

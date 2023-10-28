@@ -66,7 +66,7 @@ const Register = () => {
         {errors.name && (
           <FormError
             id='name-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='name-error'
           >
             {errors.name}
@@ -90,7 +90,7 @@ const Register = () => {
         {errors.email && (
           <FormError
             id='email-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='email-error'
           >
             {errors.email}
@@ -114,7 +114,7 @@ const Register = () => {
         {errors.password && (
           <FormError
             id='password-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='password-error'
           >
             {errors.password}
@@ -138,7 +138,7 @@ const Register = () => {
         {errors.confirmPassword && (
           <FormError
             id='confirm-password-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='confirm-password-error'
           >
             {errors.confirmPassword}

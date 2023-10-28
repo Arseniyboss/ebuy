@@ -13,12 +13,12 @@ const Message = ({ children, variant }: Props) => {
         <InfoMessage data-testid='info-message'>{children}</InfoMessage>
       )}
       {variant === 'success' && (
-        <SuccessMessage data-testid='success-message' aria-live='polite'>
+        <SuccessMessage data-testid='success-message' aria-live='assertive'>
           {children}
         </SuccessMessage>
       )}
       {variant === 'error' && (
-        <ErrorMessage data-testid='error-message' aria-live='polite'>
+        <ErrorMessage data-testid='error-message' aria-live='assertive'>
           {children}
         </ErrorMessage>
       )}

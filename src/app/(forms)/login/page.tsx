@@ -64,7 +64,7 @@ const Login = () => {
         {errors.email && (
           <FormError
             id='email-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='email-error'
           >
             {errors.email}
@@ -87,7 +87,7 @@ const Login = () => {
         {errors.password && (
           <FormError
             id='password-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='password-error'
           >
             {errors.password}

@@ -63,7 +63,7 @@ const ContactForm = ({ user }: Props) => {
           {errors.name && (
             <FormError
               id='name-error'
-              aria-live='polite'
+              aria-live='assertive'
               data-testid='name-error'
             >
               {errors.name}
@@ -87,7 +87,7 @@ const ContactForm = ({ user }: Props) => {
           {errors.email && (
             <FormError
               id='email-error'
-              aria-live='polite'
+              aria-live='assertive'
               data-testid='email-error'
             >
               {errors.email}
@@ -110,7 +110,7 @@ const ContactForm = ({ user }: Props) => {
           {errors.message && (
             <FormError
               id='message-error'
-              aria-live='polite'
+              aria-live='assertive'
               data-testid='message-error'
             >
               {errors.message}

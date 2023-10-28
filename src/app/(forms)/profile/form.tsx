@@ -65,7 +65,7 @@ const ProfileForm = ({ user }: Props) => {
         {errors.name && (
           <FormError
             id='name-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='name-error'
           >
             {errors.name}
@@ -89,7 +89,7 @@ const ProfileForm = ({ user }: Props) => {
         {errors.email && (
           <FormError
             id='email-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='email-error'
           >
             {errors.email}
@@ -112,7 +112,7 @@ const ProfileForm = ({ user }: Props) => {
         {errors.password && (
           <FormError
             id='password-error'
-            aria-live='polite'
+            aria-live='assertive'
             data-testid='password-error'
           >
             {errors.password}
