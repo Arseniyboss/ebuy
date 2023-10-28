@@ -22,6 +22,7 @@ const Navigation = ({ user }: Props) => {
             data-testid='cart-nav-link'
             aria-label='cart link'
             pathname={pathname}
+            aria-current={pathname === '/cart' && 'page'}
           >
             <FaShoppingCart />
           </NavLink>
@@ -40,6 +41,7 @@ const Navigation = ({ user }: Props) => {
               data-testid='login-nav-link'
               aria-label='login link'
               pathname={pathname}
+              aria-current={pathname === '/login' && 'page'}
             >
               <FaUserCircle aria-label='user' />
             </NavLink>
@@ -51,6 +53,7 @@ const Navigation = ({ user }: Props) => {
             data-testid='contact-nav-link'
             aria-label='contact link'
             pathname={pathname}
+            aria-current={pathname === '/contact' && 'page'}
           >
             <FaEnvelope aria-label='envelope' />
           </NavLink>
