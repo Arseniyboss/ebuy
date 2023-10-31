@@ -7,7 +7,7 @@
 :root {
   --gray: #555;
   --darkgray: #333;
-  --red: hsl(0, 100%, 26%);
+  --red: #b60000;
   --blue: hsl(193, 68%, 25%);
   --skeleton-background: #b8b8b8;
   --box-shadow: 0 0 0.25rem darkgrey;

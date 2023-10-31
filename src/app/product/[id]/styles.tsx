@@ -33,9 +33,6 @@ export const ProductImage = styled(Image)`
 `
 
 export const ProductDetails = styled.section`
-  /* display: flex;
-  flex-direction: column;
-  gap: 1rem; */
   max-width: 600px;
 
   @media screen and (max-width: ${breakpoints.product.medium}) {
