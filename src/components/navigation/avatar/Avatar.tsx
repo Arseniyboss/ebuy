@@ -30,7 +30,7 @@ const Avatar = ({ isAdmin, initials }: Props) => {
       <UserInitials
         onClick={toggleDropdown}
         $isActive={isActive}
-        aria-label='user dropdown menu'
+        aria-label={`${initials} dropdown menu`}
         data-testid='user-initials'
         aria-expanded={isDropdownOpen}
       >

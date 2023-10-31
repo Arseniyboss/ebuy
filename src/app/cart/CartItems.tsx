@@ -22,9 +22,7 @@ const CartItems = async () => {
         ))}
       </section>
       <CartTotal aria-label='cart total'>
-        <h2 data-testid='total-price'>
-          Total: ${formatTotalPrice(totalPrice)}
-        </h2>
+        <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
         <CheckoutButton as={Link} href='/address' data-testid='checkout-link'>
           Checkout
         </CheckoutButton>

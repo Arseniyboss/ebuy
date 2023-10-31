@@ -6,7 +6,7 @@ const Header = async () => {
   const user = await decodeToken()
   return (
     <HeaderContainer>
-      <HeaderLogo href='/' data-testid='home-nav-link'>
+      <HeaderLogo href='/' data-testid='home-nav-link' aria-label='ebuy logo'>
         Ebuy
       </HeaderLogo>
       <Navigation user={user} />

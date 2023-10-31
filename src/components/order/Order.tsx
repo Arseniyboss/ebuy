@@ -14,9 +14,11 @@ const Order = ({
     <tr data-testid='order'>
       <td data-testid='order-id'>{_id}</td>
       <td data-testid='order-total-price'>${formatTotalPrice(totalPrice)}</td>
-      <td data-testid='order-paid-status'>{isPaid ? paidAt : <Cross />}</td>
+      <td data-testid='order-paid-status'>
+        {isPaid ? paidAt : <Cross aria-label='order not paid' />}
+      </td>
       <td data-testid='order-delivered-status'>
-        {isDelivered ? deliveredAt : <Cross />}
+        {isDelivered ? deliveredAt : <Cross aria-label='order not delivered' />}
       </td>
       <td>
         <OrderLink

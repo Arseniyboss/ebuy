@@ -2,7 +2,7 @@ import { SignJWT } from 'jose'
 import { UserPayload } from '@/types/jwtPayload'
 import { getJwtSecret } from '@/auth/token/getters/getJwtSecret'
 
-export const hour = 60 * 60
+export const day = 60 * 60 * 24
 
 export const generateToken = async (payload: UserPayload) => {
   const currentTime = Math.floor(Date.now() / 1000)
@@ -10,6 +10,6 @@ export const generateToken = async (payload: UserPayload) => {
 
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
-    .setExpirationTime(currentTime + hour)
+    .setExpirationTime(currentTime + day)
     .sign(JWT_SECRET)
 }

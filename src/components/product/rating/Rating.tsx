@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { Star } from './styles'
 import {
   TiStarFullOutline,
@@ -12,9 +11,9 @@ type Props = {
 
 const Rating = ({ value }: Props) => {
   return (
-    <Star aria-label={`${value} stars`}>
+    <Star aria-label={`${parseFloat(value.toFixed(1))} star rating`}>
       {[...new Array(5)].map((_, index) => (
-        <Fragment key={index}>
+        <li key={index}>
           {value >= index + 1 ? (
             <TiStarFullOutline />
           ) : value >= index + 0.5 ? (
@@ -22,7 +21,7 @@ const Rating = ({ value }: Props) => {
           ) : (
             <TiStarOutline />
           )}
-        </Fragment>
+        </li>
       ))}
     </Star>
   )

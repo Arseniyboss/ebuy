@@ -13,6 +13,11 @@ export const CartTotal = styled.section`
     align-items: initial;
     gap: 1rem;
   }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 `
 
 export const CheckoutButton = styled(Button)`

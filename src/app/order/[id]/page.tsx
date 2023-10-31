@@ -48,14 +48,18 @@ const Order = async ({ params }: PageParams) => {
           {order.isPaid ? (
             <Message variant='success'>Paid on {order.paidAt}</Message>
           ) : (
-            <Message variant='error'>Not Paid</Message>
+            <Message variant='error' ariaLive={false}>
+              Not Paid
+            </Message>
           )}
           {order.isDelivered ? (
             <Message variant='success'>
               Delivered on {order.deliveredAt}
             </Message>
           ) : (
-            <Message variant='error'>Not Delivered</Message>
+            <Message variant='error' ariaLive={false}>
+              Not Delivered
+            </Message>
           )}
         </OrderDetails>
       </section>
@@ -66,9 +70,7 @@ const Order = async ({ params }: PageParams) => {
         ))}
       </section>
       <CartTotal aria-label='cart total'>
-        <h2 data-testid='total-price'>
-          Total: ${formatTotalPrice(totalPrice)}
-        </h2>
+        <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
         {!user.isAdmin && !order.isPaid && (
           <>
             {paymentMethod === 'PayPal' && (

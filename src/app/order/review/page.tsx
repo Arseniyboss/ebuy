@@ -51,9 +51,7 @@ const OrderReview = async () => {
         ))}
       </section>
       <CartTotal aria-label='cart total'>
-        <h2 data-testid='total-price'>
-          Total: ${formatTotalPrice(totalPrice)}
-        </h2>
+        <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
         <PlaceOrder
           orderItems={cartItems}
           address={address}
