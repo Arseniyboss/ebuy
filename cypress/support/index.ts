@@ -84,6 +84,11 @@ declare global {
       getOrders(
         queryParams?: OrdersQueryParams
       ): Chainable<Response<GetOrdersData>>
+      getIframeBody(): Chainable<Element>
+      capturePayPalWindow(): Chainable<Element>
+      clickPayPalButton(): Chainable<Element>
+      getPayPalWindow(): Chainable<JQuery>
+      payWithPayPal(email: string, password: string): Chainable<Element>
     }
   }
 }

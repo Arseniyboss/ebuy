@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress'
+import { exec } from 'child_process'
 import {
   connectToDB,
   seedProducts,
@@ -41,9 +42,24 @@ export default defineConfig({
           await deleteOrders()
           return null
         },
+        async execute(command: string) {
+          return new Promise((resolve, reject) => {
+            try {
+              resolve(exec(command))
+            } catch (e) {
+              reject(e)
+            }
+          })
+        },
       })
     },
     baseUrl: 'http://localhost:3000',
     video: true,
+    chromeWebSecurity: false,
+    experimentalModifyObstructiveThirdPartyCode: true,
+  },
+  env: {
+    paypalEmail: process.env.PAYPAL_EMAIL,
+    paypalPassword: process.env.PAYPAL_PASSWORD,
   },
 })

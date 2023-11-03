@@ -62,6 +62,7 @@ const orders: Order[] = [
     ...baseOrder,
     userId: new ObjectId('62dbfa7f31c12b460f19f2a6'),
     _id: new ObjectId('62dbfa7f31c12b460f19f2c4'),
+    paymentMethod: 'PayPal',
     isPaid: false,
     isDelivered: false,
   },

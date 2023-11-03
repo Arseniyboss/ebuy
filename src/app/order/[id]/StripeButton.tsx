@@ -31,7 +31,11 @@ const StripeButton = ({ orderItems, orderId }: Props) => {
   }
 
   return (
-    <CheckoutButton disabled={loading} onClick={handleStripe}>
+    <CheckoutButton
+      disabled={loading}
+      onClick={handleStripe}
+      data-testid='stripe-button'
+    >
       Stripe Checkout
     </CheckoutButton>
   )

@@ -15,11 +15,8 @@ after(() => {
 
 describe('Order Page', () => {
   describe('given the user is not an admin', () => {
-    beforeEach(() => {
-      cy.login({ email: 'robert@gmail.com', password: '123456' })
-    })
-
     it('gets user order', () => {
+      cy.login({ email: 'robert@gmail.com', password: '123456' })
       cy.visit(`/order/${id}`)
 
       cy.getOrder(id).then((response) => {
@@ -36,6 +33,10 @@ describe('Order Page', () => {
     })
 
     describe('gets order delivery address and status messages', () => {
+      beforeEach(() => {
+        cy.login({ email: 'robert@gmail.com', password: '123456' })
+      })
+
       it('given the order is not paid', () => {
         cy.visit(`/order/${id}`)
 
@@ -70,6 +71,63 @@ describe('Order Page', () => {
           cy.getMessage('success-message', `Paid on ${paidAt}`)
           cy.getMessage('success-message', `Delivered on ${deliveredAt}`, 1)
         })
+      })
+    })
+
+    describe('tests payment methods', () => {
+      // prevents the test from running in headless mode
+      if (Cypress.config('isInteractive')) {
+        it('tests paypal payment', () => {
+          const id = '62dbfa7f31c12b460f19f2c4'
+          const currentDate = getCurrentDate()
+          const email = Cypress.env('paypalEmail')
+          const password = Cypress.env('paypalPassword')
+
+          cy.login({ email: 'mike@gmail.com', password: '123456' })
+          cy.visit(`/order/${id}`)
+
+          cy.capturePayPalWindow()
+          cy.clickPayPalButton()
+          cy.payWithPayPal(email, password)
+
+          cy.getMessage('success-message', `Paid on ${currentDate}`)
+        })
+      }
+
+      it('tests stripe payment', () => {
+        const currentDate = getCurrentDate()
+
+        cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
+        cy.intercept(
+          'GET',
+          'https://api.stripe.com/v1/checkout/sessions/completed_webhook_delivered/*'
+        ).as('stripePaymentSuccess')
+
+        cy.login({ email: 'robert@gmail.com', password: '123456' })
+        cy.visit(`/order/${id}`)
+
+        cy.task('execute', 'npm run stripe-webhook')
+
+        cy.on('uncaught:exception', () => {
+          return false
+        })
+
+        cy.getByTestId('stripe-button').click()
+
+        cy.get('#email').type('john@gmail.com')
+        cy.get('#cardNumber').type('4242 4242 4242 4242')
+        cy.get('#cardExpiry').type('424')
+        cy.get('#cardCvc').type('424')
+        cy.get('#billingName').type('John')
+        cy.get('.SubmitButton').click()
+
+        cy.wait('@stripePaymentSuccess', { timeout: 10000 })
+
+        cy.wait(1000)
+
+        cy.visit(`/order/${id}`)
+
+        cy.getMessage('success-message', `Paid on ${currentDate}`)
       })
     })
   })

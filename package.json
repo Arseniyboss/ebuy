@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "test": "jest --watchAll",
-    "e2e": "start-server-and-test start 3000 \"cypress open --e2e\"",
-    "e2e:headless": "start-server-and-test start 3000 \"cypress run --spec cypress/e2e/${spec=**/*}.cy.ts --e2e\"",
+    "e2e": "start-server-and-test start 3000 \"cypress open --browser chrome --e2e \"",
+    "e2e:headless": "start-server-and-test start 3000 \"cypress run --browser chrome --spec cypress/e2e/${spec=**/*}.cy.ts --e2e\"",
     "compile": "tsc --incremental false",
     "update:latest": "ncu -u && npm install",
     "dev": "next dev",

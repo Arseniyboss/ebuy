@@ -315,3 +315,44 @@ Cypress.Commands.add('getOrders', ({ page = 1, status = '' } = {}) => {
     })
   })
 })
+
+const paypal = {
+  window: {
+    document: null,
+  },
+}
+
+Cypress.Commands.add('getIframeBody', { prevSubject: 'element' }, ($iframe) => {
+  cy.wrap($iframe.contents().find('body'))
+})
+
+Cypress.Commands.add('capturePayPalWindow', () => {
+  cy.window().then((window) => {
+    const { open } = window
+    cy.stub(window, 'open').callsFake((...params) => {
+      paypal.window = open(...params)
+      return paypal.window
+    })
+  })
+})
+
+Cypress.Commands.add('clickPayPalButton', () => {
+  cy.get('iframe').eq(1).getIframeBody().click()
+})
+
+Cypress.Commands.add('getPayPalWindow', () => {
+  const window = Cypress.$(paypal.window.document)
+  return cy.wrap(window.contents().find('body'))
+})
+
+Cypress.Commands.add('payWithPayPal', (email, password) => {
+  cy.wait(7000)
+  cy.getPayPalWindow().find('#email').type(email)
+  cy.getPayPalWindow().find('#btnNext').click()
+  cy.wait(5000)
+  cy.getPayPalWindow().find('#password').type(password)
+  cy.getPayPalWindow().find('#btnLogin').click()
+  cy.wait(18000)
+  cy.getPayPalWindow().find('#payment-submit-btn').click()
+  cy.wait(7000)
+})
