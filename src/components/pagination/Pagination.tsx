@@ -21,7 +21,7 @@ const Pagination = ({ pages }: Props) => {
         aria-label='go to the previous page'
         data-testid='left-arrow'
       >
-        <FiArrowLeft />
+        <FiArrowLeft aria-hidden />
       </PaginationButton>
       <p>
         {page} of {pages}
@@ -32,7 +32,7 @@ const Pagination = ({ pages }: Props) => {
         aria-label='go to the next page'
         data-testid='right-arrow'
       >
-        <FiArrowRight />
+        <FiArrowRight aria-hidden />
       </PaginationButton>
     </PaginationContainer>
   )

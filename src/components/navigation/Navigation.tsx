@@ -24,7 +24,7 @@ const Navigation = ({ user }: Props) => {
             pathname={pathname}
             aria-current={pathname === '/cart' && 'page'}
           >
-            <FaShoppingCart />
+            <FaShoppingCart aria-hidden />
           </NavLink>
         </li>
         {user ? (
@@ -43,7 +43,7 @@ const Navigation = ({ user }: Props) => {
               pathname={pathname}
               aria-current={pathname === '/login' && 'page'}
             >
-              <FaUserCircle aria-label='user' />
+              <FaUserCircle aria-hidden />
             </NavLink>
           </li>
         )}
@@ -55,7 +55,7 @@ const Navigation = ({ user }: Props) => {
             pathname={pathname}
             aria-current={pathname === '/contact' && 'page'}
           >
-            <FaEnvelope aria-label='envelope' />
+            <FaEnvelope aria-hidden />
           </NavLink>
         </li>
       </NavLinks>

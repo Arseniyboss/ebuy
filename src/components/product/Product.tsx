@@ -1,4 +1,5 @@
 import { Product as Props } from '@/types/api'
+import { getProductNumReviews } from '@/utils/getters/getProductNumReviews'
 import { FlexGroup, ProductPrice } from '@/styles/globals'
 import {
   ProductLink,
@@ -25,8 +26,7 @@ const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
           <ProductPrice data-testid='product-price'>${price}</ProductPrice>
           <FlexGroup>
             <Rating value={rating} />
-            <p>{numReviews}</p>
-            <p>{numReviews === 1 ? 'review' : 'reviews'}</p>
+            <p>{getProductNumReviews(numReviews)}</p>
           </FlexGroup>
         </ProductDetails>
       </ProductContainer>
