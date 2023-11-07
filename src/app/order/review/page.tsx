@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const OrderReview = async () => {
   const user = await getUser()
-  const payload = await decodeToken()
+  const session = await decodeToken()
 
   if (!user) {
     return notFound()
@@ -34,7 +34,7 @@ const OrderReview = async () => {
 
   return (
     <PageContainer className='container'>
-      <CheckoutSteps user={payload!} center={true} />
+      <CheckoutSteps user={session!.user} center={true} />
       <h1>Order Review</h1>
       <section className='container' aria-labelledby='order-details'>
         <h2 id='order-details'>Order Details</h2>

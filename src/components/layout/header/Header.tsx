@@ -3,13 +3,13 @@ import { HeaderContainer, HeaderLogo } from './styles'
 import Navigation from '@/components/navigation/Navigation'
 
 const Header = async () => {
-  const user = await decodeToken()
+  const session = await decodeToken()
   return (
     <HeaderContainer>
       <HeaderLogo href='/' data-testid='home-nav-link' aria-label='ebuy logo'>
         Ebuy
       </HeaderLogo>
-      <Navigation user={user} />
+      <Navigation user={session?.user} />
     </HeaderContainer>
   )
 }

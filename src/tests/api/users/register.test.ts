@@ -49,7 +49,7 @@ describe('GET /api/users/register', () => {
 
       expect(status).toBe(201)
       expect(users.length).toBe(initialUsers.length + 1)
-      expect(user.name).toBe(payload?.name)
+      expect(user.name).toBe(payload?.user.name)
     })
   })
 })

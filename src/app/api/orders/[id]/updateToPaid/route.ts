@@ -12,12 +12,12 @@ import User from '@/models/user'
 export const PUT = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const session = await verifyStripeCheckoutSession(request)
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const stripeSession = await verifyStripeCheckoutSession(request)
+  const userSession = await decodeToken(request)
+  const user = await User.findById(userSession?.user.id)
   const order = await Order.findById(params.id)
 
-  if (!user && !session) {
+  if (!user && !stripeSession) {
     return throwError({ error: 'User not found', status: 404 })
   }
 

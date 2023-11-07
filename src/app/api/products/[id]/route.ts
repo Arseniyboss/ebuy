@@ -23,9 +23,9 @@ export const PATCH = async (request: NextRequest) => {
 
   const { id, quantity }: Body = await request.json()
 
-  const decoded = await decodeToken(request)
+  const session = await decodeToken(request)
 
-  const user = await User.findById(decoded?.id)
+  const user = await User.findById(session?.user.id)
   const product = await Product.findById(id)
 
   if (!user) {

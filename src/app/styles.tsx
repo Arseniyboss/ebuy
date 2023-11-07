@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { breakpoints } from '@/breakpoints'
+import { breakpoints } from '@/constants/breakpoints'
 import Image from 'next/image'
 import { Button } from '@/styles/globals'
 

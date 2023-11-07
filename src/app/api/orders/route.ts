@@ -12,8 +12,8 @@ import Order from '@/models/order'
 export const GET = async (request: NextRequest) => {
   await connectToDB()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -47,8 +47,8 @@ export const POST = async (request: NextRequest) => {
 
   const body: Body = await request.json()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

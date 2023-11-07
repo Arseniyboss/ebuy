@@ -11,8 +11,8 @@ import User from '@/models/user'
 export const DELETE = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -39,8 +39,8 @@ export const PATCH = async (request: NextRequest, { params }: PageParams) => {
 
   const quantity: number = await request.json()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

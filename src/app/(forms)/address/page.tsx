@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 
 const Address = async () => {
   const user = await getUser()
-  const payload = await decodeToken()
+  const session = await decodeToken()
 
   if (!user) {
     return notFound()
   }
 
-  return <AddressForm address={user.address} payload={payload!} />
+  return <AddressForm address={user.address} payload={session!.user} />
 }
 
 export default Address

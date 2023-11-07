@@ -57,7 +57,7 @@ describe('PUT /api/checkout/payment', () => {
 
         expect(status).toBe(201)
         expect(newPaymentMethod).toEqual(paymentMethod)
-        expect(newPayload?.paymentMethod).toBeTruthy()
+        expect(newPayload?.user.paymentMethod).toBeTruthy()
       })
     })
     describe('given the payment method already exists', () => {

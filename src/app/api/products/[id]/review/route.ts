@@ -12,10 +12,10 @@ export const POST = async (request: NextRequest, { params }: PageParams) => {
 
   const { rating, comment }: Body = await request.json()
 
-  const decoded = await decodeToken(request)
+  const session = await decodeToken(request)
 
   const product = await Product.findById(params.id)
-  const user = await User.findById(decoded?.id)
+  const user = await User.findById(session?.user.id)
 
   if (!product) {
     return throwError({ error: 'Product not found', status: 404 })

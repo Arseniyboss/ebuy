@@ -1,61 +1,73 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { decodeToken } from '@/auth/token/decode/requestCookies'
-import { redirect } from '@/utils/api/redirect'
+import { checkRouteAccess } from './utils/api/middleware/checkRouteAccess'
+import { redirect } from '@/utils/api/middleware/redirect'
+import { setCookie } from './utils/api/middleware/setCookie'
+import { generateTokenCookie } from './auth/token/generators/generateTokenCookie'
+import { hour } from './constants/time'
 
 export const middleware = async (request: NextRequest) => {
-  const pathname = request.nextUrl.pathname
-  const user = await decodeToken(request)
+  const { pathname } = request.nextUrl
+  const isRouteProtected = checkRouteAccess(pathname)
+  const session = await decodeToken(request)
 
   if (pathname === '/login' || pathname === '/register') {
-    if (user) {
+    if (session) {
       return redirect('/')
     }
     return NextResponse.next()
   }
 
-  if (!user) {
-    return redirect('/login')
+  if (!session) {
+    if (isRouteProtected) {
+      return redirect('/login')
+    }
+    return NextResponse.next()
   }
 
-  if (pathname.startsWith('/admin') && !user.isAdmin) {
+  if (pathname.startsWith('/admin') && !session.user.isAdmin) {
     return redirect('/')
   }
 
   if (pathname === '/address') {
-    if (!user.cartItems) {
+    if (!session.user.cartItems) {
       return redirect('/cart')
     }
   }
 
   if (pathname === '/payment') {
-    if (!user.cartItems) {
+    if (!session.user.cartItems) {
       return redirect('/cart')
     }
-    if (!user.address) {
+    if (!session.user.address) {
       return redirect('/address')
     }
   }
 
   if (pathname === '/order/review') {
-    if (!user.cartItems) {
+    if (!session.user.cartItems) {
       return redirect('/cart')
     }
-    if (!user.paymentMethod) {
+    if (!session.user.paymentMethod) {
       return redirect('/payment')
     }
+  }
+
+  if (Date.now() + hour >= session.expirationTime) {
+    const tokenCookie = await generateTokenCookie(session.user)
+    return setCookie(tokenCookie)
   }
 }
 
 export const config = {
   matcher: [
-    '/profile',
-    '/orders',
-    '/admin/orders',
-    '/address',
-    '/payment',
-    '/order/review',
-    '/order/:id*',
-    '/login',
-    '/register',
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }

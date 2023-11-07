@@ -61,8 +61,8 @@ describe('GET /api/users/login', () => {
       const payload = await verifyToken(token)
 
       expect(status).toBe(200)
-      expect(_id.toString()).toBe(payload?.id)
-      expect(name).toBe(payload?.name)
+      expect(_id.toString()).toBe(payload?.user.id)
+      expect(name).toBe(payload?.user.name)
     })
   })
 })

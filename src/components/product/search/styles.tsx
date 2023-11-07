@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Input } from '@/styles/globals'
-import { breakpoints } from '@/breakpoints'
+import { breakpoints } from '@/constants/breakpoints'
 
 export const SearchInput = styled(Input)`
   width: 250px;

@@ -10,14 +10,17 @@ export const metadata: Metadata = {
 
 const PaymentMethod = async () => {
   const user = await getUser()
-  const payload = await decodeToken()
+  const session = await decodeToken()
 
   if (!user) {
     return notFound()
   }
 
   return (
-    <PaymentMethodForm paymentMethod={user.paymentMethod} payload={payload!} />
+    <PaymentMethodForm
+      paymentMethod={user.paymentMethod}
+      payload={session!.user}
+    />
   )
 }
 

@@ -58,7 +58,7 @@ describe('PUT /api/users/user', () => {
 
       expect(status).toBe(200)
       expect(users[1].name).toBe(user.name)
-      expect(user.name).toBe(newPayload?.name)
+      expect(user.name).toBe(newPayload?.user.name)
     })
     it('returns status code 200 and updates user email', async () => {
       const user = {

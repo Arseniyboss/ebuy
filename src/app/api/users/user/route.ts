@@ -11,8 +11,8 @@ import User from '@/models/user'
 export const GET = async (request: NextRequest) => {
   await connectToDB()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id).select('-password')
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id).select('-password')
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -25,8 +25,8 @@ export const PUT = async (request: NextRequest) => {
   await connectToDB()
 
   const { name, email, password }: Body = await request.json()
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
   const userExists = await User.exists({ email })
 
   if (!user) {

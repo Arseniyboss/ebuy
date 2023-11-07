@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 import { Button } from '@/styles/globals'
-import { breakpoints } from '@/breakpoints'
+import { breakpoints } from '@/constants/breakpoints'
 
 export const ProductContainer = styled.article`
   display: grid;

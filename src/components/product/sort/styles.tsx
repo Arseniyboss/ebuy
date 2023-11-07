@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Select } from '@/styles/globals'
-import { breakpoints } from '@/breakpoints'
+import { breakpoints } from '@/constants/breakpoints'
 
 export const SortSelect = styled(Select)`
   @media screen and (max-width: ${breakpoints.home.small}) {

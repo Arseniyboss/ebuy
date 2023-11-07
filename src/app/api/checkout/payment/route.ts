@@ -13,8 +13,8 @@ export const PUT = async (request: NextRequest) => {
 
   const paymentMethod: PaymentMethod = await request.json()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

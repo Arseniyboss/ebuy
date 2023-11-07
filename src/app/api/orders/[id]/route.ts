@@ -9,8 +9,8 @@ import Order from '@/models/order'
 export const GET = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const decoded = await decodeToken(request)
-  const user = await User.findById(decoded?.id)
+  const session = await decodeToken(request)
+  const user = await User.findById(session?.user.id)
   const order = await Order.findById(params.id)
 
   if (!user) {

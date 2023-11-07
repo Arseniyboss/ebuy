@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 import Image from 'next/image'
-import { breakpoints } from '@/breakpoints'
+import { breakpoints } from '@/constants/breakpoints'
 
 export const Container = styled.article`
   display: flex;

@@ -1,8 +1,7 @@
 import { SignJWT } from 'jose'
 import { UserPayload } from '@/types/jwtPayload'
 import { getJwtSecret } from '@/auth/token/getters/getJwtSecret'
-
-export const day = 60 * 60 * 24
+import { day } from '@/constants/time'
 
 export const generateToken = async (payload: UserPayload) => {
   const currentTime = Math.floor(Date.now() / 1000)

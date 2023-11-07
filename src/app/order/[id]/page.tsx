@@ -21,10 +21,10 @@ export const metadata: Metadata = {
 }
 
 const Order = async ({ params }: PageParams) => {
-  const user = await decodeToken()
+  const session = await decodeToken()
   const order = await getOrderById(params.id)
 
-  if (!user || !order) {
+  if (!session || !order) {
     return notFound()
   }
 
@@ -71,7 +71,7 @@ const Order = async ({ params }: PageParams) => {
       </section>
       <CartTotal aria-label='cart total'>
         <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
-        {!user.isAdmin && !order.isPaid && (
+        {!session.user.isAdmin && !order.isPaid && (
           <>
             {paymentMethod === 'PayPal' && (
               <PayPalButton amount={totalPrice} orderId={order._id} />
@@ -81,7 +81,7 @@ const Order = async ({ params }: PageParams) => {
             )}
           </>
         )}
-        {user.isAdmin && order.isPaid && !order.isDelivered && (
+        {session.user.isAdmin && order.isPaid && !order.isDelivered && (
           <AdminButton orderId={order._id} />
         )}
       </CartTotal>

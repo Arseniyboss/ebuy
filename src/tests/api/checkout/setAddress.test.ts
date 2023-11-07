@@ -56,7 +56,7 @@ describe('PUT /api/checkout/address', () => {
 
         expect(status).toBe(201)
         expect(newShippingAddress).toEqual(address)
-        expect(newPayload?.address).toBeTruthy()
+        expect(newPayload?.user.address).toBeTruthy()
       })
     })
     describe('given the user address already exists', () => {

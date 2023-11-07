@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { PageParams } from '@/types/params'
 import { getProductById } from '@/api/products/getProductById'
 import { decodeToken } from '@/auth/token/decode/cookies'
+import { getProductNumReviews } from '@/utils/getters/getProductNumReviews'
 import { FlexGroup, ProductPrice } from '@/styles/globals'
 import {
   ProductContainer,
@@ -26,12 +27,11 @@ export const generateMetadata = async ({
 
 const Product = async ({ params }: PageParams) => {
   const product = await getProductById(params.id)
-  const user = await decodeToken()
+  const session = await decodeToken()
 
   if (!product) {
     return notFound()
   }
-
   return (
     <ProductContainer>
       <ProductImage
@@ -49,11 +49,10 @@ const Product = async ({ params }: PageParams) => {
         </ProductPrice>
         <FlexGroup>
           <Rating value={product.rating} />
-          <p>{product.numReviews}</p>
-          <p>{product.numReviews === 1 ? 'review' : 'reviews'}</p>
+          <p>{getProductNumReviews(product.numReviews)}</p>
         </FlexGroup>
         <p data-testid='product-description'>{product.description}</p>
-        <AddToCart product={product} user={user} />
+        <AddToCart product={product} user={session?.user} />
       </ProductDetails>
       <ProductReviews className='container' aria-labelledby='reviews'>
         <h2 id='reviews'>Reviews</h2>
@@ -64,7 +63,7 @@ const Product = async ({ params }: PageParams) => {
             <Review key={review.userId} {...review} />
           ))
         )}
-        {!user ? (
+        {!session ? (
           <Message variant='info'>Please sign in to write a review</Message>
         ) : (
           <ReviewForm params={params} />
