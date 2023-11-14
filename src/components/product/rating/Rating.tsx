@@ -12,22 +12,24 @@ type Props = {
 
 const Rating = ({ value }: Props) => {
   return (
-    <Star
-      role='img'
-      aria-label={`rating ${parseFloat(value.toFixed(1))} out of 5 stars`}
-    >
-      {[...new Array(5)].map((_, index) => (
-        <Fragment key={index}>
-          {value >= index + 1 ? (
-            <TiStarFullOutline aria-hidden />
-          ) : value >= index + 0.5 ? (
-            <TiStarHalfOutline aria-hidden />
-          ) : (
-            <TiStarOutline aria-hidden />
-          )}
-        </Fragment>
-      ))}
-    </Star>
+    <>
+      <div className='hidden'>
+        Rating {parseFloat(value.toFixed(1))} out of 5 stars
+      </div>
+      <Star aria-hidden>
+        {[...new Array(5)].map((_, index) => (
+          <Fragment key={index}>
+            {value >= index + 1 ? (
+              <TiStarFullOutline />
+            ) : value >= index + 0.5 ? (
+              <TiStarHalfOutline />
+            ) : (
+              <TiStarOutline />
+            )}
+          </Fragment>
+        ))}
+      </Star>
+    </>
   )
 }
 
