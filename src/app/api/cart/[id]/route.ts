@@ -3,9 +3,8 @@ import { PageParams } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
 import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
+import { getTokenCookie } from '@/utils/api/getTokenCookie'
 import { setCookie } from '@/utils/api/setCookie'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
 
 export const DELETE = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
@@ -26,8 +25,7 @@ export const DELETE = async (request: NextRequest, { params }: PageParams) => {
 
   await user.save()
 
-  const payload = generatePayload(user)
-  const tokenCookie = await generateTokenCookie(payload)
+  const tokenCookie = await getTokenCookie(user)
 
   return setCookie(tokenCookie)
 }

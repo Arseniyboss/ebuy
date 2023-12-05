@@ -3,9 +3,8 @@ import { CartItem as Body } from '@/types/api'
 import { connectToDB } from '@/config/mongodb'
 import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
+import { getTokenCookie } from '@/utils/api/getTokenCookie'
 import { setCookie } from '@/utils/api/setCookie'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
 
 export const POST = async (request: NextRequest) => {
   await connectToDB()
@@ -27,8 +26,7 @@ export const POST = async (request: NextRequest) => {
 
   await user.save()
 
-  const payload = generatePayload(user)
-  const tokenCookie = await generateTokenCookie(payload)
+  const tokenCookie = await getTokenCookie(user)
 
   return setCookie(tokenCookie, 201)
 }
@@ -46,8 +44,7 @@ export const DELETE = async (request: NextRequest) => {
 
   await user.save()
 
-  const payload = generatePayload(user)
-  const tokenCookie = await generateTokenCookie(payload)
+  const tokenCookie = await getTokenCookie(user)
 
   return setCookie(tokenCookie)
 }
