@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { UpdateUserParams as Body } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { setCookie } from '@/utils/api/setCookie'
 import { generatePayload } from '@/auth/token/generators/generatePayload'
@@ -11,8 +11,7 @@ import User from '@/models/user'
 export const GET = async (request: NextRequest) => {
   await connectToDB()
 
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id).select('-password')
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -25,8 +24,8 @@ export const PUT = async (request: NextRequest) => {
   await connectToDB()
 
   const { name, email, password }: Body = await request.json()
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+
+  const user = await getUser(request)
   const userExists = await User.exists({ email })
 
   if (!user) {
@@ -39,7 +38,10 @@ export const PUT = async (request: NextRequest) => {
 
   user.name = name
   user.email = email
-  user.password = password || user.password
+
+  if (password) {
+    user.password = password
+  }
 
   await user.save()
 

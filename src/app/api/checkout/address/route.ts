@@ -1,20 +1,17 @@
 import { NextRequest } from 'next/server'
 import { Address } from '@/types/base/user'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { setCookie } from '@/utils/api/setCookie'
 import { generatePayload } from '@/auth/token/generators/generatePayload'
 import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
-import User from '@/models/user'
 
 export const PUT = async (request: NextRequest) => {
   await connectToDB()
 
   const address: Address = await request.json()
-
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

@@ -1,17 +1,15 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 import Order from '@/models/order'
-import User from '@/models/user'
 
 export const PUT = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
   const order = await Order.findById(params.id)
 
   if (!user) {

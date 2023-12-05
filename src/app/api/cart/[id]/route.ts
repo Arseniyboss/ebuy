@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PageParams } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { setCookie } from '@/utils/api/setCookie'
 import { generatePayload } from '@/auth/token/generators/generatePayload'
 import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
-import User from '@/models/user'
 
 export const DELETE = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -38,9 +36,7 @@ export const PATCH = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
   const quantity: number = await request.json()
-
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

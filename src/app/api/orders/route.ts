@@ -2,18 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 import { CreateOrderParams as Body } from '@/types/params'
 import { UserOrdersStatus } from '@/types/base/order'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'
-import User from '@/models/user'
 import Order from '@/models/order'
 
 export const GET = async (request: NextRequest) => {
   await connectToDB()
 
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
@@ -46,9 +44,7 @@ export const POST = async (request: NextRequest) => {
   await connectToDB()
 
   const body: Body = await request.json()
-
-  const session = await decodeToken(request)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })

@@ -1,21 +1,18 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams, CreateReviewParams as Body } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
 import { getRating } from '@/utils/getters/getRating'
 import Product from '@/models/product'
-import User from '@/models/user'
 
 export const POST = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
   const { rating, comment }: Body = await request.json()
 
-  const session = await decodeToken(request)
-
   const product = await Product.findById(params.id)
-  const user = await User.findById(session?.user.id)
+  const user = await getUser(request)
 
   if (!product) {
     return throwError({ error: 'Product not found', status: 404 })

@@ -1,10 +1,9 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams, UpdateProductParams as Body } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
+import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'
-import { decodeToken } from '@/auth/token/decode/requestHeaders'
 import Product from '@/models/product'
-import User from '@/models/user'
 
 export const GET = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
@@ -23,10 +22,8 @@ export const PATCH = async (request: NextRequest) => {
 
   const { id, quantity }: Body = await request.json()
 
-  const session = await decodeToken(request)
-
-  const user = await User.findById(session?.user.id)
   const product = await Product.findById(id)
+  const user = await getUser(request)
 
   if (!user) {
     return throwError({ error: 'User not found', status: 404 })
