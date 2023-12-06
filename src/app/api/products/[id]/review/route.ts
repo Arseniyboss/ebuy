@@ -1,25 +1,17 @@
-import { NextResponse, NextRequest } from 'next/server'
-import { PageParams, CreateReviewParams as Body } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
-import { getUser } from '@/utils/api/getUser'
+import { NextResponse } from 'next/server'
+import { CreateReviewParams as Body } from '@/types/params'
+import { withAuth } from '@/utils/api/withAuth/dynamicHandler'
 import { throwError } from '@/utils/api/throwError'
 import { getRating } from '@/utils/getters/getRating'
 import Product from '@/models/product'
 
-export const POST = async (request: NextRequest, { params }: PageParams) => {
-  await connectToDB()
-
+export const POST = withAuth(async ({ request, user, params }) => {
   const { rating, comment }: Body = await request.json()
 
   const product = await Product.findById(params.id)
-  const user = await getUser(request)
 
   if (!product) {
     return throwError({ error: 'Product not found', status: 404 })
-  }
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
   }
 
   const { reviews } = product
@@ -42,4 +34,4 @@ export const POST = async (request: NextRequest, { params }: PageParams) => {
   await product.save()
 
   return NextResponse.json(null, { status: 201 })
-}
+})

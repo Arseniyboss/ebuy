@@ -1,22 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { CreateOrderParams as Body } from '@/types/params'
 import { UserOrdersStatus } from '@/types/base/order'
-import { connectToDB } from '@/config/mongodb'
-import { getUser } from '@/utils/api/getUser'
-import { throwError } from '@/utils/api/throwError'
+import { withAuth } from '@/utils/api/withAuth'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'
 import Order from '@/models/order'
 
-export const GET = async (request: NextRequest) => {
-  await connectToDB()
-
-  const user = await getUser(request)
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
-  }
-
+export const GET = withAuth(async ({ request, user }) => {
   const status = getSearchParams(request, 'status') as UserOrdersStatus
 
   const filters = {
@@ -38,19 +28,10 @@ export const GET = async (request: NextRequest) => {
     .skip(prevPageOrders)
 
   return NextResponse.json({ orders, pages })
-}
+})
 
-export const POST = async (request: NextRequest) => {
-  await connectToDB()
-
+export const POST = withAuth(async ({ request, user }) => {
   const body: Body = await request.json()
-  const user = await getUser(request)
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
-  }
-
   const order = await Order.create({ ...body, userId: user.id })
-
   return NextResponse.json(order, { status: 201 })
-}
+})

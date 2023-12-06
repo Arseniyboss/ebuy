@@ -1,25 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { OrdersStatus } from '@/types/base/order'
-import { connectToDB } from '@/config/mongodb'
-import { getUser } from '@/utils/api/getUser'
-import { throwError } from '@/utils/api/throwError'
+import { withAdminAuth } from '@/utils/api/withAuth/admin'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'
 import Order from '@/models/order'
 
-export const GET = async (request: NextRequest) => {
-  await connectToDB()
-
-  const user = await getUser(request)
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
-  }
-
-  if (!user.isAdmin) {
-    return throwError({ error: 'Not authorized', status: 401 })
-  }
-
+export const GET = withAdminAuth(async ({ request }) => {
   const status = getSearchParams(request, 'status') as OrdersStatus
 
   const filters = {
@@ -41,4 +27,4 @@ export const GET = async (request: NextRequest) => {
     .skip(prevPageOrders)
 
   return NextResponse.json({ orders, pages })
-}
+})

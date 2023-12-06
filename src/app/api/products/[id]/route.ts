@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams, UpdateProductParams as Body } from '@/types/params'
 import { connectToDB } from '@/config/mongodb'
-import { getUser } from '@/utils/api/getUser'
+import { withAuth } from '@/utils/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
 import Product from '@/models/product'
 
@@ -17,17 +17,10 @@ export const GET = async (request: NextRequest, { params }: PageParams) => {
   return NextResponse.json(product)
 }
 
-export const PATCH = async (request: NextRequest) => {
-  await connectToDB()
-
+export const PATCH = withAuth(async ({ request }) => {
   const { id, quantity }: Body = await request.json()
 
   const product = await Product.findById(id)
-  const user = await getUser(request)
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
-  }
 
   if (!product) {
     return throwError({ error: 'Product not found', status: 404 })
@@ -38,4 +31,4 @@ export const PATCH = async (request: NextRequest) => {
   await product.save()
 
   return NextResponse.json(null)
-}
+})

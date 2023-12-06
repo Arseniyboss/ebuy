@@ -1,19 +1,10 @@
-import { NextResponse, NextRequest } from 'next/server'
-import { PageParams } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
-import { getUser } from '@/utils/api/getUser'
+import { NextResponse } from 'next/server'
+import { withAuth } from '@/utils/api/withAuth/dynamicHandler'
 import { throwError } from '@/utils/api/throwError'
 import Order from '@/models/order'
 
-export const GET = async (request: NextRequest, { params }: PageParams) => {
-  await connectToDB()
-
-  const user = await getUser(request)
+export const GET = withAuth(async ({ user, params }) => {
   const order = await Order.findById(params.id)
-
-  if (!user) {
-    return throwError({ error: 'User not found', status: 404 })
-  }
 
   if (!order) {
     return throwError({ error: 'Order not found', status: 404 })
@@ -24,4 +15,4 @@ export const GET = async (request: NextRequest, { params }: PageParams) => {
   }
 
   return NextResponse.json(order)
-}
+})
