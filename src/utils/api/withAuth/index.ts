@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { Handler } from './types'
 import { getUser } from '@/utils/api/getUser'
-import { throwError } from '../throwError'
+import { throwError } from '@/utils/api/throwError'
 
 export const withAuth = <T>(handler: Handler<T>) => {
   return async (request: NextRequest) => {
