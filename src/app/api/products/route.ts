@@ -33,7 +33,6 @@ export const GET = async (request: NextRequest) => {
   const numberOfProducts = await Product.countDocuments(filterQuery)
   const pages = Math.ceil(numberOfProducts / productsPerPage)
   const page = getValidPage(Number(getSearchParams(request, 'page')), pages)
-
   const prevPageProducts = productsPerPage * (page - 1)
 
   const products = await Product.find(filterQuery)

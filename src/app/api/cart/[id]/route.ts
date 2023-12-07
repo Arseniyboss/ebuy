@@ -12,17 +12,13 @@ export const DELETE = withAuth(async ({ user, params }) => {
   }
 
   await cartItem.deleteOne()
-
   await user.save()
-
   const tokenCookie = await getTokenCookie(user)
-
   return setCookie(tokenCookie)
 })
 
 export const PATCH = withAuth(async ({ request, user, params }) => {
   const quantity: number = await request.json()
-
   const cartItem = user.cartItems.find(({ id }) => params.id === id)
 
   if (!cartItem) {

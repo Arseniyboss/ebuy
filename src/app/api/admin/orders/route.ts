@@ -19,7 +19,6 @@ export const GET = withAdminAuth(async ({ request }) => {
   const numberOfOrders = await Order.countDocuments(filterQuery)
   const pages = Math.ceil(numberOfOrders / ordersPerPage)
   const page = getValidPage(Number(getSearchParams(request, 'page')), pages)
-
   const prevPageOrders = ordersPerPage * (page - 1)
 
   const orders = await Order.find(filterQuery)
