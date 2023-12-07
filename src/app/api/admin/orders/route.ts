@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { OrdersStatus } from '@/types/base/order'
 import { withAdminAuth } from '@/utils/api/withAuth/admin'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
