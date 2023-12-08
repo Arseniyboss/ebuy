@@ -65,10 +65,15 @@ describe('PATCH /api/products/:id', () => {
         it('returns status code 400', async () => {
           const productId = product._id.toString()
           const quantity = product.countInStock + 1
+
           const { status, statusText } = await updateStock(productId, quantity)
+          const products = await getProducts()
+
+          const { countInStock } = products[0]
 
           expect(status).toBe(400)
           expect(statusText).toBe(`${product.name} is out of stock`)
+          expect(countInStock).toBe(product.countInStock)
         })
       })
 
