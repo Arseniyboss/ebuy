@@ -24,10 +24,6 @@ export const FlexGroup = styled.div`
   }
 `
 
-export const SearchFailText = styled.p`
-  text-align: center;
-`
-
 export const NotFoundContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,4 +47,9 @@ export const HomeButton = styled(Button)`
   padding: 0.8rem 1.6rem;
   font-size: 1.2rem;
   border-radius: var(--border-radius);
+`
+
+export const ErrorHeading = styled.h1`
+  margin-left: 2rem;
+  color: var(--gray);
 `

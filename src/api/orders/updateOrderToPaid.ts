@@ -1,23 +1,11 @@
-import { BASE_URL } from '@/baseUrl'
-import { getToken } from '@/auth/token/getters/getToken'
+import { fetchData } from '@/utils/api/fetchData'
 
 export const updateOrderToPaid = async (
   orderId: string,
-  sessionId?: string
+  stripeSessionId?: string
 ) => {
-  const url = `${BASE_URL}/api/orders/${orderId}/updateToPaid`
-  const token = await getToken()
-
-  const response = await fetch(url, {
+  return fetchData(`/orders/${orderId}/updateToPaid`, {
     method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token || sessionId}`,
-    },
+    stripeSessionId,
   })
-
-  if (!response.ok) {
-    return alert(response.statusText)
-  }
-
-  return response
 }

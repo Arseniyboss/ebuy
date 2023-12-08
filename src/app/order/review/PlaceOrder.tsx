@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { CartItem } from '@/types/api'
 import { Address, PaymentMethod } from '@/types/base/user'
-import { clearCart } from '@/api/cart/clearCart'
-import { updateProduct } from '@/api/products/updateProduct'
-import { createOrder } from '@/api/orders/createOrder'
+import { placeOrder } from '@/api/orders/placeOrder'
 import { revalidateTag } from '@/api/revalidateTag'
 import { CheckoutButton } from '@/app/cart/styles'
 
@@ -14,39 +12,20 @@ type Props = {
   orderItems: CartItem[]
   address: Address
   paymentMethod: PaymentMethod
-  totalPrice: number
 }
 
-const PlaceOrder = ({
-  orderItems,
-  address,
-  paymentMethod,
-  totalPrice,
-}: Props) => {
+const PlaceOrder = (orderDetails: Props) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const updateStock = () => {
-    orderItems.forEach((item) => updateProduct(item._id, item.quantity))
-  }
-
-  const placeOrder = async () => {
+  const handleClick = async () => {
     setLoading(true)
+    const { data: order, error } = await placeOrder(orderDetails)
 
-    const order = await createOrder({
-      orderItems,
-      address,
-      paymentMethod,
-      totalPrice,
-    })
+    if (error || !order) setLoading(false)
+    if (error) return alert(error)
+    if (!order) return alert('Order not found')
 
-    if (!order) {
-      setLoading(false)
-      return
-    }
-
-    updateStock()
-    clearCart()
     router.push(`/order/${order._id}`)
     router.refresh()
     revalidateTag('product')
@@ -54,7 +33,7 @@ const PlaceOrder = ({
   return (
     <CheckoutButton
       disabled={loading}
-      onClick={placeOrder}
+      onClick={handleClick}
       data-testid='place-order-button'
     >
       Place Order

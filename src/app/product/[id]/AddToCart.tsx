@@ -32,11 +32,11 @@ const AddToCart = ({ product, user }: Props) => {
 
     setLoading(true)
 
-    const response = await addCartItem(cartItem)
+    const { error } = await addCartItem(cartItem)
 
-    if (!response.ok) {
+    if (error) {
       setLoading(false)
-      alert(response.statusText)
+      alert(error)
       return
     }
 

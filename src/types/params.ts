@@ -52,9 +52,12 @@ export type UpdateProductParams = {
   quantity: number
 }
 
-export type CreateOrderParams = {
+export type PlaceOrderParams = {
   orderItems: CartItem[]
   address: Address
   paymentMethod: PaymentMethod
+}
+
+export interface CreateOrderParams extends PlaceOrderParams {
   totalPrice: number
 }

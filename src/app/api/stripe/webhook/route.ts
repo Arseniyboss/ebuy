@@ -20,7 +20,9 @@ export const POST = async (request: NextRequest) => {
     const metadata = session.metadata as Metadata
     const orderId = metadata.orderId
 
-    await updateOrderToPaid(orderId, session.id)
+    const { error } = await updateOrderToPaid(orderId, session.id)
+    if (error) return alert(error)
+
     await revalidateTag('order')
   }
 

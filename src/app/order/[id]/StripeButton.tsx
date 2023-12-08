@@ -11,22 +11,22 @@ type Props = {
   orderId: string
 }
 
-// To test payment success:
-
-// 1.run npm run stripe-webhook to listen to stripe events locally
-// 2.click Stripe Checkout button
-// 3.complete the payment to see 'Payment Successful!' in the console
-
 const StripeButton = ({ orderItems, orderId }: Props) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleStripe = async () => {
     setLoading(true)
-    const sessionUrl = await createCheckoutSession(orderItems, orderId)
-    if (!sessionUrl) {
-      return setLoading(false)
-    }
+
+    const { data: sessionUrl, error } = await createCheckoutSession(
+      orderItems,
+      orderId
+    )
+
+    if (error || !sessionUrl) setLoading(false)
+    if (error) return alert(error)
+    if (!sessionUrl) return alert('Session not found')
+
     router.push(sessionUrl)
   }
 

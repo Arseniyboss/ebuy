@@ -1,6 +1,7 @@
 import { HomeQueryParams } from '@/types/params'
 import { getProducts } from '@/api/products/getProducts'
-import { SearchFailText, ProductContainer } from './styles'
+import { ProductContainer } from './styles'
+import Message from '@/components/feedback/message/Message'
 import Product from '@/components/product/Product'
 import Pagination from '@/components/pagination/Pagination'
 
@@ -9,20 +10,34 @@ type Props = {
 }
 
 const Products = async ({ searchParams }: Props) => {
-  const { products, pages } = await getProducts(searchParams)
+  const { data, error } = await getProducts(searchParams)
 
-  return searchParams.search && products.length === 0 ? (
-    <SearchFailText data-testid='search-fail-text'>
-      No products matched your search term
-    </SearchFailText>
-  ) : (
+  if (error) {
+    return <Message variant='error'>{error}</Message>
+  }
+
+  if (!data) {
+    return <Message variant='error'>Products not found</Message>
+  }
+
+  const { products, pages } = data
+  return (
     <>
-      <ProductContainer aria-label='product list'>
-        {products.map((product) => (
-          <Product key={product._id} {...product} />
-        ))}
-      </ProductContainer>
-      <Pagination pages={pages} />
+      {searchParams.search && products.length === 0 && (
+        <p className='text-center' data-testid='search-fail-text'>
+          No products matched your search term
+        </p>
+      )}
+      {products.length > 0 && (
+        <>
+          <ProductContainer aria-label='product list'>
+            {products.map((product) => (
+              <Product key={product._id} {...product} />
+            ))}
+          </ProductContainer>
+          <Pagination pages={pages} />
+        </>
+      )}
     </>
   )
 }

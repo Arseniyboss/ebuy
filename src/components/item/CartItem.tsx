@@ -37,15 +37,16 @@ const CartItem = ({
   const handleDelete = async () => {
     if (!window.confirm('Are you sure?')) return
     setLoading(true)
-    const response = await deleteCartItem(_id)
-    if (!response.ok) return alert(response.statusText)
+    const { error } = await deleteCartItem(_id)
+    if (error) return alert(error)
     router.refresh()
   }
 
   const handleUpdate = async (e: ChangeEvent<HTMLSelectElement>) => {
     const quantity = parseInt(e.target.value)
-    const response = await updateCartItem(_id, quantity)
-    if (!response.ok) return alert(response.statusText)
+    await updateCartItem(_id, quantity)
+    const { error } = await updateCartItem(_id, quantity)
+    if (error) return alert(error)
     router.refresh()
   }
   return (

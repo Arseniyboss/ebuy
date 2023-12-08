@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { PageParams } from '@/types/params'
 import { decodeToken } from '@/auth/token/decode/cookies'
 import { getOrderById } from '@/api/orders/getOrderById'
@@ -21,11 +20,19 @@ export const metadata: Metadata = {
 }
 
 const Order = async ({ params }: PageParams) => {
+  const { data: order, error } = await getOrderById(params.id)
   const session = await decodeToken()
-  const order = await getOrderById(params.id)
 
-  if (!session || !order) {
-    return notFound()
+  if (error) {
+    return <Message variant='error'>{error}</Message>
+  }
+
+  if (!order) {
+    return <Message variant='error'>Order not found</Message>
+  }
+
+  if (!session) {
+    return <Message variant='error'>User not found</Message>
   }
 
   const { address, paymentMethod, orderItems } = order

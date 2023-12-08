@@ -107,7 +107,7 @@ describe('Home Page', () => {
 
     it('when searching products', () => {
       cy.typeInto('search-input', 'Airpods')
-      cy.location('search').should('include', '?page=1')
+      cy.location('search').should('include', 'page=1')
     })
 
     it('when sorting products', () => {
@@ -116,7 +116,7 @@ describe('Home Page', () => {
         text: 'Price: Low - High',
         value: 'price.asc',
       })
-      cy.location('search').should('include', '?page=1')
+      cy.location('search').should('include', 'page=1')
     })
   })
 

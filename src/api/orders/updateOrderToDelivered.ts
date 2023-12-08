@@ -1,16 +1,5 @@
-import { BASE_URL } from '@/baseUrl'
-import { getToken } from '@/auth/token/getters/getToken'
+import { fetchData } from '@/utils/api/fetchData'
 
 export const updateOrderToDelivered = async (orderId: string) => {
-  const url = `${BASE_URL}/api/orders/${orderId}/updateToDelivered`
-  const token = await getToken()
-
-  const response = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  return response
+  return fetchData(`/orders/${orderId}/updateToDelivered`, { method: 'PUT' })
 }

@@ -25,7 +25,9 @@ const PaymentMethodForm = ({ paymentMethod, payload }: Props) => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    await setPaymentMethod(values.paymentMethod as PaymentMethod)
+    const { paymentMethod } = values
+    const { error } = await setPaymentMethod(paymentMethod as PaymentMethod)
+    if (error) return alert(error)
     router.prefetch('/order/review') // required in production because of Link prefetch in CheckoutSteps
     router.push('/order/review')
     router.refresh()

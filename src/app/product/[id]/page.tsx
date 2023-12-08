@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { PageParams } from '@/types/params'
 import { getProductById } from '@/api/products/getProductById'
 import { decodeToken } from '@/auth/token/decode/cookies'
@@ -21,16 +20,20 @@ import ReviewForm from './ReviewForm'
 export const generateMetadata = async ({
   params,
 }: PageParams): Promise<Metadata> => {
-  const product = await getProductById(params.id)
+  const { data: product } = await getProductById(params.id)
   return { title: product ? product.name : 'Not Found' }
 }
 
 const Product = async ({ params }: PageParams) => {
-  const product = await getProductById(params.id)
+  const { data: product, error } = await getProductById(params.id)
   const session = await decodeToken()
 
+  if (error) {
+    return <Message variant='error'>{error}</Message>
+  }
+
   if (!product) {
-    return notFound()
+    return <Message variant='error'>Product not found</Message>
   }
   return (
     <ProductContainer>

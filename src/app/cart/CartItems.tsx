@@ -8,7 +8,7 @@ import Message from '@/components/feedback/message/Message'
 import CartItem from '@/components/item/CartItem'
 
 const CartItems = async () => {
-  const user = await getUser()
+  const { data: user } = await getUser()
   const cartItems = user?.cartItems || []
   const totalPrice = getTotalPrice(cartItems)
 

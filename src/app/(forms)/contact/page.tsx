@@ -7,8 +7,7 @@ export const metadata: Metadata = {
 }
 
 const Contact = async () => {
-  const user = await getUser()
-
+  const { data: user } = await getUser()
   return <ContactForm user={user} />
 }
 

@@ -20,8 +20,8 @@ const ReviewForm = ({ params }: PageParams) => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    const response = await createReview(params.id, values)
-    if (!response.ok) return response.statusText
+    const { error } = await createReview(params.id, values)
+    if (error) return error
     router.refresh()
     revalidateTag('product')
     alert('Review submitted!')

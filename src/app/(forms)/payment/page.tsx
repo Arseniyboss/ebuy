@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { getUser } from '@/api/users/getUser'
 import { decodeToken } from '@/auth/token/decode/cookies'
+import Message from '@/components/feedback/message/Message'
 import PaymentMethodForm from './form'
 
 export const metadata: Metadata = {
@@ -9,11 +9,15 @@ export const metadata: Metadata = {
 }
 
 const PaymentMethod = async () => {
-  const user = await getUser()
+  const { data: user, error } = await getUser()
   const session = await decodeToken()
 
+  if (error) {
+    return <Message variant='error'>{error}</Message>
+  }
+
   if (!user) {
-    return notFound()
+    return <Message variant='error'>User not found</Message>
   }
 
   return (

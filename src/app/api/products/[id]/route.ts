@@ -26,6 +26,10 @@ export const PATCH = withAuth(async ({ request }) => {
     return throwError({ error: 'Product not found', status: 404 })
   }
 
+  if (product.countInStock < quantity) {
+    return throwError({ error: `${product.name} is out of stock`, status: 400 })
+  }
+
   product.countInStock = product.countInStock - quantity
 
   await product.save()

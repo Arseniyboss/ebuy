@@ -13,12 +13,12 @@ const AdminButton = ({ orderId }: Props) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleDelivery = async () => {
+  const handleClick = async () => {
     setLoading(true)
-    const response = await updateOrderToDelivered(orderId)
-    if (!response.ok) {
+    const { error } = await updateOrderToDelivered(orderId)
+    if (error) {
       setLoading(false)
-      alert(response.statusText)
+      alert(error)
       return
     }
     router.refresh()
@@ -26,7 +26,7 @@ const AdminButton = ({ orderId }: Props) => {
   return (
     <CheckoutButton
       disabled={loading}
-      onClick={handleDelivery}
+      onClick={handleClick}
       data-testid='admin-button'
     >
       Mark As Delivered

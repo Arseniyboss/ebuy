@@ -30,7 +30,8 @@ const PayPalButton = ({ amount, orderId }: Props) => {
         }}
         onApprove={async (_, actions) => {
           await actions.order?.capture()
-          await updateOrderToPaid(orderId)
+          const { error } = await updateOrderToPaid(orderId)
+          if (error) return alert(error)
           router.refresh()
         }}
       />

@@ -24,8 +24,8 @@ const ProfileForm = ({ user }: Props) => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    const response = await updateUser(values)
-    if (!response.ok) return response.statusText
+    const { error } = await updateUser(values)
+    if (error) return error
     router.refresh()
   }
 

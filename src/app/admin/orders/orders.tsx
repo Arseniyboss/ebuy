@@ -1,12 +1,8 @@
-import { notFound } from 'next/navigation'
 import { OrdersStatus } from '@/types/base/order'
 import { OrdersQueryParams as QueryParams } from '@/types/params'
 import { getOrders } from '@/api/orders/getOrders'
-import { Table } from '@/styles/table'
 import Message from '@/components/feedback/message/Message'
-import OrderFilter from '@/components/order/filter/OrderFilter'
-import Order from '@/components/order/Order'
-import Pagination from '@/components/pagination/Pagination'
+import OrderTable from '@/components/order/OrderTable'
 
 type Props = {
   searchParams: QueryParams
@@ -25,10 +21,14 @@ const statuses: Status[] = [
 ]
 
 const Orders = async ({ searchParams }: Props) => {
-  const data = await getOrders(searchParams)
+  const { data, error } = await getOrders(searchParams)
+
+  if (error) {
+    return <Message variant='error'>{error}</Message>
+  }
 
   if (!data) {
-    return notFound()
+    return <Message variant='error'>Orders not found</Message>
   }
 
   const { orders, pages } = data
@@ -36,26 +36,7 @@ const Orders = async ({ searchParams }: Props) => {
   return orders.length === 0 ? (
     <Message variant='info'>No orders</Message>
   ) : (
-    <>
-      <OrderFilter statuses={statuses} />
-      <Table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Total</th>
-            <th>Paid</th>
-            <th>Delivered</th>
-            <td />
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <Order key={order._id} {...order} />
-          ))}
-        </tbody>
-      </Table>
-      <Pagination pages={pages} />
-    </>
+    <OrderTable statuses={statuses} orders={orders} pages={pages} />
   )
 }
 
