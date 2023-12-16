@@ -1,6 +1,6 @@
-import { User } from '@/types/base/user'
+import { User } from '@/types/user'
 import { getBooleanValue } from '@/utils/getters/getBooleanValue'
-import { WithId } from '@/types/mongo/documents'
+import { WithId } from '@/types/mongo'
 
 type Payload = WithId<User>
 

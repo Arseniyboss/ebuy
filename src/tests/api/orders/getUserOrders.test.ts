@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { UserPayload } from '@/types/jwtPayload'
-import { Order } from '@/types/mongo/documents'
+import { Order } from '@/types/mongo'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { GET } from '@/app/api/orders/route'

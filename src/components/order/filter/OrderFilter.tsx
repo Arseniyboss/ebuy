@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from 'react'
 import { useQueryParams } from '@/hooks/useQueryParams'
-import { UserOrdersStatus } from '@/types/base/order'
+import { UserOrdersStatus } from '@/types/order'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { StatusSelect } from './styles'
 import { Status } from '@/components/order/OrderTable'

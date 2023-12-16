@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
-import { Data, Document, Product, User, Order } from '@/types/mongo/documents'
+import { Data, Document, Product, User, Order } from '@/types/mongo'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
 import orders from '@/mocks/orders'

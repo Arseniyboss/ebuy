@@ -6,7 +6,7 @@ import {
   UserDocument,
   UserModel,
   UserMethods,
-} from '@/types/base/user'
+} from '@/types/user'
 import {
   STREET_REQUIRED,
   STREET_INVALID,

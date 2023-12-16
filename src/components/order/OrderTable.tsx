@@ -1,4 +1,4 @@
-import { Status as StatusName } from '@/types/base/order'
+import { Status as StatusName } from '@/types/order'
 import { Order as OrderType } from '@/types/api'
 import { Table } from '@/styles/table'
 import OrderFilter from '@/components/order/filter/OrderFilter'

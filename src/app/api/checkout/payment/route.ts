@@ -1,4 +1,4 @@
-import { PaymentMethod } from '@/types/base/user'
+import { PaymentMethod } from '@/types/user'
 import { withAuth } from '@/utils/api/withAuth'
 import { getTokenCookie } from '@/utils/api/getTokenCookie'
 import { setCookie } from '@/utils/api/setCookie'

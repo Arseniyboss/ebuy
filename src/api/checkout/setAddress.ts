@@ -1,4 +1,4 @@
-import { Address } from '@/types/base/user'
+import { Address } from '@/types/user'
 import { fetchData } from '@/utils/api/fetchData'
 
 export const setAddress = async (address: Address) => {

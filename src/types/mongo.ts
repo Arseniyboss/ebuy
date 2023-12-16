@@ -1,10 +1,7 @@
 import { Types, mongo } from 'mongoose'
-import {
-  Review as ReviewType,
-  Product as ProductType,
-} from '@/types/base/product'
-import { CartItem as CartItemType, User as UserType } from '@/types/base/user'
-import { Order as OrderType } from '@/types/base/order'
+import { Review as ReviewType, Product as ProductType } from '@/types/product'
+import { CartItem as CartItemType, User as UserType } from '@/types/user'
+import { Order as OrderType } from '@/types/order'
 
 export type Document<T> = Promise<mongo.WithId<T>[]>
 

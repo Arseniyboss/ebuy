@@ -1,4 +1,4 @@
-import { PaymentMethod } from '@/types/base/user'
+import { PaymentMethod } from '@/types/user'
 import { fetchData } from '@/utils/api/fetchData'
 
 export const setPaymentMethod = async (paymentMethod: PaymentMethod) => {

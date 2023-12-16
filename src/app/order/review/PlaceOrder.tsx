@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { CartItem } from '@/types/api'
-import { Address, PaymentMethod } from '@/types/base/user'
+import { Address, PaymentMethod } from '@/types/user'
 import { placeOrder } from '@/api/orders/placeOrder'
 import { revalidateTag } from '@/api/revalidateTag'
 import { CheckoutButton } from '@/app/cart/styles'

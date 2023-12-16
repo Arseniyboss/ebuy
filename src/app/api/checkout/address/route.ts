@@ -1,4 +1,4 @@
-import { Address } from '@/types/base/user'
+import { Address } from '@/types/user'
 import { withAuth } from '@/utils/api/withAuth'
 import { getTokenCookie } from '@/utils/api/getTokenCookie'
 import { setCookie } from '@/utils/api/setCookie'

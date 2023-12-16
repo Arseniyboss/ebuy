@@ -1,4 +1,4 @@
-import { UserOrdersStatus } from '@/types/base/order'
+import { UserOrdersStatus } from '@/types/order'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { getUserOrders } from '@/api/orders/getUserOrders'
 import Message from '@/components/feedback/message/Message'

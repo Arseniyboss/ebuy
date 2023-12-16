@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useForm } from '@/hooks/useForm'
 import { UserPayload } from '@/types/jwtPayload'
-import { Address } from '@/types/base/user'
+import { Address } from '@/types/user'
 import { validationSchema } from '@/validation/schemas/addressSchema'
 import { setAddress } from '@/api/checkout/setAddress'
 import { Input } from '@/styles/globals'

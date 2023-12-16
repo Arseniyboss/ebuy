@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { CreateOrderParams as Body } from '@/types/params'
-import { UserOrdersStatus } from '@/types/base/order'
+import { UserOrdersStatus } from '@/types/order'
 import { withAuth } from '@/utils/api/withAuth'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'

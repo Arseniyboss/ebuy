@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { CreateOrderParams as Order } from '@/types/params'
-import { CartItem, Order as Data } from '@/types/mongo/documents'
+import { CartItem, Order as Data } from '@/types/mongo'
 import { BASE_URL } from '@/baseUrl'
 import { POST } from '@/app/api/orders/route'
 import { seedUsers, seedOrders, getOrders } from '@/config/mongoMemoryServer'

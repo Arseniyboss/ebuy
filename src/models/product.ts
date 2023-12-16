@@ -1,9 +1,5 @@
 import { Schema, models, model } from 'mongoose'
-import {
-  ReviewDocument,
-  ProductDocument,
-  ProductModel,
-} from '@/types/base/product'
+import { ReviewDocument, ProductDocument, ProductModel } from '@/types/product'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,

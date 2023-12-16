@@ -1,6 +1,6 @@
 import { CartItem } from '@/types/api'
-import { Address, PaymentMethod } from '@/types/base/user'
-import { UserOrdersStatus, OrdersStatus } from './base/order'
+import { Address, PaymentMethod } from '@/types/user'
+import { UserOrdersStatus, OrdersStatus } from './order'
 
 export type PageParams = {
   params: {
