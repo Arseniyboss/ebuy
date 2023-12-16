@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { UserPayload } from '@/types/jwtPayload'
-import { GetOrdersData as Data } from '@/types/api'
+import { Order } from '@/types/mongo/documents'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { GET } from '@/app/api/orders/route'
@@ -9,6 +9,11 @@ import { generatePayload } from '@/auth/token/generators/generatePayload'
 import { generateToken } from '@/auth/token/generators/generateToken'
 import { fakePayload } from '@/mocks/fakeData'
 import users from '@/mocks/users'
+
+export type Data = {
+  orders: Order[]
+  pages: number
+}
 
 const payload = generatePayload(users[4])
 

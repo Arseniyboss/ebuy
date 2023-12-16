@@ -18,12 +18,14 @@ const products: Product[] = [
     numReviews: 7,
     reviews: [
       {
+        _id: new ObjectId('62dbfa7f31c12b460f19f2c1'),
         userId: new ObjectId('62dbfa7f31c12b460f19f2a3'),
         username: 'Jane Doe',
         rating: 4,
         comment: 'Very Good Airpods!',
       },
       {
+        _id: new ObjectId('62dbfa7f31c12b460f19f2c2'),
         userId: new ObjectId('62dbfa7f31c12b460f19f2a2'),
         username: 'John Doe',
         rating: 5,
@@ -45,6 +47,7 @@ const products: Product[] = [
     numReviews: 5,
     reviews: [
       {
+        _id: new ObjectId('62dbfa7f31c12b460f19f2c3'),
         userId: new ObjectId('62dbfa7f31c12b460f19f2a2'),
         username: 'John Doe',
         rating: 4,

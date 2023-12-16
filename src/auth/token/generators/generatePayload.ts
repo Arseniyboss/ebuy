@@ -1,14 +1,17 @@
-import { User } from '@/types/jwtPayload'
+import { User } from '@/types/base/user'
 import { getBooleanValue } from '@/utils/getters/getBooleanValue'
+import { WithId } from '@/types/mongo/documents'
 
-export const generatePayload = ({
+type Payload = WithId<User>
+
+export const generatePayload = <T extends Payload>({
   _id,
   name,
   isAdmin,
   cartItems,
   address,
   paymentMethod,
-}: User) => {
+}: T) => {
   return {
     id: _id.toString(),
     name,

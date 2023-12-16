@@ -19,7 +19,7 @@ export const POST = withAuth(async ({ request, user }) => {
 })
 
 export const DELETE = withAuth(async ({ user }) => {
-  user.cartItems = []
+  user.cartItems.remove({})
   await user.save()
   const tokenCookie = await getTokenCookie(user)
   return setCookie(tokenCookie)

@@ -1,15 +1,9 @@
-import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
+import { MongoMemoryServer } from 'mongodb-memory-server'
+import { Data, Document, Product, User, Order } from '@/types/mongo/documents'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
 import orders from '@/mocks/orders'
-import {
-  Data,
-  Document,
-  ProductDocuments,
-  UserDocuments,
-  OrderDocuments,
-} from '@/types/mongo/documents'
 
 const collections = mongoose.connection.collections
 
@@ -48,14 +42,14 @@ const getDocuments = <T>(name: string) => {
   return collections[name].find().toArray() as Document<T>
 }
 
-export const getProducts = async (): Promise<ProductDocuments> => {
-  return getDocuments('products')
+export const getProducts = async () => {
+  return getDocuments<Product>('products')
 }
 
-export const getUsers = async (): Promise<UserDocuments> => {
-  return getDocuments('users')
+export const getUsers = async () => {
+  return getDocuments<User>('users')
 }
 
-export const getOrders = async (): Promise<OrderDocuments> => {
-  return getDocuments('orders')
+export const getOrders = async () => {
+  return getDocuments<Order>('orders')
 }

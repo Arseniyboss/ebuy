@@ -1,7 +1,12 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
-import { CartSchema, UserModel } from '@/types/mongo/models'
-import { Address as AddressSchema, User as UserSchema } from '@/types/base/user'
+import {
+  CartItem,
+  Address,
+  UserDocument,
+  UserModel,
+  UserMethods,
+} from '@/types/base/user'
 import {
   STREET_REQUIRED,
   STREET_INVALID,
@@ -27,7 +32,7 @@ import {
   EMAIL_PATTERN,
 } from '@/validation/constants/patterns'
 
-export const cartSchema = new Schema<CartSchema>({
+export const cartSchema = new Schema<CartItem>({
   name: {
     type: String,
     required: true,
@@ -50,7 +55,7 @@ export const cartSchema = new Schema<CartSchema>({
   },
 })
 
-export const addressSchema = new Schema<AddressSchema>(
+export const addressSchema = new Schema<Address>(
   {
     street: {
       type: String,
@@ -80,7 +85,7 @@ export const addressSchema = new Schema<AddressSchema>(
   { _id: false }
 )
 
-const userSchema = new Schema<UserSchema>({
+const userSchema = new Schema<UserDocument, UserModel, UserMethods>({
   name: {
     type: String,
     required: [true, USERNAME_REQUIRED],

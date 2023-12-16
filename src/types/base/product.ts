@@ -1,7 +1,6 @@
-import { Types } from 'mongoose'
+import { Model, Types } from 'mongoose'
 
 export type Review = {
-  userId: Types.ObjectId
   username: string
   rating: number
   comment: string
@@ -19,3 +18,13 @@ export interface Product {
   numReviews: number
   reviews: Review[]
 }
+
+export interface ReviewDocument extends Review {
+  userId: Types.ObjectId
+}
+
+export interface ProductDocument extends Product {
+  reviews: Types.DocumentArray<ReviewDocument>
+}
+
+export type ProductModel = Model<ProductDocument>

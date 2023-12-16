@@ -1,6 +1,9 @@
 import { Schema, models, model } from 'mongoose'
-import { ReviewSchema, ProductModel } from '@/types/mongo/models'
-import { Product as ProductSchema } from '@/types/base/product'
+import {
+  ReviewDocument,
+  ProductDocument,
+  ProductModel,
+} from '@/types/base/product'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
@@ -8,7 +11,7 @@ import {
 } from '@/validation/constants/errors'
 import { USERNAME_PATTERN } from '@/validation/constants/patterns'
 
-const reviewSchema = new Schema<ReviewSchema>(
+const reviewSchema = new Schema<ReviewDocument>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -31,7 +34,7 @@ const reviewSchema = new Schema<ReviewSchema>(
   { timestamps: true, _id: false }
 )
 
-const productSchema = new Schema<ProductSchema>({
+const productSchema = new Schema<ProductDocument, ProductModel>({
   name: {
     type: String,
     required: true,

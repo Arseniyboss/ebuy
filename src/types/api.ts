@@ -1,11 +1,3 @@
-import {
-  OmitId,
-  OmitUserId,
-  OmitPassword,
-  OmitReviews,
-  OmitCartItems,
-  OmitOrderItems,
-} from './omitters'
 import { Review as ReviewType, Product as ProductType } from './base/product'
 import { CartItem as CartItemType, User as UserType } from './base/user'
 import { Order as OrderType } from './base/order'
@@ -14,26 +6,25 @@ type WithId<T> = T & {
   _id: string
 }
 
-type WithUserId<T> = T & {
-  userId: string
-}
+type OmitPassword<T> = Omit<T, 'password'>
 
-export type CartItem = WithId<OmitId<CartItemType>>
+export type CartItem = WithId<CartItemType>
 
-export interface User extends OmitCartItems<WithId<OmitPassword<UserType>>> {
+export interface User extends WithId<OmitPassword<UserType>> {
   cartItems: CartItem[]
 }
 
-export interface Review extends WithUserId<OmitUserId<ReviewType>> {
+export interface Review extends ReviewType {
+  userId: string
   createdAt: string
   updatedAt: string
 }
 
-export interface Product extends OmitReviews<WithId<ProductType>> {
+export interface Product extends WithId<ProductType> {
   reviews: Review[]
 }
 
-export interface Order extends OmitOrderItems<WithId<OmitId<OrderType>>> {
+export interface Order extends WithId<OrderType> {
   orderItems: CartItem[]
 }
 

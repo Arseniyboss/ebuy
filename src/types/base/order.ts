@@ -1,8 +1,7 @@
-import { Types } from 'mongoose'
+import { Model, Types } from 'mongoose'
 import { CartItem, Address, PaymentMethod } from './user'
 
 export type Order = {
-  userId: Types.ObjectId
   orderItems: CartItem[]
   address: Address
   paymentMethod: PaymentMethod
@@ -13,6 +12,13 @@ export type Order = {
   deliveredAt?: string
   deliveryDate?: string
 }
+
+export interface OrderDocument extends Order {
+  userId: Types.ObjectId
+  orderItems: Types.DocumentArray<CartItem>
+}
+
+export type OrderModel = Model<OrderDocument>
 
 export type UserOrdersStatus = 'not-paid' | ''
 export type OrdersStatus = 'not-delivered' | ''

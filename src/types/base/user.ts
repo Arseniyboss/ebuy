@@ -1,7 +1,6 @@
-import { Types } from 'mongoose'
+import { Model, Types } from 'mongoose'
 
 export type CartItem = {
-  _id: Types.ObjectId
   name: string
   image: string
   price: number
@@ -27,3 +26,13 @@ export type User = {
   address?: Address
   paymentMethod?: PaymentMethod
 }
+
+export interface UserDocument extends User {
+  cartItems: Types.DocumentArray<CartItem>
+}
+
+export type UserMethods = {
+  matchPassword: (password: string) => Promise<boolean>
+}
+
+export type UserModel = Model<UserDocument, {}, UserMethods>

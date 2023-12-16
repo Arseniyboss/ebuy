@@ -1,9 +1,8 @@
 import { Schema, models, model } from 'mongoose'
-import { Order as OrderSchema } from '@/types/base/order'
-import { OrderModel } from '@/types/mongo/models'
+import { OrderDocument, OrderModel } from '@/types/base/order'
 import { cartSchema, addressSchema } from './user'
 
-const orderSchema = new Schema<OrderSchema>({
+const orderSchema = new Schema<OrderDocument, OrderModel>({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,

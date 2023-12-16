@@ -1,4 +1,4 @@
-import { User } from '@/types/jwtPayload'
+import { User } from './withAuth/types'
 import { generatePayload } from '@/auth/token/generators/generatePayload'
 import { generateTokenCookie } from '@/auth/token/generators/generateTokenCookie'
 

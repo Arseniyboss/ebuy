@@ -1,25 +1,34 @@
 import { Types, mongo } from 'mongoose'
-import { Product as ProductType } from '@/types/base/product'
+import {
+  Review as ReviewType,
+  Product as ProductType,
+} from '@/types/base/product'
 import { CartItem as CartItemType, User as UserType } from '@/types/base/user'
 import { Order as OrderType } from '@/types/base/order'
 
-type WithId<T> = T & {
+export type Document<T> = Promise<mongo.WithId<T>[]>
+
+export type WithId<T> = T & {
   _id: Types.ObjectId
 }
 
-export interface CartItem extends CartItemType {
-  id: string
-  deleteOne: () => Promise<void>
+export interface Review extends WithId<ReviewType> {
+  userId: Types.ObjectId
 }
 
-export type Document<T> = Promise<mongo.WithId<T>[]>
+export interface Product extends WithId<ProductType> {
+  reviews: Review[]
+}
 
-export type Product = WithId<ProductType>
-export type User = WithId<UserType>
-export type Order = WithId<OrderType>
+export type CartItem = WithId<CartItemType>
+
+export interface User extends WithId<UserType> {
+  cartItems: CartItem[]
+}
+
+export interface Order extends WithId<OrderType> {
+  userId: Types.ObjectId
+  orderItems: CartItem[]
+}
 
 export type Data = Product | User | Order
-
-export type ProductDocuments = Document<ProductType>
-export type UserDocuments = Document<UserType>
-export type OrderDocuments = Document<OrderType>
