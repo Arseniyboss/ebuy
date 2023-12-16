@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { decodeToken } from '@/auth/token/decode/requestCookies'
-import { checkRouteAccess } from './utils/api/middleware/checkRouteAccess'
+import { isRouteProtected } from './utils/api/middleware/isRouteProtected'
 import { redirect } from '@/utils/api/middleware/redirect'
 import { setCookie } from './utils/api/middleware/setCookie'
 import { generateTokenCookie } from './auth/token/generators/generateTokenCookie'
@@ -8,7 +8,6 @@ import { hour } from './constants/time'
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
-  const isRouteProtected = checkRouteAccess(pathname)
   const session = await decodeToken(request)
 
   if (pathname === '/login' || pathname === '/register') {
@@ -19,7 +18,7 @@ export const middleware = async (request: NextRequest) => {
   }
 
   if (!session) {
-    if (isRouteProtected) {
+    if (isRouteProtected(pathname)) {
       return redirect('/login')
     }
     return NextResponse.next()
