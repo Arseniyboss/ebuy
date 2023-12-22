@@ -20,7 +20,7 @@ export const verifyToken = async (token?: string) => {
 
     const { id, name, isAdmin, cartItems, address, paymentMethod } = payload
     const user = { id, name, isAdmin, cartItems, address, paymentMethod }
-    const expirationTime = payload.exp! / 1000
+    const expirationTime = payload.exp!
 
     const session: Session = { user, expirationTime }
     return session
