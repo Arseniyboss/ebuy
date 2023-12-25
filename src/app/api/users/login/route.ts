@@ -1,9 +1,8 @@
 import { NextRequest } from 'next/server'
 import { UserLoginParams as Body } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
+import { connectToDB } from '@/database/mongoDB'
 import { throwError } from '@/utils/api/throwError'
-import { getTokenCookie } from '@/utils/api/getTokenCookie'
-import { setCookie } from '@/utils/api/setCookie'
+import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 import User from '@/models/user'
 
 export const POST = async (request: NextRequest) => {
@@ -19,7 +18,5 @@ export const POST = async (request: NextRequest) => {
     return throwError({ error: 'Invalid credentials', status: 401 })
   }
 
-  const tokenCookie = await getTokenCookie(user)
-
-  return setCookie(tokenCookie)
+  return generateAuthTokens(user)
 }

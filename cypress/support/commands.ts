@@ -235,7 +235,7 @@ Cypress.Commands.add('verifyCookie', (name) => {
 Cypress.Commands.add('verifyUserUpdate', (input, value) => {
   cy.wait('@updateUser').then(({ response }) => {
     expect(response.statusCode).to.equal(200)
-    cy.verifyCookie('token')
+    cy.verifyCookie('accessToken')
     cy.reload()
     cy.assertValue(input, value)
   })
@@ -247,7 +247,7 @@ Cypress.Commands.add('login', (userCredentials) => {
     url: '/api/users/login',
     body: userCredentials,
   }).then(() => {
-    cy.verifyCookie('token')
+    cy.verifyCookie('accessToken')
     cy.reload()
   })
 })
@@ -257,7 +257,7 @@ Cypress.Commands.add('logout', () => {
     method: 'POST',
     url: '/api/users/logout',
   }).then(() => {
-    cy.getCookie('token').then((cookie) => {
+    cy.getCookie('accessToken').then((cookie) => {
       expect(cookie).to.be.null
     })
     cy.reload()
@@ -265,52 +265,52 @@ Cypress.Commands.add('logout', () => {
 })
 
 Cypress.Commands.add('getUser', () => {
-  cy.getCookie('token').then((cookie) => {
-    const token = cookie.value
+  cy.getCookie('accessToken').then((cookie) => {
+    const accessToken = cookie.value
     cy.request({
       method: 'GET',
       url: '/api/users/user',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
   })
 })
 
 Cypress.Commands.add('getOrder', (id) => {
-  cy.getCookie('token').then((cookie) => {
-    const token = cookie.value
+  cy.getCookie('accessToken').then((cookie) => {
+    const accessToken = cookie.value
     cy.request({
       method: 'GET',
       url: `/api/orders/${id}`,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
   })
 })
 
 Cypress.Commands.add('getUserOrders', ({ page = 1, status = '' } = {}) => {
-  cy.getCookie('token').then((cookie) => {
-    const token = cookie.value
+  cy.getCookie('accessToken').then((cookie) => {
+    const accessToken = cookie.value
     cy.request({
       method: 'GET',
       url: `/api/orders/?page=${page}&status=${status}`,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
   })
 })
 
 Cypress.Commands.add('getOrders', ({ page = 1, status = '' } = {}) => {
-  cy.getCookie('token').then((cookie) => {
-    const token = cookie.value
+  cy.getCookie('accessToken').then((cookie) => {
+    const accessToken = cookie.value
     cy.request({
       method: 'GET',
       url: `/api/admin/orders/?page=${page}&status=${status}`,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
   })

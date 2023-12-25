@@ -1,9 +1,9 @@
-import { decodeToken } from '@/auth/token/decode/cookies'
+import { getSession } from '@/auth/session/cookies'
 import { HeaderContainer, HeaderLogo } from './styles'
 import Navigation from '@/components/navigation/Navigation'
 
 const Header = async () => {
-  const session = await decodeToken()
+  const session = await getSession()
   return (
     <HeaderContainer>
       <HeaderLogo href='/' data-testid='home-nav-link' aria-label='ebuy logo'>

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
 import { BASE_URL } from '@/baseUrl'
 import { PUT } from '@/app/api/orders/[id]/updateToDelivered/route'
-import { seedUsers, seedOrders, getOrders } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, seedOrders, getOrders } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 import { fakeOrderId, fakePayload } from '@/mocks/fakeData'
 import users from '@/mocks/users'
@@ -14,10 +14,10 @@ const orderId = orders[1]._id.toString()
 
 const updateOrderToDelivered = async (id: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/orders/${id}/updateToDelivered`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const response = await PUT(request, { params: { id } })

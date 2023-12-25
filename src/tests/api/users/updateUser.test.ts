@@ -3,27 +3,27 @@ import { NextRequest } from 'next/server'
 import { UpdateUserParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { PUT } from '@/app/api/users/user/route'
-import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
-import { verifyToken } from '@/auth/token/verifyToken'
+import { seedUsers, getUsers } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
+import { verifyAccessToken } from '@/auth/verifyTokens'
 import users from '@/mocks/users'
 
 const payload = generatePayload(users[1])
 
 const updateUser = async (user: UpdateUserParams) => {
-  const token = await generateToken(payload)
   const url = `${BASE_URL}/api/users/user`
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'PUT',
     body: JSON.stringify(user),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText, cookies } = await PUT(request)
-  const newToken = cookies.get('token')?.value
-  return { status, statusText, token: newToken }
+  const newAccessToken = cookies.get('accessToken')?.value
+  return { status, statusText, accessToken: newAccessToken }
 }
 
 beforeAll(async () => await seedUsers())
@@ -52,8 +52,8 @@ describe('PUT /api/users/user', () => {
         password: '',
       }
 
-      const { status, token } = await updateUser(user)
-      const newPayload = await verifyToken(token)
+      const { status, accessToken } = await updateUser(user)
+      const newPayload = await verifyAccessToken(accessToken)
       const users = await getUsers()
 
       expect(status).toBe(200)

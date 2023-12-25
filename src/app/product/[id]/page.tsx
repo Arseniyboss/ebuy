@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { PageParams } from '@/types/params'
 import { getProductById } from '@/api/products/getProductById'
-import { decodeToken } from '@/auth/token/decode/cookies'
+import { getSession } from '@/auth/session/cookies'
 import { getProductNumReviews } from '@/utils/getters/getProductNumReviews'
 import { FlexGroup, ProductPrice } from '@/styles/globals'
 import {
@@ -26,7 +26,7 @@ export const generateMetadata = async ({
 
 const Product = async ({ params }: PageParams) => {
   const { data: product, error } = await getProductById(params.id)
-  const session = await decodeToken()
+  const session = await getSession()
 
   if (error) {
     return <Message variant='error'>{error}</Message>

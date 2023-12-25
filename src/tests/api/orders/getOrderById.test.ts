@@ -2,9 +2,9 @@ import { NextRequest } from 'next/server'
 import { Order } from '@/types/api'
 import { BASE_URL } from '@/baseUrl'
 import { GET } from '@/app/api/orders/[id]/route'
-import { seedUsers, seedOrders } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, seedOrders } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakeOrderId, fakePayload } from '@/mocks/fakeData'
 import orders from '@/mocks/orders'
 import users from '@/mocks/users'
@@ -14,10 +14,10 @@ const orderId = orders[0]._id.toString()
 
 const getOrderById = async (id: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/orders/${id}`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const response = await GET(request, { params: { id } })

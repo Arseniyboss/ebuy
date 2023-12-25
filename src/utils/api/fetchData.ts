@@ -1,5 +1,5 @@
 import { BASE_URL } from '@/baseUrl'
-import { getToken } from '@/auth/token/getters/getToken'
+import { getAccessToken } from '@/auth/getters/getAccessToken'
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
@@ -26,13 +26,13 @@ export const fetchData = async <T>(
   route: string,
   options?: Partial<Options>
 ): Promise<Response<T>> => {
-  const token = await getToken()
+  const accessToken = await getAccessToken()
 
   const response = await fetch(`${BASE_URL}/api${route}`, {
     method: options?.method || 'GET',
     body: JSON.stringify(options?.body),
     headers: {
-      Authorization: `Bearer ${token || options?.stripeSessionId}`,
+      Authorization: `Bearer ${accessToken || options?.stripeSessionId}`,
     },
     next: {
       tags: options?.tags,

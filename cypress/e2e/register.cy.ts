@@ -101,7 +101,7 @@ describe('Register Page', () => {
 
     cy.wait('@register').then(({ response }) => {
       expect(response.statusCode).to.equal(201)
-      cy.verifyCookie('token')
+      cy.verifyCookie('accessToken')
     })
   })
 })

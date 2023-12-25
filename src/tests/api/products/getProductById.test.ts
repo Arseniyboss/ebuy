@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { Product } from '@/types/api'
 import { BASE_URL } from '@/baseUrl'
 import { GET } from '@/app/api/products/[id]/route'
-import { seedProducts } from '@/config/mongoMemoryServer'
+import { seedProducts } from '@/database/mongoMemoryServer'
 import { fakeProductId } from '@/mocks/fakeData'
 import products from '@/mocks/products'
 

@@ -3,9 +3,9 @@ import { CreateOrderParams as Order } from '@/types/params'
 import { CartItem, Order as Data } from '@/types/mongo'
 import { BASE_URL } from '@/baseUrl'
 import { POST } from '@/app/api/orders/route'
-import { seedUsers, seedOrders, getOrders } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, seedOrders, getOrders } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { getTotalPrice } from '@/utils/getters/getTotalPrice'
 import { fakePayload } from '@/mocks/fakeData'
 import users from '@/mocks/users'
@@ -36,12 +36,12 @@ const order: Order = {
 
 const createOrder = async (payload = defaultPayload) => {
   const url = `${BASE_URL}/api/orders`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'POST',
     body: JSON.stringify(order),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const response = await POST(request)

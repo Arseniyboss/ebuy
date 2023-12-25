@@ -1,8 +1,7 @@
 import { CartItem as Body } from '@/types/api'
 import { withAuth } from '@/utils/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
-import { getTokenCookie } from '@/utils/api/getTokenCookie'
-import { setCookie } from '@/utils/api/setCookie'
+import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 
 export const POST = withAuth(async ({ request, user }) => {
   const cartItem: Body = await request.json()
@@ -14,13 +13,12 @@ export const POST = withAuth(async ({ request, user }) => {
 
   user.cartItems.push(cartItem)
   await user.save()
-  const tokenCookie = await getTokenCookie(user)
-  return setCookie(tokenCookie, 201)
+
+  return generateAuthTokens(user, 201)
 })
 
 export const DELETE = withAuth(async ({ user }) => {
   user.cartItems.remove({})
   await user.save()
-  const tokenCookie = await getTokenCookie(user)
-  return setCookie(tokenCookie)
+  return generateAuthTokens(user)
 })

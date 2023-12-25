@@ -5,9 +5,9 @@ import {
   seedProducts,
   seedUsers,
   getProducts,
-} from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+} from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakeProductId, fakePayload } from '@/mocks/fakeData'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
@@ -22,12 +22,12 @@ const updateStock = async (
   payload = defaultPayload
 ) => {
   const url = `${BASE_URL}/api/products/${id}`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'PATCH',
     body: JSON.stringify({ id, quantity }),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText } = await PATCH(request)

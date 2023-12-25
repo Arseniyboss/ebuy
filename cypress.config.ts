@@ -8,7 +8,7 @@ import {
   deleteUsers,
   seedOrders,
   deleteOrders,
-} from './src/config/mongodb'
+} from './src/database/mongoDB'
 
 export default defineConfig({
   e2e: {

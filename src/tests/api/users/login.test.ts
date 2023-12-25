@@ -2,8 +2,8 @@ import { NextRequest } from 'next/server'
 import { UserLoginParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { POST } from '@/app/api/users/login/route'
-import { seedUsers } from '@/config/mongoMemoryServer'
-import { verifyToken } from '@/auth/token/verifyToken'
+import { seedUsers } from '@/database/mongoMemoryServer'
+import { verifyAccessToken } from '@/auth/verifyTokens'
 import users from '@/mocks/users'
 
 const login = async (userCredentials: UserLoginParams) => {
@@ -13,8 +13,8 @@ const login = async (userCredentials: UserLoginParams) => {
     body: JSON.stringify(userCredentials),
   })
   const { status, statusText, cookies } = await POST(request)
-  const token = cookies.get('token')?.value
-  return { status, statusText, token }
+  const accessToken = cookies.get('accessToken')?.value
+  return { status, statusText, accessToken }
 }
 
 beforeAll(async () => await seedUsers())
@@ -57,8 +57,8 @@ describe('GET /api/users/login', () => {
         password: '123456',
       }
 
-      const { status, token } = await login(userCredentials)
-      const payload = await verifyToken(token)
+      const { status, accessToken } = await login(userCredentials)
+      const payload = await verifyAccessToken(accessToken)
 
       expect(status).toBe(200)
       expect(_id.toString()).toBe(payload?.user.id)

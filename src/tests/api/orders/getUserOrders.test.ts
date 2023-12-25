@@ -4,9 +4,9 @@ import { Order } from '@/types/mongo'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { GET } from '@/app/api/orders/route'
-import { seedUsers, seedOrders } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, seedOrders } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakePayload } from '@/mocks/fakeData'
 import users from '@/mocks/users'
 
@@ -22,10 +22,10 @@ const getUserOrders = async (
   { page = 1, status = '' }: QueryParams = {}
 ) => {
   const url = `${BASE_URL}/api/orders?page=${page}&status=${status}`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const response = await GET(request)

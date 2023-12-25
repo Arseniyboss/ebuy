@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
+import { connectToDB } from '@/database/mongoDB'
 import { verifyStripeCheckoutSession } from '@/auth/verifyStripeCheckoutSession'
 import { getUser } from '@/utils/api/getUser'
 import { throwError } from '@/utils/api/throwError'

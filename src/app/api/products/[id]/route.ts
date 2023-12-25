@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { PageParams, UpdateProductParams as Body } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
+import { connectToDB } from '@/database/mongoDB'
 import { withAuth } from '@/utils/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
 import Product from '@/models/product'

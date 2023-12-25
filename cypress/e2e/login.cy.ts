@@ -54,7 +54,7 @@ describe('Login Page', () => {
 
     cy.wait('@login').then(({ response }) => {
       expect(response.statusCode).to.equal(200)
-      cy.verifyCookie('token')
+      cy.verifyCookie('accessToken')
     })
   })
 })

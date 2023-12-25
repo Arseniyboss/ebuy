@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server'
 import { UpdateUserParams as Body } from '@/types/params'
 import { withAuth } from '@/utils/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
-import { getTokenCookie } from '@/utils/api/getTokenCookie'
-import { setCookie } from '@/utils/api/setCookie'
+import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 import User from '@/models/user'
 
 export const GET = withAuth(async ({ user }) => {
@@ -28,7 +27,5 @@ export const PUT = withAuth(async ({ request, user }) => {
 
   await user.save()
 
-  const tokenCookie = await getTokenCookie(user)
-
-  return setCookie(tokenCookie)
+  return generateAuthTokens(user)
 })

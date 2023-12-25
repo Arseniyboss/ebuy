@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import { withAuth } from '@/utils/api/withAuth/dynamicHandler'
 import { throwError } from '@/utils/api/throwError'
-import { getTokenCookie } from '@/utils/api/getTokenCookie'
-import { setCookie } from '@/utils/api/setCookie'
+import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 
 export const DELETE = withAuth(async ({ user, params }) => {
   const cartItem = user.cartItems.find(({ id }) => params.id === id)
@@ -13,8 +12,8 @@ export const DELETE = withAuth(async ({ user, params }) => {
 
   await cartItem.deleteOne()
   await user.save()
-  const tokenCookie = await getTokenCookie(user)
-  return setCookie(tokenCookie)
+
+  return generateAuthTokens(user)
 })
 
 export const PATCH = withAuth(async ({ request, user, params }) => {

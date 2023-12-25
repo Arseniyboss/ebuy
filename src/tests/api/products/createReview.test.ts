@@ -6,9 +6,9 @@ import {
   seedProducts,
   seedUsers,
   getProducts,
-} from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+} from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakeProductId, fakePayload } from '@/mocks/fakeData'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
@@ -24,12 +24,12 @@ const review: Review = {
 
 const createReview = async (productId: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/products/${productId}/review`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'POST',
     body: JSON.stringify(review),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText } = await POST(request, {

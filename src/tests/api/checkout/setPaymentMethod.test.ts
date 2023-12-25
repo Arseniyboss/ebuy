@@ -3,10 +3,10 @@ import { UserPayload } from '@/types/jwtPayload'
 import { PaymentMethod } from '@/types/user'
 import { BASE_URL } from '@/baseUrl'
 import { PUT } from '@/app/api/checkout/payment/route'
-import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
-import { verifyToken } from '@/auth/token/verifyToken'
+import { seedUsers, getUsers } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
+import { verifyAccessToken } from '@/auth/verifyTokens'
 import { fakePayload } from '@/mocks/fakeData'
 import users from '@/mocks/users'
 
@@ -17,17 +17,17 @@ const setPaymentMethod = async (
   payload: UserPayload
 ) => {
   const url = `${BASE_URL}/api/checkout/payment`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'PUT',
     body: JSON.stringify(paymentMethod),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText, cookies } = await PUT(request)
-  const newToken = cookies.get('token')?.value
-  return { status, statusText, token: newToken }
+  const newAccessToken = cookies.get('accessToken')?.value
+  return { status, statusText, accessToken: newAccessToken }
 }
 
 beforeAll(async () => await seedUsers())
@@ -49,9 +49,12 @@ describe('PUT /api/checkout/payment', () => {
     describe('given the payment method does not exist', () => {
       const payload = generatePayload(users[3])
       it('returns status code 201 and adds payment method', async () => {
-        const { status, token } = await setPaymentMethod(paymentMethod, payload)
+        const { status, accessToken } = await setPaymentMethod(
+          paymentMethod,
+          payload
+        )
 
-        const newPayload = await verifyToken(token)
+        const newPayload = await verifyAccessToken(accessToken)
         const users = await getUsers()
         const newPaymentMethod = users[3].paymentMethod
 

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
 import { BASE_URL } from '@/baseUrl'
 import { PATCH } from '@/app/api/cart/[id]/route'
-import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, getUsers } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakePayload } from '@/mocks/fakeData'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
@@ -14,12 +14,12 @@ const defaultPayload = generatePayload(users[2])
 
 const updateCartItem = async (id: string, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/cart/${id}`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'PATCH',
     body: JSON.stringify(quantity),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText } = await PATCH(request, { params: { id } })

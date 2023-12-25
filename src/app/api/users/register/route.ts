@@ -1,9 +1,8 @@
 import { NextRequest } from 'next/server'
 import { UserRegisterParams as Body } from '@/types/params'
-import { connectToDB } from '@/config/mongodb'
+import { connectToDB } from '@/database/mongoDB'
 import { throwError } from '@/utils/api/throwError'
-import { getTokenCookie } from '@/utils/api/getTokenCookie'
-import { setCookie } from '@/utils/api/setCookie'
+import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 import User from '@/models/user'
 
 export const POST = async (request: NextRequest) => {
@@ -19,7 +18,5 @@ export const POST = async (request: NextRequest) => {
 
   const user = await User.create({ name, email, password })
 
-  const tokenCookie = await getTokenCookie(user)
-
-  return setCookie(tokenCookie, 201)
+  return generateAuthTokens(user, 201)
 }

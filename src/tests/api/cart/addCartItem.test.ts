@@ -2,9 +2,9 @@ import { NextRequest } from 'next/server'
 import { CartItem } from '@/types/user'
 import { BASE_URL } from '@/baseUrl'
 import { POST } from '@/app/api/cart/route'
-import { seedUsers, getUsers } from '@/config/mongoMemoryServer'
-import { generatePayload } from '@/auth/token/generators/generatePayload'
-import { generateToken } from '@/auth/token/generators/generateToken'
+import { seedUsers, getUsers } from '@/database/mongoMemoryServer'
+import { generatePayload } from '@/auth/generators/generatePayload'
+import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakePayload } from '@/mocks/fakeData'
 import products from '@/mocks/products'
 import users from '@/mocks/users'
@@ -17,12 +17,12 @@ const defaultPayload = generatePayload(user)
 
 const addCartItem = async (cartItem: CartItem, payload = defaultPayload) => {
   const url = `${BASE_URL}/api/cart`
-  const token = await generateToken(payload)
+  const accessToken = await generateAccessToken(payload)
   const request = new NextRequest(url, {
     method: 'POST',
     body: JSON.stringify(cartItem),
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
   const { status, statusText } = await POST(request)
