@@ -11,4 +11,4 @@ export type Params = {
 }
 
 export type Layout = (props: Props) => JSX.Element
-export type LayoutHandler = (params: Params) => JSX.Element
+export type Middleware = (params: Params) => JSX.Element
