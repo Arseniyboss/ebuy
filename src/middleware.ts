@@ -1,17 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getSession } from '@/auth/session/requestCookies'
-import { getSessionId } from '@/auth/api/getCookies'
+import { getSession } from './auth/session/cookies'
+import { getSessionId } from '@/auth/getters/getSessionId'
 import { refreshAccessToken } from '@/auth/api/refreshAccessToken'
 
-export const middleware = async (request: NextRequest) => {
-  const session = await getSession(request)
-  const sessionId = getSessionId(request)
+export const middleware = async () => {
+  const session = await getSession()
+  const sessionId = getSessionId()
 
   if (!session && sessionId) {
-    return refreshAccessToken(request)
+    return refreshAccessToken()
   }
-
-  return NextResponse.next()
 }
 
 export const config = {

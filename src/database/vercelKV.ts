@@ -1,8 +1,8 @@
 import { kv } from '@vercel/kv'
-import { getSessionId } from '@/auth/getters/getSessionId'
 import { isTest } from '@/constants/isTest'
+import { getSessionId } from '@/auth/getters/getSessionId'
 
-export const getRefreshToken = async () => {
+export const getRefreshToken = () => {
   if (isTest) return
   const sessionId = getSessionId()
   if (!sessionId) return

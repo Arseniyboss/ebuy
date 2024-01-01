@@ -5,7 +5,7 @@ import { throwError } from '@/utils/api/throwError'
 import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 import User from '@/models/user'
 
-export const GET = withAuth(async ({ user }) => {
+export const GET = withAuth(({ user }) => {
   return NextResponse.json(user)
 })
 

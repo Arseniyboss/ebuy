@@ -3,7 +3,7 @@ import { getUser } from '@/utils/api/getUser'
 
 export type User = NonNullable<Awaited<ReturnType<typeof getUser>>>
 
-export type ReturnValue<T> = Promise<NextResponse<T>>
+export type ReturnValue<T> = NextResponse<T> | Promise<NextResponse<T>>
 
 export type Params = {
   request: NextRequest
