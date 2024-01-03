@@ -16,10 +16,10 @@ export const refreshAccessToken = async (request: NextRequest) => {
   }
 
   const accessToken = await generateAccessToken(session.user)
-  const newSessionId = generateSessionId()
+  const sessionId = generateSessionId()
 
   deleteRefreshToken()
-  setRefreshToken(newSessionId, refreshToken)
+  setRefreshToken(sessionId, refreshToken)
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('accessToken', accessToken)
@@ -29,7 +29,7 @@ export const refreshAccessToken = async (request: NextRequest) => {
   })
 
   response.cookies.set({ ...accessTokenOptions, value: accessToken })
-  response.cookies.set({ ...sessionIdOptions, value: newSessionId })
+  response.cookies.set({ ...sessionIdOptions, value: sessionId })
 
   return response
 }
