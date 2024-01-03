@@ -2,7 +2,7 @@
 
 ## Description
 
-Fullstack e-commerce website built with NextJS
+Fullstack e-commerce website that is highly accessible for people with different types of disabilities such as visual and mobility impairments
 
 ## Technologies
 
@@ -10,7 +10,7 @@ Fullstack e-commerce website built with NextJS
 - Framework: **NextJS**
 - Styling: **Styled Components**
 - Database: **MongoDB**
-- API Route Testing: **Jest**
+- Unit Testing: **Jest**
 - E2E Testing: **Cypress**
 
 ## Commands
