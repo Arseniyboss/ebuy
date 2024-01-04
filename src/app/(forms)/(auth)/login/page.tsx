@@ -25,8 +25,8 @@ const Login = () => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    const response = await login(values)
-    if (!response.ok) return response.statusText
+    const { error } = await login(values)
+    if (error) return error
     router.push('/')
     router.refresh()
   }

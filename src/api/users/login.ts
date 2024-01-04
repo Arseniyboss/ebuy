@@ -1,9 +1,6 @@
 import { UserLoginParams } from '@/types/params'
-import { BASE_URL } from '@/baseUrl'
+import { fetchData } from '@/utils/api/fetchData'
 
 export const login = async (userCredentials: UserLoginParams) => {
-  return fetch(`${BASE_URL}/api/users/login`, {
-    method: 'POST',
-    body: JSON.stringify(userCredentials),
-  })
+  return fetchData('/users/login', { method: 'POST', body: userCredentials })
 }

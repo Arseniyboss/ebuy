@@ -26,8 +26,8 @@ const Register = () => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    const response = await register(values)
-    if (!response.ok) return response.statusText
+    const { error } = await register(values)
+    if (error) return error
     router.push('/')
     router.refresh()
   }

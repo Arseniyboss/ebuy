@@ -1,9 +1,6 @@
 import { UserRegisterParams as User } from '@/types/params'
-import { BASE_URL } from '@/baseUrl'
+import { fetchData } from '@/utils/api/fetchData'
 
 export const register = async (user: User) => {
-  return fetch(`${BASE_URL}/api/users/register`, {
-    method: 'POST',
-    body: JSON.stringify(user),
-  })
+  return fetchData('/users/register', { method: 'POST', body: user })
 }
