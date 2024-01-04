@@ -32,6 +32,7 @@ export const fetchData = async <T>(
     method: options?.method || 'GET',
     body: JSON.stringify(options?.body),
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken || options?.stripeSessionId}`,
     },
     next: {
