@@ -1,6 +1,6 @@
 import { getSession } from '@/auth/session/cookies'
 import { HeaderContainer, HeaderLogo } from './styles'
-import Navigation from '@/components/navigation/Navigation'
+import Navigation from '@/components/layout/header/navigation/Navigation'
 
 const Header = async () => {
   const session = await getSession()

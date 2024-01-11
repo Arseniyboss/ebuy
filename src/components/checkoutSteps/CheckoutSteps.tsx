@@ -21,6 +21,7 @@ const CheckoutSteps = ({ user, center }: Props) => {
           <NavLink
             href='/payment'
             disabled={!user.address}
+            tabIndex={!user.address ? -1 : 0}
             data-testid='payment-link'
           >
             Payment
@@ -30,6 +31,7 @@ const CheckoutSteps = ({ user, center }: Props) => {
           <NavLink
             href='/order/review'
             disabled={!user.paymentMethod}
+            tabIndex={!user.paymentMethod ? -1 : 0}
             data-testid='order-review-link'
           >
             Review

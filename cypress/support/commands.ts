@@ -49,6 +49,7 @@ Cypress.Commands.add('assertDisabled', (testId) => {
 
 Cypress.Commands.add('assertDisabledLink', (testId) => {
   cy.getByTestId(testId).should('have.css', 'pointer-events', 'none')
+  cy.getByTestId(testId).should('have.attr', 'tabindex', '-1')
 })
 
 Cypress.Commands.add('assertChecked', (testId) => {
