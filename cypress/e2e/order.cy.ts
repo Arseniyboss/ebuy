@@ -75,24 +75,21 @@ describe('Order Page', () => {
     })
 
     describe('tests payment methods', () => {
-      // prevents the test from running in headless mode
-      if (Cypress.config('isInteractive')) {
-        it('tests paypal payment', () => {
-          const id = '62dbfa7f31c12b460f19f2c4'
-          const currentDate = getCurrentDate()
-          const email = Cypress.env('paypalEmail')
-          const password = Cypress.env('paypalPassword')
+      it('tests paypal payment', () => {
+        const id = '62dbfa7f31c12b460f19f2c4'
+        const currentDate = getCurrentDate()
+        const email = Cypress.env('paypalEmail')
+        const password = Cypress.env('paypalPassword')
 
-          cy.login({ email: 'mike@gmail.com', password: '123456' })
-          cy.visit(`/order/${id}`)
+        cy.login({ email: 'mike@gmail.com', password: '123456' })
+        cy.visit(`/order/${id}`)
 
-          cy.capturePayPalWindow()
-          cy.clickPayPalButton()
-          cy.payWithPayPal(email, password)
+        cy.capturePayPalWindow()
+        cy.clickPayPalButton()
+        cy.payWithPayPal(email, password)
 
-          cy.getMessage('success-message', `Paid on ${currentDate}`)
-        })
-      }
+        cy.getMessage('success-message', `Paid on ${currentDate}`)
+      })
 
       it('tests stripe payment', () => {
         const currentDate = getCurrentDate()

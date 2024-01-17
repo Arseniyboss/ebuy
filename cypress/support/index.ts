@@ -66,6 +66,7 @@ declare global {
       waitDebounce(): Chainable<Element>
       waitSelect(): Chainable<Element>
       waitBeforeSubmit(): Chainable<Element>
+      waitPayPalLoading(): Chainable<Element>
       verifyUrl(url: string): Chainable<Element>
       verifyProtectedUrl(url: string): Chainable<Element>
       verifyLink(dataId: string, url: string): Chainable<Element>

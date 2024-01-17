@@ -192,6 +192,10 @@ Cypress.Commands.add('waitBeforeSubmit', () => {
   cy.wait(100)
 })
 
+Cypress.Commands.add('waitPayPalLoading', () => {
+  cy.wait(3000)
+})
+
 Cypress.Commands.add('verifyUrl', (url) => {
   cy.location('pathname').should('eq', url)
 })
@@ -347,13 +351,12 @@ Cypress.Commands.add('getPayPalWindow', () => {
 })
 
 Cypress.Commands.add('payWithPayPal', (email, password) => {
-  cy.wait(7000)
+  cy.waitPayPalLoading()
   cy.getPayPalWindow().find('#email').type(email)
   cy.getPayPalWindow().find('#btnNext').click()
-  cy.wait(5000)
   cy.getPayPalWindow().find('#password').type(password)
   cy.getPayPalWindow().find('#btnLogin').click()
-  cy.wait(18000)
+  cy.waitPayPalLoading()
   cy.getPayPalWindow().find('#payment-submit-btn').click()
-  cy.wait(7000)
+  cy.waitPayPalLoading()
 })
