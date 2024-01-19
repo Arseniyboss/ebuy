@@ -2,6 +2,7 @@ import { UserOrdersStatus } from '@/types/order'
 import { UserOrdersQueryParams as QueryParams } from '@/types/params'
 import { getUserOrders } from '@/api/orders/getUserOrders'
 import Message from '@/components/feedback/message/Message'
+import OrderFilter from '@/components/order/filter/OrderFilter'
 import OrderTable from '@/components/order/OrderTable'
 
 type Props = {
@@ -33,10 +34,15 @@ const UserOrders = async ({ searchParams }: Props) => {
 
   const { orders, pages } = data
 
-  return orders.length === 0 ? (
-    <Message variant='info'>No orders</Message>
-  ) : (
-    <OrderTable statuses={statuses} orders={orders} pages={pages} />
+  return (
+    <>
+      <OrderFilter statuses={statuses} />
+      {orders.length === 0 ? (
+        <Message variant='info'>No orders</Message>
+      ) : (
+        <OrderTable orders={orders} pages={pages} />
+      )}
+    </>
   )
 }
 
