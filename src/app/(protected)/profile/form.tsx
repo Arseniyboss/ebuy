@@ -26,6 +26,7 @@ const ProfileForm = ({ user }: Props) => {
   const onSubmit = async () => {
     const { error } = await updateUser(values)
     if (error) return error
+    setValues({ ...values, password: '' })
     router.refresh()
   }
 
@@ -36,6 +37,7 @@ const ProfileForm = ({ user }: Props) => {
     loading,
     success,
     isValid,
+    setValues,
     handleChange,
     handleSubmit,
   } = useForm({
