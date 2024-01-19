@@ -18,8 +18,8 @@ export const refreshAccessToken = async (request: NextRequest) => {
   const accessToken = await generateAccessToken(session.user)
   const sessionId = generateSessionId()
 
-  deleteRefreshToken()
-  setRefreshToken(sessionId, refreshToken)
+  await deleteRefreshToken()
+  await setRefreshToken(sessionId, refreshToken)
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('accessToken', accessToken)
