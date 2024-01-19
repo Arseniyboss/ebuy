@@ -95,7 +95,7 @@ describe('Product Page', () => {
     })
 
     it('does not submit a review with no rating and shows an error message', () => {
-      cy.waitBeforeSubmit()
+      cy.waitCypressLoading()
       cy.submitForm('review-form')
       cy.getMessage('rating-error', 'Rating is required')
     })

@@ -65,7 +65,7 @@ declare global {
       submitForm(dataId: string): Chainable<Element>
       waitDebounce(): Chainable<Element>
       waitSelect(): Chainable<Element>
-      waitBeforeSubmit(): Chainable<Element>
+      waitCypressLoading(): Chainable<Element>
       waitPayPalLoading(): Chainable<Element>
       verifyUrl(url: string): Chainable<Element>
       verifyProtectedUrl(url: string): Chainable<Element>

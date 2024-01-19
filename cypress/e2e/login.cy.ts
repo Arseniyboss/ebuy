@@ -16,7 +16,6 @@ describe('Login Page', () => {
   })
 
   it('submits the form with empty input fields and shows error messages', () => {
-    cy.waitBeforeSubmit()
     cy.submitForm('login-form')
     cy.getMessage('email-error', 'Email is required')
     cy.getMessage('password-error', 'Password is required')

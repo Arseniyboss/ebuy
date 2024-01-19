@@ -35,7 +35,7 @@ describe('Payment Method Page', () => {
     })
 
     it('submits the form without payment method and shows an error message', () => {
-      cy.waitBeforeSubmit()
+      cy.waitCypressLoading()
       cy.submitForm('payment-method-form')
       cy.getMessage('form-error', 'Payment method is required')
     })

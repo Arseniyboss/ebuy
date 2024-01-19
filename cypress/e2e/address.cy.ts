@@ -48,7 +48,7 @@ describe('Address Page', () => {
     })
 
     it('submits the form with empty input fields and shows error messages', () => {
-      cy.waitBeforeSubmit()
+      cy.waitCypressLoading()
       cy.submitForm('address-form')
       cy.getMessage('street-error', 'Street is required')
       cy.getMessage('country-error', 'Country is required')

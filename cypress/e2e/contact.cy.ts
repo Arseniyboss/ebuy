@@ -18,7 +18,6 @@ describe('Contact Page', () => {
   })
 
   it('submits the form with empty input fields and shows error messages', () => {
-    cy.waitBeforeSubmit()
     cy.submitForm('contact-form')
     cy.getMessage('name-error', 'Username is required')
     cy.getMessage('email-error', 'Email is required')

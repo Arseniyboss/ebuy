@@ -16,7 +16,6 @@ describe('Register Page', () => {
   })
 
   it('submits the form with empty input fields and shows error messages', () => {
-    cy.wait(100)
     cy.submitForm('register-form')
     cy.getMessage('name-error', 'Username is required')
     cy.getMessage('email-error', 'Email is required')

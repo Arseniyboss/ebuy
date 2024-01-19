@@ -104,7 +104,6 @@ describe('Profile Page', () => {
 
   describe('after 3 seconds', () => {
     it('removes success message', () => {
-      cy.waitBeforeSubmit()
       cy.submitForm('profile-form')
       cy.getTemporaryMessage('success-message', 'Profile Updated')
     })
@@ -119,7 +118,6 @@ describe('Profile Page', () => {
 
   describe('when form error occurs', () => {
     it('removes success message', () => {
-      cy.waitBeforeSubmit()
       cy.submitForm('profile-form')
       cy.getMessage('success-message', 'Profile Updated')
 
