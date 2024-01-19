@@ -82,6 +82,7 @@ export const ProductQuantity = styled.select`
   width: 40px;
   color: inherit;
   appearance: auto;
+  border: 1px solid grey;
   border-radius: var(--border-radius);
 
   &:focus {

@@ -94,6 +94,7 @@ describe('Profile Page', () => {
 
       cy.getByTestId('password-error').should('not.exist')
       cy.assertDisabled('update-button')
+      cy.assertEmpty('password-input')
 
       cy.getMessage('success-message', 'Profile Updated')
 

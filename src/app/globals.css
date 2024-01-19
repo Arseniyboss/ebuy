@@ -44,6 +44,8 @@ select {
   outline: none;
   cursor: pointer;
   appearance: none;
+  background: white;
+  color: black;
 }
 
 textarea {
