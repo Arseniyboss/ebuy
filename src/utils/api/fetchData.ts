@@ -20,6 +20,8 @@ type ErrorState = {
   error: string
 }
 
+type Error = Pick<ErrorState, 'error'>
+
 type Response<T> = SuccessState<T> | ErrorState
 
 export const fetchData = async <T>(
@@ -41,7 +43,8 @@ export const fetchData = async <T>(
   })
 
   if (!response.ok) {
-    return { error: response.statusText }
+    const { error }: Error = await response.json()
+    return { error }
   }
 
   const data: T = await response.json()

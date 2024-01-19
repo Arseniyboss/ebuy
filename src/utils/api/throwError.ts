@@ -6,5 +6,5 @@ type Error = {
 }
 
 export const throwError = ({ error, status }: Error) => {
-  return NextResponse.json(null, { status, statusText: error })
+  return NextResponse.json({ error }, { status, statusText: error })
 }
