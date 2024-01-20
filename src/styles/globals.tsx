@@ -68,6 +68,7 @@ export const Select = styled.select`
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   text-align: center;
+  text-align-last: center; // for safari and chrome on ios
 
   &:focus {
     border: 1px solid #aaa;
