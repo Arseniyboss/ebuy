@@ -11,7 +11,7 @@ export const Table = styled.table`
   max-height: 475px;
   margin: 0 auto;
   overflow: scroll;
-  color: var(--gray);
+  color: var(--darkgray);
 
   tbody tr:nth-child(odd) {
     background: #f2f2f2;
