@@ -28,7 +28,6 @@ const AddressForm = ({ address, payload }: Props) => {
   const onSubmit = async () => {
     const { error } = await setAddress(values)
     if (error) return alert(error)
-    router.prefetch('/payment') // required in production because of Link prefetch in CheckoutSteps
     router.push('/payment')
     router.refresh()
   }
