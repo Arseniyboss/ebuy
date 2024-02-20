@@ -15,8 +15,8 @@ const Product = ({ _id, name, image, price, rating, numReviews }: Props) => {
       <ProductContainer data-testid='product'>
         <ProductImage
           src={image}
-          height={250}
-          width={250}
+          height={255}
+          width={320}
           alt=''
           priority
           data-testid='product-image'
