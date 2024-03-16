@@ -23,9 +23,11 @@ const PayPalButton = ({ amount, orderId }: Props) => {
               {
                 amount: {
                   value: amount.toString(),
+                  currency_code: 'USD',
                 },
               },
             ],
+            intent: 'CAPTURE',
           })
         }}
         onApprove={async (_, actions) => {
