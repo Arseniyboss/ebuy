@@ -3,7 +3,6 @@ import { HomeQueryParams } from '@/types/params'
 import { Product, GetProductsData as Data } from '@/types/api'
 import { SortOrder, SortKey } from '@/types/sort'
 import { BASE_URL } from '@/baseUrl'
-// import { BASE_URL } from '@//baseUrl'
 import { GET } from '@/app/api/products/route'
 import { seedProducts } from '@/database/mongoMemoryServer'
 
