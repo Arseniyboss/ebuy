@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { updateOrderToDelivered } from '@/api/orders/updateOrderToDelivered'
+import { revalidateTag } from '@/api/revalidateTag'
 import { CheckoutButton } from '@/app/cart/styles'
 
 type Props = {
@@ -22,6 +23,7 @@ const AdminButton = ({ orderId }: Props) => {
       return
     }
     router.refresh()
+    revalidateTag('order')
   }
   return (
     <CheckoutButton
