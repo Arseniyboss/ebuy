@@ -51,19 +51,19 @@ const productSchema = new Schema<ProductDocument, ProductModel>({
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  numReviews: {
-    type: Number,
-    required: true,
-  },
   price: {
     type: Number,
     required: true,
   },
   countInStock: {
+    type: Number,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  numReviews: {
     type: Number,
     required: true,
   },
