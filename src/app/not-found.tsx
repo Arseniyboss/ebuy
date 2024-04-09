@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { NotFoundContainer, NotFoundImage, HomeButton } from './styles'
 
 const NotFound = () => {
@@ -13,7 +12,7 @@ const NotFound = () => {
         data-testid='404-image'
       />
       <h1 data-testid='404-heading'>Page Not Found</h1>
-      <HomeButton as={Link} href='/' data-testid='home-link'>
+      <HomeButton as='a' href='/' data-testid='home-link'>
         Go Home
       </HomeButton>
     </NotFoundContainer>

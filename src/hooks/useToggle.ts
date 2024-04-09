@@ -1,13 +1,11 @@
 import { useState } from 'react'
 
-type ReturnValues = [boolean, () => void]
-
-export const useToggle = (initialValue: boolean = false): ReturnValues => {
+export const useToggle = (initialValue = false) => {
   const [value, setValue] = useState(initialValue)
 
   const toggleValue = () => {
     setValue(!value)
   }
 
-  return [value, toggleValue]
+  return [value, toggleValue] as const
 }
