@@ -1,5 +1,6 @@
 import { getDeliveryDate } from '@/utils/getters/getDeliveryDate'
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
+import { getCardExpiry } from '@/utils/getters/getCardExpiry'
 
 const id = '62dbfa7f31c12b460f19f2c1'
 
@@ -93,6 +94,7 @@ describe('Order Page', () => {
 
       it('tests stripe payment', () => {
         const currentDate = getCurrentDate()
+        const cardExpiry = getCardExpiry()
 
         cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.intercept(
@@ -113,7 +115,7 @@ describe('Order Page', () => {
 
         cy.get('#email').type('john@gmail.com')
         cy.get('#cardNumber').type('4242 4242 4242 4242')
-        cy.get('#cardExpiry').type('424')
+        cy.get('#cardExpiry').type(cardExpiry)
         cy.get('#cardCvc').type('424')
         cy.get('#billingName').type('John')
         cy.get('.SubmitButton').click()
