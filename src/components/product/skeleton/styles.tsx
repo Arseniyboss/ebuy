@@ -31,7 +31,7 @@ export const SkeletonBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2.3rem;
+  padding: 2.2rem;
 `
 
 export const SkeletonText = styled.div<Props>`

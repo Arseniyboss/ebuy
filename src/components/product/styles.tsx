@@ -15,8 +15,9 @@ export const ProductContainer = styled.article`
 `
 
 export const ProductImage = styled(Image)`
-  width: 100%;
+  display: block;
   height: auto;
+  width: 100%;
 `
 
 export const ProductDetails = styled.section`

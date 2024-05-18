@@ -51,7 +51,7 @@ const CartItem = ({
   }
   return (
     <Container data-testid='cart-item'>
-      <Link href={`/product/${_id}`} aria-label='product link'>
+      <Link href={`/product/${_id}`} aria-label={name}>
         <ItemImage
           src={image}
           height={153}

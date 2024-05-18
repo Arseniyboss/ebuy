@@ -15,7 +15,7 @@ const OrderItem = ({ _id, name, image, price, quantity }: Props) => {
   const totalPrice = formatPrice(quantity * price)
   return (
     <Container>
-      <Link href={`/product/${_id}`} aria-label='product link'>
+      <Link href={`/product/${_id}`} aria-label={name}>
         <ItemImage
           src={image}
           height={153}
