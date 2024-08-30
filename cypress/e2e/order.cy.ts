@@ -96,6 +96,8 @@ describe('Order Page', () => {
         const currentDate = getCurrentDate()
         const cardExpiry = getCardExpiry()
 
+        cy.task('execute', 'npm run stripe-webhook')
+
         cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.intercept(
           'GET',
@@ -104,8 +106,6 @@ describe('Order Page', () => {
 
         cy.login({ email: 'robert@gmail.com', password: '123456' })
         cy.visit(`/order/${id}`)
-
-        cy.task('execute', 'npm run stripe-webhook')
 
         cy.on('uncaught:exception', () => {
           return false
