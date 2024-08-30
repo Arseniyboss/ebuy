@@ -4,6 +4,7 @@ import { Product } from '@/types/api'
 import { formatPrice } from '@/utils/formatters/formatPrice'
 import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
 import { getTotalPrice } from '@/utils/getters/getTotalPrice'
+import { isLocalTest } from 'utils/isLocalTest'
 
 Cypress.Commands.add('getByTestId', (testId) => {
   cy.get(`[data-testid=${testId}]`)
@@ -333,9 +334,11 @@ Cypress.Commands.add('getIframeBody', { prevSubject: 'element' }, ($iframe) => {
 })
 
 Cypress.Commands.add('capturePayPalWindow', () => {
-  cy.window().then((window) => {
-    const { open } = window
-    cy.stub(window, 'open').callsFake((...params) => {
+  const payPalWindow = cy.get('iframe').eq(0).its('0.contentWindow')
+  const window = isLocalTest() ? cy.window() : payPalWindow
+
+  window.then((win) => {
+    cy.stub(win, 'open').callsFake((...params) => {
       paypal.window = open(...params)
       return paypal.window
     })
@@ -343,7 +346,11 @@ Cypress.Commands.add('capturePayPalWindow', () => {
 })
 
 Cypress.Commands.add('clickPayPalButton', () => {
-  cy.get('iframe').eq(1).getIframeBody().click()
+  if (isLocalTest()) {
+    cy.get('iframe').eq(1).getIframeBody().click()
+  } else {
+    cy.get('iframe').eq(0).getIframeBody().click()
+  }
 })
 
 Cypress.Commands.add('getPayPalWindow', () => {
