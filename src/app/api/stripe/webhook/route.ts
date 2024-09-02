@@ -23,8 +23,11 @@ export const POST = async (request: NextRequest) => {
       const orderId = metadata.orderId
 
       const { error } = await updateOrderToPaid(orderId, session.id)
-      if (error) return alert(error)
-
+      
+      if (error) {
+        return throwError({ error, status: 404 })
+      }
+        
       await revalidateTag('order')
     }
 
