@@ -10,7 +10,7 @@ export const Table = styled.table`
   max-width: 90%;
   max-height: 475px;
   margin: 0 auto;
-  overflow: scroll;
+  overflow: auto;
   color: var(--darkgray);
 
   tbody tr:nth-child(odd) {
