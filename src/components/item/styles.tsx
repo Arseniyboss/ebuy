@@ -28,10 +28,11 @@ export const ItemDetails = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.55rem;
+  gap: 0.5rem;
 `
 
 export const ItemName = styled.h2`
+  line-height: 1.2;
   font-size: 1.3rem;
   margin-top: -0.2em;
 
