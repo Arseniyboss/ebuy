@@ -12,6 +12,7 @@ export const Form = styled.form<Props>`
   flex-direction: column;
   gap: var(--spacing);
   width: 340px;
+  max-width: 90vw;
   padding: 2rem;
   margin: ${({ $center = true }) => ($center ? 'auto' : 0)};
   color: var(--gray);
