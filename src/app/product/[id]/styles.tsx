@@ -24,9 +24,8 @@ export const ProductContainer = styled.article`
 `
 
 export const ProductImage = styled(Image)`
-  max-width: 90vw;
-
   @media screen and (max-width: ${breakpoints.product.medium}) {
+    max-width: 90vw;
     height: auto;
     margin: 0 auto;
   }
@@ -43,6 +42,7 @@ export const ProductDetails = styled.section`
 
 export const ProductName = styled.h1`
   font-size: 1.8rem;
+  margin-top: -0.2em;
 `
 
 export const ProductButton = styled(Button)`
