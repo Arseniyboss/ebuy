@@ -6,13 +6,12 @@ import { breakpoints } from '@/constants/breakpoints'
 
 export const Container = styled.article`
   display: flex;
-  column-gap: 2rem;
+  column-gap: 1.2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid lightgrey;
 
   @media screen and (max-width: ${breakpoints.cart.small}) {
-    flex-direction: column;
-    align-items: center;
+    column-gap: 0.8rem;
   }
 `
 
@@ -20,9 +19,8 @@ export const ItemImage = styled(Image)`
   border-radius: var(--border-radius);
 
   @media screen and (max-width: ${breakpoints.cart.small}) {
-    width: 90vw;
+    width: 143px;
     height: auto;
-    margin-bottom: 1rem;
   }
 `
 
@@ -30,25 +28,29 @@ export const ItemDetails = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.7rem;
-
-  @media screen and (max-width: ${breakpoints.cart.small}) {
-    text-align: center;
-    align-items: center;
-  }
+  gap: 0.55rem;
 `
 
 export const ItemName = styled.h2`
   font-size: 1.3rem;
+  margin-top: -0.2em;
+
+  @media screen and (max-width: ${breakpoints.cart.small}) {
+    font-size: 1.1rem;
+  }
 `
 
 export const ItemPrice = styled.p`
   font-size: 1rem;
   font-weight: bold;
+
+  @media screen and (max-width: ${breakpoints.cart.small}) {
+    font-size: 0.9rem;
+  }
 `
 
 export const FlexGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
 `
