@@ -11,7 +11,7 @@ export const PaginationContainer = styled.div`
 
 export const PaginationButton = styled(Button)`
   display: flex;
-  background: #8ccaf8;
+  background: black;
   padding: 0.4rem;
   border-radius: var(--border-radius);
 `
