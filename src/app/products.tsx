@@ -1,6 +1,6 @@
 import { HomeQueryParams } from '@/types/params'
 import { getProducts } from '@/api/products/getProducts'
-import { ProductContainer } from './styles'
+import { ProductWrapper } from './styles'
 import Message from '@/components/feedback/message/Message'
 import Product from '@/components/product/Product'
 import Pagination from '@/components/pagination/Pagination'
@@ -30,11 +30,11 @@ const Products = async ({ searchParams }: Props) => {
       )}
       {products.length > 0 && (
         <>
-          <ProductContainer aria-label='product list'>
+          <ProductWrapper aria-label='product list'>
             {products.map((product) => (
               <Product key={product._id} {...product} />
             ))}
-          </ProductContainer>
+          </ProductWrapper>
           <Pagination pages={pages} />
         </>
       )}

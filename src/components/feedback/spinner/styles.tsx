@@ -8,7 +8,7 @@ const loader = keyframes`
   }
 `
 
-export const LoaderWrapper = styled.div`
+export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
 `

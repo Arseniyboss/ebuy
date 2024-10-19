@@ -5,7 +5,7 @@ import { breakpoints } from '@/constants/breakpoints'
 import Image from 'next/image'
 import { Button } from '@/styles/globals'
 
-export const ProductContainer = styled.section`
+export const ProductWrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;

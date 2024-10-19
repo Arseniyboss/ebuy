@@ -1,5 +1,5 @@
 import {
-  LoaderWrapper,
+  LoaderContainer,
   RainbowLoader,
   StripeLoader,
   PrimaryLoader,
@@ -12,7 +12,7 @@ type Props = {
 
 const Spinner = ({ variant }: Props) => {
   return (
-    <LoaderWrapper>
+    <LoaderContainer>
       {variant === 'primary' && (
         <PrimaryLoader>
           <TransparentCircle />
@@ -28,7 +28,7 @@ const Spinner = ({ variant }: Props) => {
           <TransparentCircle />
         </RainbowLoader>
       )}
-    </LoaderWrapper>
+    </LoaderContainer>
   )
 }
 
