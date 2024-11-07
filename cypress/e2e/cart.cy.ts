@@ -40,30 +40,20 @@ describe('Cart Page', () => {
     })
 
     it('updates cart item', () => {
-      cy.intercept('PATCH', '/api/cart/*').as('updateCartItem')
-
       cy.selectOption({
         testId: 'product-quantity',
         text: '1',
         value: '1',
         index: 0,
       })
-
-      cy.wait('@updateCartItem').then(({ response }) => {
-        expect(response.statusCode).to.equal(200)
-        cy.assertValue('product-quantity', '1', 0)
-      })
+      cy.wait(3000)
+      cy.assertValue('product-quantity', '1', 0)
     })
 
     it('deletes cart item', () => {
-      cy.intercept('DELETE', '/api/cart/*').as('deleteCartItem')
-
       cy.getByTestId('delete-button').eq(0).click()
-
-      cy.wait('@deleteCartItem').then(({ response }) => {
-        expect(response.statusCode).to.equal(200)
-        cy.assertLength('cart-item', 1)
-      })
+      cy.wait(3000)
+      cy.assertLength('cart-item', 1)
     })
   })
 })

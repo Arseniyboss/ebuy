@@ -1,29 +1,32 @@
+'use client'
+
 import Link from 'next/link'
-import { getUser } from '@/api/users/getUser'
+import { useOptimistic } from 'react'
 import { getTotalPrice } from '@/utils/getters/getTotalPrice'
 import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
+import { cartReducer } from '@/reducers/cartReducer'
 import { PageContainer } from '@/styles/globals'
 import { CartTotal, CheckoutButton } from './styles'
-import Message from '@/components/feedback/message/Message'
+import { CartItem as CartItemType } from '@/types/api'
 import CartItem from '@/components/item/CartItem'
 
-const CartItems = async () => {
-  const { data: user } = await getUser()
-  const cartItems = user?.cartItems || []
-  const totalPrice = getTotalPrice(cartItems)
+type Props = {
+  cartItems: CartItemType[]
+}
 
-  return cartItems.length === 0 ? (
-    <Message variant='info'>Your cart is empty</Message>
-  ) : (
-    <PageContainer className='container'>
-      <section className='container' aria-label='cart items'>
-        {cartItems.map((cartItem) => (
-          <CartItem key={cartItem._id} {...cartItem} />
+const CartItems = ({ cartItems }: Props) => {
+  const [optimisticCartItems, dispatch] = useOptimistic(cartItems, cartReducer)
+  const totalPrice = getTotalPrice(optimisticCartItems)
+  return (
+    <PageContainer className="container">
+      <section className="container" aria-label="cart items">
+        {optimisticCartItems.map((cartItem) => (
+          <CartItem key={cartItem._id} {...cartItem} dispatch={dispatch} />
         ))}
       </section>
-      <CartTotal aria-label='cart total'>
-        <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
-        <CheckoutButton as={Link} href='/address' data-testid='checkout-link'>
+      <CartTotal aria-label="cart total">
+        <p data-testid="total-price">Total: ${formatTotalPrice(totalPrice)}</p>
+        <CheckoutButton as={Link} href="/address" data-testid="checkout-link">
           Checkout
         </CheckoutButton>
       </CartTotal>
