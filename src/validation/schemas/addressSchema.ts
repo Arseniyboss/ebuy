@@ -1,5 +1,5 @@
 import { Address as Values } from '@/types/user'
-import { ValidationSchema } from '../../hooks/useForm'
+import { ValidationSchema } from '@/hooks/useForm'
 import {
   STREET_REQUIRED,
   STREET_INVALID,

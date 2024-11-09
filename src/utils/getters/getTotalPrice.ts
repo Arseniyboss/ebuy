@@ -1,5 +1,5 @@
 import { CartItem } from '@/types/api'
-import { formatPrice } from '../formatters/formatPrice'
+import { formatPrice } from '@/utils/formatters/formatPrice'
 
 export const getTotalPrice = (cartItems: CartItem[]) => {
   const totalPrice = cartItems.reduce((acc, item) => {

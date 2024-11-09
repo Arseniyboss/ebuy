@@ -1,4 +1,4 @@
-import { ValidationSchema } from '../../hooks/useForm'
+import { ValidationSchema } from '@/hooks/useForm'
 import {
   USERNAME_REQUIRED,
   USERNAME_INVALID,
@@ -6,10 +6,7 @@ import {
   EMAIL_INVALID,
   MESSAGE_REQUIRED,
 } from '@/validation/constants/errors'
-import {
-  USERNAME_PATTERN,
-  EMAIL_PATTERN,
-} from '@/validation/constants/patterns'
+import { USERNAME_PATTERN, EMAIL_PATTERN } from '@/validation/constants/patterns'
 
 export type Values = {
   name: string
