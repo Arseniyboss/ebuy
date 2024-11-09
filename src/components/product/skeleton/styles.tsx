@@ -15,6 +15,7 @@ export const SkeletonContainer = styled.div`
   animation: ${loading} 2s linear infinite;
   animation-delay: 0.2s;
   border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
 `
 
@@ -28,7 +29,7 @@ export const SkeletonBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2.2rem;
+  padding: 2.1rem;
 `
 
 export const SkeletonText = styled.div`
