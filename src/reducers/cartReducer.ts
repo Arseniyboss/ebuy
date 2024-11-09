@@ -1,4 +1,4 @@
-import { CartItem } from '@/types/api'
+import { CartItem } from '@/api/cart/getCartItems'
 import { CartAction } from '@/types/actions'
 
 export const cartReducer = (cartItems: CartItem[], action: CartAction) => {

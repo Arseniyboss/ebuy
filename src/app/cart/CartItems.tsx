@@ -7,7 +7,7 @@ import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
 import { cartReducer } from '@/reducers/cartReducer'
 import { PageContainer } from '@/styles/globals'
 import { CartTotal, CheckoutButton } from './styles'
-import { CartItem as CartItemType } from '@/types/api'
+import { CartItem as CartItemType } from '@/api/cart/getCartItems'
 import CartItem from '@/components/item/CartItem'
 
 type Props = {

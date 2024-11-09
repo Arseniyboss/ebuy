@@ -1,10 +1,9 @@
-import { getUser } from '@/api/users/getUser'
+import { getCartItems } from '@/api/cart/getCartItems'
 import Message from '@/components/feedback/message/Message'
 import CartItems from './CartItems'
 
 const Cart = async () => {
-  const { data: user } = await getUser()
-  const cartItems = user?.cartItems || []
+  const cartItems = await getCartItems()
   return cartItems.length === 0 ? (
     <Message variant="info">Your cart is empty</Message>
   ) : (

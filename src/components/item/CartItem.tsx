@@ -1,10 +1,8 @@
-'use client'
-
 import Link from 'next/link'
 import { ChangeEvent, startTransition } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { CartAction } from '@/types/actions'
-import { CartItem as CartItemProps } from '@/types/api'
+import { CartItem as CartItemProps } from '@/api/cart/getCartItems'
 import { formatPrice } from '@/utils/formatters/formatPrice'
 import { formatTotalPrice } from '@/utils/formatters/formatTotalPrice'
 import { getQuantities } from '@/utils/getters/getQuantities'
@@ -25,7 +23,7 @@ interface Props extends CartItemProps {
 }
 
 const CartItem = (props: Props) => {
-  const { _id, name, image, price, countInStock, quantity, dispatch } = props
+  const { _id, name, image, blurDataURL, price, countInStock, quantity, dispatch } = props
 
   const totalPrice = formatPrice(quantity * price)
   const quantities = getQuantities(countInStock)
@@ -56,6 +54,8 @@ const CartItem = (props: Props) => {
           width={192}
           alt=""
           priority
+          placeholder="blur"
+          blurDataURL={blurDataURL}
           data-testid="product-image"
         />
       </Link>
