@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { withCartItems } from '@/middlewares/utils/withCartItems'
-import { Layout } from '@/middlewares/types'
+import { withCartItems } from './utils/withCartItems'
+import { Layout } from './types'
 
 export const withAddress = (layout: Layout) => {
   return withCartItems(({ props, session }) => {

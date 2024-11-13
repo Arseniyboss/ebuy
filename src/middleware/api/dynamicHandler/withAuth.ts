@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { Handler } from '@/utils/api/withAuth/dynamicHandler/types'
+import { Handler } from './types'
 import { PageParams } from '@/types/params'
 import { throwError } from '@/utils/api/throwError'
 import { getUser } from '@/utils/api/getUser'

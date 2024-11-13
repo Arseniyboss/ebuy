@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { UpdateUserParams as Body } from '@/types/params'
-import { withAuth } from '@/utils/api/withAuth'
+import { withAuth } from '@/middleware/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
 import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 import User from '@/models/user'

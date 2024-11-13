@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { withAddress } from '@/middlewares/layout/withAddress'
+import { withAddress } from '@/middleware/layout/withAddress'
 
 type Props = {
   children: ReactNode

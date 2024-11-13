@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { withAuth } from '@/utils/api/withAuth/dynamicHandler'
+import { withAuth } from '@/middleware/api/dynamicHandler/withAuth'
 import { throwError } from '@/utils/api/throwError'
 import Order from '@/models/order'
 

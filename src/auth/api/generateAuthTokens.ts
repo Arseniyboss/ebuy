@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { User } from '@/utils/api/withAuth/types'
+import { User } from '@/middleware/api/types'
 import { generatePayload } from '@/auth/generators/generatePayload'
 import { generateSessionId } from '@/auth/generators/generateSessionId'
 import { generateAccessToken } from '@/auth/generators/generateAccessToken'

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { withAuth } from '@/middlewares/utils/withAuth'
-import { Layout } from '@/middlewares/types'
+import { withAuth } from './utils/withAuth'
+import { Layout } from './types'
 
 export const withCartItems = (layout: Layout) => {
   return withAuth(({ props, session }) => {

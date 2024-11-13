@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { withAdminAuth } from '@/utils/api/withAuth/dynamicHandler/admin'
+import { withAdminAuth } from '@/middleware/api/dynamicHandler/withAdminAuth'
 import { throwError } from '@/utils/api/throwError'
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 import Order from '@/models/order'

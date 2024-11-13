@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { OrdersStatus } from '@/types/order'
-import { withAdminAuth } from '@/utils/api/withAuth/admin'
+import { withAdminAuth } from '@/middleware/api/withAdminAuth'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'
 import Order from '@/models/order'
@@ -21,9 +21,7 @@ export const GET = withAdminAuth(async ({ request }) => {
   const page = getValidPage(Number(getSearchParams(request, 'page')), pages)
   const prevPageOrders = ordersPerPage * (page - 1)
 
-  const orders = await Order.find(filterQuery)
-    .limit(ordersPerPage)
-    .skip(prevPageOrders)
+  const orders = await Order.find(filterQuery).limit(ordersPerPage).skip(prevPageOrders)
 
   return NextResponse.json({ orders, pages })
 })

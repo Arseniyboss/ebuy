@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { withPayment } from '@/middlewares/layout/withPayment'
+import { withPayment } from '@/middleware/layout/withPayment'
 
 type Props = {
   children: ReactNode

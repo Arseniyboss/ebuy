@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { withAuth } from '@/middlewares/layout/withAuth'
+import { withAuth } from '@/middleware/layout/withAuth'
 
 type Props = {
   children: ReactNode

@@ -1,5 +1,5 @@
 import { PaymentMethod } from '@/types/user'
-import { withAuth } from '@/utils/api/withAuth'
+import { withAuth } from '@/middleware/api/withAuth'
 import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 
 export const PUT = withAuth(async ({ request, user }) => {

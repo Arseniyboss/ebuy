@@ -1,5 +1,5 @@
 import { CartItem as Body } from '@/types/api'
-import { withAuth } from '@/utils/api/withAuth'
+import { withAuth } from '@/middleware/api/withAuth'
 import { throwError } from '@/utils/api/throwError'
 import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 

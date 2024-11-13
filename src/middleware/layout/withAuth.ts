@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
 import { getSession } from '@/auth/session/cookies'
-import { Middleware, Props } from '@/middlewares/types'
+import { Layout, Props } from './types'
 
-export const withAuth = (middleware: Middleware) => async (props: Props) => {
+export const withAuth = (layout: Layout) => async (props: Props) => {
   const session = await getSession()
   if (!session) {
     redirect('/login')
   }
-  return middleware({ props, session })
+  return layout(props)
 }

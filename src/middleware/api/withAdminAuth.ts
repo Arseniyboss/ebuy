@@ -1,5 +1,5 @@
 import { Handler } from './types'
-import { withAuth } from '@/utils/api/withAuth'
+import { withAuth } from './withAuth'
 import { throwError } from '@/utils/api/throwError'
 
 export const withAdminAuth = <T>(handler: Handler<T>) => {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { CreateOrderParams as Body } from '@/types/params'
 import { UserOrdersStatus } from '@/types/order'
-import { withAuth } from '@/utils/api/withAuth'
+import { withAuth } from '@/middleware/api/withAuth'
 import { getSearchParams } from '@/utils/getters/getSearchParams'
 import { getValidPage } from '@/utils/api/validateQueryParams'
 import Order from '@/models/order'
@@ -22,9 +22,7 @@ export const GET = withAuth(async ({ request, user }) => {
   const page = getValidPage(Number(getSearchParams(request, 'page')), pages)
   const prevPageOrders = ordersPerPage * (page - 1)
 
-  const orders = await Order.find(filterQuery)
-    .limit(ordersPerPage)
-    .skip(prevPageOrders)
+  const orders = await Order.find(filterQuery).limit(ordersPerPage).skip(prevPageOrders)
 
   return NextResponse.json({ orders, pages })
 })

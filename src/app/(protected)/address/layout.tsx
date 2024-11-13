@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { withCartItems } from '@/middlewares/layout/withCartItems'
+import { withCartItems } from '@/middleware/layout/withCartItems'
 
 type Props = {
   children: ReactNode
