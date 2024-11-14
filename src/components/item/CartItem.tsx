@@ -29,7 +29,6 @@ const CartItem = (props: Props) => {
   const quantities = getQuantities(countInStock)
 
   const handleDelete = async () => {
-    if (!window.confirm('Are you sure?')) return
     startTransition(() => {
       dispatch({ type: 'DELETE_ITEM', id: _id })
     })
