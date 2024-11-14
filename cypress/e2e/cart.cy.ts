@@ -46,13 +46,13 @@ describe('Cart Page', () => {
         value: '1',
         index: 0,
       })
-      cy.wait(3000)
+      cy.wait(1500)
       cy.assertValue('product-quantity', '1', 0)
     })
 
     it('deletes cart item', () => {
       cy.getByTestId('delete-button').eq(0).click()
-      cy.wait(3000)
+      cy.wait(1500)
       cy.assertLength('cart-item', 1)
     })
   })
