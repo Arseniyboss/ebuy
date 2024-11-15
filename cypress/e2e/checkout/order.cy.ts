@@ -1,6 +1,5 @@
 import { getDeliveryDate } from '@/utils/getters/getDeliveryDate'
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
-import { getCardExpiry } from '@/utils/getters/getCardExpiry'
 
 const id = '62dbfa7f31c12b460f19f2c1'
 
@@ -94,7 +93,7 @@ describe('Order Page', () => {
 
       it('tests stripe payment', () => {
         const currentDate = getCurrentDate()
-        const cardExpiry = getCardExpiry()
+        // const cardExpiry = getCardExpiry()
 
         cy.task('execute', 'npm run stripe-webhook')
 
@@ -111,18 +110,7 @@ describe('Order Page', () => {
           return false
         })
 
-        cy.getByTestId('stripe-button').click()
-
-        cy.get('#email').type('john@gmail.com')
-        cy.get('#cardNumber').type('4242 4242 4242 4242')
-        cy.get('#cardExpiry').type(cardExpiry)
-        cy.get('#cardCvc').type('424')
-        cy.get('#billingName').type('John')
-        cy.get('.SubmitButton').click()
-
-        cy.wait('@stripePaymentSuccess', { timeout: 10000 })
-
-        cy.wait(1000)
+        cy.payWithStripe()
 
         cy.visit(`/order/${id}`)
 
