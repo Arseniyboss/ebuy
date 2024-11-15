@@ -346,11 +346,8 @@ Cypress.Commands.add('capturePayPalWindow', () => {
 })
 
 Cypress.Commands.add('clickPayPalButton', () => {
-  if (isLocalTest()) {
-    cy.get('iframe').eq(1).getIframeBody().click()
-  } else {
-    cy.get('iframe').eq(0).getIframeBody().click()
-  }
+  const index = isLocalTest() ? 1 : 0
+  cy.get('iframe').eq(index).getIframeBody().click()
 })
 
 Cypress.Commands.add('getPayPalWindow', () => {
