@@ -79,8 +79,8 @@ describe('Order Page', () => {
       it('tests paypal payment', () => {
         const id = '62dbfa7f31c12b460f19f2c4'
         const currentDate = getCurrentDate()
-        const email = Cypress.env('paypalEmail')
-        const password = Cypress.env('paypalPassword')
+        const email = Cypress.env('PAYPAL_EMAIL')
+        const password = Cypress.env('PAYPAL_PASSWORD')
 
         cy.login({ email: 'mike@gmail.com', password: '123456' })
         cy.visit(`/order/${id}`)

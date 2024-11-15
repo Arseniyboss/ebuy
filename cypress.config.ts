@@ -57,8 +57,4 @@ export default defineConfig({
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
   },
-  env: {
-    paypalEmail: process.env.PAYPAL_EMAIL,
-    paypalPassword: process.env.PAYPAL_PASSWORD,
-  },
 })
