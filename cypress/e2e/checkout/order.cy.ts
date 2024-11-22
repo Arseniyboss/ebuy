@@ -93,7 +93,6 @@ describe('Order Page', () => {
 
       it('tests stripe payment', () => {
         const currentDate = getCurrentDate()
-        // const cardExpiry = getCardExpiry()
 
         cy.task('execute', 'npm run stripe-webhook')
 

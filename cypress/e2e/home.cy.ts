@@ -136,9 +136,7 @@ describe('Home Page', () => {
         cy.getByTestId('user-initials').click()
         cy.getByTestId('logout-button').click()
 
-        cy.getCookie('token').then((cookie) => {
-          expect(cookie).to.be.null
-        })
+        cy.getCookie('accessToken').should('be.null')
       })
 
       it('given the user is an admin', () => {
