@@ -8,7 +8,8 @@ import Product from '@/models/product'
 export const GET = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
-  const product = await Product.findById(params.id)
+  const { id } = await params
+  const product = await Product.findById(id)
 
   if (!product) {
     return throwError({ error: 'Product not found', status: 404 })

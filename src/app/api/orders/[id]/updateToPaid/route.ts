@@ -11,9 +11,10 @@ import Order from '@/models/order'
 export const PUT = async (request: NextRequest, { params }: PageParams) => {
   await connectToDB()
 
+  const { id } = await params
   const stripeSession = await verifyStripeCheckoutSession(request)
   const user = await getUser(request)
-  const order = await Order.findById(params.id)
+  const order = await Order.findById(id)
 
   if (!user && !stripeSession) {
     return throwError({ error: 'User not found', status: 404 })

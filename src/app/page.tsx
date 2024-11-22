@@ -8,10 +8,10 @@ import SkeletonLoaders from './skeletons'
 import Products from './products'
 
 type Props = {
-  searchParams: HomeQueryParams
+  searchParams: Promise<HomeQueryParams>
 }
 
-const Home = ({ searchParams }: Props) => {
+const Home = async ({ searchParams }: Props) => {
   return (
     <>
       <Heading>Products</Heading>
@@ -20,7 +20,7 @@ const Home = ({ searchParams }: Props) => {
         <Sort />
       </FlexGroup>
       <Suspense fallback={<SkeletonLoaders />}>
-        <Products searchParams={searchParams} />
+        <Products searchParams={await searchParams} />
       </Suspense>
     </>
   )

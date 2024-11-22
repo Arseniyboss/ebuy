@@ -21,7 +21,8 @@ const updateOrderToPaid = async (id: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const response = await PUT(request, { params: { id } })
+  const params = Promise.resolve({ id })
+  const response = await PUT(request, { params })
   return { status: response.status, statusText: response.statusText }
 }
 
@@ -33,10 +34,7 @@ beforeAll(async () => {
 describe('PUT /api/orders/:id/updateToPaid', () => {
   describe('given the user does not exist', () => {
     it('returns status code 404', async () => {
-      const { status, statusText } = await updateOrderToPaid(
-        fakeOrderId,
-        fakePayload
-      )
+      const { status, statusText } = await updateOrderToPaid(fakeOrderId, fakePayload)
 
       expect(status).toBe(404)
       expect(statusText).toBe('User not found')

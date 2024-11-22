@@ -22,7 +22,8 @@ const updateCartItem = async (id: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const { status, statusText } = await PATCH(request, { params: { id } })
+  const params = Promise.resolve({ id })
+  const { status, statusText } = await PATCH(request, { params })
   return { status, statusText }
 }
 

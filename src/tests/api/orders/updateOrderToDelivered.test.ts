@@ -20,7 +20,9 @@ const updateOrderToDelivered = async (id: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const response = await PUT(request, { params: { id } })
+  const params = Promise.resolve({ id })
+
+  const response = await PUT(request, { params })
   return { status: response.status, statusText: response.statusText }
 }
 
@@ -47,10 +49,7 @@ describe('PUT /api/orders/:id/updateToDelivered', () => {
       it('returns status code 404', async () => {
         const payload = generatePayload(users[1])
 
-        const { status, statusText } = await updateOrderToDelivered(
-          orderId,
-          payload
-        )
+        const { status, statusText } = await updateOrderToDelivered(orderId, payload)
 
         expect(status).toBe(401)
         expect(statusText).toBe('Not authorized')
@@ -60,9 +59,7 @@ describe('PUT /api/orders/:id/updateToDelivered', () => {
     describe('given the user is an admin', () => {
       describe('given the order does not exist', () => {
         it('returns status code 401', async () => {
-          const { status, statusText } = await updateOrderToDelivered(
-            fakeOrderId
-          )
+          const { status, statusText } = await updateOrderToDelivered(fakeOrderId)
 
           expect(status).toBe(404)
           expect(statusText).toBe('Order not found')

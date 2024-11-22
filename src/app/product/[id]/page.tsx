@@ -19,12 +19,14 @@ import Review from '@/components/product/review/Review'
 import ReviewForm from './ReviewForm'
 
 export const generateMetadata = async ({ params }: PageParams): Promise<Metadata> => {
-  const { data: product } = await getProductById(params.id)
+  const { id } = await params
+  const { data: product } = await getProductById(id)
   return { title: product ? product.name : 'Not Found' }
 }
 
 const Product = async ({ params }: PageParams) => {
-  const { data: product, error } = await getProductById(params.id)
+  const { id } = await params
+  const { data: product, error } = await getProductById(id)
   const session = await getSession()
 
   if (error) {

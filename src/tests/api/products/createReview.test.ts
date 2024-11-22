@@ -2,11 +2,7 @@ import { NextRequest } from 'next/server'
 import { CreateReviewParams as Review } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
 import { POST } from '@/app/api/products/[id]/review/route'
-import {
-  seedProducts,
-  seedUsers,
-  getProducts,
-} from '@/database/mongoMemoryServer'
+import { seedProducts, seedUsers, getProducts } from '@/database/mongoMemoryServer'
 import { generatePayload } from '@/auth/generators/generatePayload'
 import { generateAccessToken } from '@/auth/generators/generateAccessToken'
 import { fakeProductId, fakePayload } from '@/mocks/fakeData'
@@ -32,9 +28,8 @@ const createReview = async (productId: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const { status, statusText } = await POST(request, {
-    params: { id: productId },
-  })
+  const params = Promise.resolve({ id: productId })
+  const { status, statusText } = await POST(request, { params })
   return { status, statusText }
 }
 
@@ -58,10 +53,7 @@ describe('POST /api/products/:id/review', () => {
       it('returns status code 404', async () => {
         const productId = products[0]._id.toString()
 
-        const { status, statusText } = await createReview(
-          productId,
-          fakePayload
-        )
+        const { status, statusText } = await createReview(productId, fakePayload)
 
         expect(status).toBe(404)
         expect(statusText).toBe('User not found')

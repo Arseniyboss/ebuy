@@ -4,7 +4,8 @@ import { throwError } from '@/utils/api/throwError'
 import Order from '@/models/order'
 
 export const GET = withAuth(async ({ user, params }) => {
-  const order = await Order.findById(params.id)
+  const { id } = await params
+  const order = await Order.findById(id)
 
   if (!order) {
     return throwError({ error: 'Order not found', status: 404 })

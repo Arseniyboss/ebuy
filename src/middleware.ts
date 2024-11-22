@@ -5,7 +5,7 @@ import { refreshAccessToken } from '@/auth/api/refreshAccessToken'
 
 export const middleware = async (request: NextRequest) => {
   const session = await getSession()
-  const sessionId = getSessionId()
+  const sessionId = await getSessionId()
 
   if (!session && sessionId) {
     return refreshAccessToken(request)

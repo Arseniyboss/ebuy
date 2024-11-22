@@ -5,7 +5,8 @@ import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 import Order from '@/models/order'
 
 export const PUT = withAdminAuth(async ({ params }) => {
-  const order = await Order.findById(params.id)
+  const { id } = await params
+  const order = await Order.findById(id)
 
   if (!order) {
     return throwError({ error: 'Order not found', status: 404 })

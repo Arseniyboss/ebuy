@@ -23,7 +23,8 @@ const deleteCartItem = async (id: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const { status, statusText } = await DELETE(request, { params: { id } })
+  const params = Promise.resolve({ id })
+  const { status, statusText } = await DELETE(request, { params })
   return { status, statusText }
 }
 

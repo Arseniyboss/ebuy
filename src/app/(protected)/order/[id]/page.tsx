@@ -20,19 +20,20 @@ export const metadata: Metadata = {
 }
 
 const Order = async ({ params }: PageParams) => {
-  const { data: order, error } = await getOrderById(params.id)
+  const { id } = await params
+  const { data: order, error } = await getOrderById(id)
   const session = await getSession()
 
   if (error) {
-    return <Message variant='error'>{error}</Message>
+    return <Message variant="error">{error}</Message>
   }
 
   if (!order) {
-    return <Message variant='error'>Order not found</Message>
+    return <Message variant="error">Order not found</Message>
   }
 
   if (!session) {
-    return <Message variant='error'>User not found</Message>
+    return <Message variant="error">User not found</Message>
   }
 
   const { address, paymentMethod, orderItems } = order
@@ -40,44 +41,42 @@ const Order = async ({ params }: PageParams) => {
   const deliveryDate = getDeliveryDate()
   const totalPrice = getTotalPrice(orderItems)
   return (
-    <PageContainer className='container'>
+    <PageContainer className="container">
       <OrderId>Order {order._id}</OrderId>
-      <section className='container' aria-labelledby='order-details'>
-        <h2 id='order-details'>Order Details</h2>
-        <OrderDetails className='container'>
+      <section className="container" aria-labelledby="order-details">
+        <h2 id="order-details">Order Details</h2>
+        <OrderDetails className="container">
           {!order.isDelivered && (
-            <p data-testid='delivery-date'>
+            <p data-testid="delivery-date">
               Delivery Date: {order.isPaid ? order.deliveryDate : deliveryDate}
             </p>
           )}
           <Address {...address} />
-          <p data-testid='payment-method'>Payment Method: {paymentMethod}</p>
+          <p data-testid="payment-method">Payment Method: {paymentMethod}</p>
           {order.isPaid ? (
-            <Message variant='success'>Paid on {order.paidAt}</Message>
+            <Message variant="success">Paid on {order.paidAt}</Message>
           ) : (
-            <Message variant='error' ariaLive={false}>
+            <Message variant="error" ariaLive={false}>
               Not Paid
             </Message>
           )}
           {order.isDelivered ? (
-            <Message variant='success'>
-              Delivered on {order.deliveredAt}
-            </Message>
+            <Message variant="success">Delivered on {order.deliveredAt}</Message>
           ) : (
-            <Message variant='error' ariaLive={false}>
+            <Message variant="error" ariaLive={false}>
               Not Delivered
             </Message>
           )}
         </OrderDetails>
       </section>
-      <section className='container' aria-labelledby='order-items'>
-        <h2 id='order-items'>Order Items</h2>
+      <section className="container" aria-labelledby="order-items">
+        <h2 id="order-items">Order Items</h2>
         {orderItems.map((orderItem) => (
           <OrderItem key={orderItem._id} {...orderItem} />
         ))}
       </section>
-      <CartTotal aria-label='cart total'>
-        <p data-testid='total-price'>Total: ${formatTotalPrice(totalPrice)}</p>
+      <CartTotal aria-label="cart total">
+        <p data-testid="total-price">Total: ${formatTotalPrice(totalPrice)}</p>
         {!session.user.isAdmin && !order.isPaid && (
           <>
             {paymentMethod === 'PayPal' && (

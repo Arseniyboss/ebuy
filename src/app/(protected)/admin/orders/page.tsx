@@ -6,7 +6,7 @@ import Spinner from '@/components/feedback/spinner/Spinner'
 import Orders from './orders'
 
 type Props = {
-  searchParams: QueryParams
+  searchParams: Promise<QueryParams>
 }
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ const OrdersPage = async ({ searchParams }: Props) => {
   return (
     <>
       <Heading>Orders</Heading>
-      <Suspense fallback={<Spinner variant='rainbow' />}>
-        <Orders searchParams={searchParams} />
+      <Suspense fallback={<Spinner variant="rainbow" />}>
+        <Orders searchParams={await searchParams} />
       </Suspense>
     </>
   )

@@ -20,7 +20,8 @@ const ReviewForm = ({ params }: PageParams) => {
   const router = useRouter()
 
   const onSubmit = async () => {
-    const { error } = await createReview(params.id, values)
+    const { id } = await params
+    const { error } = await createReview(id, values)
     if (error) return error
     router.refresh()
     revalidateTag('product')
@@ -43,51 +44,47 @@ const ReviewForm = ({ params }: PageParams) => {
     validationSchema,
   })
   return (
-    <Form onSubmit={handleSubmit} data-testid='review-form' $center={false}>
+    <Form onSubmit={handleSubmit} data-testid="review-form" $center={false}>
       <h2>Write a review</h2>
-      {error && <Message variant='error'>{error}</Message>}
+      {error && <Message variant="error">{error}</Message>}
       <FormGroup>
-        <label htmlFor='rating'>Rating</label>
+        <label htmlFor="rating">Rating</label>
         <Input
-          name='rating'
-          id='rating'
-          as='select'
+          name="rating"
+          id="rating"
+          as="select"
           value={values.rating}
           onChange={handleChange}
           aria-required
           aria-describedby={errors.rating && 'rating-error'}
-          data-testid='rating-select'
+          data-testid="rating-select"
         >
-          <option value=''>Select</option>
-          <option value='1'>1 - Terrible</option>
-          <option value='2'>2 - Bad</option>
-          <option value='3'>3 - Good</option>
-          <option value='4'>4 - Very Good</option>
-          <option value='5'>5 - Excellent</option>
+          <option value="">Select</option>
+          <option value="1">1 - Terrible</option>
+          <option value="2">2 - Bad</option>
+          <option value="3">3 - Good</option>
+          <option value="4">4 - Very Good</option>
+          <option value="5">5 - Excellent</option>
         </Input>
         {errors.rating && (
-          <FormError
-            id='rating-error'
-            aria-live='assertive'
-            data-testid='rating-error'
-          >
+          <FormError id="rating-error" aria-live="assertive" data-testid="rating-error">
             {errors.rating}
           </FormError>
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor='comment'>Comment</label>
+        <label htmlFor="comment">Comment</label>
         <Input
-          name='comment'
-          id='comment'
-          as='textarea'
+          name="comment"
+          id="comment"
+          as="textarea"
           rows={5}
           value={values.comment}
           onChange={handleChange}
-          data-testid='comment-input'
+          data-testid="comment-input"
         />
       </FormGroup>
-      <FormButton disabled={!isValid || loading} data-testid='submit-button'>
+      <FormButton disabled={!isValid || loading} data-testid="submit-button">
         Submit
       </FormButton>
     </Form>

@@ -9,7 +9,8 @@ import products from '@/mocks/products'
 const getProductById = async (id: string) => {
   const url = `${BASE_URL}/api/products/${id}`
   const request = new NextRequest(url)
-  const response = await GET(request, { params: { id } })
+  const params = Promise.resolve({ id })
+  const response = await GET(request, { params })
   const product: Product = await response.json()
   return { status: response.status, statusText: response.statusText, product }
 }

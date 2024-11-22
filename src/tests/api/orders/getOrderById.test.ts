@@ -20,7 +20,8 @@ const getOrderById = async (id: string, payload = defaultPayload) => {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  const response = await GET(request, { params: { id } })
+  const params = Promise.resolve({ id })
+  const response = await GET(request, { params })
   const order: Order = await response.json()
   return { status: response.status, statusText: response.statusText, order }
 }
@@ -33,10 +34,7 @@ beforeAll(async () => {
 describe('GET /api/orders/:id', () => {
   describe('given the user does not exist', () => {
     it('returns status code 404', async () => {
-      const { status, statusText } = await getOrderById(
-        fakeOrderId,
-        fakePayload
-      )
+      const { status, statusText } = await getOrderById(fakeOrderId, fakePayload)
 
       expect(status).toBe(404)
       expect(statusText).toBe('User not found')

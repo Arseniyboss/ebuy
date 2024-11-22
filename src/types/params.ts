@@ -3,9 +3,7 @@ import { Address, PaymentMethod } from '@/types/user'
 import { UserOrdersStatus, OrdersStatus } from './order'
 
 export type PageParams = {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export type QueryParams = {

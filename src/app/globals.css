@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   overscroll-behavior: none;
-  gap: var(--gap);
 }
 
 a {

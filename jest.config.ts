@@ -1,11 +1,11 @@
-import nextJest from 'next/jest.js'
+import nextJest from 'next/jest'
+import { Config } from 'jest'
 
 const createJestConfig = nextJest({
   dir: './',
 })
 
-/** @type {import('jest').Config} */
-const config = {
+const config: Config = {
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }
