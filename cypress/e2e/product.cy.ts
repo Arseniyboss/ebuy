@@ -124,6 +124,7 @@ describe('Product Page', () => {
       expect(response.statusCode).to.equal(201)
 
       cy.verifyUrl('/cart')
+      cy.getByTestId('cart-items').should('contain', 'Logitech')
       cy.assertLength('cart-item', 3)
     })
   })

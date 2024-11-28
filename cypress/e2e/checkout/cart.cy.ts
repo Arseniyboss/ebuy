@@ -48,6 +48,7 @@ describe('Cart Page', () => {
     it('deletes cart item', () => {
       cy.getByTestId('delete-button').eq(0).click()
       cy.wait(1500)
+      cy.getByTestId('cart-items').should('not.contain', 'Airpods')
       cy.assertLength('cart-item', 1)
     })
   })

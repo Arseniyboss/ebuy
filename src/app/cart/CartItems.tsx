@@ -19,7 +19,7 @@ const CartItems = ({ cartItems }: Props) => {
   const totalPrice = getTotalPrice(optimisticCartItems)
   return (
     <PageContainer className="container">
-      <section className="container" aria-label="cart items">
+      <section className="container" aria-label="cart items" data-testid="cart-items">
         {optimisticCartItems.map((cartItem) => (
           <CartItem key={cartItem._id} {...cartItem} dispatch={dispatch} />
         ))}
