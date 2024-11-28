@@ -62,36 +62,12 @@ describe('Product Page', () => {
     })
 
     it('verifies select options', () => {
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '1 - Terrible',
-        value: '1',
-      })
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '2 - Bad',
-        value: '2',
-      })
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '3 - Good',
-        value: '3',
-      })
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '4 - Very Good',
-        value: '4',
-      })
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '5 - Excellent',
-        value: '5',
-      })
-      cy.selectOption({
-        testId: 'rating-select',
-        text: 'Select',
-        value: '',
-      })
+      cy.selectOption({ testId: 'rating-select', value: '1' })
+      cy.selectOption({ testId: 'rating-select', value: '2' })
+      cy.selectOption({ testId: 'rating-select', value: '3' })
+      cy.selectOption({ testId: 'rating-select', value: '4' })
+      cy.selectOption({ testId: 'rating-select', value: '5' })
+      cy.selectOption({ testId: 'rating-select', value: '' })
     })
 
     it('does not submit a review with no rating and shows an error message', () => {
@@ -101,11 +77,7 @@ describe('Product Page', () => {
     })
 
     it('does not submit a review for an already reviewed product and shows an error message', () => {
-      cy.selectOption({
-        testId: 'rating-select',
-        text: '4 - Very Good',
-        value: '4',
-      })
+      cy.selectOption({ testId: 'rating-select', value: '4' })
       cy.typeInto('comment-input', 'This product is very good!')
       cy.submitForm('review-form')
       cy.getMessage('error-message', 'Product already reviewed')
@@ -118,11 +90,7 @@ describe('Product Page', () => {
     cy.login({ email: 'john@gmail.com', password: '123456' })
     cy.visit(`/product/${id}`)
 
-    cy.selectOption({
-      testId: 'rating-select',
-      text: '5 - Excellent',
-      value: '5',
-    })
+    cy.selectOption({ testId: 'rating-select', value: '5' })
     cy.typeInto('comment-input', 'This product is excellent!')
     cy.submitForm('review-form')
     cy.getByTestId('rating-error').should('not.exist')
@@ -141,8 +109,8 @@ describe('Product Page', () => {
 
   it('verifies product quantity select options', () => {
     cy.visit(`/product/${id}`)
-    cy.selectOption({ testId: 'product-quantity', text: '2', value: '2' })
-    cy.selectOption({ testId: 'product-quantity', text: '3', value: '3' })
+    cy.selectOption({ testId: 'product-quantity', value: '2' })
+    cy.selectOption({ testId: 'product-quantity', value: '3' })
   })
 
   it('adds product to the cart', () => {

@@ -25,11 +25,7 @@ describe('User Orders Page', () => {
   })
 
   it('filters user orders', () => {
-    cy.selectOption({
-      testId: 'status-select',
-      text: 'Not Paid',
-      value: 'not-paid',
-    })
+    cy.selectOption({ testId: 'status-select', value: 'not-paid' })
     cy.waitSelect()
 
     cy.getUserOrders({ status: 'not-paid' }).then((response) => {

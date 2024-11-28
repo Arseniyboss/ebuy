@@ -25,11 +25,7 @@ describe('User Orders Page', () => {
   })
 
   it('filters orders', () => {
-    cy.selectOption({
-      testId: 'status-select',
-      text: 'Not Delivered',
-      value: 'not-delivered',
-    })
+    cy.selectOption({ testId: 'status-select', value: 'not-delivered' })
     cy.waitSelect()
 
     cy.getOrders({ status: 'not-delivered' }).then((response) => {

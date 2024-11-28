@@ -89,11 +89,7 @@ describe('Home Page', () => {
     })
 
     it('when sorting products', () => {
-      cy.selectOption({
-        testId: 'sort-select',
-        text: 'Price: Low - High',
-        value: 'price.asc',
-      })
+      cy.selectOption({ testId: 'sort-select', value: 'price.asc' })
       cy.location('search').should('include', 'page=1')
     })
   })

@@ -40,14 +40,9 @@ describe('Cart Page', () => {
     })
 
     it('updates cart item', () => {
-      cy.selectOption({
-        testId: 'product-quantity',
-        text: '1',
-        value: '1',
-        index: 0,
-      })
+      cy.selectOption({ testId: 'product-quantity', value: '1' })
       cy.wait(1500)
-      cy.assertValue('product-quantity', '1', 0)
+      cy.assertValue('product-quantity', '1')
     })
 
     it('deletes cart item', () => {

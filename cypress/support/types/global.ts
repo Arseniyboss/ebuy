@@ -1,6 +1,5 @@
 type SelectOptionParams = {
   testId: string
-  text: string
   value: string
   index?: number
 }

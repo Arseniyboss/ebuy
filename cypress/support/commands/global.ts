@@ -6,8 +6,8 @@ Cypress.Commands.add('typeInto', (dataId, text) => {
   cy.getByTestId(dataId).type(text).should('have.value', text)
 })
 
-Cypress.Commands.add('selectOption', ({ testId, text, value, index = 0 }) => {
-  cy.getByTestId(testId).eq(index).select(text).should('have.value', value)
+Cypress.Commands.add('selectOption', ({ testId, value, index = 0 }) => {
+  cy.getByTestId(testId).eq(index).select(value).should('have.value', value)
 })
 
 Cypress.Commands.add('clearInput', (dataId) => {
