@@ -73,31 +73,9 @@ describe('Home Page', () => {
   })
 
   it('sorts products', () => {
-    const ascendingPrices = [29.99, 49.99, 99.99, 129.99]
-    const descendingPrices = [929.99, 599.99, 399.99, 129.99]
-
-    cy.selectOption({
-      testId: 'sort-select',
-      text: 'Price: Low - High',
-      value: 'price.asc',
-    })
-    cy.waitSelect()
-    cy.verifySort(ascendingPrices)
-
-    cy.selectOption({
-      testId: 'sort-select',
-      text: 'Price: High - Low',
-      value: 'price.desc',
-    })
-    cy.waitSelect()
-    cy.verifySort(descendingPrices)
-
-    cy.selectOption({
-      testId: 'sort-select',
-      text: 'Top Rated',
-      value: 'rating.desc',
-    })
-    cy.waitSelect()
+    cy.verifySort('price.asc')
+    cy.verifySort('price.desc')
+    cy.verifySort('rating.desc')
   })
 
   describe('navigates to the first page', () => {

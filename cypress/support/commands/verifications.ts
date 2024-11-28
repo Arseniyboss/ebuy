@@ -1,3 +1,5 @@
+import { getPrice } from 'utils/getPrice'
+
 Cypress.Commands.add('verifyUrl', (url) => {
   cy.location('pathname').should('eq', url)
 })
@@ -24,10 +26,28 @@ Cypress.Commands.add('verifyFirstDynamicLink', (testId, url) => {
   cy.go('back')
 })
 
-Cypress.Commands.add('verifySort', (prices) => {
-  cy.getByTestId('product-price').each((element, index) => {
-    const price = Number(element.text().slice(1))
-    expect(price).to.eq(prices[index])
+Cypress.Commands.add('verifySort', (sort) => {
+  cy.getByTestId('sort-select').select(sort)
+  cy.waitSelect()
+
+  if (sort.includes('rating')) return
+
+  cy.getByTestId('product-price').each(($currentPrice, index, $prices) => {
+    if (index === 0) return
+
+    const previousPriceElement = $prices[index - 1]
+
+    cy.wrap(previousPriceElement).then(($previousPrice) => {
+      const currentPrice = getPrice($currentPrice)
+      const previousPrice = getPrice($previousPrice)
+
+      if (sort === 'price.asc') {
+        expect(previousPrice).to.be.lessThan(currentPrice)
+      }
+      if (sort === 'price.desc') {
+        expect(previousPrice).to.be.greaterThan(currentPrice)
+      }
+    })
   })
 })
 
