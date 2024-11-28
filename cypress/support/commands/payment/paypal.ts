@@ -1,6 +1,12 @@
 import { isLocalTest } from 'utils/isLocalTest'
 
-const paypal = {
+type PayPal = {
+  window: {
+    document: Document
+  }
+}
+
+const paypal: PayPal = {
   window: {
     document: null,
   },
@@ -29,7 +35,7 @@ Cypress.Commands.add('clickPayPalButton', () => {
 
 Cypress.Commands.add('getPayPalWindow', () => {
   const window = Cypress.$(paypal.window.document)
-  return cy.wrap(window.contents().find('body'))
+  cy.wrap(window.contents().find('body'))
 })
 
 Cypress.Commands.add('payWithPayPal', (email, password) => {
