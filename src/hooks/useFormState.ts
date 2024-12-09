@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useTimeout } from './useTimeout'
 import { Errors, OnSubmit } from './useForm'
 
@@ -32,12 +32,12 @@ export const useFormState = <T>({ onSubmit, errors }: Props<T>) => {
     setSuccess(true)
   }
 
-  const onSuccess = useCallback(async () => {
+  const onSuccess = async () => {
     onBeforeSubmit()
     const error = await onSubmit()
     if (error) return onError(error)
     onAfterSubmit()
-  }, [onSubmit])
+  }
 
   useEffect(() => {
     setError('')

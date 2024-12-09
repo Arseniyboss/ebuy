@@ -1,12 +1,5 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  FormEvent,
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-} from 'react'
+import type { FormEvent, ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect } from 'react'
 import { validate } from '@/validation/validate'
 import { useFormState } from './useFormState'
 
@@ -43,10 +36,7 @@ export type Errors<T> = Partial<Record<keyof T, string>>
 
 export type OnSubmit = () => void | Promise<string | void>
 
-type HTMLChangeElement =
-  | HTMLInputElement
-  | HTMLTextAreaElement
-  | HTMLSelectElement
+type HTMLChangeElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 
 type ReturnValues<T> = {
   values: T
@@ -92,12 +82,12 @@ export const useForm = <T extends Record<string, Value>>({
     }
   }
 
-  const validateOnChange = useCallback(() => {
+  const validateOnChange = () => {
     if (validationSchema && validatedOnSubmit && isChanging) {
       setErrors(validate(values, validationSchema))
       setIsChanging(false)
     }
-  }, [validationSchema, values, validatedOnSubmit, isChanging])
+  }
 
   const setValue = (e: ChangeEvent<HTMLChangeElement>) => {
     const { name, type, value } = e.target
@@ -134,7 +124,7 @@ export const useForm = <T extends Record<string, Value>>({
 
   useEffect(() => {
     validateOnChange()
-  }, [validateOnChange])
+  }, [values, validatedOnSubmit, isChanging])
 
   useEffect(() => {
     if (isValid && isSubmitting) {
