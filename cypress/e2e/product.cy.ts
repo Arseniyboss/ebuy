@@ -1,5 +1,6 @@
 import { Product } from '@/types/api'
 import { formatReviewDate } from '@/utils/formatters/formatReviewDate'
+import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 
 const id = '62dbfa7f31c12b460f19f2b1'
 
@@ -86,6 +87,8 @@ describe('Product Page', () => {
 
   it('submits a review with a rating and a comment', () => {
     const id = '62dbfa7f31c12b460f19f2b4'
+    const currentDate = getCurrentDate()
+
     cy.intercept('POST', `/api/products/${id}/review`).as('createReview')
     cy.login({ email: 'john@gmail.com', password: '123456' })
     cy.visit(`/product/${id}`)
@@ -102,7 +105,7 @@ describe('Product Page', () => {
     cy.wait('@createReview').then(({ response }) => {
       expect(response.statusCode).to.equal(201)
       cy.assertText('review-username', 'John Doe')
-      cy.assertText('review-date', new Date().toLocaleDateString('ru-RU'))
+      cy.assertText('review-date', currentDate)
       cy.assertText('review-comment', 'This product is excellent!')
     })
   })
@@ -115,6 +118,7 @@ describe('Product Page', () => {
 
   it('adds product to the cart', () => {
     const id = '62dbfa7f31c12b460f19f2b3'
+
     cy.intercept('POST', '/api/cart').as('addCartItem')
     cy.login({ email: 'jane@gmail.com', password: '123456' })
     cy.visit(`/product/${id}`)

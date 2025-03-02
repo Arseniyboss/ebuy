@@ -1,6 +1,8 @@
 import { getCurrentDate } from '@/utils/getters/getCurrentDate'
 
 it('gets current date', () => {
-  const currentDate = new Date().toLocaleDateString('ru-RU')
-  expect(getCurrentDate()).toBe(currentDate)
+  jest.useFakeTimers()
+  jest.setSystemTime(new Date('2024-05-10'))
+  expect(getCurrentDate()).toBe('10.05.2024')
+  jest.useRealTimers()
 })

@@ -1,7 +1,8 @@
 import { getDeliveryDate } from '@/utils/getters/getDeliveryDate'
 
 it('gets order delivery date', () => {
-  const day = 24 * 60 * 60 * 1000
-  const deliveryDate = new Date(Date.now() + day).toLocaleDateString('ru-RU')
-  expect(getDeliveryDate()).toBe(deliveryDate)
+  jest.useFakeTimers()
+  jest.setSystemTime(new Date('2024-05-10'))
+  expect(getDeliveryDate()).toBe('11.05.2024')
+  jest.useRealTimers()
 })
