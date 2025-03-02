@@ -20,31 +20,28 @@ type ErrorState = {
   error: string
 }
 
-type Error = Pick<ErrorState, 'error'>
-
 type Response<T> = SuccessState<T> | ErrorState
 
 export const fetchData = async <T>(
   route: string,
-  options?: Partial<Options>
+  options: Partial<Options> = {}
 ): Promise<Response<T>> => {
+  const { method, body, tags, stripeSessionId } = options
   const accessToken = await getAccessToken()
 
   try {
     const response = await fetch(`${BASE_URL}/api${route}`, {
-      method: options?.method || 'GET',
-      body: JSON.stringify(options?.body),
+      method: method || 'GET',
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken || options?.stripeSessionId}`,
+        Authorization: `Bearer ${accessToken || stripeSessionId}`,
       },
-      next: {
-        tags: options?.tags,
-      },
+      next: { tags },
     })
 
     if (!response.ok) {
-      const { error }: Error = await response.json()
+      const { error }: ErrorState = await response.json()
       return { error }
     }
 
