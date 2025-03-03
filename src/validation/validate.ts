@@ -1,9 +1,4 @@
-import {
-  ValidationOptions,
-  ValidationSchema,
-  Errors,
-  Value,
-} from '@/hooks/useForm'
+import { ValidationOptions, ValidationSchema, Errors, Value } from '@/hooks/useForm'
 
 type Entry<T> = [keyof T, ValidationOptions<T, keyof T>]
 
