@@ -24,6 +24,13 @@ const invalidValues = {
   confirmPassword: '1234',
 }
 
+const validValues = {
+  name: 'John',
+  email: 'john@gmail.com',
+  password: '123456',
+  confirmPassword: '123456',
+}
+
 describe('validates form values', () => {
   it('returns error messages for empty values', () => {
     const errors = validate(emptyValues, validationSchema)
@@ -40,5 +47,9 @@ describe('validates form values', () => {
     expect(errors.email).toBe(EMAIL_INVALID)
     expect(errors.password).toBe(PASSWORD_INVALID)
     expect(errors.confirmPassword).toBe(PASSWORDS_DIFFERENT)
+  })
+  it('returns no error messages for valid values', () => {
+    const errors = validate(invalidValues, validationSchema)
+    expect(errors).toEqual({})
   })
 })
