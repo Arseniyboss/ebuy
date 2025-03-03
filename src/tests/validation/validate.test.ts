@@ -10,46 +10,46 @@ import {
   PASSWORDS_DIFFERENT,
 } from '@/validation/constants/errors'
 
-const emptyValues = {
-  name: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
-
-const invalidValues = {
-  name: 'John123',
-  email: 'john@gmail.com!',
-  password: '12345',
-  confirmPassword: '1234',
-}
-
-const validValues = {
-  name: 'John',
-  email: 'john@gmail.com',
-  password: '123456',
-  confirmPassword: '123456',
-}
-
 describe('validates form values', () => {
-  it('returns error messages for empty values', () => {
-    const errors = validate(emptyValues, validationSchema)
+  it('returns errors for empty values', () => {
+    const values = {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    }
+
+    const errors = validate(values, validationSchema)
 
     expect(errors.name).toBe(USERNAME_REQUIRED)
     expect(errors.email).toBe(EMAIL_REQUIRED)
     expect(errors.password).toBe(PASSWORD_REQUIRED)
     expect(errors.confirmPassword).toBe(PASSWORD_REQUIRED)
   })
-  it('returns error messages for invalid values', () => {
-    const errors = validate(invalidValues, validationSchema)
+  it('returns errors for invalid values', () => {
+    const values = {
+      name: 'John123',
+      email: 'john@gmail.com!',
+      password: '12345',
+      confirmPassword: '1234',
+    }
+
+    const errors = validate(values, validationSchema)
 
     expect(errors.name).toBe(USERNAME_INVALID)
     expect(errors.email).toBe(EMAIL_INVALID)
     expect(errors.password).toBe(PASSWORD_INVALID)
     expect(errors.confirmPassword).toBe(PASSWORDS_DIFFERENT)
   })
-  it('returns no error messages for valid values', () => {
-    const errors = validate(invalidValues, validationSchema)
+  it('returns no errors for valid values', () => {
+    const values = {
+      name: 'John',
+      email: 'john@gmail.com',
+      password: '123456',
+      confirmPassword: '123456',
+    }
+
+    const errors = validate(values, validationSchema)
     expect(errors).toEqual({})
   })
 })
