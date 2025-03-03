@@ -1,4 +1,4 @@
-import { getCardExpiry } from '@/utils/getters/getCardExpiry'
+import { getCardExpiry } from 'utils/getCardExpiry'
 
 Cypress.Commands.add('payWithStripe', () => {
   const cardExpiry = getCardExpiry()
