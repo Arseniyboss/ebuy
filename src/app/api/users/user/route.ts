@@ -10,7 +10,7 @@ export const GET = withAuth(({ user }) => {
 })
 
 export const PUT = withAuth(async ({ request, user }) => {
-  const { name, email, password }: Body = await request.json()
+  const { name, email }: Body = await request.json()
 
   const userExists = await User.exists({ email })
 
@@ -20,10 +20,6 @@ export const PUT = withAuth(async ({ request, user }) => {
 
   user.name = name
   user.email = email
-
-  if (password) {
-    user.password = password
-  }
 
   await user.save()
 

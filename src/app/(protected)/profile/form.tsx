@@ -18,7 +18,6 @@ const ProfileForm = ({ user }: Props) => {
   const initialValues: Values = {
     name: user.name,
     email: user.email,
-    password: '',
   }
 
   const router = useRouter()
@@ -26,102 +25,61 @@ const ProfileForm = ({ user }: Props) => {
   const onSubmit = async () => {
     const { error } = await updateUser(values)
     if (error) return error
-    setValues({ ...values, password: '' })
     router.refresh()
   }
 
-  const {
-    values,
-    errors,
-    error,
-    loading,
-    success,
-    isValid,
-    setValues,
-    handleChange,
-    handleSubmit,
-  } = useForm({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  })
+  const { values, errors, error, loading, success, isValid, handleChange, handleSubmit } =
+    useForm({
+      initialValues,
+      onSubmit,
+      validationSchema,
+    })
   return (
-    <Form onSubmit={handleSubmit} data-testid='profile-form'>
+    <Form onSubmit={handleSubmit} data-testid="profile-form">
       <h1>User Profile</h1>
-      {error && <Message variant='error'>{error}</Message>}
-      {success && <Message variant='success'>Profile Updated</Message>}
+      {error && <Message variant="error">{error}</Message>}
+      {success && <Message variant="success">Profile Updated</Message>}
       <FormGroup>
-        <label htmlFor='name'>Name</label>
+        <label htmlFor="name">Name</label>
         <Input
-          type='text'
-          name='name'
-          id='name'
+          type="text"
+          name="name"
+          id="name"
           value={values.name}
           onChange={handleChange}
-          autoComplete='on'
+          autoComplete="on"
           aria-required
           aria-invalid={!!errors.name}
           aria-describedby={errors.name && 'name-error'}
-          data-testid='name-input'
+          data-testid="name-input"
         />
         {errors.name && (
-          <FormError
-            id='name-error'
-            aria-live='assertive'
-            data-testid='name-error'
-          >
+          <FormError id="name-error" aria-live="assertive" data-testid="name-error">
             {errors.name}
           </FormError>
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor="email">Email</label>
         <Input
-          type='email'
-          name='email'
-          id='email'
+          type="email"
+          name="email"
+          id="email"
           value={values.email}
           onChange={handleChange}
-          autoComplete='on'
+          autoComplete="on"
           aria-required
           aria-invalid={!!errors.email}
           aria-describedby={errors.email && 'email-error'}
-          data-testid='email-input'
+          data-testid="email-input"
         />
         {errors.email && (
-          <FormError
-            id='email-error'
-            aria-live='assertive'
-            data-testid='email-error'
-          >
+          <FormError id="email-error" aria-live="assertive" data-testid="email-error">
             {errors.email}
           </FormError>
         )}
       </FormGroup>
-      <FormGroup>
-        <label htmlFor='password'>Password</label>
-        <Input
-          type='password'
-          name='password'
-          id='password'
-          value={values.password}
-          onChange={handleChange}
-          autoComplete='on'
-          aria-invalid={!!errors.password}
-          aria-describedby={errors.password && 'password-error'}
-          data-testid='password-input'
-        />
-        {errors.password && (
-          <FormError
-            id='password-error'
-            aria-live='assertive'
-            data-testid='password-error'
-          >
-            {errors.password}
-          </FormError>
-        )}
-      </FormGroup>
-      <FormButton disabled={!isValid || loading} data-testid='update-button'>
+      <FormButton disabled={!isValid || loading} data-testid="update-button">
         Update
       </FormButton>
     </Form>

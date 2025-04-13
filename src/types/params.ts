@@ -37,7 +37,12 @@ export type UserRegisterParams = {
 export type UpdateUserParams = {
   name: string
   email: string
-  password: string
+}
+
+export type UpdateUserPasswordParams = {
+  currentPassword: string
+  newPassword: string
+  confirmNewPassword: string
 }
 
 export type CreateReviewParams = {

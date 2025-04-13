@@ -31,7 +31,7 @@ const Avatar = ({ isAdmin, initials }: Props) => {
         onClick={toggleDropdown}
         $isActive={isActive}
         aria-label={`${initials} dropdown menu`}
-        data-testid='user-initials'
+        data-testid="user-initials"
         aria-expanded={isDropdownOpen}
       >
         {initials}
@@ -39,20 +39,22 @@ const Avatar = ({ isAdmin, initials }: Props) => {
       {isDropdownOpen && (
         <Dropdown onClick={toggleDropdown}>
           <li>
-            <Link href='/profile' data-testid='profile-link'>
+            <Link href="/profile" data-testid="profile-link">
               Profile
             </Link>
           </li>
           <li>
-            <Link
-              href={isAdmin ? '/admin/orders' : '/orders'}
-              data-testid='orders-link'
-            >
+            <Link href="/change-password" data-testid="password-link">
+              Password
+            </Link>
+          </li>
+          <li>
+            <Link href={isAdmin ? '/admin/orders' : '/orders'} data-testid="orders-link">
               Orders
             </Link>
           </li>
           <li>
-            <InvisibleButton onClick={handleLogout} data-testid='logout-button'>
+            <InvisibleButton onClick={handleLogout} data-testid="logout-button">
               Logout
             </InvisibleButton>
           </li>

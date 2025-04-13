@@ -5,7 +5,6 @@ import {
   USERNAME_INVALID,
   EMAIL_REQUIRED,
   EMAIL_INVALID,
-  PASSWORD_INVALID,
 } from '@/validation/constants/errors'
 import { USERNAME_PATTERN, EMAIL_PATTERN } from '@/validation/constants/patterns'
 
@@ -17,11 +16,5 @@ export const validationSchema: ValidationSchema<Values> = {
   email: {
     required: { value: true, message: EMAIL_REQUIRED },
     pattern: { value: EMAIL_PATTERN, message: EMAIL_INVALID },
-  },
-  password: {
-    isValid: {
-      value: (password) => password.length >= 6,
-      message: PASSWORD_INVALID,
-    },
   },
 }

@@ -11,13 +11,17 @@ export const Form = styled.form<Props>`
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
-  width: 340px;
-  max-width: 90vw;
+  width: 350px;
+  max-width: 95vw;
   padding: 2rem;
   margin: ${({ $center = true }) => ($center ? 'auto' : 0)};
   color: var(--gray);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+
+  h1 {
+    font-size: 1.8rem;
+  }
 
   fieldset {
     border: 0;

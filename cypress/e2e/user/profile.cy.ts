@@ -74,35 +74,6 @@ describe('Profile Page', () => {
     })
   })
 
-  describe('tests password input', () => {
-    it('does not update the user with an invalid password', () => {
-      cy.clearInput('password-input')
-      cy.typeInto('password-input', '12345')
-      cy.submitForm('profile-form')
-      cy.getMessage(
-        'password-error',
-        'Password must be at least 6 characters long'
-      )
-    })
-
-    it('updates the user with a valid password', () => {
-      cy.intercept('PUT', '/api/users/user').as('updateUser')
-
-      cy.clearInput('password-input')
-      cy.typeInto('password-input', '1234567')
-      cy.submitForm('profile-form')
-
-      cy.getByTestId('password-error').should('not.exist')
-      cy.assertDisabled('update-button')
-      cy.assertEmpty('password-input')
-
-      cy.getMessage('success-message', 'Profile Updated')
-
-      cy.logout()
-      cy.login({ email: 'john@gmail.com', password: '1234567' })
-    })
-  })
-
   describe('after 3 seconds', () => {
     it('removes success message', () => {
       cy.submitForm('profile-form')
@@ -122,7 +93,9 @@ describe('Profile Page', () => {
       cy.submitForm('profile-form')
       cy.getMessage('success-message', 'Profile Updated')
 
-      cy.typeInto('password-input', '12345')
+      cy.clearInput('email-input')
+      cy.typeInto('email-input', 'john.gmail.com')
+
       cy.submitForm('profile-form')
       cy.getByTestId('success-message').should('not.exist')
     })
@@ -130,10 +103,13 @@ describe('Profile Page', () => {
     it('removes server error message', () => {
       cy.clearInput('email-input')
       cy.typeInto('email-input', 'jane@gmail.com')
+
       cy.submitForm('profile-form')
       cy.getMessage('error-message', 'Email is already in use')
 
-      cy.typeInto('password-input', '12345')
+      cy.clearInput('email-input')
+      cy.typeInto('email-input', 'john.gmail.com')
+
       cy.submitForm('profile-form')
       cy.getByTestId('error-message').should('not.exist')
     })

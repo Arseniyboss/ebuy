@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs'
 import { NextRequest } from 'next/server'
 import { UpdateUserParams } from '@/types/params'
 import { BASE_URL } from '@/baseUrl'
@@ -34,7 +33,6 @@ describe('PUT /api/users/user', () => {
       const user = {
         name: 'John',
         email: 'jane@gmail.com',
-        password: '',
       }
 
       const { status, statusText } = await updateUser(user)
@@ -49,7 +47,6 @@ describe('PUT /api/users/user', () => {
       const user = {
         name: 'John',
         email: 'john@gmail.com',
-        password: '',
       }
 
       const { status, accessToken } = await updateUser(user)
@@ -64,7 +61,6 @@ describe('PUT /api/users/user', () => {
       const user = {
         name: 'John',
         email: 'johndoe@gmail.com',
-        password: '',
       }
 
       const { status } = await updateUser(user)
@@ -72,22 +68,6 @@ describe('PUT /api/users/user', () => {
 
       expect(status).toBe(200)
       expect(users[1].email).toBe(user.email)
-    })
-    it('returns status code 200 and updates user password', async () => {
-      const user = {
-        name: 'John',
-        email: 'john@gmail.com',
-        password: '12345678',
-      }
-
-      const { status } = await updateUser(user)
-      const users = await getUsers()
-
-      const { password } = users[1]
-      const isPasswordUpdated = await bcrypt.compare(user.password, password)
-
-      expect(status).toBe(200)
-      expect(isPasswordUpdated).toBeTruthy()
     })
   })
 })
