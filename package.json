@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --watchAll",
     "e2e": "CYPRESS_TEST=true start-server-and-test start 3000 \"cypress open --browser chrome --e2e \"",
-    "e2e:headless": "CYPRESS_TEST=true start-server-and-test start 3000 \"cypress run --browser chrome --spec **/*.cy.ts --e2e\"",
+    "e2e:headless": "CYPRESS_TEST=true start-server-and-test start 3000 \"cypress run --browser chrome --e2e\"",
+    "e2e:headless-single": "CYPRESS_TEST=true start-server-and-test start 3000 \"cypress run --browser chrome --spec **/${spec=**/*}.cy.ts --e2e\"",
     "compile": "tsc --incremental false",
     "update:latest": "ncu -u && npm install",
     "dev": "next dev",
