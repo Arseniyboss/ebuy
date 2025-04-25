@@ -12,5 +12,5 @@ Cypress.Commands.add('waitCypressLoading', () => {
 })
 
 Cypress.Commands.add('waitPayPalLoading', () => {
-  cy.wait(3000)
+  cy.wait(5000)
 })

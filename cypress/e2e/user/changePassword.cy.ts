@@ -10,6 +10,7 @@ afterEach(() => {
 
 describe('Change Password Page', () => {
   it('submits the form with empty input fields and shows error messages', () => {
+    cy.waitCypressLoading()
     cy.submitForm('password-form')
     cy.getMessage('current-password-error', 'Current password is required')
     cy.getMessage('new-password-error', 'New password is required')
