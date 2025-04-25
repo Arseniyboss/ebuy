@@ -75,20 +75,6 @@ export const useForm = <T extends Record<string, Value>>({
 
   const isValid = Object.keys(errors).length === 0
 
-  const validateOnSubmit = () => {
-    if (validationSchema && isValid) {
-      setErrors(validate(values, validationSchema))
-      setValidatedOnSubmit(true)
-    }
-  }
-
-  const validateOnChange = () => {
-    if (validationSchema && validatedOnSubmit && isChanging) {
-      setErrors(validate(values, validationSchema))
-      setIsChanging(false)
-    }
-  }
-
   const setValue = (e: ChangeEvent<HTMLChangeElement>) => {
     const { name, type, value } = e.target
     switch (type) {
@@ -117,15 +103,22 @@ export const useForm = <T extends Record<string, Value>>({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    validateOnSubmit()
     setIsSubmitting(true)
     setIsChanging(false)
+    if (!validationSchema || !isValid) return
+    setErrors(validate(values, validationSchema))
+    setValidatedOnSubmit(true)
   }
 
+  // validate form when input value changes
   useEffect(() => {
-    validateOnChange()
-  }, [values, validatedOnSubmit, isChanging])
+    if (validationSchema && validatedOnSubmit && isChanging) {
+      setErrors(validate(values, validationSchema))
+      setIsChanging(false)
+    }
+  }, [validationSchema, values, validatedOnSubmit, isChanging])
 
+  // handle successful form submission
   useEffect(() => {
     if (isValid && isSubmitting) {
       onSuccess()
