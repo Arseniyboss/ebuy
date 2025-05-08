@@ -10,7 +10,3 @@ Cypress.Commands.add('waitSelect', () => {
 Cypress.Commands.add('waitCypressLoading', () => {
   cy.wait(100)
 })
-
-Cypress.Commands.add('waitPayPalLoading', () => {
-  cy.wait(5000)
-})

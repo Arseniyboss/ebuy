@@ -39,12 +39,26 @@ Cypress.Commands.add('getPayPalWindow', () => {
 })
 
 Cypress.Commands.add('payWithPayPal', (email, password) => {
-  cy.waitPayPalLoading()
+  cy.getPayPalWindow().within(() => {
+    cy.get('.loader').should('not.exist')
+    cy.wait(1000)
+  })
+
   cy.getPayPalWindow().find('#email').type(email)
   cy.getPayPalWindow().find('#btnNext').click()
   cy.getPayPalWindow().find('#password').type(password)
   cy.getPayPalWindow().find('#btnLogin').click()
-  cy.waitPayPalLoading()
+
+  cy.getPayPalWindow().within(() => {
+    cy.get('.spinnerWithLockIcon').should('not.exist')
+    cy.get('.contextual-loading-spinner').should('not.exist')
+    cy.wait(1000)
+  })
+
   cy.getPayPalWindow().find('#payment-submit-btn').click()
-  cy.waitPayPalLoading()
+
+  cy.getPayPalWindow().within(() => {
+    cy.get('.app-spinner-container').should('not.exist')
+    cy.wait(1000)
+  })
 })
