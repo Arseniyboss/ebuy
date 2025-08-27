@@ -16,8 +16,7 @@ export const UserInitials = styled(InvisibleButton)<Props>`
   align-items: center;
   height: var(--header-icon-size);
   width: var(--header-icon-size);
-  background: ${({ $isActive }) =>
-    $isActive ? 'var(--darkgray)' : 'var(--gray)'};
+  background: ${({ $isActive }) => ($isActive ? 'var(--darkgray)' : 'var(--gray)')};
   color: white;
   border-radius: 50%;
   text-transform: capitalize;
@@ -38,12 +37,16 @@ export const Dropdown = styled.ul`
   border-radius: 0.5rem;
   overflow: hidden;
 
-  li {
-    padding: 0.3rem 0.6rem;
+  li:hover {
+    background: lightgrey;
+    color: #303545;
+  }
 
-    &:hover {
-      background: lightgrey;
-      color: #303545;
-    }
+  a,
+  button {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 0.3rem 0.6rem;
   }
 `
