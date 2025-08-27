@@ -3,9 +3,10 @@
 import { useRouter, usePathname } from 'next/navigation'
 import { useToggle } from '@/hooks/useToggle'
 import { logout } from '@/api/users/logout'
+import { broadcastAuthEvent } from '@/utils/api/broadcastAuthEvent'
+import { InvisibleButton } from '@/styles/globals'
 import { AvatarContainer, UserInitials, Dropdown } from './styles'
 import Link from 'next/link'
-import { InvisibleButton } from '@/styles/globals'
 
 type Props = {
   isAdmin: boolean
@@ -22,6 +23,7 @@ const Avatar = ({ isAdmin, initials }: Props) => {
 
   const handleLogout = async () => {
     await logout()
+    broadcastAuthEvent('logout')
     router.push('/login')
     router.refresh()
   }

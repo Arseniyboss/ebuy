@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/registry'
+import CrossTabAuthSync from '@/auth/CrossTabAuthSync'
 import Header from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
 import { Container, SkipLink } from '@/styles/globals'
@@ -20,12 +21,13 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Props) => {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <SkipLink href='#main-content'>Skip to main content</SkipLink>
+          <CrossTabAuthSync />
+          <SkipLink href="#main-content">Skip to main content</SkipLink>
           <Header />
-          <Container id='main-content'>{children}</Container>
+          <Container id="main-content">{children}</Container>
           <Footer />
         </StyledComponentsRegistry>
       </body>

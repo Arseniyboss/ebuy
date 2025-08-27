@@ -5,6 +5,7 @@ import { useForm } from '@/hooks/useForm'
 import { UserLoginParams as Values } from '@/types/params'
 import { validationSchema } from '@/validation/schemas/loginSchema'
 import { login } from '@/api/users/login'
+import { broadcastAuthEvent } from '@/utils/api/broadcastAuthEvent'
 import { Input } from '@/styles/globals'
 import {
   Form,
@@ -27,79 +28,69 @@ const Login = () => {
   const onSubmit = async () => {
     const { error } = await login(values)
     if (error) return error
+    broadcastAuthEvent('login')
     router.push('/')
     router.refresh()
   }
 
-  const {
-    values,
-    errors,
-    error,
-    isSubmitted,
-    isValid,
-    handleChange,
-    handleSubmit,
-  } = useForm({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  })
+  const { values, errors, error, isSubmitted, isValid, handleChange, handleSubmit } =
+    useForm({
+      initialValues,
+      onSubmit,
+      validationSchema,
+    })
   return (
-    <Form onSubmit={handleSubmit} data-testid='login-form'>
+    <Form onSubmit={handleSubmit} data-testid="login-form">
       <h1>Sign In</h1>
-      {error && <Message variant='error'>{error}</Message>}
+      {error && <Message variant="error">{error}</Message>}
       <FormGroup>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor="email">Email</label>
         <Input
-          type='email'
-          name='email'
-          id='email'
+          type="email"
+          name="email"
+          id="email"
           value={values.email}
           onChange={handleChange}
-          autoComplete='on'
+          autoComplete="on"
           aria-required
           aria-describedby={errors.email && 'email-error'}
-          data-testid='email-input'
+          data-testid="email-input"
         />
         {errors.email && (
-          <FormError
-            id='email-error'
-            aria-live='assertive'
-            data-testid='email-error'
-          >
+          <FormError id="email-error" aria-live="assertive" data-testid="email-error">
             {errors.email}
           </FormError>
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor="password">Password</label>
         <Input
-          type='password'
-          name='password'
-          id='password'
+          type="password"
+          name="password"
+          id="password"
           value={values.password}
           onChange={handleChange}
-          autoComplete='on'
+          autoComplete="on"
           aria-required
           aria-describedby={errors.password && 'password-error'}
-          data-testid='password-input'
+          data-testid="password-input"
         />
         {errors.password && (
           <FormError
-            id='password-error'
-            aria-live='assertive'
-            data-testid='password-error'
+            id="password-error"
+            aria-live="assertive"
+            data-testid="password-error"
           >
             {errors.password}
           </FormError>
         )}
       </FormGroup>
-      <FormButton disabled={!isValid || isSubmitted} data-testid='login-button'>
+      <FormButton disabled={!isValid || isSubmitted} data-testid="login-button">
         Sign In
       </FormButton>
       <FormFooter>
         <p>Don't have an account?</p>
-        <FormLink href='/register' data-testid='register-link'>
+        <FormLink href="/register" data-testid="register-link">
           Sign Up
         </FormLink>
       </FormFooter>
