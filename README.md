@@ -54,3 +54,10 @@ Fullstack e-commerce website that is highly accessible for people with different
 - Disable the real webhook in [Stripe](https://dashboard.stripe.com/test/webhooks) to prevent requests from being sent to it during local testing
 - run `stripe login` command
 - run `npm run stripe-webhook`
+
+## Useful Learning References
+
+- Custom authentication using access and refresh tokens
+- Custom useForm hook with validation
+- API route testing using MongoDB Memory Server
+- E2E testing for PayPal and Stripe payments
