@@ -33,6 +33,10 @@ export const Form = styled.form<Props>`
   legend {
     margin-bottom: var(--spacing);
   }
+
+  select {
+    justify-content: start;
+  }
 `
 
 export const FormGroup = styled.div`

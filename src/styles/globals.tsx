@@ -65,7 +65,7 @@ export const Input = styled.input`
 
 export const Select = styled.select`
   border: 1px solid #ddd;
-  border-radius: 1rem;
+  border-radius: 2rem;
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   text-align: center;
@@ -83,9 +83,12 @@ export const ProductPrice = styled.p`
 export const ProductQuantity = styled.select`
   width: 40px;
   color: inherit;
-  appearance: auto;
   border: 1px solid grey;
   border-radius: var(--border-radius);
+  appearance: base-select;
+  text-align: center;
+  text-align-last: center; // for safari and chrome on ios
+  padding: 0.1rem;
 
   &:focus {
     outline: auto;

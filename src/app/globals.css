@@ -40,11 +40,37 @@ button {
 }
 
 select {
-  outline: none;
-  cursor: pointer;
-  appearance: none;
   background: white;
   color: black;
+  cursor: pointer;
+  outline: none;
+  appearance: none; /* fallback in case base-select is not supported */
+  justify-content: center;
+  align-items: center;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+option::checkmark,
+select::picker-icon {
+  display: none;
+}
+
+::picker(select) {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+option {
+  padding: 0.3rem 1rem;
+}
+
+option:hover {
+  background: #eee;
 }
 
 textarea {

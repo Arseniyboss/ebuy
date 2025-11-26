@@ -5,4 +5,5 @@ import styled from 'styled-components'
 
 export const StatusSelect = styled(Select)`
   margin: 0 auto;
+  min-width: 120px;
 `
