@@ -38,8 +38,7 @@ export const Dropdown = styled.ul`
   overflow: hidden;
 
   li:hover {
-    background: lightgrey;
-    color: #303545;
+    background: #eee;
   }
 
   a,
