@@ -12,6 +12,8 @@ type Props = {
 }
 
 const Home = async ({ searchParams }: Props) => {
+  const resolvedParams = await searchParams
+  const suspenseKey = JSON.stringify(resolvedParams)
   return (
     <>
       <Heading>Products</Heading>
@@ -19,8 +21,8 @@ const Home = async ({ searchParams }: Props) => {
         <Search />
         <Sort />
       </FlexGroup>
-      <Suspense fallback={<SkeletonLoaders />}>
-        <Products searchParams={await searchParams} />
+      <Suspense key={suspenseKey} fallback={<SkeletonLoaders />}>
+        <Products searchParams={resolvedParams} />
       </Suspense>
     </>
   )
