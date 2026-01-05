@@ -10,11 +10,11 @@ export const GET = withAuth(async ({ request, user }) => {
   const status = getSearchParams(request, 'status') as UserOrdersStatus
 
   const filters = {
-    userId: user.id,
+    userId: user._id.toString(),
     isPaid: false,
   }
 
-  const filterQuery = status === 'not-paid' ? filters : { userId: user.id }
+  const filterQuery = status === 'not-paid' ? filters : { userId: user._id.toString() }
 
   const ordersPerPage = 2
   const numberOfOrders = await Order.countDocuments(filterQuery)
@@ -29,6 +29,6 @@ export const GET = withAuth(async ({ request, user }) => {
 
 export const POST = withAuth(async ({ request, user }) => {
   const body: Body = await request.json()
-  const order = await Order.create({ ...body, userId: user.id })
+  const order = await Order.create({ ...body, userId: user._id.toString() })
   return NextResponse.json(order, { status: 201 })
 })

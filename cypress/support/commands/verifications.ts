@@ -24,6 +24,7 @@ Cypress.Commands.add('verifyFirstDynamicLink', (testId, url) => {
   cy.getByTestId(testId).eq(0).click()
   cy.location('pathname').should('eq', url)
   cy.go('back')
+  cy.waitCypressLoading()
 })
 
 Cypress.Commands.add('verifySort', (sort) => {

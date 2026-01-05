@@ -45,7 +45,7 @@ const Product = async ({ params }: PageParams) => {
         alt=""
         width={448}
         height={357}
-        priority
+        preload
         placeholder="blur"
         blurDataURL={blurDataURL}
         data-testid="product-image"

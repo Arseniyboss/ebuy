@@ -52,7 +52,7 @@ const CartItem = (props: Props) => {
           height={153}
           width={192}
           alt=""
-          priority
+          preload
           placeholder="blur"
           blurDataURL={blurDataURL}
           data-testid="product-image"

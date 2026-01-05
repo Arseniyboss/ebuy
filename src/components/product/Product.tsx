@@ -15,7 +15,7 @@ const Product = async ({ _id, name, image, price, rating, numReviews }: Props) =
           height={255}
           width={320}
           alt=""
-          priority
+          preload
           placeholder="blur"
           blurDataURL={blurDataURL}
           data-testid="product-image"

@@ -3,7 +3,7 @@ import { getSession } from './auth/session/cookies'
 import { getSessionId } from '@/auth/getters/getSessionId'
 import { refreshAccessToken } from '@/auth/api/refreshAccessToken'
 
-export const middleware = async (request: NextRequest) => {
+export const proxy = async (request: NextRequest) => {
   const session = await getSession()
   const sessionId = await getSessionId()
 

@@ -17,13 +17,15 @@ export const POST = withAuth(async ({ request, user, params }) => {
 
   const { reviews } = product
 
-  const isAlreadyReviewed = reviews.find((review) => review.userId.toString() === user.id)
+  const isAlreadyReviewed = reviews.find((review) => {
+    return review.userId.toString() === user._id.toString()
+  })
 
   if (isAlreadyReviewed) {
     return throwError({ error: 'Product already reviewed', status: 400 })
   }
 
-  const review = { userId: user.id, username: user.name, rating, comment }
+  const review = { userId: user._id.toString(), username: user.name, rating, comment }
 
   reviews.push(review)
 

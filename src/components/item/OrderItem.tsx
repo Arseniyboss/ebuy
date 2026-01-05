@@ -16,7 +16,7 @@ const OrderItem = async ({ _id, name, image, price, quantity }: Props) => {
           height={153}
           width={192}
           alt=""
-          priority
+          preload
           placeholder="blur"
           blurDataURL={blurDataURL}
           data-testid="item-image"

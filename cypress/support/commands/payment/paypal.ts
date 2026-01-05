@@ -55,7 +55,10 @@ Cypress.Commands.add('payWithPayPal', (email, password) => {
     cy.wait(1000)
   })
 
-  cy.getPayPalWindow().find('#payment-submit-btn').click()
+  cy.getPayPalWindow().within(() => {
+    cy.getByTestId('submit-button-initial').click()
+    cy.wait(1000)
+  })
 
   cy.getPayPalWindow().within(() => {
     cy.get('.app-spinner-container').should('not.exist')

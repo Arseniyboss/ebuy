@@ -5,7 +5,7 @@ import { generateAuthTokens } from '@/auth/api/generateAuthTokens'
 
 export const POST = withAuth(async ({ request, user }) => {
   const cartItem: Body = await request.json()
-  const itemInTheCart = user.cartItems.find(({ id }) => cartItem._id === id)
+  const itemInTheCart = user.cartItems.find(({ _id }) => cartItem._id === _id.toString())
 
   if (itemInTheCart) {
     return throwError({ error: 'Item is already in the cart', status: 400 })

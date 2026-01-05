@@ -7,7 +7,7 @@ import products from '@/mocks/products'
 import users from '@/mocks/users'
 import orders from '@/mocks/orders'
 
-dotenv.config()
+dotenv.config({ quiet: true })
 
 const isConnected = mongoose.connection.readyState === 1
 const isNotCypressTest = process.env.CYPRESS_TEST !== 'true'

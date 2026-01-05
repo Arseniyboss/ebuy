@@ -11,7 +11,7 @@ export const GET = withAuth(async ({ user, params }) => {
     return throwError({ error: 'Order not found', status: 404 })
   }
 
-  if (!user.isAdmin && order.userId.toString() !== user.id) {
+  if (!user.isAdmin && order.userId.toString() !== user._id.toString()) {
     return throwError({ error: 'Not authorized', status: 401 })
   }
 

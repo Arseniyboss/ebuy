@@ -1,12 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { Schema, models, model } from 'mongoose'
-import {
-  CartItem,
-  Address,
-  UserDocument,
-  UserModel,
-  UserMethods,
-} from '@/types/user'
+import { CartItem, Address, UserDocument, UserModel, UserMethods } from '@/types/user'
 import {
   STREET_REQUIRED,
   STREET_INVALID,
@@ -124,11 +118,10 @@ userSchema.methods.matchPassword = async function (password: string) {
   return bcrypt.compare(password, this.password)
 }
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10)
   }
-  next()
 })
 
 const User: UserModel = models.User || model('User', userSchema)
