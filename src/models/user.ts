@@ -76,7 +76,7 @@ export const addressSchema = new Schema<Address>(
       trim: true,
     },
   },
-  { _id: false }
+  { _id: false },
 )
 
 const userSchema = new Schema<UserDocument, UserModel, UserMethods>({
@@ -124,6 +124,6 @@ userSchema.pre('save', async function () {
   }
 })
 
-const User: UserModel = models.User || model('User', userSchema)
+const User = (models.User as UserModel) || model('User', userSchema)
 
 export default User
