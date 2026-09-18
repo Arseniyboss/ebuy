@@ -49,28 +49,30 @@ select {
   align-items: center;
 }
 
-select,
-::picker(select) {
-  appearance: base-select;
-}
+@supports (appearance: base-select) {
+  select,
+  ::picker(select) {
+    appearance: base-select;
+  }
 
-option::checkmark,
-select::picker-icon {
-  display: none;
-}
+  option::checkmark,
+  select::picker-icon {
+    display: none;
+  }
 
-::picker(select) {
-  border: none;
-  border-radius: 0.5rem;
-  box-shadow: var(--box-shadow);
-}
+  ::picker(select) {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+  }
 
-option {
-  padding: 0.3rem 1rem;
-}
+  option {
+    padding: 0.3rem 1rem;
+  }
 
-option:hover {
-  background: #eee;
+  option:hover {
+    background: #eee;
+  }
 }
 
 textarea {
