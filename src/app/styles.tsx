@@ -10,6 +10,9 @@ export const ProductWrapper = styled.section`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   padding: 0 2rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
 `
 
 export const FlexGroup = styled.div`
